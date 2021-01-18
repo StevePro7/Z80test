@@ -11,11 +11,14 @@ namespace BinaryFileWrite
 			ByteObjectList = new List<ByteObject>();
 		}
 
-		public void Process(string fileName)
+		public void Process(string fileName, string extension)
 		{
 			ByteObjectList.Clear();
 
-			var lines = File.ReadAllLines("input/" + fileName);
+			var inpFile = fileName + extension;
+			var outFile = "main" + extension;
+
+			var lines = File.ReadAllLines("input/" + inpFile);
 			var count = 0;
 			for (int index = 0; index < lines.Length; index++)
 			{
@@ -41,7 +44,8 @@ namespace BinaryFileWrite
 				}
 			}
 
-			File.WriteAllLines("output/main.asm", lines);
+			string path = $"output/{fileName}/{outFile}";
+			File.WriteAllLines(path, lines);
 		}
 
 		public ByteObject CalcByteObject(string info, int count)
@@ -59,15 +63,21 @@ namespace BinaryFileWrite
 			};
 		}
 
-		public void Setup()
+		public void Setup(string fileName)
 		{
 			if (!Directory.Exists("output"))
 			{
 				Directory.CreateDirectory("output");
 			}
-			if (!Directory.Exists("output/data"))
+
+			var path = $"output/{fileName}";
+			if (!Directory.Exists(path))
 			{
-				Directory.CreateDirectory("output/data");
+				Directory.CreateDirectory(path);
+			}
+			if (!Directory.Exists(path + "/data"))
+			{
+				Directory.CreateDirectory(path + "/data");
 			}
 		}
 

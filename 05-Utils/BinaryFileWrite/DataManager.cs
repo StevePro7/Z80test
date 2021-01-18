@@ -7,15 +7,15 @@ namespace BinaryFileWrite
 {
 	public class DataManager
 	{
-		public void Process(string fileName, IList<ByteObject> byteObjectList)
+		public void Process(string fileName, string extension, IList<ByteObject> byteObjectList)
 		{
 			foreach (ByteObject obj in byteObjectList)
 			{
-				Process(fileName, obj);
+				Process(fileName, extension, obj);
 			}
 		}
 
-		public void Process(string fileName, ByteObject obj)
+		public void Process(string fileName, string extension, ByteObject obj)
 		{
 			int starts = Int32.Parse(obj.ByteStarts, NumberStyles.HexNumber);
 			int finish = Int32.Parse(obj.ByteFinish, NumberStyles.HexNumber);
@@ -28,8 +28,8 @@ namespace BinaryFileWrite
 
 			// 1.
 			// Open as binary file.
-			var inFile = "input/" + fileName;
-			var outFile = "output/data/" + obj.ByteString;
+			var inFile = "input/" + fileName + extension;
+			var outFile = $"output/{fileName}/data/" + obj.ByteString;
 
 			using (BinaryReader b = new BinaryReader(File.Open(inFile, FileMode.Open)))
 			{
