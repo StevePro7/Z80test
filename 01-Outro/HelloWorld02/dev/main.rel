@@ -1,0 +1,52 @@
+;!FILE main.asm
+XL2
+H 9 areas 1C global symbols
+M main
+O -mz80
+S _devkit_SMS_displayOn Ref0000
+S _devkit_SMS_init Ref0000
+S .__.ABS. Def0000
+S _devkit_SMS_displayOff Ref0000
+S _devkit_SMS_setSpritePaletteColor Ref0000
+S _devkit_SMS_waitForVBlank Ref0000
+A _CODE size 1A flags 0 addr 0
+S C$main.c$14$2$40 Def0018
+S C$main.c$12$3$41 Def0015
+S _main Def0000
+S XG$main$0$0 Def0018
+S A$main$60 Def0000
+S A$main$70 Def000A
+S A$main$71 Def000C
+S A$main$72 Def000D
+S A$main$73 Def0010
+S A$main$64 Def0003
+S A$main$83 Def0015
+S A$main$74 Def0011
+S C$main.c$5$1$39 Def0000
+S A$main$68 Def0006
+S C$main.c$6$1$39 Def0003
+S C$main.c$3$0$0 Def0000
+S A$main$78 Def0012
+S A$main$69 Def0009
+S C$main.c$7$1$39 Def0006
+S A$main$88 Def0018
+S C$main.c$8$1$39 Def0012
+S G$main$0$0 Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 21 03 03 E5 2E 00 E5 CD
+R 00 00 00 00 02 03 01 00 02 06 03 00
+T 0E 00 00 00 F1 F1 CD 00 00
+R 00 00 00 00 02 02 04 00 02 07 00 00
+T 15 00
+R 00 00 00 00
+T 15 00 CD 00 00 18 FB
+R 00 00 00 00 02 03 05 00
