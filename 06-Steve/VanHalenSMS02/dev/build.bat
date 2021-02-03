@@ -15,6 +15,7 @@ REM psg.bat
 
 cd devkit
 sdcc --debug -c -mz80 --opt-code-speed --peep-file ..\peep-rules.txt --std-c99 _sms_manager.c
+sdcc --debug -c -mz80 --opt-code-speed --peep-file ..\peep-rules.txt --std-c99 _snd_manager.c
 cd ..
 
 cd engine
