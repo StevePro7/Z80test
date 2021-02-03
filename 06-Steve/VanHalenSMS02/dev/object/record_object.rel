@@ -1,5 +1,5 @@
 XL2
-H 9 areas 29 global symbols
+H 9 areas 30 global symbols
 M record_object
 O -mz80
 S _VanHalen1980__tiles__psgcompr Ref0000
@@ -40,10 +40,14 @@ S _VanHalen1979__palette__bin Ref0000
 S _VanHalen1998__palette__bin Ref0000
 S _VanHalen2012__tiles__psgcompr Ref0000
 A _CODE size C flags 0 addr 0
+S G$record_tiles_bank$0$0 Def0000
 S _record_tiles_bank Def0000
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 48 flags 0 addr 0
+S G$record_tiles_data$0$0 Def0000
+S G$record_tilemap_data$0$0 Def0018
 S _record_tiles_data Def0000
+S G$record_palette_data$0$0 Def0030
 S _record_tilemap_data Def0018
 S _record_palette_data Def0030
 A _DABS size 0 flags 8 addr 0
@@ -51,6 +55,9 @@ A _HOME size 0 flags 0 addr 0
 A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
 A _INITIALIZER size 48 flags 0 addr 0
+S Frecord_object$__xinit_record_tiles_data$0$0 Def0000
+S Frecord_object$__xinit_record_tilemap_data$0$0 Def0018
+S Frecord_object$__xinit_record_palette_data$0$0 Def0030
 A _CABS size 0 flags 8 addr 0
 T 00 00
 R 00 00 02 00
