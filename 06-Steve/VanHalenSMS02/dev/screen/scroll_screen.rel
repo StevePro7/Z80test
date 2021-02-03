@@ -1,0 +1,59 @@
+XL2
+H 9 areas 6 global symbols
+M scroll_screen
+O -mz80
+S .__.ABS. Def0000
+S _engine_input_manager_hold Ref0000
+S _devkit_SMS_setBGScrollY Ref0000
+S _engine_scroll_manager_load Ref0000
+A _CODE size 61 flags 0 addr 0
+S _screen_scroll_screen_update Def0006
+S _screen_scroll_screen_load Def0000
+A _DATA size 1 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 00 00
+T 00 00 21 00 00 36 00 C9
+R 00 00 00 00 00 03 01 00
+T 06 00
+R 00 00 00 00
+T 06 00 3B 3A 00 00 D6 20 20 04 3E 01 18 01
+R 00 00 00 00 00 04 01 00
+T 12 00
+R 00 00 00 00
+T 12 00 AF
+R 00 00 00 00
+T 13 00
+R 00 00 00 00
+T 13 00 33 F5 33 FD 21 00 00 FD 46 00 FD 34 00 C5
+R 00 00 00 00 00 07 01 00
+T 21 00 33 CD 00 00 33 3E 10 F5 33 CD 00 00 33 4D
+R 00 00 00 00 02 04 02 00 02 0C 01 00
+T 2F 00 21 03 00 39 7E 23 66 6F 79 B7 20 0C FD 21
+R 00 00 00 00
+T 3D 00 00 00 FD 39 FD 7E 00 B7 28 16
+R 00 00 00 00
+T 47 00
+R 00 00 00 00
+T 47 00 E5 3E 04 F5 33 CD 00 00 33 3E 20 F5 33 CD
+R 00 00 00 00 02 08 03 00
+T 55 00 00 00 33 E1 36 04 18 02
+R 00 00 00 00 02 02 02 00
+T 5D 00
+R 00 00 00 00
+T 5D 00 36 03
+R 00 00 00 00
+T 5F 00
+R 00 00 00 00
+T 5F 00 33 C9
+R 00 00 00 00
