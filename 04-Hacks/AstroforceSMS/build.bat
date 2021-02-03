@@ -74,4 +74,4 @@ erase fixedbank.rel
 erase *.sym
 
 rem Run
-..\tools\fusion\fusion.exe game.sms
+::..\tools\fusion\fusion.exe game.sms
