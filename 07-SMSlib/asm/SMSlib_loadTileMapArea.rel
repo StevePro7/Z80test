@@ -1,0 +1,51 @@
+XL2
+H 9 areas 6 global symbols
+M SMSlib_loadTileMapArea
+O -mz80
+S _ROM_bank_to_be_mapped_on_slot2 DefFFFF
+S _SRAM_bank_to_be_mapped_on_slot2 DefFFFC
+S .__.ABS. Def0000
+S _SMS_SRAM Def8000
+S _SMS_crt0_RST08 Ref0000
+A _CODE size 75 flags 0 addr 0
+S _SMS_loadTileMapArea Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 DD E5 DD 21 00 00 DD 39 F5 3B DD 4E 05 DD
+R 00 00 00 00
+T 0E 00 7E 08 87 DD 77 FF
+R 00 00 00 00
+T 14 00
+R 00 00 00 00
+T 14 00 DD 5E 05 16 00 DD 6E 09 26 00 19 59 16 00
+R 00 00 00 00
+T 22 00 7B 95 7A 9C E2 2B 00 EE 80
+R 00 00 00 00 00 07 00 00
+T 2B 00
+R 00 00 00 00
+T 2B 00 F2 70 00 EB 29 29 29 29 29 DD 5E 04 16 00
+R 00 00 00 00 00 03 00 00
+T 39 00 19 29 11 00 78 19 C5 CF C1 DD 7E 06 DD 77
+R 00 00 00 00
+T 47 00 FD DD 7E 07 DD 77 FE D1 D5 DD 46 FF
+R 00 00 00 00
+T 53 00
+R 00 00 00 00
+T 53 00 1A D3 BE 13 68 2D 7D 47 B7 20 F5 DD 6E 08
+R 00 00 00 00
+T 61 00 26 00 29 D1 D5 19 DD 75 06 DD 74 07 0C 18
+R 00 00 00 00
+T 6F 00 A4
+R 00 00 00 00
+T 70 00
+R 00 00 00 00
+T 70 00 DD F9 DD E1 C9
+R 00 00 00 00
