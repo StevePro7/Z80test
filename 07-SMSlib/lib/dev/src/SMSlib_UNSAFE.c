@@ -17,7 +17,7 @@ extern unsigned char SpriteNextFree;
 // VRAM unsafe functions. Fast, but dangerous!
 void UNSAFE_SMS_copySpritestoSAT (void) {
   SMS_setAddr(SMS_SATAddress);
-  __asm
+  /*__asm
     ld a,(#_SpriteNextFree)
     or a
     jr z,_no_sprites
@@ -35,9 +35,9 @@ void UNSAFE_SMS_copySpritestoSAT (void) {
     ld a,#0xD0
     out (c),a
 _no_sprite_term:
-  __endasm;
+  __endasm; */
  SMS_setAddr(SMS_SATAddress+128);
-  __asm
+  /*__asm
     ld a,(#_SpriteNextFree)
     dec a                   ; there is surely at least one sprite used
     add a,a
@@ -57,14 +57,14 @@ _do_copy_Y:
 _no_sprites:
     ld a,#0xD0
     out (#_VDPDataPort),a
-  __endasm;
+  __endasm; */
 }
 
 /*
 // previous version
 void UNSAFE_SMS_copySpritestoSAT (void) {
   SMS_setAddr(SMS_SATAddress);
-  __asm
+  /*__asm
     ld a,(#_SpriteNextFree)
     or a
     jr z,_no_sprites
@@ -85,9 +85,9 @@ void UNSAFE_SMS_copySpritestoSAT (void) {
     ld a,#0xD0
     out (c),a
 _no_sprite_term:
-  __endasm;
+  __endasm; */
  SMS_setAddr(SMS_SATAddress+128);
-  __asm
+  /*__asm
     ld a,(#_SpriteNextFree)
     ld b,a
     ld a,#64
@@ -107,15 +107,15 @@ _start_cpy:
 _no_sprites:
     ld a,#0xD0
     out (#_VDPDataPort),a
-  __endasm;
+  __endasm; */
 }
 */
 
-void OUTI32(void *src) __z88dk_fastcall;
-void OUTI64(void *src) __z88dk_fastcall;
-void OUTI128(void *src) __z88dk_fastcall;
+void OUTI32(void *src) /* __z88dk_fastcall */;
+void OUTI64(void *src) /* __z88dk_fastcall */;
+void OUTI128(void *src) /* __z88dk_fastcall */;
 
-#define SETVDPDATAPORT  __asm ld c,#_VDPDataPort __endasm
+#define SETVDPDATAPORT  /*__asm ld c,#_VDPDataPort __endasm */
 
 void UNSAFE_SMS_VRAMmemcpy32 (unsigned int dst, void *src) {
   SMS_setAddr(0x4000|dst);

@@ -19,7 +19,7 @@ void SMS_loadPSGaidencompressedTilesatAddr (void *src, unsigned int dst) {
    (slightly modified and wrapped into a C function - and it MUST preserve ix register )
 ************************************************************************************** */
   SMS_setAddr(dst);
-__asm
+/* __asm
 
    pop bc                   ; move *src from stack into hl
    pop hl
@@ -182,6 +182,6 @@ _inLoop:
    or c
    jp nz,_DecompressTile
    pop ix                  ; restore preserved ix
-__endasm;
+__endasm; */
 }
 #pragma restore

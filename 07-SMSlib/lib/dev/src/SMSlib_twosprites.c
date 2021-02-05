@@ -11,7 +11,7 @@
 
 // 2nd ASM version: 290 CPU cycles
 void SMS_addTwoAdjoiningSprites (unsigned char x, unsigned char y, unsigned char tile) __naked __preserves_regs(iyh,iyl) {
-  __asm
+  /* __asm
     ld  a,(#_SpriteNextFree)
     cp  a,#MAXSPRITES-1
     ret nc                           ; we do not have 2 sprites left, leave!
@@ -62,6 +62,6 @@ _secondSpriteClipped:
     ld  hl,#_SpriteNextFree          ; second sprite has been clipped, so just inc SpriteNextFree
     inc (hl)
     ret
- __endasm;
+ __endasm; */
 }
 #pragma restore

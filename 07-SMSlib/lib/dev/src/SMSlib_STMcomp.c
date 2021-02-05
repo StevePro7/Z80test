@@ -23,7 +23,7 @@ void SMS_loadSTMcompressedTileMapatAddr (unsigned int dst, void* src) {
   STM_HH=0;
   STM_oldHH=0;
   STM_needRestore=0;
-  __asm
+  /* __asm
   ld hl,(#_STM_dest)
   call _SMS_crt0_RST08
 
@@ -172,7 +172,7 @@ _STM_setAddr:
    ret
    
 _STM_leave:
-  __endasm;
+  __endasm; */
 }
 
 // the previous code:

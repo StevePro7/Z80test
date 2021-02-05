@@ -23,7 +23,7 @@ void SMS_initSprites (void) {
 
 // 3rd ASM version: 212 CPU cycles
 signed char SMS_addSprite (unsigned char x, unsigned char y, unsigned char tile) __naked __preserves_regs(iyh,iyl) {
-  __asm
+  /* __asm
     ld  a,(#_SpriteNextFree)
     cp  a,#MAXSPRITES
     jr  nc,_returnInvalidHandle1     ; no sprites left, leave!
@@ -65,7 +65,7 @@ _returnInvalidHandle1:
 _returnInvalidHandle2:
     ld l,#0xfe
     ret
- __endasm;
+ __endasm; */
 }
 #pragma restore
 
@@ -82,7 +82,7 @@ void SMS_copySpritestoSAT (void) {
   }
   */
   SMS_setAddr(SMS_SATAddress);
-  __asm
+  /* __asm
     ld a,(#_SpriteNextFree)
     or a
     jr z,_no_sprites
@@ -97,9 +97,9 @@ _next_spriteY:
     ld a,#0xD0              ;  7 cycles   =>  VRAM safe
     out (c),a
 _no_sprite_term:
-  __endasm;
+  __endasm; */
   SMS_setAddr(SMS_SATAddress+128);
-  __asm
+  /* __asm
     ld c,#_VDPDataPort
     ld a,(#_SpriteNextFree)
     add a,a
@@ -113,7 +113,7 @@ _next_spriteXN:
 _no_sprites:
     ld a,#0xD0
     out (#_VDPDataPort),a
-  __endasm;
+  __endasm; */
 }
 
 /*

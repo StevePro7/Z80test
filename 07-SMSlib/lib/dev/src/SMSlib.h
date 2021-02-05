@@ -13,8 +13,8 @@
 void SMS_init (void);
 
 /* VDP operative mode handling functions */
-void SMS_VDPturnOnFeature (unsigned int feature) __z88dk_fastcall;
-void SMS_VDPturnOffFeature (unsigned int feature)__z88dk_fastcall;
+void SMS_VDPturnOnFeature (unsigned int feature) /* __z88dk_fastcall */;
+void SMS_VDPturnOffFeature (unsigned int feature)/* __z88dk_fastcall */;
 /* turns on/off a VDP feature */
 /* feature can be one of the following: */
 
@@ -41,11 +41,11 @@ void SMS_VDPturnOffFeature (unsigned int feature)__z88dk_fastcall;
 #define SMS_displayOn()   SMS_VDPturnOnFeature(VDPFEATURE_SHOWDISPLAY)   /* turns on display */
 #define SMS_displayOff()  SMS_VDPturnOffFeature(VDPFEATURE_SHOWDISPLAY)  /* turns off display */
 
-void SMS_setBGScrollX (unsigned char scrollX) __z88dk_fastcall;
-void SMS_setBGScrollY (unsigned char scrollY) __z88dk_fastcall;
-void SMS_setBackdropColor (unsigned char entry) __z88dk_fastcall;
-void SMS_useFirstHalfTilesforSprites (_Bool usefirsthalf) __z88dk_fastcall;
-void SMS_setSpriteMode (unsigned char mode) __z88dk_fastcall;
+void SMS_setBGScrollX (unsigned char scrollX) /* __z88dk_fastcall */;
+void SMS_setBGScrollY (unsigned char scrollY) /* __z88dk_fastcall */;
+void SMS_setBackdropColor (unsigned char entry) /* __z88dk_fastcall */;
+void SMS_useFirstHalfTilesforSprites (_Bool usefirsthalf) /* __z88dk_fastcall */;
+void SMS_setSpriteMode (unsigned char mode) /* __z88dk_fastcall */;
 /* modes for SMS_setSpriteMode */
 #define SPRITEMODE_NORMAL         0x00
 #define SPRITEMODE_TALL           0x01
@@ -68,8 +68,8 @@ __at (0x8000) unsigned char SMS_SRAM[];
 /* wait until next VBlank starts */
 void SMS_waitForVBlank (void);
 
-void SMS_crt0_RST08(unsigned int addr) __z88dk_fastcall __preserves_regs(a,b,d,e,h,l,iyh,iyl);
-void SMS_crt0_RST18(unsigned int tile) __z88dk_fastcall __preserves_regs(b,c,d,e,h,l,iyh,iyl);
+void SMS_crt0_RST08(unsigned int addr) /* __z88dk_fastcall */ __preserves_regs(a,b,d,e,h,l,iyh,iyl);
+void SMS_crt0_RST18(unsigned int tile) /* __z88dk_fastcall */ __preserves_regs(b,c,d,e,h,l,iyh,iyl);
 
 /* function for setting tiles/moving 'cursor' */
 #define SMS_setTile(tile)         SMS_crt0_RST18(tile)
@@ -141,8 +141,8 @@ void SMS_copySpritestoSAT (void);
 /* GG functions to set a color / load a palette */
 void GG_setBGPaletteColor (unsigned char entry, unsigned int color);
 void GG_setSpritePaletteColor (unsigned char entry, unsigned int color);
-void GG_loadBGPalette (void *palette) __z88dk_fastcall;
-void GG_loadSpritePalette (void *palette) __z88dk_fastcall;
+void GG_loadBGPalette (void *palette) /* __z88dk_fastcall */;
+void GG_loadSpritePalette (void *palette) /* __z88dk_fastcall */;
 #define GG_setNextBGColoratIndex(i)       SMS_setAddr(SMS_CRAMAddress|((i)<<1))
 #define GG_setNextSpriteColoratIndex(i)   SMS_setAddr(SMS_CRAMAddress|0x20|((i)<<1))
 #define GG_setColor(color)       SMS_crt0_RST18(color)
@@ -154,17 +154,17 @@ void GG_loadSpritePalette (void *palette) __z88dk_fastcall;
 /* SMS functions to set a color / load a palette */
 void SMS_setBGPaletteColor (unsigned char entry, unsigned char color);
 void SMS_setSpritePaletteColor (unsigned char entry, unsigned char color);
-void SMS_loadBGPalette (void *palette) __z88dk_fastcall;
-void SMS_loadSpritePalette (void *palette) __z88dk_fastcall;
+void SMS_loadBGPalette (void *palette) /* __z88dk_fastcall */;
+void SMS_loadSpritePalette (void *palette) /* __z88dk_fastcall */;
 #define SMS_setNextBGColoratIndex(i)       SMS_setAddr(SMS_CRAMAddress|(i))
 #define SMS_setNextSpriteColoratIndex(i)   SMS_setAddr(SMS_CRAMAddress|0x10|(i))
-void SMS_setColor (unsigned char color) __z88dk_fastcall __preserves_regs(b,c,d,e,h,l,iyh,iyl);
+void SMS_setColor (unsigned char color) /* __z88dk_fastcall */ __preserves_regs(b,c,d,e,h,l,iyh,iyl);
 /* SMS macros for colors */
 #define RGB(r,g,b)        ((r)|((g)<<2)|((b)<<4))
 #define RGB8(r,g,b)       (((r)>>6)|(((g)>>6)<<2)|(((b)>>6)<<4))
 #define RGBHTML(RGB24bit) (((RGB24bit)>>22)|((((RGB24bit)&0xFFFF)>>14)<<2)|((((RGB24bit)&0xFF)>>6)<<4))
-void SMS_loadBGPaletteHalfBrightness (void *palette) __z88dk_fastcall;
-void SMS_loadSpritePaletteHalfBrightness (void *palette) __z88dk_fastcall;
+void SMS_loadBGPaletteHalfBrightness (void *palette) /* __z88dk_fastcall */;
+void SMS_loadSpritePaletteHalfBrightness (void *palette) /* __z88dk_fastcall */;
 void SMS_zeroBGPalette (void);
 void SMS_zeroSpritePalette (void);
 #endif

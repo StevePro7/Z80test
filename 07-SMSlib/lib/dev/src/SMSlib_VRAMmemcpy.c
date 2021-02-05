@@ -15,7 +15,7 @@ void SMS_VRAMmemcpy (unsigned int dst, void *src, unsigned int size) {
   // SMS_setAddr(0x4000|dst);
   // SMS_byte_array_to_VDP_data(src,size);
   //  optimized (faster looping) ASM code (SDCC generated then hand optimized)
-__asm
+/* __asm
 	push	ix
 	ld	ix,#0
 	add	ix,sp
@@ -42,7 +42,7 @@ _copyloop:
 	dec	a
 	jr	NZ,_copyloop
 	pop	ix
-__endasm;
+__endasm; */
 }
 
 void SMS_VRAMmemcpy_brief (unsigned int dst, void *src, unsigned char size) {
@@ -50,7 +50,7 @@ void SMS_VRAMmemcpy_brief (unsigned int dst, void *src, unsigned char size) {
   // SMS_setAddr(0x4000|dst);
   // SMS_byte_brief_array_to_VDP_data(src,size);
   //  optimized (faster looping) ASM code (SDCC generated then hand optimized)
-__asm
+/* __asm
 	push	ix
 	ld	ix,#0
 	add	ix,sp
@@ -67,6 +67,6 @@ __asm
 	outi                   ; 16
 	jr	NZ,_copyloop   ; 12 = 28 (VRAM safe)
 	pop	ix
-__endasm;
+__endasm; */
 }
 #pragma restore

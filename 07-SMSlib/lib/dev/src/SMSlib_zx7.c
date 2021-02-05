@@ -17,7 +17,7 @@ void UNSAFE_SMS_loadZX7compressedTilesatAddr (void *src, unsigned int dst) {
 ; *** This version only supports match lengths up to 255. This enables ***
 ; *** it to be smaller and faster, but it is not 100% compatible.      ***
    ************************************************** */
-  __asm
+  /* __asm
   
   pop bc
   pop hl         ; move *src from stack into hl
@@ -163,6 +163,6 @@ _nextFlagsByte:
 
 _done:
   pop hl
-  __endasm;
+  __endasm; */
 }
 #pragma restore

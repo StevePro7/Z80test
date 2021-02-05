@@ -9,18 +9,18 @@
 
 /* declare various I/O ports in SDCC z80 syntax */
 /* define IOPort (joypad) */
-__sfr __at 0xDC IOPortL;
+/* __sfr __at 0xDC IOPortL;
 #ifdef TARGET_GG
 /* define GG IOPort (GG START key) */
-__sfr __at 0x00 GGIOPort;
+/* __sfr __at 0x00 GGIOPort;
 #else
 /* define IOPort (joypad) */
-__sfr __at 0xDD IOPortH;
+/* __sfr __at 0xDD IOPortH;
 #endif
 
 #ifdef MD_PAD_SUPPORT
 /* define IOPortCtrl (for accessing MD pad) */
-__sfr __at 0x3F IOPortCtrl;
+/* __sfr __at 0x3F IOPortCtrl;
 #define TH_HI                 0xF5
 #define TH_LO                 0xD5
 #endif
@@ -117,36 +117,36 @@ unsigned char SMS_VDPType (void) {
 #endif
 #endif
 
-void SMS_VDPturnOnFeature (unsigned int feature) __z88dk_fastcall {
+void SMS_VDPturnOnFeature (unsigned int feature) /* __z88dk_fastcall */ {
   // turns on a VDP feature
   VDPReg[HI(feature)]|=LO(feature);
   SMS_write_to_VDPRegister (HI(feature),VDPReg[HI(feature)]);
 }
 
-void SMS_VDPturnOffFeature (unsigned int feature) __z88dk_fastcall {
+void SMS_VDPturnOffFeature (unsigned int feature) /* __z88dk_fastcall */ {
   // turns off a VDP feature
   unsigned char val=~LO(feature);
   VDPReg[HI(feature)]&=val;
   SMS_write_to_VDPRegister (HI(feature),VDPReg[HI(feature)]);
 }
 
-void SMS_setBGScrollX (unsigned char scrollX) __z88dk_fastcall {
+void SMS_setBGScrollX (unsigned char scrollX) /* __z88dk_fastcall */ {
   SMS_write_to_VDPRegister(0x08,scrollX);
 }
 
-void SMS_setBGScrollY (unsigned char scrollY) __z88dk_fastcall {
+void SMS_setBGScrollY (unsigned char scrollY) /* __z88dk_fastcall */ {
   SMS_write_to_VDPRegister(0x09,scrollY);
 }
 
-void SMS_setBackdropColor (unsigned char entry) __z88dk_fastcall {
+void SMS_setBackdropColor (unsigned char entry) /* __z88dk_fastcall */ {
   SMS_write_to_VDPRegister(0x07,entry);
 }
 
-void SMS_useFirstHalfTilesforSprites (_Bool usefirsthalf) __z88dk_fastcall {
+void SMS_useFirstHalfTilesforSprites (_Bool usefirsthalf) /* __z88dk_fastcall */ {
   SMS_write_to_VDPRegister(0x06,usefirsthalf?0xFB:0xFF);
 }
 
-void SMS_setSpriteMode (unsigned char mode) __z88dk_fastcall {
+void SMS_setSpriteMode (unsigned char mode) /* __z88dk_fastcall */ {
   if (mode & SPRITEMODE_TALL) {
     SMS_VDPturnOnFeature(VDPFEATURE_USETALLSPRITES);
     spritesHeight=16;
@@ -197,7 +197,7 @@ void SMS_setSpritePaletteColor (unsigned char entry, unsigned char color) {
 #pragma save
 #pragma disable_warning 85
 #ifdef TARGET_GG
-void GG_loadBGPalette (void *palette) __z88dk_fastcall {
+void GG_loadBGPalette (void *palette) /* __z88dk_fastcall */ {
   // *palette will be in HL
   ASM_LD_DE_IMM(#SMS_CRAMAddress);
   ASM_DE_TO_VDP_CONTROL;
@@ -205,7 +205,7 @@ void GG_loadBGPalette (void *palette) __z88dk_fastcall {
   ASM_SHORT_XFER_TO_VDP_DATA;
 }
 
-void GG_loadSpritePalette (void *palette) __z88dk_fastcall {
+void GG_loadSpritePalette (void *palette) /* __z88dk_fastcall */ {
   // *palette will be in HL
   ASM_LD_DE_IMM(#SMS_CRAMAddress+0x20);
   ASM_DE_TO_VDP_CONTROL;
@@ -213,7 +213,7 @@ void GG_loadSpritePalette (void *palette) __z88dk_fastcall {
   ASM_SHORT_XFER_TO_VDP_DATA;
 }
 #else
-void SMS_loadBGPalette (void *palette) __z88dk_fastcall {
+void SMS_loadBGPalette (void *palette) /* __z88dk_fastcall */ {
   // *palette will be in HL
   ASM_LD_DE_IMM(#SMS_CRAMAddress);
   ASM_DE_TO_VDP_CONTROL;
@@ -221,7 +221,7 @@ void SMS_loadBGPalette (void *palette) __z88dk_fastcall {
   ASM_SHORT_XFER_TO_VDP_DATA;
 }
 
-void SMS_loadSpritePalette (void *palette) __z88dk_fastcall {
+void SMS_loadSpritePalette (void *palette) /* __z88dk_fastcall */ {
   // *palette will be in HL
   ASM_LD_DE_IMM(#SMS_CRAMAddress+0x10);
   ASM_DE_TO_VDP_CONTROL;
@@ -229,7 +229,7 @@ void SMS_loadSpritePalette (void *palette) __z88dk_fastcall {
   ASM_SHORT_XFER_TO_VDP_DATA;
 }
 
-void SMS_setColor (unsigned char color) __z88dk_fastcall __preserves_regs(b,c,d,e,h,l,iyh,iyl) {
+void SMS_setColor (unsigned char color) /* __z88dk_fastcall */ __preserves_regs(b,c,d,e,h,l,iyh,iyl) {
   // color will be in L
   ASM_L_TO_VDP_DATA;
 }
@@ -306,14 +306,14 @@ unsigned char SMS_getHCount (void) {
 /* Interrupt Service Routines */
 #ifdef MD_PAD_SUPPORT
 void SMS_isr (void) __interrupt __naked {
-  __asm
+  /*__asm
     push af
     push bc
     push de
     push hl
     push iy
     push ix
-  __endasm;
+  __endasm; */
   SMS_VDPFlags=VDPStatusPort;              /* read status port and write it to SMS_VDPFlags */
   if (SMS_VDPFlags & 0x80) {               /* this also aknowledge interrupt at VDP */
     VDPBlank=true;                         /* frame interrupt */
@@ -336,7 +336,7 @@ void SMS_isr (void) __interrupt __naked {
       MDKeysStatus=0;                       /* (because one might have detached his MD pad) */
   } else
     SMS_theLineInterruptHandler();          /* line interrupt */
-  __asm
+  /*__asm
     pop ix
     pop iy
     pop hl
@@ -345,11 +345,11 @@ void SMS_isr (void) __interrupt __naked {
     pop af
     ei                                      ; Z80 disable the interrupts on ISR, so we should re-enable them explicitly
     reti                                    ; this is here because function is __naked
-  __endasm;
+  __endasm; */
 }
 #else
 void SMS_isr (void) __interrupt __naked {
-  __asm
+  /*__asm
     push af
     push hl
     in a,(_VDPStatusPort)                   ; also aknowledge interrupt at VDP
@@ -387,7 +387,7 @@ void SMS_isr (void) __interrupt __naked {
     pop af                                  ; Z80 disable the interrupts on ISR,
     ei                                      ; so we should re-enable them explicitly.
     reti                                    ; this is here because function is __naked
-  __endasm;
+  __endasm; */
 }
 #endif
 
