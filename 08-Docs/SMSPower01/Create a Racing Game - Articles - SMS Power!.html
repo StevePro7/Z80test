@@ -1,0 +1,735 @@
+<!DOCTYPE 
+    HTML PUBLIC 
+    "-//W3C//DTD HTML 4.01 Transitional//EN" 
+    "http://www.w3.org/TR/html4/loose.dtd"
+    >
+<html>
+<head>
+<title>Create a Racing Game - Articles - SMS Power!</title>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<link rel='stylesheet' title='Styled' href='//www.smspower.org/pub/skins/smspower/smspower.css' type='text/css' />
+<style type='text/css'><!--
+  ul, ol, pre, dl, p { margin-top:0px; margin-bottom:0px; }
+  code.escaped { white-space: nowrap; }
+  .vspace { margin-top:1.33em; }
+  .indent { margin-left:40px; }
+  .outdent { margin-left:40px; text-indent:-40px; }
+  a.createlinktext { text-decoration:none; border-bottom:1px dotted gray; }
+  a.createlink { text-decoration:none; position:relative; top:-0.5em;
+    font-weight:bold; font-size:smaller; border-bottom:none; }
+  img { border:0px; }
+  .editconflict { color:green; 
+  font-style:italic; margin-top:1.33em; margin-bottom:1.33em; }
+
+  table.markup { border:2px dotted #ccf; width:90%; }
+  td.markup1, td.markup2 { padding-left:10px; padding-right:10px; }
+  table.vert td.markup1 { border-bottom:1px solid #ccf; }
+  table.horiz td.markup1 { width:23em; border-right:1px solid #ccf; }
+  table.markup caption { text-align:left; }
+  div.faq p, div.faq pre { margin-left:2em; }
+  div.faq p.question { margin:1em 0 0.75em 0; font-weight:bold; }
+  div.faqtoc div.faq * { display:none; }
+  div.faqtoc div.faq p.question 
+    { display:block; font-weight:normal; margin:0.5em 0 0.5em 20px; line-height:normal; }
+  div.faqtoc div.faq p.question * { display:inline; }
+   
+    .frame 
+      { border:1px solid #cccccc; padding:4px; background-color:#f9f9f9; }
+    .lfloat { float:left; margin-right:0.5em; }
+    .rfloat { float:right; margin-left:0.5em; }
+a.varlink { text-decoration:none; }
+
+--></style><meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<link rel='stylesheet' type='text/css' href='//www.smspower.org/pub/attachtable/attachtable.css' /> <meta name='robots' content='index,follow' />
+</head>
+<body>
+<div id='wrap' class='clearfix'>
+
+<div id='header'>
+<table width='100%'><tr>
+<td align='left' valign='middle'>
+<h1><a href='//www.smspower.org'><img src='/uploads/Site/logo.png' alt='SMS Power!' title='SMS Power!' width='204' height='50' /></a></h1>
+</td><td align='center' valign='middle'>
+<div class='nowrap' style='text-align: center;'>
+<h2><a class='wikilink' href='//www.smspower.org/Articles/Index'>Articles</a></h2>
+<p><span style='font-size:83%'>Sega Master System / Mark III / Game Gear<br />SG-1000 / SC-3000 / SF-7000 / OMV</span>
+</p></div>
+</td><td align='right' valign='top'>
+<p><a name='top' id='top'></a>
+<a class='wikilink' href='//www.smspower.org/'>Home</a> - <a class='wikilink' href='/forums/'>Forums</a> - <a class='wikilink' href='//www.smspower.org/Games/Index'>Games</a> - <a class='wikilink' href='//www.smspower.org/Scans/Index'>Scans</a> - <a class='wikilink' href='//www.smspower.org/Maps/Index'>Maps</a> - <a class='wikilink' href='//www.smspower.org/Cheats/Index'>Cheats</a> - <a class='wikilink' href='//www.smspower.org/Credits/Index'>Credits</a><br /><a class='wikilink' href='//www.smspower.org/Music/Index'>Music</a> - <a class='wikilink' href='//www.smspower.org/Videos/Index'>Videos</a> - <a class='wikilink' href='//www.smspower.org/Development/Index'>Development</a> - <a class='wikilink' href='//www.smspower.org/Hacks/Index'>Hacks</a> - <a class='wikilink' href='//www.smspower.org/Translations/Index'>Translations</a> - <a class='wikilink' href='//www.smspower.org/Homebrew/Index'>Homebrew</a>
+</p><form action='//www.smspower.org/Articles/CreateARacingGame' method='get'><input type='hidden' name='action' value='search' /><input type='search' name='q' value='' size='40' /><input type='submit' name='' value='Search' class='inputbutton' /><input type='checkbox' name='group' value='Articles' id='group' /><label for='group'>Articles only</label></form>
+<div id='menubar'>
+<ul><li><a class='wikilink' href='/forums/login.php?redirect=redirect.php%3fn%3dArticles/CreateARacingGame'>Login</a>
+</li><li><a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=12440">Report an error</a>
+</li><li><a rel='nofollow' class='wikilink' href='//www.smspower.org/Articles/CreateARacingGame?action=print'>Print</a>
+</li></ul></div>
+</td></tr></table>
+
+<h2 class='pagetitle'>Create a Racing Game</h2>
+
+<hr />
+</div>
+
+
+<div id='wikitext'>
+<p><strong>Update (november, 2015):</strong> I further developed Racer into a 'rebooted', improved version, and thus I re-made/re-wrote the graphics, sound, and code. Even though this tutorial covers only the 'classic' version of Racer, the source code for all versions (classic, easter and rebooted) is available at <a class='urllink' href="https://www.smspower.org/Homebrew/Racer-SMS" rel='nofollow'>Racer's homebrew page</a>.
+</p>
+<p class='vspace'>This article is part development notes, part tutorial, related to the creation of Racer - a simple racing game inspired by Speedway! on the Magnavox Odyssey II console (released 1978). This console is the second iteration of the original Magnavox Odyssey created by the legendary Ralph H. Baer (1922-2014) - one of the founding fathers of the video game industry. Speedway! is part of a multigame cart, and before you scream "ugly graphics!" at Racer's simple sprites, you should <a class='urllink' href='https://www.youtube.com/watch?v=lSKkzUYfZx0' rel='nofollow'>watch how the original plays</a>.
+</p>
+<p class='vspace'>For comparison I present a screenshot of the original Speedway! on the Magnavox Odyssey II besides a screenshot of Racer.
+</p>
+<div class='vspace'></div>
+<table border='1'><tr><td align='center'><strong>Speedway!</strong></td><td align='center'><strong>Racer - classic</strong></td><td align='center'><strong>Racer - rebooted</strong></td></tr>
+<tr><td align='center'><img src='//www.smspower.org/uploads/Articles/Speedway-screenshot.jpg' alt='' title='' /></td><td align='center'><img src='//www.smspower.org/uploads/Articles/Racer-screenshot.jpg' alt='' title='' /></td><td align='center'><img src='//www.smspower.org/uploads/Articles/Racer-SMS-1.png' alt='' title='' /></td></tr>
+</table>
+<p class='vspace'>Source code and assets for each of the tutorial's steps are accessible directly from the page you are reading now. Additionally, you can visit <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15376">Racer's discussion thread</a> to participate in the discussion about the game, ask questions, add comments, etc. After writing this tutorial, I made a few minor adjustments to the code. You can get the latest version of Racer, including a special Easter edition, from <a class='urllink' href="https://www.smspower.org/Homebrew/Racer-SMS" rel='nofollow'>Racer's homebrew page</a>.
+</p>
+<div class='vspace'></div><div class='toc'>
+<div style='cursor: pointer;' class='tocheader' onclick="if (!window.__cfRLUnblockHandlers) return false; javascript:toggleToc('tocid1');" data-cf-modified-b046ddfc978d808f5369a068-=""><span style='cursor: pointer;' id="tocid1tog" class='toc_close'><span>+</span></span><a name='toc1' id='toc1'></a>Contents
+</div>
+<div class='toclist' id='tocid1'>
+<ul><li><a href='#Introduction'>Introduction</a>
+</li><li><a href='#DescriptionOfTheGame'>Description of the Game</a>
+<ul><li><a href='#Gameplay'>Gameplay</a>
+</li><li><a href='#Controls'>Controls</a>
+</li></ul></li><li><a href='#DevelopmentGoals'>Development Goals</a>
+</li><li><a href='#DevelopmentPrinciplesAndConstraints'>Development Principles and Constraints</a>
+</li><li><a href='#GeneralTechnicalNotes'>General Technical Notes</a>
+<ul><li><a href='#ToolsForWritingAndDebuggingCode'>Tools for Writing and Debugging Code</a>
+</li><li><a href='#ToolsForCreatingGraphicsAndSound'>Tools for Creating Graphics and Sound</a>
+</li><li><a href='#Documents'>Documents</a>
+</li><li><a href='#TheDisplays6Phases'>The Display's 6 Phases</a>
+</li><li><a href='#AGenericGameLoop'>A Generic Game Loop</a>
+</li></ul></li><li><a href='#SpriteAttributeTableBuffer'>Sprite Attribute Table Buffer</a>
+</li><li><a href='#OverviewOfRacersProgramFlow'>Overview of Racer's Program Flow</a>
+</li><li><a href='#Step0TheAssets'>Step 0 - The Assets</a>
+</li><li><a href='#Step1AVerticalScrollingRoad'>Step 1 - A Vertical Scrolling Road</a>
+</li><li><a href='#Step2APlayerControlledCar'>Step 2 - A Player Controlled Car</a>
+</li><li><a href='#Step3TheFirstEnemyCar'>Step 3 - The First Enemy Car</a>
+</li><li><a href='#Step4TheSecondEnemyCar'>Step 4 - The Second Enemy Car</a>
+</li><li><a href='#Conclusion'>Conclusion</a>
+</li><li><a href='#Footnotes'>Footnotes</a>
+</li></ul></div></div>
+<div class='vspace'></div><h2><a name='Introduction' id='Introduction'></a> Introduction</h2>
+<p>Reading another programmer's source code can be really helpful, but it can also be quite overwhelming. To help facilitate the reader's learning, I break the game development process into 5 separate steps. And as you can imagine, the source for the first step (a scrolling road) has relatively little code in it. Code is added as we progress through the steps. The only missing elements are scoring, death-handling (including super simple collision detection) and the title screen. Upon request I will happily make more detailed explanations if required. I can also add the scoring and/or collision detection as separate steps. I really did the five steps in order as I developed Racer. I added the title screen and music in the end, and also the way scoring and dying is handled, because these elements are different from the original game (it has no title screen, and it just crashes when your two minute timer is up).
+</p>
+<p class='vspace'>This wiki page will not discuss everything that goes on in the code. I discuss some of the central stuff going on in each step, and I highlight some related routines. The source code is almost fully line-by-line commented, so just browsing it should give you a pretty good idea about what goes on.
+</p>
+<p class='vspace'>My motivation for doing this? I wish I have had something like this to proceed to after completing <a class='urllink' href="https://www.smspower.org/maxim/HowToProgram/Lesson1AllOnOnePage" rel='nofollow'>Maxim's Hello World tutorial</a>. Writing tutorials even though you are not an ancient SMS coder, in fact I'm getting started myself, seems to be in the spirit of content creation for SMSPower's <a class='wikilink' href='//www.smspower.org/Development/GettingStarted'>Getting Started section</a><a href='#fn1' class='footnoteref' title='As described by Maxim in this thread' name='fnref1'><sup>[1]</sup></a>. This unfortunately also means that I don't have the skills and knowledge to provide you with super optimized code. As I review my code over and over, I think of new ways to improve it. You should too. For example, the way I update the sprite table buffer (see later) is not particularly great, but it gets the job done before vblank finishes.
+</p>
+<p class='vspace'><strong>Disclaimer:</strong>
+It is important that you attune your expectations to what this document really <em>is</em> (and thus also what it is not). It IS a rather detailed personal account of how I made my first complete SMS game. And as such, it is definitely NOT a template for building optimized, generalized, clean and easily extendable assembly programs. This is NOT a tutorial that will teach you general SMS-programming techniques and good practices. But hopefully you will find it helpful if you are getting started with SMS-programming - just like I was when I wrote Racer.
+</p>
+<p class='vspace'>Ideally you should have completed at least Maxim's Hello World tutorial, and preferably have done a little general z80 assembler fiddling and SMS document reading in addition, before taking on this tutorial. I wont go into super much detail about all the stuff going on in the source code. What I <strong>will</strong> do is provide you with some fundamental building blocks to stack on top of each other to re-create Racer. These building blocks are five steps describing how 1) the assets were created, 2) the scrolling road was made 3) player control was added, 4) enemy Ash and 5) enemy Mae was added.
+</p>
+<p class='vspace'>I start with some general technical considerations. Then I present the core of this tutorial: A five step approach to recreate Racer. At each step you can download the source code and relevant assets. I have line-by-line commented almost the entire source code. I highlight a few important points under each step in this tutorial. If you need more help, I'm happy to provide further explanations to the best of my knowledge. Put a question or comment in <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15376">Racer's thread on the forums</a>.
+</p>
+<p class='vspace'>You can also check out GameGearGuy's Racer-based games, including <a class='urllink' href="https://www.smspower.org/Homebrew/MrUltra-GG" rel='nofollow'>Mr. Ultra</a>, <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15858">Bananas are good</a> and <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15958">Mr. Banana</a>. Thanks to GameGearGuy for really taking the Racer codebase in new directions... from a vertically scrolling race game to a sidescrolling jumper, and a fly-swatting reflex game, etc...
+</p>
+<p class='vspace'>This is an exiciting time in the community! It seems like we are on the verge of a breakthrough for C-based homebrewing. I look forward to these advancements, and feel certain that both assembler- and C-based coding will thrive alongside each other for many years to come. These notes describe assembler-based game development.
+</p>
+<div class='vspace'></div><h2><a name='DescriptionOfTheGame' id='DescriptionOfTheGame'></a> Description of the Game</h2>
+<p>I strongly suggest that you download and try out the game before you proceed!
+</p>
+<div class='vspace'></div><h3><a name='Gameplay' id='Gameplay'></a> Gameplay</h3>
+<p>You find yourself on the track - ready to go! Race full speed up the track, and avoid enemy cars as you overtake them. At first there is only one enemy, but that will change soon enough. Keep calm and stay alive for as long as you can. The game starts with a humble hiscore of 200. Break that hiscore. Die a couple of times. Feel the almost flappy bird-like gameplay frustration. Invite your friend/wife/husband/kids, and let them have a go at beating your hiscore. Put Racer on next time you throw a party. The unforgiving, fast and super simple gameplay will hopefully both motivate you... and piss you off!
+</p>
+<div class='vspace'></div><h3><a name='Controls' id='Controls'></a> Controls</h3>
+<p>Press button one (start) to progress from the title screen, and press again to start the engine of the car. Left and right on the d-pad are for horizontal control of your car. After you have crashed, you are back to the starting point, and a shining new car is waiting for you. Now you can press button 1 to fire up the engine and try again, or you can pass the controller on to your eager friend next to you. If you want to go back to the title screen, just wait a moment, and you are taken there automatically.
+</p>
+<div class='vspace'></div><h2><a name='DevelopmentGoals' id='DevelopmentGoals'></a> Development Goals</h2>
+<ul><li>To actually develop a game from start to finish. Development started late in January 2015, and I never intended to enter the compo, because I thought it would take ages to code the game. But it was surprisingly fast, and it really helps to have some code snippets lying around from other projects.
+</li><li>To use the game as a platform for my own learning and exploration, while having a reasonable amount of SMS fun.
+</li><li>To write the game in such a way that it is made up of modules, that can be build on top of each other. This way, I can document the game so that it can hopefully contribute to the getting started section here on sms-power. See further down on this page.
+</li></ul><div class='vspace'></div><h2><a name='DevelopmentPrinciplesAndConstraints' id='DevelopmentPrinciplesAndConstraints'></a> Development Principles and Constraints</h2>
+<ul><li>Max. 1.000 lines of code, including comments, handwritten data blocks, etc.
+</li><li>Hard focus on the essentials. Which elements are essential to the gameplay?
+</li><li>Deploy a Jonathan Cauldwell-inspired retro coding convention, in all its limitations and poetic beauty. The z80 assembler language is praised as beatiful and almost poetic on the forums<a href='#fn2' class='footnoteref' title='According to TmEE Z80 is beautiful, and Maxim states that Z80 code is very readable and almost poetic.  Click here to go to the thread' name='fnref2'><sup>[2]</sup></a>. I think that a strict and tight coding scheme, which - to a reasonable extent - makes the code look and feel like an actual assembler program on an ageing microprocessor, reinforces this poetic and aesthetical dimension to z80 assembler coding. Of course I'm happy that I don't need to worry about running out of symbol space, etc. In some ways, having to come up with a good name for a function or variable at only 6 chars long at max, causes me to think a little deeper about the inner workings of the program, possible redundancy, etc. For the sceptics I would also like to add, that this coding convention prescribes full line-by-line commenting. So what might be lacking in fully self-explaining variables, is to some extent made up by the extensive commenting.
+</li><li>Stick pretty close to the original visuals and gameplay, and refrain from trying to make all sorts of improvements and extra features not present in the original. I actually deviated a little from this principle with regards to the score/hiscore system.
+</li><li>No flickering. Sprite flicker is not cool. Period.
+</li></ul><p class='vspace'>For a larger game, I would probably have used wla-dx's .sections to organize the code. I have chosen to keep the raw hex numbers for i.e. the vdp status port ($bf) and data port ($be). These values cannot be changed by the programmer, so you might as well learn them. If you prefer, you can of course create a constant definition, i.e. .equ VDP_Control_Port $bf, and use this instead. To me, long and fancy definitions are sometimes harder to remember than the handful of raw hex numbers referring to hardware ports, etc.
+</p>
+<p class='vspace'>I have created constants for some of my values, i.e. horizontal speed (hspeed), vertical speed (vspeed), etc. Creating a constant will allow me to change all references to this value by changing just the value in the definition. As I developed the game, I tweaked these constants in order to create the best flow of the cars' movement.
+</p>
+<div class='vspace'></div><h2><a name='GeneralTechnicalNotes' id='GeneralTechnicalNotes'></a> General Technical Notes</h2>
+<p>This section describes the software I have used, as well as the various technical documents I have read and used for reference. I also include some tables and considerations supporting my work with the vertical blanking and vram updating, and general principles for organizing a generic main game loop.
+</p>
+<div class='vspace'></div><h3><a name='ToolsForWritingAndDebuggingCode' id='ToolsForWritingAndDebuggingCode'></a> Tools for Writing and Debugging Code</h3>
+<p>My development toolchain is mainly based on the setup described in Maxim's tutorial:
+</p><ul><li>ConTEXT - programmer's notepad with handy execute keys and syntax highlighting
+</li><li>WLA-DX - Z80 assembler (mapped to F9 in ConTEXT)
+</li><li>Meka - emulator and debugger (F10)
+</li><li>Emulicious - emulator and debugger (F11)
+</li></ul><div class='vspace'></div><h3><a name='ToolsForCreatingGraphicsAndSound' id='ToolsForCreatingGraphicsAndSound'></a> Tools for Creating Graphics and Sound</h3>
+<ul><li>Paint Shop Pro 7 (PSP7) for graphics. Essential palette control.
+</li><li>Deflemask for tracking/music. MOD2PSG is also very good.
+</li><li>Vgm2psg for converting the vgm files from Deflemask to psg files to be handled in the source code by PSGLib. Vgm2psg is part of the PSGLib package at <a class='urllink' href='https://github.com/sverx/PSGlib' rel='nofollow'>sverx' Github</a>.
+</li><li>Photoshop for cover art, making mock-ups, etc.
+</li><li>Even though I did not actively use it for this project, I would like to mention Sprite Something on the Ipad. It is great for making pixel-art mockups and test-drawing animations etc. It even comes with an SMS palette pre-loaded, but as far as I can see it is not 100% color accurate. But it works well.
+</li></ul><div class='vspace'></div><h3><a name='Documents' id='Documents'></a> Documents</h3>
+<ul><li>The official SEGA software reference guide (I still can't believe we actually have this cool original document!).
+</li><li>Charles Mac Donald's VDP documentation. Great and comprehensive - and goes beyond even the official software reference.
+</li><li>Maxim's listing of SMS colors, including hex codes and RGB values.
+</li><li>WLA-DX documentation.
+</li><li>Z80 opcode overview.
+</li><li>Jonathan Cauldwell's "How to Make Games for the ZX Spectrum"; style guide and general inspiration.
+</li></ul><div class='vspace'></div><h3><a name='TheDisplays6Phases' id='TheDisplays6Phases'></a> The Display's 6 Phases</h3>
+<p>This is explained in Charles' vdp documentation, and also discussed on the forum, but I have included it here for reference. I use this table together with the line counting features of Meka and Emulicious to make sure that I never update the vram in the active display phase. While writing Racer I had some colorful, but magically appearing pixels on the title screen near the bottom. Later I found out that these pixels were caused by me writing to the color ram during the bottom border phase. As you can see from the table, this is not good. I added a delay that caused my color ram updating to happen in the bottom blanking phase instead, and then the mystic pixels disappeared as expected.
+</p>
+<p class='vspace'>The following table does only apply to NTSC.
+</p>
+<div class='vspace'></div><pre class='escaped'>
+ Lines       Description 
+---------------------------------------------------------------------------
+ 000-191     Active display (192 lines) 
+             Update VRAM very carefully! Don't touch graphics currently 
+             being drawn by/on the raster line. Work with line interrupts 
+             and/or the counter, i.e. in A,($7E). 
+
+ 192-215     Bottom border (24 lines) 
+             Start of VBlank interrupt (also called frame interrupt). 
+             Write sprites, tiles and tilemaps. 
+
+ 216-218     Bottom blanking (3 lines) 
+             Write everything, including colors (CRAM). 
+
+ 219-221     Vertical sync (3 lines) 
+             Write everything. Beam moves back. 
+
+ 222-234     Top blanking (13 lines) 
+             Write everything. 
+
+ 235-261     Top border (27 lines) 
+             Write sprites, tiles and tilemaps. 
+---------------------------------------------------------------------------
+</pre>
+<div class='vspace'></div><h3><a name='AGenericGameLoop' id='AGenericGameLoop'></a> A Generic Game Loop</h3>
+<p>I don't think such a thing as a generic game loop exists. Anyway, I defined the following overall code-structuring principles in the beginning of the project. These principles are primarily used on the main game loop.
+</p>
+<p class='vspace'>1. Wait for vblank (frame interrupt). The first thing in the loop is a wait for the screen to blank.
+</p>
+<p class='vspace'>2. Write to vram from buffers. In order to update vram while the screen is blanked, next thing I do is to load the sprite attribute table buffer and the vertical scroll register variable into vram. Thise step finishes around line 218, som I'm well within the time frame for vram updating (please refer to the table above).
+</p>
+<p class='vspace'>3. Resolve issues rising from current state of game objects. This means collision detection and test/responding to counters.
+</p>
+<p class='vspace'>4. Update game objects. Set new states/positions (x,y), etc. Get, and respond to, user input. Calculate new positions for enemies. Note: Nothing happens with regards to sprites in this step.
+</p>
+<p class='vspace'>5. Update vram buffers. Change the sprites' vertical and horizontal positions. Below is a map of the sprite attribute table buffer.
+</p>
+<p class='vspace'>When all buffers are updated, we sit back and wait for the next vblank...
+</p>
+<div class='vspace'></div><h2><a name='SpriteAttributeTableBuffer' id='SpriteAttributeTableBuffer'></a> Sprite Attribute Table Buffer</h2>
+<p>This is the layout of the sprite attribute table (sat) buffer I use in Racer. The player is introduced in step 2, and the enemies (Ash and Mae) are introduced in steps 3 and 4 (see below).
+</p>
+<div class='vspace'></div><div><img src='//www.smspower.org/uploads/Articles/Sat-buffer-map.png' alt='' title='' /></div>
+<p class='vspace'>This layout corresponds to the sprite attribute table mapping I do in the beginning of the source (note the memory locations):
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock1'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; Map of the sprite attribute table (sat) buffer.</span><br />
+<span class="co1">; Contains sprites' vertical position (vpos), horizontal posi-</span><br />
+<span class="co1">; tion (hpos) and character codes (cc).</span><br />
+<br />
+<span class="kw3">.equ</span> highvp <span class="re0">$c000</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; first hiscore vpos.</span><br />
+<span class="kw3">.equ</span> highhp <span class="re0">$c080</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; first highscore hpos.</span><br />
+<span class="kw3">.equ</span> highcc <span class="re0">$c081</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; first hiscore cc.</span><br />
+<br />
+<span class="kw3">.equ</span> scorvp <span class="re0">$c004</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; first score vpos.</span><br />
+<span class="kw3">.equ</span> scorhp <span class="re0">$c088</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; first score hpos.</span><br />
+<span class="kw3">.equ</span> scorcc <span class="re0">$c089</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; first score cc.</span><br />
+<br />
+<span class="kw3">.equ</span> plrvp <span class="re0">$c008</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first player vpos.</span><br />
+<span class="kw3">.equ</span> plrhp <span class="re0">$c090</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first player hpos.</span><br />
+<span class="kw3">.equ</span> plrcc <span class="re0">$c091</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first player cc.</span><br />
+<br />
+<span class="kw3">.equ</span> maevp <span class="re0">$c018</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first Mae vpos.</span><br />
+<span class="kw3">.equ</span> maehp <span class="re0">$c<span class="re1">0b</span>0</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first Mae hpos.</span><br />
+<span class="kw3">.equ</span> maecc <span class="re0">$c<span class="re1">0b</span>1</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first Mae cc.</span><br />
+<br />
+<span class="kw3">.equ</span> ashvp <span class="re0">$c028</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first Ash vpos.</span><br />
+<span class="kw3">.equ</span> ashhp <span class="re0">$c0d0</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first Ash hpos.</span><br />
+<span class="kw3">.equ</span> ashcc <span class="re0">$c0d1</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; first Ash cc.</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=1' type='text/plain'>Get Code</a></div>
+</div>
+<div class='vspace'></div><h2><a name='OverviewOfRacersProgramFlow' id='OverviewOfRacersProgramFlow'></a> Overview of Racer's Program Flow</h2>
+<p>1. Game initialization
+</p><ul><li>Initialize ram and vram.
+</li><li>Initialize variables.
+</li><li>Load game assets into vram.
+</li></ul><p class='vspace'>2. Prepare title screen.
+</p><ul><li>Load title screen assets into vram.
+</li></ul><p class='vspace'>3. Title screen loop.
+</p><ul><li>Play music.
+</li><li>Flash hiscore.
+</li><li>Wait for button 1 press. If pressed, then go to "Prepare main loop".
+</li></ul><p class='vspace'>4. Prepare main loop.
+</p><ul><li>Load main loop assets.
+</li><li>Initialize variables.
+</li><li>Update sat buffer.
+</li></ul><p class='vspace'>5. 'Ready loop'.
+</p><ul><li>Wait for keypress. If button 1 is pressed, then go forward to "Main loop".
+</li><li>Wait for timer. If time is up then go back to "Prepare title screen".
+</li></ul><p class='vspace'>6. Main loop.
+</p><ul><li>Write to vram.
+</li><li>Compare score to hiscore.
+</li><li>Test for score = 9999. Yes? - then go to "Player dies".
+</li><li>Detect collision. Do sprites collide? Yes - go to "Player dies".
+</li><li>Read and respond to controller input.
+</li><li>Update enemy positions.
+</li><li>Add to score.
+</li><li>Update the sat and scroll buffers.
+</li></ul><p class='vspace'>7. Player dies (prepare death loop).
+</p><ul><li>Make crash noise and trash player car.
+</li></ul><p class='vspace'>8. Death loop
+</p><ul><li>Update enemy positions (now moving up).
+</li><li>Wait for timer. Is time up? Yes - go back to prepare main loop.
+</li></ul><div class='vspace'></div><h2><a name='Step0TheAssets' id='Step0TheAssets'></a> Step 0 - The Assets</h2>
+<div><span class='frame rfloat'> <a class='attachlink' href='//www.smspower.org/uploads/Articles/Player-car-in-grid.png'><img width='198px' src='//www.smspower.org/uploads/Articles/Player-car-in-grid.png' alt='' /></a><br />4 x 4 tiles</span></div>
+<p class='vspace'>You can <a class='attachlink' href='//www.smspower.org/uploads/Articles/Assets.zip'>download the original .bmp files, the processed .inc files and also the title screen smash hit in Deflemask module format</a>, so you can tweak and tinker as you see fit.
+I used Paint Shop Pro 7 (PSP7) for tile editing, because it has super tight palette control. When I work in PSP7, I usually apply a 8x8 grid, so I can always see how my drawings will be separated into tiles. You can see how it looks on the picture to the right. When I define colors in the palette, I refer to Maxim's color table from the Hello World tutorial. This way I can make sure I get some SMS-compatible colors into the palette.
+</p>
+<p class='vspace'>As you can see, the blocky nature of the sprites are not due to them being zoomed (like in my other game Block Quest aka. Knights of the Square). So if you are fuelled by disappointment/rage regarding the visual output from Racer, I encourage you to do something about it! You can make almost Genesis-quality cars for the player and the enemies. 4 x 4 tiles per car means 32 x 32 pixels at your disposal for the player and Mae+Ash sprites respectively. Flicker-free sprites, that is! Kapow!! You can easily load some extra colors also. So knock yourself out. Just like when you start to improve on an old house (believe me, I live in one), you often realize that when you update one wall, you have to update the others. And then the floor. And the windows, and... phew! You cannot have a 7-color super detailed player car racing down a dull purple road, crashing into blocky white enemies, can you...? :) Soon you will spend a lot of time really remaking the game graphically - and if you do, I'll love to see the result. Thanks to Orlan Rod for <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15558">hacking around with the graphical output from Racer</a>.
+</p>
+<p class='vspace'>I'm not perfectly happy with the digits for scrore and highscore. I took the easy way out, though. I re-used a set I had already grabbed from Shinobi. This means that the digit tiles are just 8x8 pixels (one tile per digit). In the original Speedway!, the digits are about twice this size. Although the larger digits sure look good, I choose to stick to my standard digit tiles for two reasons: 1) The score keeping and updating routine (pasted in from another game, and originating from Jonathan Cauldwell's tutorial) assumes 8x8 pixel digits. 2) I work exclusively with the hardware sprites in the sprite attribute table, and bigger score digits would be causing sprite overdraw as the enemy cars race by (+8 sprites on a scanline). Beacuse the enemy cars are 4 tiles wide, I can have 4 digits of scoring. I actually wanted five digits in the beginning, but chosed to live with 4 digits to obey the sprite limitations (and I have never even been close to getting 9999 points yet).
+</p>
+<p class='vspace'>Having bigger digits, without the graphics suffering from sprite overdraw, would require me to treat the digits as part of the background (and thus update them through the name table, and not the sprite attribute table). This is not particularly hard, but I think it is nice, also from a tutorial keep-it-simple perspective, that I actually manage to make this game run solely on hardware sprites. OK, except from the scrolling background, but you know what I mean. There is no name table updating in the loops. Clean. Simple.
+</p>
+<p class='vspace'>On the title screen the hiscore is made of what seems like 16x16 pixel tiles. Okay, I cheated a little and used zoomed sprites (setting the vdp register). So it is just the same tiles as in-game, but now they are zoomed. Because I have only four digits for the hiscore, the zoomed sprites should look alright on both SMS I and SMS II. The SMS I suffers from a hardware bug that makes it zoom only the first four sprites.
+</p>
+<p class='vspace'>Anyway, when I'm done making graphics, I use BMP2Tile for making include files out of the bmp files. This is a super nice and easy workflow.
+</p>
+<p class='vspace'>I used Deflemask to compose the title music, and I used the vgm2psg tool included with PSGLib to create psg out of vgm. As mentioned above, I have included the title screen tune in native Deflemask format. Refer to the "Sources" folder in the zip file. Please note: Because I have mapped ram to slot 2 (and not slot 3 where it usually goes), I needed to adapt the psglib a little. Refer to <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15678">GameGearGuy's post</a> for more details. Greetings goes out to GameGearGuy - thanks for your interest in Racer (look for the Racer-based games Yum! and <a class='urllink' href="https://www.smspower.org/Homebrew/MrUltra-GG" rel='nofollow'>Mr. Ultra</a> on the forums)!
+</p>
+<p class='vspace'>For the constant sound of engines roaring (??), and for the crash sound, I write directly to the noise channel on the programmable sound generator (psg). The following code excerpt shows how the engine sound is turned on when the race begins:
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock2'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;">&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="re1">%11110110</span> &nbsp; &nbsp; &nbsp;<span class="co1">; turn noise volume up to 12 db.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">out</span> <span class="br0">&#40;</span><span class="re0">$7f</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; write to psg.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="re1">%11100110</span> &nbsp; &nbsp; &nbsp;<span class="co1">; make coarse noise - go car engine!</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">out</span> <span class="br0">&#40;</span><span class="re0">$7f</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; write to psg.</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=2' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>This could have been done using the PSGLib and Deflemask. The reason why I write directly to the psg (not using the routines in PSGLib) is twofold: 1) I simply wanted to try and do it! It was my first time dealing directly with the psg. 2) I thought that I could do without title screen and music far into the development proces, because none of these things are in the original. Towards the end, when I had already written the motor and crash sound code, I decided to include PSGLib to spice up my title screen.
+</p>
+<p class='vspace'>I used Photoshop to make the cover. It was a messy trial and error process, where I would arrange and resize stuff, print it, cut it out and try to cram it into an old World Soccer box. I would hereby like to extend my gratitude to the printer at my workplace, which made this possible. Even during regular work hours! :)
+</p>
+<div class='vspace'></div><div><img src='//www.smspower.org/uploads/Articles/Racer_Cover.png' alt='' title='' /></div>
+<p class='vspace'>Aside from the technical considerations, I have pondered a little over ways to actually design cover art for homebrew games. You could possibly set it up to look like an original game, complete with the Sega logo, barcodes, and all that stuff. When I designed the cover art for Racer, I went more in the direction of the unlicensed games (i.e. games from the Gam* Boy, etc.). There is no need to pretend that Sega oficially endorses your game. Be proud of what it is: Unlicensed homebrew, and design your box art to reflect this fact.
+</p>
+<p class='vspace'>I went to Deviantart to look for inspiration, and found <a class='urllink' href="https://morgenty.deviantart.com/art/racing-271251172" rel='nofollow'>morgenty's super nice drawing</a>, which even matches the purple color theme of racer! I got her permission to use it. Thanks morgenty!
+</p>
+<div class='vspace'></div><h2><a name='Step1AVerticalScrollingRoad' id='Step1AVerticalScrollingRoad'></a> Step 1 - A Vertical Scrolling Road</h2>
+<p>In this first real coding step, we utilize the built in 'wrap-around' feature of the hardware vertical scroll register. If we just decrement the scroll register's value, and use a properly formatted background image, the road will scroll on and on for eternity.
+</p>
+<p class='vspace'>Get the fully commented source code for this step, including relevant assets, in a handy zip file: <a class='attachlink' href='//www.smspower.org/uploads/Articles/Step1.zip'>Step1.zip</a>. Everything is ready to be assembled, so you can have your own little scrolling road to tweak and cherish.
+</p>
+<p class='vspace'>Apart from initialization and memory-mapping, this is really what goes on in order to scroll the road:
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock3'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; This is the main loop.</span><br />
+<span class="co1">; Of course it could be done without a buffer, but now we</span><br />
+<span class="co1">; are building the scroll element the way it will look in the</span><br />
+<span class="co1">; finished game....</span><br />
+<br />
+mloop &nbsp;<span class="kw1">halt</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; start main loop with vblank.</span><br />
+<br />
+<span class="co1">; Update vdp right when vblank begins!</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>scroll<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; <span class="co1">; 1-byte scroll reg. buffer in ram.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>,<span class="nu0">9</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; target VDP register 9 (v-scroll).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> setreg &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; now vdp register = buffer, and the</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; screen scrolls accordingly.</span><br />
+<br />
+<span class="co1">; Blah blah ... in the game, lots of stuff goes on here....</span><br />
+<span class="co1">; and then, towards the end...</span><br />
+<br />
+<span class="co1">; Scroll background - update the vertical scroll buffer.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>scroll<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; <span class="co1">; get scroll buffer value.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">sub</span> vspeed &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; subtract vertical speed.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span>scroll<span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; <span class="co1">; update scroll buffer.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> mloop &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; jump back for another round.</span><br />
+<br />
+<span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; SET VDP REGISTER.</span><br />
+<span class="co1">; Write to target register.</span><br />
+<span class="co1">; A = byte to be loaded into vdp register.</span><br />
+<span class="co1">; B = target register 0-10.</span><br />
+<br />
+setreg <span class="kw1">out</span> <span class="br0">&#40;</span><span class="re0">$bf</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; output command word 1/2.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="re0">$80</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">or</span> <span class="kw2">b</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">out</span> <span class="br0">&#40;</span><span class="re0">$bf</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; output command word 2/2.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span><br />
+&nbsp;</div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=3' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>Even though it is totally overkill to use a buffer (just a one-byte variable in this case) to perform the scrolling at this point, it is firmly in line with the general principle to update vram via buffers, in order to make sure every vram update happens within the vertical blanking period. As the program grows bigger, I write sprite and scroll info to buffers as needed during the flow of the program. Every loop then starts with a "halt" opcode (meaning wait for interrupt - <del>in this case the frame interrupt = the beginning of the vertical blanking phase</del>), and right after this wait, I load stuff from my various buffers into vram. Edit: Note that I made a mistake here! The halt opcode will also resume program flow when returning from the pause button interrupt handler, not only from the frame interrupt. For a long time, this resulted in a bug, where pressing the pause button instantly killed the player. See the discussion i Racers thread, and read more at the end of this document.
+</p>
+<p class='vspace'>For more info on the different phases of the display (including what you can/should write to vram in each phase), refer to the table presented earlier.
+</p>
+<div class='vspace'></div><h2><a name='Step2APlayerControlledCar' id='Step2APlayerControlledCar'></a> Step 2 - A Player Controlled Car</h2>
+<p>Let us get some sprites onto the stage! Download <a class='attachlink' href='//www.smspower.org/uploads/Articles/Step2.zip'>Step2.zip</a> to get the fully commented source code for this step. In step 1 we made a scrolling road. Here in step 2, we will add a player controlled car to this road. The major point to note is that from this step and onwards, we will work with a sprite attribute table (sat) buffer in ram, and blast the buffer contents to the real sat in vram, during the vertical blanking phase in each loop.
+</p>
+<p class='vspace'>The player has x and y coordinates, and can move his car horizontally between the left and the right border of the road. The player car is made up of 16 hardware sprites (4x4), and these sprites' vertical and horizontal positions must be adjusted with regards to the player's coordinates at every loop.
+</p>
+<p class='vspace'>This is how we get input from the controller, and update the player's coordinates accordingly:
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock4'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; Test if player wants to move right.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> getkey &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; read controller port.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>input<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; read input from ram mirror.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">bit</span> <span class="nu0">3</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; is right key pressed?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nz,mpl &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; no - test for left key.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>plx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; get player's hpos (x-coordinate).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> rightb &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; is player over thr right border?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nc,mpl &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; yes - skip to left test.</span><br />
+<br />
+<span class="co1">; Move player right.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>plx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; get player x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">add</span> <span class="kw2">a</span>,hspeed &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; add constant hspeed</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span>plx<span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; update player x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> endchk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; exit key check part.</span><br />
+<br />
+<span class="co1">; Test if player wants to move left.</span><br />
+<br />
+mpl &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>input<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; read input from ram mirror.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">bit</span> <span class="nu0">2</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; is left key pressed?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nz,endchk &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; no - end key check.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>plx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; get player's hpos (x-coordinate).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> leftb &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; is player over the left border?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> <span class="kw2">c</span>,endchk &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; yes - then don't move left.</span><br />
+<br />
+<span class="co1">; Move player left.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>plx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; get player x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>, hspeed &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load horizontal speed (constant).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">sub</span> <span class="kw2">b</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; subtract hspeed from player x.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span>plx<span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; update player x-coordinate.</span><br />
+endchk &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; end key check</span><br />
+<br />
+<span class="co1">; Update player sprites in the buffer.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> upbuf &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; update sat buffer.</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=4' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>And this is the subroutine for reading the controller port into a variable. This sub is called once every frame (once every pass in the main loop). The variable "input" is defined in the beginning of the code, along with the other variables.
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock5'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; GET KEYS.</span><br />
+<span class="co1">; Read player 1 keys (port $dc) into ram mirror (input).</span><br />
+<br />
+getkey <span class="kw1">in</span> <span class="kw2">a</span>,<span class="re0">$dc</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; read player 1 input port $dc.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span>input<span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; let variable mirror port status.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=5' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>Below is an excerpt of the code that translates the players' coordinates to new sprite positions in the buffer. The Update Buffer (upbuf) subroutine is called near the end of the main loop. At first (in this step), it does only handle the player's car, but later it will also handle the two enemies. This is partly reflected in the comments, i.e. "each of the cars". Sorry.
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock6'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; UPDATE SAT BUFFER</span><br />
+<span class="co1">; Generate vpos, hpos and cc data for the sprites that make up</span><br />
+<span class="co1">; each of the cars.</span><br />
+<br />
+<span class="co1">; Generate sat buffer data from player's x,y coordinates.</span><br />
+<br />
+upbuf &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>ply<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load player's current y-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,plrvp &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> cary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; refresh buffer according to y.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>plx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load player's current x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,plrhp &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> carx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; refresh buffer according to x.</span><br />
+<br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span><br />
+<br />
+<span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; CAR Y TO SPRITES' VERTICAL POSITIONS (VPOS) IN BUFFER.</span><br />
+<span class="co1">; Generate vpos sat buffer data from a car's y position.</span><br />
+<span class="co1">; A = car's y (i.e. ply), HL = buffer address of car vpos.</span><br />
+<br />
+cary &nbsp; <span class="kw1">ld</span> <span class="kw2">b</span>,<span class="nu0">4</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; a car is 4 tiles wide.</span><br />
+<span class="sy0">-</span> &nbsp; &nbsp; &nbsp;<span class="kw1">push</span> <span class="kw2">af</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; a row of 4 tiles share the same y,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">push</span> <span class="kw2">af</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; so here the y's are saved on stack.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">push</span> <span class="kw2">af</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">push</span> <span class="kw2">af</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">add</span> <span class="kw2">a</span>,<span class="nu0">8</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; next row is 8 pixels below.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">djnz</span> <span class="sy0">-</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; make 4 consecutive rows.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">de</span>,<span class="nu0">15</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load buffer offset into DE.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">add</span> <span class="kw2">hl</span>,<span class="kw2">de</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; add buffer offset to HL.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>,<span class="nu0">16</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; we need to update 16 bytes.</span><br />
+<span class="sy0">-</span> &nbsp; &nbsp; &nbsp;<span class="kw1">pop</span> <span class="kw2">af</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; get saved y from stack.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">hl</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; write it to the buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">dec</span> <span class="kw2">hl</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; point to previous byte.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">djnz</span> <span class="sy0">-</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; backwards from vpos+15 to vpos+0.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span><br />
+<br />
+<span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; CAR X TO SPRITES' HORIZONTAL POSITIONS (HPOS) IN BUFFER.</span><br />
+<span class="co1">; Generates hpos sat buffer data from a car's x position.</span><br />
+<span class="co1">; A = car's x (i.e. plx), HL = buffer address of car hpos.</span><br />
+<br />
+carx &nbsp; <span class="kw1">ld</span> <span class="kw2">c</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; save hpos in C</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw3">.rept</span> <span class="nu0">4</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; wladx: Repeat code four times.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="kw2">c</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load hpos into A</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>,<span class="nu0">4</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; loop: Repeat four times.</span><br />
+<span class="sy0">-</span> &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">hl</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; write value to buffer at address.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">inc</span> <span class="kw2">hl</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; skip over the char code byte.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">inc</span> <span class="kw2">hl</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; point to next hpos byte in buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">add</span> <span class="kw2">a</span>,<span class="nu0">8</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; add 8 (a tile's width in pixels).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">djnz</span> <span class="sy0">-</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; jump back</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw3">.endr</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; end of wladx repeat directive.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span><br />
+&nbsp;</div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=6' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>Please refer to the SAT buffer map discussed earlier. After the upbuf routine has done its thing, the buffer is fully updated to reflect new positions for the player (and later enemies). Next time we have a vertical blanking phase, this buffer is loaded into vram (content is copied into the real sprite attribute table). This is the code responsible for the updating. It is not the fastest, most optimized stuff, but it gets the job done.
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock7'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; LOAD SPRITE ATTRIBUTE TABLE</span><br />
+<span class="co1">; Load data into sprite attribute table (SAT) from the buffer.</span><br />
+<br />
+ldsat &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,<span class="re0">$3f00</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to start of SAT in vram.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> vrampr &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; prepare vram to recieve data.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>,<span class="nu0">255</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; amount of bytes to output.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">c</span>,<span class="re0">$be</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; destination is vdp data port.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,satbuf &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; source is start of sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">otir</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; output buffer to vdp.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=7' type='text/plain'>Get Code</a></div>
+</div>
+<div class='vspace'></div><h2><a name='Step3TheFirstEnemyCar' id='Step3TheFirstEnemyCar'></a> Step 3 - The First Enemy Car</h2>
+<p>In this step we add one enemy car. For convenience I name the enemies Ash and Mae, with Ash as the first enemy. Even though the gameplay is made up of what seems to be multiple racing cars that the player takes over as he/she races forward, it is really just the same two cars wrapping around forever.
+</p>
+<p class='vspace'>Download the <a class='attachlink' href='//www.smspower.org/uploads/Articles/Step3.zip'>fully commented source code and assets that make up step 3</a>.
+</p>
+<p class='vspace'>Enemy Ash uses the same functions as the player to make sprites in the buffer from y,x positions. The update buffer subroutine is expanded to include updates to Ash's sprites:
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock8'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; UPDATE SAT BUFFER</span><br />
+<span class="co1">; Generate vpos, hpos and cc data for the sprites that make up</span><br />
+<span class="co1">; each of the cars (player and Ash).</span><br />
+<br />
+<span class="co1">; Generate sat buffer data from player's x,y coordinates.</span><br />
+<br />
+upbuf &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>ply<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load player's current y-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,plrvp &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> cary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; refresh buffer according to y.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>plx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load player's current x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,plrhp &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> carx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; refresh buffer according to x.</span><br />
+<br />
+<span class="co1">; Generate sat buffer data from Ash's x,y coordinates.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>ashy<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load Ash's current y-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,ashvp &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> cary &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; refresh buffer according to y.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>ashx<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load Ash's current x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,ashhp &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to sat buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> carx &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; refresh buffer according to x.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=8' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>Now it is time to introduce a kind of enemy artificial intelligence (AI). Maybe that is too strong a concept to cover what is going on here. Anyway, I have a subroutine named "enemy" that takes care of updating the three variables of an enemy car: 1) direction (left or right), 2) y-coordinate and 3) x-coordinate.
+</p>
+<p class='vspace'>I use this to update Ash - and in a moment also Mae. When register IX is pointing to ashdir (Ash's direction), we know that ix+1 is Ash's vertical position and ix+2 is Ash's horizontal position, as this is the order in which the variables are declared in the enumeration section in the beginning of the code.
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock9'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; Update enemy x,y positions.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">ix</span>,ashdir &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; point to enemy Ash data.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> enemy &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; move Ash down and left/right.</span><br />
+<br />
+<span class="co1">; ..... code continues...</span><br />
+<br />
+<span class="co1">; --------------------------------------------------------------</span><br />
+<span class="co1">; UPDATE ENEMY.</span><br />
+<span class="co1">; Calculate new x,y positions for an enemy car.</span><br />
+<span class="co1">; IX = start of enemy data block.</span><br />
+<br />
+enemy &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">0</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; test direction.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> <span class="nu0">0</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; moving left (0=left, 1=right)?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nz,enem0 &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; no - then enemy is moving right.</span><br />
+<br />
+<span class="co1">; Direction: Left - test left border.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load enemy's x-coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> leftb &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; compare it to left border constant.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nc,<span class="sy0">+</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; branch if accumulator (x) &gt; leftb.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; else - enemy is on the left border</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="nu0">1</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; shift direction to 'right'.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">0</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load it into direction byte.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> enem1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; skip forward to vertical movement.</span><br />
+<br />
+<span class="co1">; Direction: Left - subtract from enemy x coordinate.</span><br />
+<br />
+<span class="sy0">+</span> &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>,hspeed &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load horizontal speed into B.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load enemy x into A.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">sub</span> <span class="kw2">b</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; subtract hspeed from x (move left).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; update enemy x coordinate.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> enem1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; skip forward to vertical movement.</span><br />
+<br />
+<span class="co1">; Direction: Right - test right border.</span><br />
+<br />
+enem0 &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load enemy x.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> rightb &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; compare it to right border.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> <span class="kw2">c</span>,<span class="sy0">+</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; skip if rightb &gt; accumulator (x).</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">xor</span> <span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; else - shift direction to 0 = left.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">0</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load new value into direction var.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> enem1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; forward to vertical movement.</span><br />
+<br />
+<span class="co1">; Direction: Right - add to enemy x coordinate.</span><br />
+<br />
+<span class="sy0">+</span> &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">b</span>,hspeed &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load hspeed constant into B.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load enemy x into A.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">add</span> <span class="kw2">a</span>,<span class="kw2">b</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; add hspeed to enemy x.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; update enemy x coordinate.</span><br />
+<br />
+<span class="co1">; Vertical movement for enemy (move enemy car down).</span><br />
+<br />
+enem1 &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; load enemy y into A.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">add</span> <span class="kw2">a</span>,espeed &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; add constant enemy vertical speed.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="br0">&#40;</span><span class="kw2">ix</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; update enemy y.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span><br />
+&nbsp;</div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=9' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>This is super simple, to the point that it is actually almost bad practice on a more general level. Ash races on and on, and wraps around the screen. As he leaves at the bottom on the screen, he reappears at the top. What is wrong here, is that some of Ash's sprites' vertical positions will, from time to time, be 208, which is $d0 in hex. A vertical position of $d0 is the sprite terminator character, and when the vdp sees this character as it renders sprites, it simple stops the sprite rendering. So the remaining sprites are not rendered. This is not a problem when we have got only Ash, but when I added Mae and the score and hiscore digits, I experienced issues with the graphics, stemming from my unawareness of this problem <a href='#fn3' class='footnoteref' title='Sprite clipping and vertically oriented games are discussed in this thread' name='fnref3'><sup>[3]</sup></a>.
+</p>
+<div class='vspace'></div><h2><a name='Step4TheSecondEnemyCar' id='Step4TheSecondEnemyCar'></a> Step 4 - The Second Enemy Car</h2>
+<p>May I present Mae. She is the second enemy, and she appears after a little while. As always I recommend that you download and explore <a class='attachlink' href='//www.smspower.org/uploads/Articles/Step4.zip'>the source code</a> for this step.
+</p>
+<p class='vspace'>You will see that Mae and Ash share a lot of the routines. So adding Mae, when you already have Ash, is pretty straight forward. The main point to note in this step is regarding Mae's delayed entrance on the playfield. Actually Mae is always on the road, but she starts out invisible, and made up by transparent tiles. A counter for Mae's delay (maedel) is decremented at every frame until it reaches zero. Then Mae's transparent tiles are swapped for the same kind of tiles that make up Ash's car. This is highlights from the related code:
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock10'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; Handle Mae visibility.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>maedel<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; <span class="co1">; check Mae delay.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> <span class="re0">$ff</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; is Mae already visible ($ff)?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> z,endmae &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; yes - then skip rest of Mae routine.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">cp</span> <span class="nu0">0</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; else - is delay counter depleted?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nz,<span class="sy0">+</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; no - then skip forward, else...</span><br />
+<br />
+<span class="co1">; Make Mae visible by loading opaque tiles into buffer.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,encar &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to enemy car char codes.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">de</span>,maecc &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; point to buffer.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">call</span> carcc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; load new char codes to buffer.</span><br />
+<br />
+<span class="sy0">+</span> &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">hl</span>,maedel &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; point to Mae delay counter.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">dec</span> <span class="br0">&#40;</span><span class="kw2">hl</span><span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; decrement it.</span><br />
+endmae<br />
+<br />
+<span class="co1">; blah blah blah ... more code...</span><br />
+<br />
+<span class="co1">; Charcodes for player, enemy and invisible car.</span><br />
+<br />
+plrcar <span class="kw3">.db</span> <span class="nu0">0</span> <span class="nu0">1</span> <span class="nu0">2</span> <span class="nu0">3</span> <span class="nu0">4</span> <span class="nu0">5</span> <span class="nu0">6</span> <span class="nu0">7</span> <span class="nu0">8</span> <span class="nu0">9</span> <span class="nu0">10</span> <span class="nu0">11</span> <span class="nu0">12</span> <span class="nu0">13</span> <span class="nu0">14</span> <span class="nu0">15</span><br />
+encar <span class="kw3">.db</span> <span class="nu0">16</span> <span class="nu0">17</span> <span class="nu0">18</span> <span class="nu0">19</span> <span class="nu0">20</span> <span class="nu0">21</span> <span class="nu0">22</span> <span class="nu0">23</span> <span class="nu0">24</span> <span class="nu0">25</span> <span class="nu0">26</span> <span class="nu0">27</span> <span class="nu0">28</span> <span class="nu0">29</span> <span class="nu0">30</span> <span class="nu0">31</span><br />
+invcar <span class="kw3">.db</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span> <span class="nu0">0</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=10' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>You can see how the character codes for the player and enemy cars are strings of bytes that correspond to tile indexes in the tile bank. The invisible car is made up of 16 x tile 0, which is a totally empty (transparent) tile. When the game (re-)starts, Mae's character codes are defined from the invcar (invisible car) string. When it is time for her to appear, the character codes are redfined from the encar (enemy car) string.
+</p>
+<p class='vspace'>For these steps I have not included the collision detection. It is super simple, and you can easily see how it works in the full game's source code. Anyway, I'll just mention it here.
+</p>
+<p class='vspace'>I read the vdp status byte into a variable at every frame interrupt.
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock11'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; Read the vdp status flag at every frame interrupt.</span><br />
+<span class="co1">; Sprite collision is read from bit 5 of the status flag.</span><br />
+<br />
+<span class="kw3">.orga</span> <span class="re0">$0038</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; frame interrupt address.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ex</span> <span class="kw2">af</span>,<span class="kw2">af</span><span class="st0">' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ; save accumulator in its shadow reg.<br />
+&nbsp; &nbsp; &nbsp; &nbsp;in a,$bf &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;; get vdp status / satisfy interrupt.<br />
+&nbsp; &nbsp; &nbsp; &nbsp;ld (status),a &nbsp; &nbsp; &nbsp; ; save vdp status in ram.<br />
+&nbsp; &nbsp; &nbsp; &nbsp;ex af,af'</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; restore accumulator.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ei</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; enable interrupts.</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ret</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; return from interrupt.</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=11' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>In my main loop, I test bit 5 of the status byte. This bit is set if two or more sprites overlap (that is, opaque parts of two or more sprites). When Mae is made of transparent tiles, she does not trigger this bit. Mae and Ash do never collide with each other. So if two sprites overlap, it must be the player's car colliding with either Ash or (visible) Mae.
+</p>
+<div class='vspace'></div>
+<div class='sourceblock ' id='sourceblock12'>
+<div class='sourceblocktext'><div class="z80" style="font-family:monospace;"><span class="co1">; Test for collision between sprites.</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">ld</span> <span class="kw2">a</span>,<span class="br0">&#40;</span>status<span class="br0">&#41;</span> &nbsp; &nbsp; &nbsp; <span class="co1">; load vdp status (set by interrupt).</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">bit</span> <span class="nu0">5</span>,<span class="kw2">a</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="co1">; is the sprite collision bit set?</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp;<span class="kw1">jp</span> nz,plrdie &nbsp; &nbsp; &nbsp; &nbsp;<span class="co1">; yes - jump out of main loop.</span></div></div>
+<div class='sourceblocklink'><a href='//www.smspower.org/Articles/CreateARacingGame?action=sourceblock&amp;num=12' type='text/plain'>Get Code</a></div>
+</div>
+<p class='vspace'>If sprites collide, then jump to the place that handles stuff when the player dies. Super simple, and I can have a very accurate collision detection scheme without doing a lot of heavy work with hitboxes etc.
+</p>
+<div class='vspace'></div><h2><a name='Conclusion' id='Conclusion'></a> Conclusion</h2>
+<p>I have learned a lot from undertaking a complete project from first mockup to these final lines of documentation. It is a very simple and modest game, and that was exactly what I needed at this point in my SMS education. It was nice to work on a game that for sure would be possible to create on the SMS, without too many workarounds and tricks.
+</p>
+<p class='vspace'>Having the original Speedway! to aim for, I could concentrate on writing code and making assets, and not worrying too much about game play mechanics and overall design. These choices were already made for me in the original game. For example: If I have not had Speedway! as a guide, I would surely have been trapped for weeks thinking about an overly complicated, pseudo random, and surely worse, way to make the enemies appear and move on the road. Speedway! shows how it is done, with just two cars bouncing from side to side. Almost too simple, but it works in practice.
+</p>
+<p class='vspace'>At this point I'm puzzled by an unresolved bug: On real hardware, pressing pause instantly kills the player. I can't explain why...? It might have something to do with memory handling - it often has when emulators and real hardware works differently.
+</p>
+<p class='vspace'>Speaking of memory handling, I had a ghost in the shell moment one evening, when I tried enemy Mae on real hardware. You might remember how she is initially made up of transparent tiles. In an earlier version of the game, I added a fixed offset to all Mae's tiles initially, so her character codes would all be pointing to empty, unused tiles in the sprite bank. This worked great on emulators, but on real hardware I saw this unsettling stuff where Mae was:
+</p>
+<div class='vspace'></div><div><img src='//www.smspower.org/uploads/Articles/ghost-in-the-shell.png' alt='' title='' /></div>
+<p class='vspace'>It seems like the vram was remembering some kind of charset from an earlier gaming session. I don't readily recognize the characters, but for sure I did not load them as part of Racer. I even thought about going straight to the forum to ask if we are 100% certain that the vram is not preloaded with some characters. We are sure, aren't we...? Anyway, once I got my vram initialization routine going (mfill), those spooky characters disappeared. This is just to say: Remember to initialize ram and vram! Crazy warped stuff lurk in those innocent looking chips.
+</p>
+<p class='vspace'>Update 1: With the help of Calindro, I finally managed to eliminate the lethal pause button bug. I was not aware that pressing pause also counts as an interrupt, as far as the halt opcode is concerned. As I think about it now, it seems pretty obvious though. Thanks Calindro! You can get some details on <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15376">Racer's thread</a>.
+</p>
+<p class='vspace'>Update 2: Calindro also helped me realize that the mysterious charset mentioned above is not so ghostly at all. It is the remains of the Everdrive's menu assets. I tend to forget that I'm running stuff through an Everdrive.
+</p>
+<p class='vspace'>If you have any comments, questions, etc., then I encourage you to post them in <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15376">Racer's forum thread</a>.
+</p>
+<p class='vspace'>If you are still with me, I want to thank you for taking the time to read through my humble SMS development musings. Making games for the SMS was something I always dreamt of as a child. As an adult, it feels massively satisfying to be taking the first steps down the developer's path...
+</p>
+<p class='vspace frame' style='margin-left: auto; margin-right: auto; width: 320px; text-align: center;'> <strong>THE CHALLENGE WILL ALWAYS BE THERE!</strong>
+</p>
+<p class='vspace'>/Anders. March 2015.
+</p>
+<div class='vspace'></div><h2><a name='Footnotes' id='Footnotes'></a> Footnotes</h2>
+<hr><ol class='footnotes'><li value=1 id='fn1'><a class=footnotebackref href=#fnref1>^</a> As described by Maxim <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=14848">in this thread</a></li><li value=2 id='fn2'><a class=footnotebackref href=#fnref2>^</a> According to TmEE Z80 is beautiful, and Maxim states that Z80 code is very readable and almost poetic. <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15108">Click here to go to the thread</a></li><li value=3 id='fn3'><a class=footnotebackref href=#fnref3>^</a> Sprite clipping and vertically oriented games are discussed <a class='forumtopiclink' href="https://www.smspower.org/forums/viewtopic.php?t=15345">in this thread</a></li></ol>
+</div>
+<hr>
+
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="b046ddfc978d808f5369a068-text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+<script type="b046ddfc978d808f5369a068-text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4d6b8488365a9b75"></script>
+
+</div>
+
+<div><a href='#top'><img src='//www.smspower.org/uploads/Site/ReturnToTop.gif' alt='' /></a><br /><a href='#top'>Return to top</a><br /><span style='font-size:69%'>0.067s</span></div>
+
+<script type="b046ddfc978d808f5369a068-text/javascript" src='//www.smspower.org/pub/ape/ape.js'></script><script src=//www.smspower.org/pub/nicetitle.js type="b046ddfc978d808f5369a068-text/javascript"></script><link type='text/css' href='//www.smspower.org/pub/nicetitle.css' rel='stylesheet' />
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="b046ddfc978d808f5369a068-|49" defer=""></script></body>
+</html>

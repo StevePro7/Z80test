@@ -1,0 +1,2077 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <link href="../z80/darkmode.css" type="text/css" rel="stylesheet">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-176094325-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-176094325-1');
+</script>
+
+
+    <title>Z80 Assembly programming for the Sega Master System and the Game
+      Gear!</title>
+  </head>
+  <body>
+    
+<!--header-->
+<table border=0 cellpadding=0 cellspacing=0>
+<tr><td colspan=3><a href="https://www.learnasm.net/"><img src="../z80/AsmTitleStrip.jpg" border=0 width=100%></a></td></tr>
+<tr><td valign=top>
+	<br>
+ 
+<center><a href="https://www.chibiakumas.com/forum" target=_parent>
+<img src="https://www.chibiakumas.com/titlestrips/titlestrip1.jpg" border=1 width=640 height=96 >
+</a></center>
+
+
+	
+<br>
+    <h1 class="green" style="text-align: center;">Z80 Assembly programming for
+      the Sega Master System and the Game Gear!<br>
+    </h1>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="0">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;"> Unlike the Gameboy, the SMS and GG
+            have a real Z80 CPU!... Quite surprisingly the Master System and
+            Game Gear are pretty much the same system... it was also known as
+            the Sega Mark III in Japan.<br>
+            <br>
+            The Game Gear has a smaller screen than the master system... rather
+            strangely it actually has a better colour palette! but appart from
+            that, they are identical, and can run the same basic games!<br>
+            <br>
+            Lets take a look at the specs!</td>
+          <td><a href="https://www.chibiakumas.com/z80/Z80DevTools.php"><img style="border: 0px solid ; width: 128px; height: 128px;"
+                src="theme/DevTools.png" alt=""></a></td>
+          <td><a href="sources.7z"><img style="border: 0px solid ; width: 128px; height: 128px;"
+                src="theme/File.png" alt=""></a></td>
+          <td style="width: 128px;"><a href="https://youtu.be/OeNDat4mr7Q"><img
+                style="border: 0px solid ; width: 128px; height: 128px;" src="theme/Videox.png"
+                alt=""></a></td>
+        </tr>
+      </tbody>
+    </table>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;"><br>
+            <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td class="cyan magenta" style="font-weight: bold;"><br>
+                  </td>
+                  <td class="cyan" style="font-weight: bold;">Master System
+                    &nbsp;/ Mark III</td>
+                  <td class="cyan" style="font-weight: bold;">Game Gear</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Cpu</td>
+                  <td>Z80 3.5mhz</td>
+                  <td>Z80 3.5mhz</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Ram</td>
+                  <td>8k</td>
+                  <td>8k</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Vram</td>
+                  <td>16k</td>
+                  <td>16k</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Resolution</td>
+                  <td>256x192</td>
+                  <td>160x144</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Max Tiles</td>
+                  <td>512 (8x8 px) - 768 onscreen</td>
+                  <td>512 (8x8 px)&nbsp;- 360 onscreen</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Max Sprites</td>
+                  <td>64 (8x8 px 8 per line)</td>
+                  <td>64 (8x8 px 8 per line)</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Colors</td>
+                  <td>32 onscreen (16 sprite, 16 tile)</td>
+                  <td>32 onscreen (16 sprite, 16 tile)</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Palette</td>
+                  <td>64</td>
+                  <td>4096</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Sound chip</td>
+                  <td>SN76489</td>
+                  <td>SN76489</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">Joystick</td>
+                  <td>2x 4 directon, 2 fire</td>
+                  <td>1x 4 direction, 2 fire + start</td>
+                </tr>
+                <tr>
+                  <td class="magenta" style="font-weight: bold;">PSU<br>
+                    Power Supply</td>
+                  <td>Model 3025-1<br>
+                    9V 1A <span style="font-weight: bold;">Center NEGATIVE </span><br>
+                    (both SMS and Mark III)<br>
+                    (10V famicom works OK)</td>
+                  <td>Model MK-2103<br>
+                    10V <span style="font-weight: bold;">1A Center POSITIVE</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            The smaller screen is handled by 'skipping the 6 tiles from the left
+            and right side, and 3 from the top and bottom... So we can write a
+            game for our gamegear, and run it on a mastersystem, we just need to
+            design around the screen size difference, and use some different
+            palette code!<br>
+          </td>
+          <td><img src="smsgg/SMS.jpg" alt=""><br>
+            <img src="smsgg/gg.jpg" alt=""><span style="font-weight: bold;"><br>
+            </span><span style="font-weight: bold;"> </span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p> <big class="cyan">ChibiAkumas Tutorials</big></p>
+    <table style="text-align: left; height: 25px;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td><br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/helloworld.php#LessonH8">Lesson
+              H8- Hello World on the Sega Master System and GameGear</a></td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp; <br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/simplesamples.php#LessonS10">Lesson
+              S10 - Easy Tile bitmaps on the Sega Mastersystem or GameGear</a></td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/platform.php#LessonP8">Lesson
+P8
+              - Tilemap graphics on the Sega Master System &amp; Game Gear</a></td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/platform2.php#LessonP16">Lesson
+P16
+              - Palette definitions on the Sega Master System and Game Gear</a></td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/platform3.php#LessonP29">Lesson
+P29
+              - Hardware detection and Bank Switching on the Gameboy/GBC and
+              Sega Mastersystem/GameGear</a> </td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/platform4.php#LessonP31">Lesson
+P31
+              - Hardware Sprites on the Master System / Game Gear and MSX1!</a></td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><a href="https://www.chibiakumas.com/z80/platform4.php#LessonP38">Lesson
+              P38 - Playing Digital Sound with WAV on the Sega
+              MasterSystem/GameGear, Elan Enterprise and GameBoy/GBC</a></td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <p><span style="font-weight: bold;"><big class="cyan">Console graphics
+          hardware - Tiles and Sprites!</big></span></p>
+    <span style="font-weight: bold;"><big class="cyan"> </big></span>This
+    section is a general description, and not SMS/GG specific, skip to the next
+    chapter if you know the concept of tiles and sprite layers!<br>
+    <br>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">The Gameboy,Gamegear and Mastersystem
+            screens do not work like they do on computers like the CPC<br>
+            Graphics are not just 'bytes' in a memory address... &nbsp;The
+            screen is made up of a 'Tile Layer' and a 'Sprite Layer'<br>
+            <br>
+            To explain Tiles and sprites, lets look at our imaginary game shown
+            to the right 'The Super Yuusha Siblings', on a theoretical game
+            system the 'GameChibi'... Just to be very clear, we looking at this
+            as a concept, not the actual layout of the gameboy!<br>
+            <br>
+            Looking at our example, We have a level with some grass, blocks, and
+            some collectable 'stars'... our hero, Yume is controlled by the
+            player...<br>
+          </td>
+          <td><img src="res/SpriteExample_1.png" alt=""></td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">The screen is made up of the Tile
+            layer, and the Sprite Layer,<br>
+            <br>
+            Usually Sprites are drawn above the Tiles... but sometimes they may
+            be drawn below.<br>
+            <br>
+            It's also possible we could use sprites for the stars.. but sprites
+            are very limited, so the object doesn't move, then tiles will do the
+            job... we can even animate the stars by switching the tile between
+            different patterns</td>
+          <td><img src="res/SpriteExample_2.png" alt=""></td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">The tile array on the systems we'll
+            be looking at is made up of 8x8 tiles... the array is a 'grid' of
+            these tiles, so the tiles must line up, a block cannot be at a 'half
+            way boundary'<br>
+            <br>
+            Tiles are defined by a number (usually 0-255)... we define the
+            bitmap (image) data for that tile (we'll call it a pattern), then
+            tell the hardware what positions in the tile array to use that
+            pattern.<br>
+            <br>
+            In our example, the black background is pattern 0 ... the blocks are
+            pattern 1... the grass is pattern 2... and the stars are pattern 3<br>
+            <br>
+            Our 'GameChibi' console has a tile array of 8x8... and 64 bytes is
+            used to define the tile grid...<br>
+            So to define the stars, we need to set memory locations 10,20 and 15
+            of the tile array to byte '3'<br>
+            <br>
+            A real system usually has a tile array bigger than the screen (maybe
+            just by one row and one coumn)... this is to allow smooth scrolling
+            of the screen, where two tiles are 'half shown'<br>
+            <br>
+            Now in the case of our&nbsp;'GameChibi' system, with it's 64 tile
+            screen, and 256 pattern definitions, we could just set every visible
+            tile to a different pattern, and treat the screen as a plain bitmap
+            again... We can do that on the MSX1, but unfortunately the Gameboy
+            and Mastersystem have too few tiles for their screen size, so some
+            parts of the screen must contain the same tile!</td>
+          <td><img src="res/SpriteExample_3.png" alt=""></td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"><big class="cyan"><br>
+        Combining Sprites</big></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td>Because our system is using hardware sprites, we have to design
+            our game sprites in a way that can be drawn with the hardware
+            sprites... for example lets look at our Yume sprite... if our
+            'GameChibi' used 8x8 hardware sprites, we would have to use 48 of
+            them to make this image!... we can save 5 (marked green)... these
+            have no data, so we can just not draw them...<br>
+            <br>
+            When it comes to moving our character, the software will have to
+            move the hardware sprites all together, so the user does not realise
+            they are made up of many sprites!... on systems with more onscreen
+            colors than sprite colors, two or more sprites may be overlapped to
+            make the sprite appear more colorful<br>
+            <br>
+            Most systems will have one color (usually 0) which marks the
+            transparent colour.<br>
+            <br>
+            but there is a problem! with software sprites on a bitmap screen, we
+            can draw as much as we want, it will just get slow.... but with
+            hardware sprites, we have a fixed limit of how many sprites can be
+            shown onscreen at once! sounds bad? well actually it's worse, even
+            though a system like the master system can show 64 sprites onscreen,
+            there can only be 8 on a line... if more than 10 appear on the same
+            line, some will flicker, or not appear... there's nothing we can do
+            about it, we just have to design our game to avoid this problem!</td>
+          <td><img src="res/SpriteExample_5.png" alt=""></td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"><big class="cyan"><br>
+        The Gamegear screen compared to the Mastersystem<br>
+      </big></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td>The Sega Mastersystem and Sega game gear are almost the same
+            system, the major difference is the screen size, The SMS screen is
+            256x192, but the GG screen is 160x144...<br>
+            <br>
+            If we draw the same data to the screen, we'll realize that the
+            gamegear is drawing only the center area of the SMS screen area,
+            with 3 lines missing from the top and bottom, and 6 columns missing
+            from the left and right sides.<br>
+            <br>
+            While both systems are 16 color, The Gamegear has a better color
+            palette!<br>
+            The MasterSystem uses a single byte palette in the format: --BBGGRR<br>
+            The GameGear uses 2 bytes, in the format ----BBBB GGGGRRRR</td>
+          <td><img src="res/SmsGgScreenArea.png" alt=""></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <span style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"><big class="cyan">Gamegear &amp; Mastersystem
+        Cartridge Rom format &amp; System Ram</big></span><span style="font-weight: bold;"></span><br>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">The Gamegear rom is pretty simple,
+            when the console starts, execution begins at memory address
+            &amp;0000, <br>
+            <br>
+            The 'Header' which defines the cartridge is 16 bytes, and typically
+            appears at &amp;7FF0<br>
+            some of the attributes are not a full byte, and use half a byte (a
+            nibble)<br>
+            <br>
+            if you're using an emulator, you do not need need a header! even
+            without the 'System type' the 'Fusion' emulator will use the file
+            extension (SMS or GG) to detect the system to use.<br>
+            <br>
+            if the system is a Majesco SGG the <font>“TMR SEGA” bytes must be
+              present (Checksum is ignored)... if it's not the screen will be
+              black</font><br>
+            <br>
+            If the system is an Export SMS the checksum must be correct - if
+            it's not you will get the message "Software Error"<br>
+            <br>
+            My 'BinaryTools' program can build a valid file with the following
+            command:<br>
+            BinaryTools.exe checksum "\RelSMS\cart.sms" $0000 $7FF0
+            "\RelSMS\cart.sms" $7FFA 16bit</td>
+          <td>
+            <table cellspacing="0" border="0">
+              <colgroup width="85" span="2"></colgroup> <colgroup width="631"></colgroup>
+              <tbody>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-weight: bold;"
+                    sdnum="1041;0;@" height="17" align="left"><font>From</font></td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-weight: bold;"
+                    sdnum="1041;0;@" align="left"><font>To</font></td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); font-weight: bold;"
+                    align="left"><font>Meaning</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ffff99" align="left"><b><font>0000</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ffff99"
+                    align="left"><b><font>0007</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ffff99" align="left"><font>RST0
+–
+                      Entry Point (jump to your Game Code)<br>
+                    </font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>0008</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ccffff"
+                    align="left"><b><font>000F</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>RST1</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>0010</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ccffff"
+                    align="left"><b><font>0017</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>RST2</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>0018</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ccffff"
+                    align="left"><b><font>001F</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>RST3</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>0020</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ccffff"
+                    align="left"><b><font>0027</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>RST4</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>0028</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ccffff"
+                    align="left"><b><font>002F</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>RST5</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>0030</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ccffff"
+                    align="left"><b><font>0037</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>RST6</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ffcc99" align="left"><b><font>0038</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ffcc99"
+                    align="left"><b><font>003F</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ffcc99" align="left"><font>RST7
+–
+                      IM1 Interrupt handler</font></td>
+                </tr>
+                <tr>
+                  <td style="background-color: #ff9900;"><span style="color: black;"><b><font>0066</font></b></span></td>
+                  <td style="background-color: #ff9900;"><span style="color: black;">?<br>
+                    </span></td>
+                  <td style="background-color: #ff9900;"><span style="color: black;">Non
+                      Maskable Interrupt handler<br>
+                    </span></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ffff99" align="left"><b><font>0040</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ffff99"
+                    align="left"><b><font>7FEF</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ffff99" align="left"><font>Game
+                      Code</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#c8a3ee" align="left"><b><font>7FF0</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#c8a3ee"
+                    align="left"><b><font>7FF7</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#c8a3ee" align="left"><font>“TMR
+                      SEGA” (needed by later SGG)<br>
+                    </font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#cccccc" align="left"><b><font>7FF8</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#cccccc"
+                    align="left"><b><font>7FF9</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#cccccc" align="left"><font>Unused</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#c8a3ee" align="left"><b><font>7FFA</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#c8a3ee"
+                    align="left"><b><font>7FFB</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#c8a3ee" align="left"><font>16
+                      bit Checksum<small> (sum of bytes $0000-$7FEF... Little
+                        endian)</small><br>
+                    </font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#c8a3ee" align="left"><b><font>7FFC</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#c8a3ee"
+                    align="left"><b><font>7FFE.H</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#c8a3ee" align="left"><font>Product
+code
+                      in BCD (2.5 bytes) eg 12345</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#c8a3ee" align="left"><b><font>7FFE.L</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#c8a3ee"
+                    align="left"><b><font>7FFE.L</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#c8a3ee" align="left"><font>Low
+Nibble:
+                      Rom Version (0)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#c8a3ee" align="left"><b><font>7FFF.H</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#c8a3ee"
+                    align="left"><b><font>7FFF.H</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#c8a3ee" align="left"><font>High
+Nibble:
+                      Region &amp; System<small> (&amp;3-=SMS JP) (&amp;4-=SMS
+                        EXP) (&amp;5-=GG JP) (&amp;6-=GG EXP) (&amp;7-=GG INT)</small></font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#c8a3ee" align="left"><b><font>7FFF.L</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#c8a3ee"
+                    align="left"><b><font>7FFF.L</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#c8a3ee" align="left"><font>Low
+Nibble:
+                      Rom Size<small> (&amp;-C=32k &amp;-F=128k, &amp;-0=256k
+                        &amp;-1=512k)</small></font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ffff99" align="left"><b><font>8000</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#ffff99"
+                    align="left"><b>…</b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ffff99" align="left"><font>Game
+Code
+                      (Optional)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#b4e7a9" align="left"><b><font>C000</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#b4e7a9"
+                    align="left"><b><font>DFFF</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#b4e7a9" align="left"><font>System
+                      Ram</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#b4e7a9" align="left"><b><font>D000</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#b4e7a9"
+                    align="left"><b><font>FFFF</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#b4e7a9" align="left"><font>Same
+as
+                      &amp;C000-DFFF (Mirror)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#99ccff" align="left"><font>FFFC</font></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#99ccff"
+                    align="left"><font>FFFC</font></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#99ccff" align="left"><font>Ram
+Bank
+                      Swapper</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#99ccff" align="left"><font>FFFD</font></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#99ccff"
+                    align="left"><font>FFFD</font></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#99ccff" align="left"><font>Bank
+                      &amp;0000-&amp;3FFF</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#99ccff" align="left"><font>FFFE</font></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#99ccff"
+                    align="left"><font>FFFE</font></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#99ccff" align="left"><font>Bank
+                      &amp;4000-&amp;7FFF</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#99ccff" align="left"><font>FFFF</font></td>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" bgcolor="#99ccff"
+                    align="left"><font>FFFF</font></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#99ccff" align="left"><font>Bank
+                      &amp;8000-&amp;BFFF</font></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <span style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"></span><span style="font-weight: bold;"><big class="cyan">Gamegear
+&amp;
+        Mastersystem I/O Ports</big></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">Note, some of these ports also
+            respond to alternate addresses, so you may see different port
+            numbers in other programs.</td>
+          <td><br>
+            <table cellspacing="0" border="0">
+              <colgroup width="37"></colgroup> <colgroup width="285"></colgroup>
+              <tbody>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"
+                    sdnum="1041;0;@" height="17" align="left"><b><font>Port</font></b></td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"
+                    align="left"><b><font>Function</font></b></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ffcc99" align="left"><b><font>06</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ffcc99" align="left"><font>PSG</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ffcc99" align="left"><b><font>3E</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ffcc99" align="left"><font>YM2413</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#cccccc" align="left"><b><font>3F</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#cccccc" align="left"><font>Joystick
+IO
+                      Control</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>7E</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>Vertical
+counter
+                      (R) / PSG (W)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#ccffff" align="left"><b><font>7F</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#ccffff" align="left"><font>Horizontal
+counter
+                      (R)/ PSG (W)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#00b8ff" align="left"><b><font>BE</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#00b8ff" align="left"><font>VDP
+data
+                      (RW)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#00b8ff" align="left"><b><font>BF</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#00b8ff" align="left"><font>VDP
+control
+                      (RW)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#cccccc" align="left"><b><font>DC</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#cccccc" align="left"><font>I/O
+port
+                      A and B (Joystick Read)</font></td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0);" sdnum="1041;0;@" height="17"
+                    bgcolor="#cccccc" align="left"><b><font>DD</font></b></td>
+                  <td style="color: rgb(0, 0, 0);" bgcolor="#cccccc" align="left"><font>I/O
+port
+                      B and miscellaneous (Joystick Read)</font></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <span style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"></span><span style="font-weight: bold;"><big class="cyan">Gamegear
+        &amp;&nbsp;</big></span><span style="font-weight: bold;"><big class="cyan">Mastersystem</big></span><span
+      style="font-weight: bold;"><big class="cyan"> VRAM</big></span><br>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">Vram is separate so must be accessed
+            by OUT commands on the SMS/GG... Note, Palette data is addressed
+            using &amp;C000... however this is actually not a memory address in
+            the VDP, as the VDP only has 16k ram.</td>
+          <td>
+            <table cellspacing="0" border="0">
+              <tbody>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">From</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">To</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Function</td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    height="17" align="left"><font>0000</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    align="left"><font>1FFF</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0);"
+                    align="left"><font>Pattern Definitions</font></td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    sdval="2000" height="17" align="left"><font>2000</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    align="left"><font>2FFF</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0);"
+                    align="left"><font>Sprite Pattern Definitions</font></td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    sdval="3800" height="17" align="left"><font>3800</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    align="left"><font>3EFF</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0);"
+                    align="left"><font>Tile Map</font></td>
+                </tr>
+                <tr>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    height="17" align="left"><font>3F00</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    align="left"><font>3FFF</font></td>
+                  <td style="background-color: rgb(255, 153, 255); color: rgb(0, 0, 0);"
+                    align="left"><font>Sprite Attribute table</font></td>
+                </tr>
+                <tr>
+                  <td style="height: 17px; text-align: left; background-color: rgb(153, 255, 255); vertical-align: top; color: rgb(0, 0, 0); font-weight: bold;"><font>C000</font></td>
+                  <td style="background-color: rgb(153, 255, 255); color: rgb(0, 0, 0); font-weight: bold;"
+                    align="left"><font>C020 (SMS)<br>
+                      CO40 (GG)</font></td>
+                  <td style="text-align: left; background-color: rgb(153, 255, 255); vertical-align: top; color: rgb(0, 0, 0);"><font>Palette
+                      Data</font></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"></span><span style="font-weight: bold;"><big class="cyan">GameGear
+&amp;
+        Mastersystem Palettes<br>
+      </big></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">The GameGear and Mastersystem use 2x
+            16 color palettes...<br>
+            <br>
+            Background Tiles can use either of the 2 palettes... sprites always
+            use the second one.<br>
+            <br>
+            The Mastersystem uses just 2 bits per color channel... meaning 1
+            byte per definition<br>
+            The GameGear uses 1 nibble per channel.. meaning 2 bytes per
+            definition... this means the memory locations are different on the
+            SMS and GG<br>
+            <br>
+            SMS Palette Definition:<br>
+            <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;7
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;6
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;5
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;4
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;3
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;2
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;1
+                    </td>
+                  <td class="magenta" style="font-weight: bold; text-align: center;">&nbsp;0
+                    </td> </tr>
+                <tr>
+                  <td style="background-color: rgb(51, 51, 51); color: rgb(255, 255, 255); text-align: center;">-</td>
+                  <td style="background-color: rgb(51, 51, 51); color: rgb(255, 255, 255); text-align: center;">-</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 153); text-align: center;">B1</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 153); text-align: center;">B0</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 102, 0); text-align: center;">G1</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 102, 0); text-align: center;">G0</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(102, 0, 0); text-align: center;">R1</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(102, 0, 0); text-align: center;">R0</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            GG Palette Definition:<br>
+            <br>
+            <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;F
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;E
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;D
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;C
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;B
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;A
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;9
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;8
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;7
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;6
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;5
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;4
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;3
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;2
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;1
+                    </td>
+                  <td style="font-weight: bold; text-align: center;" class="magenta">&nbsp;0
+                    </td> </tr>
+                <tr>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(51, 51, 51); text-align: center;">-</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(51, 51, 51); text-align: center;">-</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(51, 51, 51); text-align: center;">-</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(51, 51, 51); text-align: center;">-</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 153); text-align: center;">B3</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 153); text-align: center;">B2</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 153); text-align: center;">B1</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 153); text-align: center;">B0</td>
+                  <td style="color: rgb(255, 255, 255); text-align: center;"><br>
+                  </td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 102, 0); text-align: center;">G3</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 102, 0); text-align: center;">G2</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 102, 0); text-align: center;">G1</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(0, 102, 0); text-align: center;">G0</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(102, 0, 0); text-align: center;">R3</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(102, 0, 0); text-align: center;">R2</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(102, 0, 0); text-align: center;">R1</td>
+                  <td style="color: rgb(255, 255, 255); background-color: rgb(102, 0, 0); text-align: center;">R0</td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+          </td>
+          <td>
+            <table cellspacing="0" cellpadding="0" border="1">
+              <tbody>
+                <tr>
+                  <td height="17" bgcolor="#ffffff" align="left"><b><font color="#000000">Palette</font></b></td>
+                  <td bgcolor="#ffffff" align="left"><b><font color="#000000">Color&nbsp;</font></b></td>
+                  <td bgcolor="#ffffff" align="left"><b><font color="#000000">SMS
+                        Addr&nbsp;</font></b></td>
+                  <td bgcolor="#ffffff" align="left"><b><font color="#000000">GG
+                        Addr&nbsp;</font></b></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="0" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">0</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C000</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C000</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="1" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">1</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C001</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C002</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="2" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">2</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C002</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C004</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="3" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">3</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C003</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C006</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="4" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">4</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C004</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C008</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="5" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">5</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C005</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00A</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="6" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">6</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C006</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00C</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="7" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">7</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C007</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00E</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="8" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">8</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C008</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C010</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="9" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">9</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C009</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C012</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="10" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">10</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00A</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C014</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="11" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">11</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00B</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C016</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="12" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">12</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00C</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C018</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="13" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">13</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00D</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C01A</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="14" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">14</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00E</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C01C</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffff66" align="left"><font color="#000000">0
+                      (BG)</font></td>
+                  <td sdval="15" sdnum="1041;" bgcolor="#ffff66" align="left"><font
+                      color="#000000">15</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C00F</font></td>
+                  <td bgcolor="#ffff66" align="left"><font color="#000000">C01E</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="0" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">0</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C010</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C020</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="1" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">1</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C011</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C022</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="2" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">2</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C012</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C024</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="3" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">3</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C013</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C026</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="4" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">4</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C014</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C028</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="5" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">5</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C015</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C02A</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="6" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">6</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C016</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C02C</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="7" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">7</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C017</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C02E</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="8" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">8</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C018</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C030</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="9" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">9</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C019</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C032</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="10" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">10</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C01A</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C034</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="11" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">11</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C01B</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C036</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="12" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">12</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C01C</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C038</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="13" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">13</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C01D</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C03A</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="14" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">14</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C01E</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C03C</font></td>
+                </tr>
+                <tr>
+                  <td height="17" bgcolor="#ffcc99" align="left"><font color="#000000">1
+                      (BG / Sprite)</font></td>
+                  <td sdval="15" sdnum="1041;" bgcolor="#ffcc99" align="left"><font
+                      color="#000000">15</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C01F</font></td>
+                  <td bgcolor="#ffcc99" align="left"><font color="#000000">C03E</font></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p> <span style="font-weight: bold;"><big class="cyan">Gamegear &amp;
+          Mastersystem Tilemap</big></span></p>
+    <p></p>
+    <p>The 2 bytes that define each tile are in the format&nbsp;---<span class="grey">P</span><span
+        class="yellow">C</span><span class="cyan">V</span><span class="green">H</span><span
+        class="magenta">N NNNNNNNN</span></p>
+    <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+      <tbody>
+        <tr>
+          <td style="background-color: white;"><span style="color: black;"><b>Bit</b></span></td>
+          <td style="background-color: white;"><span style="color: black;"><b>Function</b></span></td>
+        </tr>
+        <tr>
+          <td>-</td>
+          <td>no function</td>
+        </tr>
+        <tr>
+          <td><span class="grey">P</span></td>
+          <td>Priority (1=Tile in front of Sprites... 0=behind)</td>
+        </tr>
+        <tr>
+          <td><span class="yellow">C</span></td>
+          <td>Color palette (0=normal 1=Sprite palette)</td>
+        </tr>
+        <tr>
+          <td><span class="cyan">V</span></td>
+          <td>Vertical Flip (1=on)</td>
+        </tr>
+        <tr>
+          <td class="green">H</td>
+          <td>Horizontal flip (1=on)</td>
+        </tr>
+        <tr>
+          <td><span class="magenta">NNNNNNNNN</span></td>
+          <td>Tile number (0-511)</td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"><big class="cyan"><br>
+        Gamegear &amp;&nbsp;</big></span><span style="font-weight: bold;"><big class="cyan">Mastersystem</big></span><span
+      style="font-weight: bold;"><big class="cyan"> Sprite Memory (&amp;3F00)</big></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">The SMS/GG memory supports up to 64
+            sprites,<br>
+            <br>
+            There are 3 memory bytes for each hardware sprite, but they are not
+            consecutive!<br>
+            <br>
+            Look at sprite 0 - shown in black... it's X co-ordinate is at
+            &amp;3F00 ... it's Y co-ordinate is at &amp;3F80... it's Sprite
+            Number is at &amp;3F81<br>
+            <br>
+            Sprite Numbers can come from memory address &amp;2000, or &amp;0000
+            (The Tile Patterns) depending on the setting of register &amp;06</td>
+          <td><img src="smsgg/SpriteMemory.png" alt=""></td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"><big class="cyan"><br>
+      </big></span><span style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"></span><span style="font-weight: bold;"></span><span
+      style="font-weight: bold;"></span><span style="font-weight: bold;"><big class="cyan">Gamegear
+        &amp;&nbsp;</big></span><span style="font-weight: bold;"><big class="cyan">Mastersystem</big></span><span
+      style="font-weight: bold;"><big class="cyan"> VDP Ports<br>
+      </big></span>To Set a register, eg, lets set register 8&nbsp; to value 11<br>
+    &nbsp;&nbsp;&nbsp; ld a,11&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+    &nbsp; <span class="grey">;New value</span><br>
+    &nbsp;&nbsp;&nbsp; out (&amp;BF),a&nbsp;&nbsp;&nbsp; <span class="grey">;Send
+      to control port</span><br>
+    &nbsp;&nbsp;&nbsp; ld a,8 + 128&nbsp;&nbsp;<span class="grey">&nbsp; ;Reg
+      number + 128</span><br>
+    &nbsp;&nbsp;&nbsp; out (&amp;BF),a&nbsp;&nbsp;&nbsp; <span class="grey">;Send
+      to control port</span><br>
+    <br>
+    <span style="font-weight: bold;"></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td class="magenta" style="font-weight: bold;">Register Number</td>
+          <td class="magenta" style="font-weight: bold;">Purpose</td>
+          <td class="magenta" style="font-weight: bold;">Bits</td>
+          <td class="magenta" style="font-weight: bold;">Bit meaning</td>
+        </tr>
+        <tr>
+          <td>&amp;00</td>
+          <td>Mode Control No. 1 </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;01</td>
+          <td>Mode Control No. 2 </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;02</td>
+          <td>Name Table Base Address</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;03</td>
+          <td>Color Table Base Address</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;04</td>
+          <td>Pattern Generator Table Base Address</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;05</td>
+          <td>Sprite Attribute Table Base Address </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;06</td>
+          <td>Sprite Pattern Generator Table Base Address</td>
+          <td>- - - - - S - -</td>
+          <td>S=Sprite Table Address (0= use patterns for sprites, 1=sprites
+            at&nbsp;&amp;2000) </td>
+        </tr>
+        <tr>
+          <td>&amp;07</td>
+          <td>Overscan/Backdrop Color</td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>&amp;08</td>
+          <td>Background X Scroll </td>
+          <td>&nbsp;T T T T T P P P</td>
+          <td>T = Tile offset (0-31), P=Pixel offset</td>
+        </tr>
+        <tr>
+          <td>&amp;09</td>
+          <td>Background Y Scroll </td>
+          <td>&nbsp;T T T T T P P P</td>
+          <td>T = Tile offset (0-27), P=Pixel offset</td>
+        </tr>
+        <tr>
+          <td>&amp;0A</td>
+          <td>Line counter </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"><big class="cyan"><br>
+        Joypad Ports</big></span>
+    <table style="text-align: left; width: 100%;" cellspacing="2" cellpadding="2"
+      border="1">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top;">The GameGear and Master System use 3
+            ports in total, but there are differences!<br>
+            <br>
+            The Gamegear has an extra button! 'Start' accessible from bit 7 of
+            Port &amp;00... The Gamegear does not have any player 2 controls<br>
+            <br>
+            The Mastersystem has no start button, but it does have a second
+            player paddle!<br>
+            <br>
+            note:Button TH has no use on the normal SMS gamepads, so is not used
+            in these rexamples.</td>
+          <td>
+            <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Port</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Bit</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Purpose</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 204, 102);">&amp;DC</td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 204, 102);">7</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(238, 204, 102);">Player
+2
+                    - Down</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 204, 102);">6</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(238, 204, 102);">Player
+2
+                    - Up</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);">5</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Player
+1
+                    - Fire 2&nbsp;(TR)</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);">4</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Player
+1
+                    - Fire 1&nbsp;(TL)</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);">3</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Player
+1
+                    - Right</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);">2</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Player
+1
+                    - Left</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);">1</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Player
+1
+                    - Down</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 204, 102);">0</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Player
+1
+                    - Up</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Port</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Bit</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Purpose</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);">&amp;DD</td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);">7</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 102);">Player
+2
+                    - Extra (TH)</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);">6</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 102);">Player
+1
+                    - Extra&nbsp;(TH)</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);">5</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 102);">Cartridge
+                    slot</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(255, 255, 102);">4</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 102);">Reset</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);">3</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(238, 255, 102);">Player
+2
+                    - Fire 2&nbsp;(TR)</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);">2</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(238, 255, 102);">Player
+2
+                    - Fire 1&nbsp;(TL)</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);">1</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(238, 255, 102);">Player
+2
+                    - Right</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(238, 255, 102);">0</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(238, 255, 102);">Player
+2
+                    - Left</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Port</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Bit</td>
+                  <td style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-weight: bold;">Purpose</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102); font-weight: bold;">&amp;00</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102); font-weight: bold;">7</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(255, 204, 102);">Gamegear
+                    Start</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">6</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">5</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">4</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">3</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">2</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">1</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused</td>
+                </tr>
+                <tr>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);"><br>
+                  </td>
+                  <td style="color: rgb(0, 0, 0); font-weight: bold; background-color: rgb(223, 204, 102);">0</td>
+                  <td style="color: rgb(0, 0, 0); background-color: rgb(223, 204, 102);">unused</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <span style="font-weight: bold;"><big class="cyan">Sound on the SMS/GG<br>
+      </big></span>The Master System &amp; Gamegear use port &amp;7F for their
+    sound control... the data we send is in the format below<br>
+    <table style="text-align: left;" cellspacing="2" cellpadding="2" border="1">
+      <tbody>
+        <tr>
+          <td class="magenta" style="font-weight: bold;"><br>
+          </td>
+          <td class="magenta" style="font-weight: bold;"><br>
+          </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;" colspan="8"
+            rowspan="1">Bits</td>
+        </tr>
+        <tr>
+          <td class="magenta" style="text-align: center; font-weight: bold;">Command</td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">Bit
+            Details</td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;7
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;6
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;5
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;4
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;3
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;2
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;1
+            </td>
+          <td class="magenta" style="text-align: center; font-weight: bold;">&nbsp;0
+            </td> </tr>
+        <tr>
+          <td>Format Template</td>
+          <td>L=Latch C=Channel T=Type XXXX=Data</td>
+          <td style="text-align: center; background-color: rgb(153, 153, 0);"><span
+              style="color: rgb(255, 255, 255);">L</span></td>
+          <td style="text-align: center; background-color: rgb(0, 102, 0); color: rgb(255, 255, 255);">C</td>
+          <td style="text-align: center; background-color: rgb(0, 102, 0); color: rgb(255, 255, 255);">C</td>
+          <td style="text-align: center; background-color: rgb(51, 51, 0);"><span
+              style="color: rgb(255, 255, 255);">T</span></td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(153, 0, 0);">D</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(153, 0, 0);">D</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(153, 0, 0);">D</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(153, 0, 0);">D</td>
+        </tr>
+        <tr>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+          <td><br>
+          </td>
+        </tr>
+        <tr>
+          <td>Tone - Command 1/2</td>
+          <td>C=Channel L=tone Low data</td>
+          <td style="text-align: center; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0);">1</td>
+          <td style="text-align: center; background-color: rgb(0, 102, 0); color: rgb(255, 255, 255);">C</td>
+          <td style="text-align: center; background-color: rgb(0, 102, 0); color: rgb(255, 255, 255);">C</td>
+          <td style="text-align: center; background-color: rgb(51, 51, 51); color: rgb(255, 255, 255);">0</td>
+          <td style="text-align: center; background-color: rgb(255, 102, 0); color: rgb(255, 255, 255);">L</td>
+          <td style="text-align: center; background-color: rgb(255, 102, 0); color: rgb(255, 255, 255);">L</td>
+          <td style="text-align: center; background-color: rgb(255, 102, 0); color: rgb(255, 255, 255);">L</td>
+          <td style="text-align: center; background-color: rgb(255, 102, 0); color: rgb(255, 255, 255);">L</td>
+        </tr>
+        <tr>
+          <td>Tone - Command 2/2</td>
+          <td>H= High tone data (Higher numbers = lower tone)</td>
+          <td style="text-align: center; background-color: rgb(51, 51, 51); color: rgb(255, 255, 255);">0</td>
+          <td style="text-align: center; color: rgb(102, 102, 102);">-</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(255, 153, 102);">H</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(255, 153, 102);">H</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(255, 153, 102);">H</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(255, 153, 102);">H</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(255, 153, 102);">H</td>
+          <td style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(255, 153, 102);">H</td>
+        </tr>
+        <tr>
+          <td>Volume </td>
+          <td>C=Channel (0-2) &nbsp;V=Volume (15=silent 0=max)</td>
+          <td style="text-align: center; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0);">1</td>
+          <td style="text-align: center; background-color: rgb(0, 102, 0); color: rgb(255, 255, 255);">C</td>
+          <td style="text-align: center; background-color: rgb(0, 102, 0); color: rgb(255, 255, 255);">C</td>
+          <td style="text-align: center; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0);">1</td>
+          <td style="text-align: center; background-color: rgb(51, 153, 153); color: rgb(255, 255, 255);">V</td>
+          <td style="text-align: center; background-color: rgb(51, 153, 153); color: rgb(255, 255, 255);">V</td>
+          <td style="text-align: center; background-color: rgb(51, 153, 153); color: rgb(255, 255, 255);">V</td>
+          <td style="text-align: center; background-color: rgb(51, 153, 153); color: rgb(255, 255, 255);">V</td>
+        </tr>
+        <tr>
+          <td>Noise Channel</td>
+          <td>(Channel 3) &nbsp;M=Noise mode (1=white)&nbsp;R=Rate (3=use tone
+            2)</td>
+          <td style="text-align: center; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0);">1</td>
+          <td style="text-align: center; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0);">1</td>
+          <td style="text-align: center; background-color: rgb(192, 192, 192); color: rgb(0, 0, 0);">1</td>
+          <td style="text-align: center; background-color: rgb(51, 51, 51); color: rgb(255, 255, 255);">0</td>
+          <td style="text-align: center; color: rgb(102, 102, 102);">-</td>
+          <td style="text-align: center; background-color: rgb(102, 0, 204); color: rgb(255, 255, 255);">M</td>
+          <td style="text-align: center; background-color: rgb(51, 51, 255); color: rgb(255, 255, 255);">R</td>
+          <td style="text-align: center; background-color: rgb(51, 51, 255); color: rgb(255, 255, 255);">R</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <big><big>Sega Mastersystem &amp; GameGear Links </big></big>(Both systems
+    are practically identical)<br>
+    <a href="https://www.carpeludum.com/kega-fusion/">Fusion</a> - Emulates the
+    Master System, Game Gear and Others!<br>
+    <a href="http://www.smspower.org/Development/Documents">SMS Power</a> - Sega
+    Master system programming info<br>
+    <p> <a href="MasterSystemGameGear.php">My SMS/GG site</a> - A breif
+      overview of the system, I'll be including these systems in my tutorials
+      soon!</p>
+    <p><br>
+    </p>
+    <p><br>
+    </p>
+    
+<!--footer-->
+</td ><td>&nbsp;</td>
+<td valign=top>
+<center>
+	
+<br>
+	
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>View Options</td></tr>
+<tr><td><a href="?theme=">Default Dark</a></td></tr>
+<tr><td><a href="?noui=1">Simple (Hide this menu)</a></td></tr>
+<tr><td><a href="?theme=print&noui=1"><font size=-1>Print Mode (white background)</font></a></td></tr>
+</table>
+
+<br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Top Menu</td></tr>
+<tr><td>***<a href="https://www.assemblytutorial.com/">Main Menu</a>***</td></tr>
+<tr><td><a href="https://www.youtube.com/chibiakumas">Youtube channel</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/forum/">Forum</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/akusprite/">AkuSprite Editor</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/bases.php">Dec/Bin/Hex/Oct/Ascii Table</a></td></tr>
+
+</table>
+
+
+<br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Z80 Content</td></tr>
+<tr><td>***<a href="https://www.assemblytutorial.com/z80">Z80 Tutorial List</a>***</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/">Learn Z80 Assembly</a> <a href="https://www.youtube.com/watch?v=LpQCEwk2U9w&list=PLp_QNRIYljFq-9nFiAUiAkRzAXfcZTBR_"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/helloworld.php">Hello World</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/advanced.php">Advanced Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/multiplatform.php">Multiplatform Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/platform.php">Platform Specific Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/akuma.php">ChibiAkumas Series</a>  <a href="https://www.youtube.com/watch?v=EPe-Ajk8bXs&list=PLp_QNRIYljFomP-gnRyvgIw7UL82NCjyk"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/grimez80.php">Grime Z80</a>  <a href="https://www.youtube.com/watch?v=B2XKdiUEx80&list=PLp_QNRIYljFqwHWKzqpOcYl4bq6RUrvu4"><img src="theme/yticon.png"></a> </td></tr>
+<tr class=minimenusub><td class=minimenusub>Z80 Downloads</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/theme/Cheatsheet.png">Z80 Cheatsheet</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/Z80DevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>Z80 Platforms</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/AmstradCPC.php">Amstrad CPC</a>  <a href="https://www.youtube.com/watch?v=Ii6Tp5mhoIs&list=PLp_QNRIYljFp4RpVvsRWPGBV2CRJH2oyf"><img src="theme/yticon.png"></a>  </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/enterprise128.php">Elan Enterprise</a>  <a href="https://www.youtube.com/watch?v=_W62vFBzlew&list=PLp_QNRIYljFosStEZ3G_mfH0QgNECMWoG"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/Gameboy.php"><font size=-1>Gameboy & Gameboy Color</font></a>  <a href="https://www.youtube.com/watch?v=Tn1rFUutkdo&list=PLp_QNRIYljFrNLNhKgIZQjMM9eaZd166O"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/MasterSystemGameGear.php"><font size=-1>Master System & GameGear</font></a>  <a href="https://www.youtube.com/watch?v=X-bjtF7sBxg&list=PLp_QNRIYljFpKtZHSAFZ9EUlpe-W0_BHg"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/msx.php">MSX & MSX2</a>  <a href="https://www.youtube.com/watch?v=GNqLOg9jtmc&list=PLp_QNRIYljFphoJW8u5ko_vrRszTuCQ8o"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/SamCoupe.php">Sam Coupe</a>  <a href="https://www.youtube.com/watch?v=Ii6Tp5mhoIs&list=PLp_QNRIYljFpEPesYQhsPwkJUrecz14DB"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/ti83.php">TI-83</a>  <a href="https://www.youtube.com/watch?v=EN4DW9q-06g&list=PLp_QNRIYljFrXt3YfahN_FesMRoNtyuJS"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/ZXSpectrum.php">ZX Spectrum</a>  <a href="https://www.youtube.com/watch?v=Ii6Tp5mhoIs&list=PLp_QNRIYljFpUXFznr12zUhRHVOsLsotX"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/SpectrumNext.php">Spectrum NEXT</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/z80/CamputersLynx.php">Camputers Lynx</a>  <a href="https://www.youtube.com/watch?v=87sfLMI7NiQ&list=PLp_QNRIYljFqZChp9fxoBpKeaXNtEX9Ag"><img src="theme/yticon.png"></a> </td></tr>
+</table>
+
+<br>
+
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>6502 Content</td></tr>
+<tr><td>***<a href="https://www.assemblytutorial.com/6502">6502 Tutorial List</a>***</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/">Learn 6502 Assembly</a> <a href="https://www.youtube.com/watch?v=lsvSZamCCBM&list=PLp_QNRIYljFofA93OyUFnxDamjemzidFv"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/advanced.php">Advanced Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/platform.php">Platform Specific Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/helloworld.php">Hello World Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/grime6502.php">Grime 6502</a>  <a href="https://www.youtube.com/watch?v=L7hCzAQ5BEU&list=PLp_QNRIYljFpCikndk3UjXtH1t5TsXizz"><img src="theme/yticon.png"></a> </td></tr>
+<tr class=minimenusub><td class=minimenusub>6502 Downloads</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/CheatSheet.pdf">6502 Cheatsheet</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/6502DevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>6502 Platforms</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/appleii.php">Apple IIe</a>  <a href="https://www.youtube.com/watch?v=WfcJlia_a_A&list=PLp_QNRIYljFr-UGNeYQqncrtS9x300iaJ"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/Atari800Atari5200.php">Atari 800 and 5200</a>  <a href="https://www.youtube.com/watch?v=nDnoO1075oY&list=PLp_QNRIYljFoTUKRiWbDxA_zSRVjhY0Z8"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/atarilynx.php">Atari Lynx</a>  <a href="https://www.youtube.com/watch?v=efjsTMmuIKg&list=PLp_QNRIYljFrThuuusAmfEzWkRKxSrjuD"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/bbc.php">BBC Micro</a>  <a href="https://www.youtube.com/watch?v=5qgMJIaSuvs&list=PLp_QNRIYljFobMbfxNFGhWKgDgsIaySwU"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/c64.php">Commodore 64</a>  <a href="https://www.youtube.com/watch?v=MrJEBVCGvLQ&list=PLp_QNRIYljFqITAm68B4ZbmxpR9C_idpM"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/commanderx16.php">Commander x16</a>  <a href="https://www.youtube.com/watch?v=v1_ivVaRbAk&list=PLp_QNRIYljFo9a5l3fJwZanqC0IYEjCv6"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/snes.php"><font size=-1>Super Nintendo (SNES)</font></a>  <a href="https://www.youtube.com/watch?v=yBLwjYFgqcw&list=PLp_QNRIYljFrC7p62O2uJ9umHezHaEUsK"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/nesfamicom.php"><font size=-1>Nintendo NES / Famicom</font></a>  <a href="https://www.youtube.com/watch?v=kG2RobA7keI&list=PLp_QNRIYljFoSkq8absJGxocIvofS06RN"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/pcengine.php"><font size=-1>PC Engine (Turbografx-16)</font></a>  <a href="https://www.youtube.com/watch?v=j1-aPB2HenM&list=PLp_QNRIYljFr7BWKetjriJl81FROLXGSs"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6502/vic20.php">Vic 20</a>  <a href="https://www.youtube.com/watch?v=pf57ytdyEo0&list=PLp_QNRIYljFqJwH9O-M-EVJ_4iwvvIK6H"><img src="theme/yticon.png"></a> </td></tr>
+</table>
+
+
+<br>
+
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>68000 Content</td></tr>
+<tr><td>***<a href="https://www.assemblytutorial.com/68000">68000 Tutorial List</a>***</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/">Learn 68000 Assembly</a>  <a href="https://www.youtube.com/watch?v=ilSvChwlmtw&list=PLp_QNRIYljFqbJk96Ow1t7ObusLchrBvH"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/helloworld.php">Hello World Series</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/platform.php">Platform Specific Series</a></td></tr>
+<tr><td><a href="http://chibiakumas.com/68000/grime68000.php">Grime 68000</a>  <a href="https://www.youtube.com/watch?v=5r-R-TqrbgY&list=PLp_QNRIYljFrKmjy4qUhYTIrRDsfOc0sf"><img src="theme/yticon.png"></a> </td></tr>
+<tr class=minimenusub><td class=minimenusub>68000 Downloads</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/CheatSheet.pdf">68000 Cheatsheet</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/68000DevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>68000 Platforms</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/amiga.php">Amiga 500</a>  <a href="https://www.youtube.com/watch?v=usfLiWsouCI&list=PLp_QNRIYljFrHmrrTYCyWQeJDNuGh3ibo"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/atarist.php">Atari ST</a>  <a href="https://www.youtube.com/watch?v=Xr5LAOPjMcE&list=PLp_QNRIYljFrtuifgkvLpb88vvKQf2xUD"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/neogeo.php">Neo Geo</a>   <a href="https://www.youtube.com/watch?v=Xr5LAOPjMcE&list=PLp_QNRIYljFogkZFsa4TuvLW6ih1BbWG5"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/genesis.php"><font size=-1>Sega Genesis / Mega Drive</font></a>  <a href="https://www.youtube.com/watch?v=5qgMJIaSuvs&list=PLp_QNRIYljFoy1iv8BG9HykORt_g342IV"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/sinclairql.php"><font size=-1>Sinclair QL</font></a>  <a href="https://www.youtube.com/watch?v=6rJK6dPu6yM&list=PLp_QNRIYljFoWZ3VRPpXfxS-ULP3u9WLD"><img src="theme/yticon.png"></a> </td></tr>
+<tr><td><a href="https://www.chibiakumas.com/68000/x68000.php">X68000 (Sharp x68k)</a>  <a href="https://www.youtube.com/watch?v=hlFNV13brm0&list=PLp_QNRIYljFrLc_aYz3AEI_cls43Fl1bB"><img src="theme/yticon.png"></a> </td></tr>
+</table>
+
+
+<br>
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>8086 Content</td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/">Learn 8086 Assembly</a>  <a href="https://www.youtube.com/watch?v=K9eRSsYlt00&list=PLp_QNRIYljFpvg9tgPabsWHGi8Uox-rpy"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/platform.php">Platform Specific Series</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/helloworld.php">Hello World Series</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>8086 Downloads</td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/8086CheatSheet.pdf">8086 Cheatsheet</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/8086sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/8086DevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>8086 Platforms</td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/wonderswan.php">Wonderswan</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/8086/msdos.php">MsDos</a></td></tr>
+</table>
+<br>
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>ARM Content</td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/">Learn ARM Assembly</a>  <a href="https://www.youtube.com/watch?v=7vz8VRaArCM&list=PLp_QNRIYljFrVKGVfqGVKdZYOn4FkifBi"><img src="theme/yticon.png"></a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/platform.php">Platform Specific Series</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>ARM Downloads</td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/ArmCheatSheet.pdf">ARM Cheatsheet</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/ArmSources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/ArmDevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>ARM Platforms</td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/gba.php">Gameboy Advance</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/nds.php">Nintendo DS</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/arm/riscos.php">Risc Os</a></td></tr>
+</table>
+<br>
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Risc-V Content</td></tr>
+<tr><td><a href="http://www.chibialiens.com/riscv/">Learn Risc-V Assembly</a></td></tr>
+
+<tr class=minimenusub><td class=minimenusub>Risc-V Downloads</td></tr>
+<tr><td><a href="http://www.chibialiens.com/riscv/RiscVCheatsheet.pdf">Risc-V Cheatsheet</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/riscv/RiscVSources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="http://www.chibialiens.com/riscv/RiscVDevTools.php">DevTools kit</a></td></tr>
+
+</table>
+<br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>PDP-11 Content</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/pdp11/">Learn PDP-11 Assembly</a></td></tr>
+
+<tr class=minimenusub><td class=minimenusub>PDP-11 Downloads</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/pdp11/PDP11Cheatsheet.pdf">PDP-11 Cheatsheet</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/pdp11/PDP11Sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/pdp11/PDP11DevTools.php">DevTools kit</a></td></tr>
+</table>
+<br>
+
+
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>TMS9900 Content</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/tms9900/">Learn TMS9900 Assembly</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>TMS9900 Downloads</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/tms9900/TMS9900Cheatsheet.pdf">TMS9900 Cheatsheet</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/tms9900/TMS9900_Sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/tms9900/TMS9900DevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>TMS9900 Platforms</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/tms9900/ti99.php">Ti 99</a></td></tr>
+</table>
+<br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>6809 Content</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/">Learn 6809 Assembly</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>6809 Downloads</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6309/6309CheatSheet.pdf">6809/6309 Cheatsheet</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/6809Sources.7z">Sources.7z</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/6809DevTools.php">DevTools kit</a></td></tr>
+<tr class=minimenusub><td class=minimenusub>6809 Platforms</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/dragon.php">Dragon 32/Tandy Coco</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/fm7.php">Fujitsu FM7</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/coco3.php">TRS-80 Coco 3</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/6809/vectrex.php">Vectrex</a></td></tr>
+</table>
+<br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>My Game projects</td></tr>
+<tr><td><a href="http://www.chibialiens.com">Chibi Aliens</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com">Chibi Akumas</a></td></tr>
+</table>
+
+<br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Work in Progress</td></tr>
+<tr><td><a href="https://www.chibiakumas.com/65816/">Learn 65816 Assembly</a></td></tr>
+<tr><td><a href="https://www.chibiakumas.com/ez80/">Learn eZ80 Assembly</a></td></tr>
+
+
+</table>
+
+<br>
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Misc bits</td></tr>
+<tr><td><a href="http://www.chibialiens.com/ruby/">Ruby programming</a></td></tr>
+</table>
+
+
+
+</center>
+
+<center>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.patreon.com/akuyou"><img src="../titlestrips/MiniButton_PT.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.subscribestar.com/chibiakumas"><img src="../titlestrips/MiniButton_SS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://teespring.com/stores/chibiakumas"><img src="../titlestrips/MiniButton_TS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.youtube.com/channel/UC8t99gp5IN-FTf5rGVaRevw"><img src="../titlestrips/MiniButton_YT.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.chibiakumas.com/forum/"><img src="../titlestrips/MiniButton_FM.png" width=256 height=128></a>
+
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.subscribestar.com/chibiakumas"><img src="../titlestrips/MiniButton_SS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Recent New Content</td></tr>
+<td>
+<a href=https://youtu.be/-JPpfRRXIc0>6809 Lesson 5 - More Maths - Logical Ops, Bit shifts and more</a><br><br>
+<a href=https://youtu.be/JpGrEcPPBO0>x68000 Hardware Sprites</a><br><br>
+<a href=https://youtu.be/PS_lFwCaPbk>Joypad & Pen on the GBA / NDS ... Key reading on Risc OS</a><br><br>
+<a href=https://youtu.be/dcytDn01804>C64 Hardware Sprites - 6502 ASM Lesson YQuest14</a><br><br>
+<a href=https://youtu.be/J7k3h2WXzHo>SNES Hardware sprites - 6502 ASM YQuest13</a><br><br>
+<a href=https://youtu.be/vWYomecVTLw>Vector drawing on the Vectrex</a><br><br>
+<a href=https://youtu.be/kT4tc8j3JMU>Graphics on the Fujitsu FM7</a><br><br>
+<a href=https://youtu.be/pggzEaaGUn4>CPC ASM: Tape loading on the Amstrad CPC (5K subs special)</a><br><br>
+<a href=https://youtu.be/bdlAcghvgtE>68000 YQuest7 - Atari ST Specific code</a><br><br>
+<a href=https://youtu.be/nzsUJgMj6EE>Hardware Sprites on the NES - Lesson YQuest12</a><br><br>
+<a href=https://youtu.be/KCoJ97yrM9E>Hardware Sprites on the PC Engine / Turbografix</a><br><br>
+<a href=https://youtu.be/dRxCYAanwU0>Joystick reading on the Vectrex - 6809 ASM</a><br><br>
+
+
+
+<hr>
+Gaming + more:<br><br>
+<a href=https://youtu.be/rdg1Yhom-6M>Emily The Strange (DS) - Live full playthrough</a><br><br>
+<a href=https://youtu.be/5W0SZeUpsxE>$150 calculator: Unboxing the Ti-84 Plus CE (eZ80 cpu)</a><br><br>
+</td>
+</table>
+
+<br><br><br><br><br><br><br><br><br>
+
+<a href="https://www.polyplay.xyz/navi.php?qs=chibi+akuma"><img alt="Buy Chibi Akuma(s) from PolyPlay" src="https://www.chibiakumas.com/ep1/EP1GameBox.png"><br>
+	<font color=#FFFF00 size=-2>Buy ChibiAkuma(s) games now!</font></a><br><br>
+	
+		
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.patreon.com/akuyou"><img src="../titlestrips/MiniButton_PT.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.subscribestar.com/chibiakumas"><img src="../titlestrips/MiniButton_SS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://teespring.com/stores/chibiakumas"><img src="../titlestrips/MiniButton_TS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.youtube.com/channel/UC8t99gp5IN-FTf5rGVaRevw"><img src="../titlestrips/MiniButton_YT.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.chibiakumas.com/forum/"><img src="../titlestrips/MiniButton_FM.png" width=256 height=128></a>
+
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.subscribestar.com/chibiakumas"><img src="../titlestrips/MiniButton_SS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Recent New Content</td></tr>
+<td>
+<a href=https://youtu.be/-JPpfRRXIc0>6809 Lesson 5 - More Maths - Logical Ops, Bit shifts and more</a><br><br>
+<a href=https://youtu.be/JpGrEcPPBO0>x68000 Hardware Sprites</a><br><br>
+<a href=https://youtu.be/PS_lFwCaPbk>Joypad & Pen on the GBA / NDS ... Key reading on Risc OS</a><br><br>
+<a href=https://youtu.be/dcytDn01804>C64 Hardware Sprites - 6502 ASM Lesson YQuest14</a><br><br>
+<a href=https://youtu.be/J7k3h2WXzHo>SNES Hardware sprites - 6502 ASM YQuest13</a><br><br>
+<a href=https://youtu.be/vWYomecVTLw>Vector drawing on the Vectrex</a><br><br>
+<a href=https://youtu.be/kT4tc8j3JMU>Graphics on the Fujitsu FM7</a><br><br>
+<a href=https://youtu.be/pggzEaaGUn4>CPC ASM: Tape loading on the Amstrad CPC (5K subs special)</a><br><br>
+<a href=https://youtu.be/bdlAcghvgtE>68000 YQuest7 - Atari ST Specific code</a><br><br>
+<a href=https://youtu.be/nzsUJgMj6EE>Hardware Sprites on the NES - Lesson YQuest12</a><br><br>
+<a href=https://youtu.be/KCoJ97yrM9E>Hardware Sprites on the PC Engine / Turbografix</a><br><br>
+<a href=https://youtu.be/dRxCYAanwU0>Joystick reading on the Vectrex - 6809 ASM</a><br><br>
+
+
+
+<hr>
+Gaming + more:<br><br>
+<a href=https://youtu.be/rdg1Yhom-6M>Emily The Strange (DS) - Live full playthrough</a><br><br>
+<a href=https://youtu.be/5W0SZeUpsxE>$150 calculator: Unboxing the Ti-84 Plus CE (eZ80 cpu)</a><br><br>
+</td>
+</table>
+
+<br><br><br><br><br><br><br><br><br>
+
+<a href="https://www.polyplay.xyz/navi.php?qs=chibi+akuma"><img alt="Buy Chibi Akuma(s) from PolyPlay" src="https://www.chibiakumas.com/ep1/EP1GameBox.png"><br>
+	<font color=#FFFF00 size=-2>Buy ChibiAkuma(s) games now!</font></a><br><br>
+	
+		
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.patreon.com/akuyou"><img src="../titlestrips/MiniButton_PT.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.subscribestar.com/chibiakumas"><img src="../titlestrips/MiniButton_SS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://teespring.com/stores/chibiakumas"><img src="../titlestrips/MiniButton_TS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.youtube.com/channel/UC8t99gp5IN-FTf5rGVaRevw"><img src="../titlestrips/MiniButton_YT.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.chibiakumas.com/forum/"><img src="../titlestrips/MiniButton_FM.png" width=256 height=128></a>
+
+
+<br><br><br><br><br><br><br><br><br>
+<a href="https://www.subscribestar.com/chibiakumas"><img src="../titlestrips/MiniButton_SS.png" width=256 height=128></a>
+
+<br><br><br><br><br><br><br><br><br>
+
+<table width=256 class=minimenu>
+<tr class=minimenuhead><td class=minimenuhead>Recent New Content</td></tr>
+<td>
+<a href=https://youtu.be/-JPpfRRXIc0>6809 Lesson 5 - More Maths - Logical Ops, Bit shifts and more</a><br><br>
+<a href=https://youtu.be/JpGrEcPPBO0>x68000 Hardware Sprites</a><br><br>
+<a href=https://youtu.be/PS_lFwCaPbk>Joypad & Pen on the GBA / NDS ... Key reading on Risc OS</a><br><br>
+<a href=https://youtu.be/dcytDn01804>C64 Hardware Sprites - 6502 ASM Lesson YQuest14</a><br><br>
+<a href=https://youtu.be/J7k3h2WXzHo>SNES Hardware sprites - 6502 ASM YQuest13</a><br><br>
+<a href=https://youtu.be/vWYomecVTLw>Vector drawing on the Vectrex</a><br><br>
+<a href=https://youtu.be/kT4tc8j3JMU>Graphics on the Fujitsu FM7</a><br><br>
+<a href=https://youtu.be/pggzEaaGUn4>CPC ASM: Tape loading on the Amstrad CPC (5K subs special)</a><br><br>
+<a href=https://youtu.be/bdlAcghvgtE>68000 YQuest7 - Atari ST Specific code</a><br><br>
+<a href=https://youtu.be/nzsUJgMj6EE>Hardware Sprites on the NES - Lesson YQuest12</a><br><br>
+<a href=https://youtu.be/KCoJ97yrM9E>Hardware Sprites on the PC Engine / Turbografix</a><br><br>
+<a href=https://youtu.be/dRxCYAanwU0>Joystick reading on the Vectrex - 6809 ASM</a><br><br>
+
+
+
+<hr>
+Gaming + more:<br><br>
+<a href=https://youtu.be/rdg1Yhom-6M>Emily The Strange (DS) - Live full playthrough</a><br><br>
+<a href=https://youtu.be/5W0SZeUpsxE>$150 calculator: Unboxing the Ti-84 Plus CE (eZ80 cpu)</a><br><br>
+</td>
+</table>
+
+<br><br><br><br><br><br><br><br><br>
+
+<a href="https://www.polyplay.xyz/navi.php?qs=chibi+akuma"><img alt="Buy Chibi Akuma(s) from PolyPlay" src="https://www.chibiakumas.com/ep1/EP1GameBox.png"><br>
+	<font color=#FFFF00 size=-2>Buy ChibiAkuma(s) games now!</font></a><br><br>
+	
+		
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+<br><br><br><br><br><br><br><br><br>	
+	
+</center>
+
+</td></tr></table>
+
+
+  </body>
+</html>
