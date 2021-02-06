@@ -53,23 +53,23 @@ void SMS_setSpriteMode (unsigned char mode) /* __z88dk_fastcall */;
 #define SPRITEMODE_TALL_ZOOMED    0x03
 
 /* macro for ROM bankswitching */
-volatile __at (0xffff) unsigned char ROM_bank_to_be_mapped_on_slot2;
+volatile /* __at (0xffff) */ unsigned char ROM_bank_to_be_mapped_on_slot2;
 #define SMS_mapROMBank(n)       ROM_bank_to_be_mapped_on_slot2=(n)
 
 /* macro for SRAM access */
-volatile __at (0xfffc) unsigned char SRAM_bank_to_be_mapped_on_slot2;
+volatile /* __at (0xfffc) */ unsigned char SRAM_bank_to_be_mapped_on_slot2;
 #define SMS_enableSRAM()        SRAM_bank_to_be_mapped_on_slot2=0x08
 #define SMS_enableSRAMBank(n)   SRAM_bank_to_be_mapped_on_slot2=((((n)<<2)|0x08)&0x0C)
 #define SMS_disableSRAM()       SRAM_bank_to_be_mapped_on_slot2=0x00
 
 /* SRAM access is as easy as accessing an array of char */
-__at (0x8000) unsigned char SMS_SRAM[];
+/* __at (0x8000) */ unsigned char SMS_SRAM[];
 
 /* wait until next VBlank starts */
 void SMS_waitForVBlank (void);
 
-void SMS_crt0_RST08(unsigned int addr) /* __z88dk_fastcall */ __preserves_regs(a,b,d,e,h,l,iyh,iyl);
-void SMS_crt0_RST18(unsigned int tile) /* __z88dk_fastcall */ __preserves_regs(b,c,d,e,h,l,iyh,iyl);
+void SMS_crt0_RST08(unsigned int addr) /* __z88dk_fastcall */ /* __preserves_regs(a,b,d,e,h,l,iyh,iyl) */;
+void SMS_crt0_RST18(unsigned int tile) /* __z88dk_fastcall */ /* __preserves_regs(b,c,d,e,h,l,iyh,iyl) */;
 
 /* function for setting tiles/moving 'cursor' */
 #define SMS_setTile(tile)         SMS_crt0_RST18(tile)
@@ -158,7 +158,7 @@ void SMS_loadBGPalette (void *palette) /* __z88dk_fastcall */;
 void SMS_loadSpritePalette (void *palette) /* __z88dk_fastcall */;
 #define SMS_setNextBGColoratIndex(i)       SMS_setAddr(SMS_CRAMAddress|(i))
 #define SMS_setNextSpriteColoratIndex(i)   SMS_setAddr(SMS_CRAMAddress|0x10|(i))
-void SMS_setColor (unsigned char color) /* __z88dk_fastcall */ __preserves_regs(b,c,d,e,h,l,iyh,iyl);
+void SMS_setColor (unsigned char color) /* __z88dk_fastcall */ /* __preserves_regs(b,c,d,e,h,l,iyh,iyl) */;
 /* SMS macros for colors */
 #define RGB(r,g,b)        ((r)|((g)<<2)|((b)<<4))
 #define RGB8(r,g,b)       (((r)>>6)|(((g)>>6)<<2)|(((b)>>6)<<4))
@@ -311,7 +311,7 @@ void UNSAFE_SMS_VRAMmemcpy128 (unsigned int dst, void *src);
                         SMS_EMBED_SDSC_HEADER((verMaj),(verMin),0,0,0,(author),(name),(descr))
 
 /* the Interrupt Service Routines (do not modify) */
-void SMS_isr (void) __interrupt;
-void SMS_nmi_isr (void) __critical __interrupt;
+void SMS_isr (void) /* __interrupt */;
+void SMS_nmi_isr (void) /* __critical */ /* __interrupt */;
 
 /* EOF */

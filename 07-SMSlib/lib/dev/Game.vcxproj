@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="src\SMSlib_common.c" />
+    <ClCompile Include="src\SMSlib_deprecated.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat" />
