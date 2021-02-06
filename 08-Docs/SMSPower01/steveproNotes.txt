@@ -1,0 +1,12 @@
+06/02/2021
+
+00	0	00xx xxxx	VRAM read	0x00
+01	1	01xx xxxx	VRAM write	0x40
+02	2	10xx xxxx	VDP reg write	0x80
+03	3	11xx xxxx	CRAM write 	0xC0
+
+
+VDP reg write
+80
+1000 rrrr	reg
+xxxx xxxx	data for VDP register to write
