@@ -18,11 +18,11 @@ void SMS_initSprites (void) {
   SpriteNextFree=0;
 }
 
-#pragma save
-#pragma disable_warning 85
+//#pragma save
+//#pragma disable_warning 85
 
 // 3rd ASM version: 212 CPU cycles
-signed char SMS_addSprite (unsigned char x, unsigned char y, unsigned char tile) __naked __preserves_regs(iyh,iyl) {
+signed char SMS_addSprite (unsigned char x, unsigned char y, unsigned char tile) /*__naked __preserves_regs(iyh,iyl)*/ {
   /* __asm
     ld  a,(#_SpriteNextFree)
     cp  a,#MAXSPRITES
@@ -66,8 +66,11 @@ _returnInvalidHandle2:
     ld l,#0xfe
     ret
  __endasm; */
+
+	// stevepro
+	return 0;
 }
-#pragma restore
+//#pragma restore
 
 void SMS_copySpritestoSAT (void) {
   /*

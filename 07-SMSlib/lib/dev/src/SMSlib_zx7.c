@@ -5,8 +5,8 @@
 
 #include "SMSlib.h"
 
-#pragma save
-#pragma disable_warning 85
+//#pragma save
+//#pragma disable_warning 85
 void UNSAFE_SMS_loadZX7compressedTilesatAddr (void *src, unsigned int dst) {
 /* **************************************************
 ; by Einar Saukas, Antonio Villena & Metalbrain
@@ -165,4 +165,4 @@ _done:
   pop hl
   __endasm; */
 }
-#pragma restore
+//#pragma restore

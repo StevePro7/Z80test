@@ -151,6 +151,10 @@
     <ClCompile Include="src\SMSlib_common.c" />
     <ClCompile Include="src\SMSlib_deprecated.c" />
     <ClCompile Include="src\SMSlib_load1bppTiles.c" />
+    <ClCompile Include="src\SMSlib_sprite.c" />
+    <ClCompile Include="src\SMSlib_STMcomp.c" />
+    <ClCompile Include="src\SMSlib_VRAMmemset.c" />
+    <ClCompile Include="src\SMSlib_zx7.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat" />

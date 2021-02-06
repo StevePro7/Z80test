@@ -7,6 +7,10 @@ SMSlib - C programming library for the SMS/GG
 #include "SMSlib_common.c"
 #include <stdbool.h>
 
+// stevepro
+void SMS_crt0_RST08( unsigned int addr ) /* __z88dk_fastcall */ /* __preserves_regs(a,b,d,e,h,l,iyh,iyl) */ {}
+void SMS_crt0_RST18( unsigned int tile ) /* __z88dk_fastcall */ /* __preserves_regs(b,c,d,e,h,l,iyh,iyl) */ {}
+
 /* declare various I/O ports in SDCC z80 syntax */
 /* define IOPort (joypad) */
 //__sfr __at 0xDC IOPortL;
@@ -198,8 +202,8 @@ void SMS_setSpritePaletteColor( unsigned char entry, unsigned char color ) {
 }
 #endif
 
-#pragma save
-#pragma disable_warning 85
+//#pragma save
+//#pragma disable_warning 85
 #ifdef TARGET_GG
 void GG_loadBGPalette( void *palette ) /* __z88dk_fastcall */ {
 	// *palette will be in HL
@@ -238,7 +242,7 @@ void SMS_setColor( unsigned char color ) /* __z88dk_fastcall */ /* __preserves_r
 	ASM_L_TO_VDP_DATA;
 }
 #endif
-#pragma restore
+//#pragma restore
 
 void SMS_waitForVBlank( void ) {
 	VDPBlank = false;
