@@ -24,3 +24,18 @@ bmp2tile.exe raw\splash.bmp
 -savetilemap "splash (tilemap).stmcompr"
 -savepalette "splash (palette).bin"
 -fullpalette -exit
+
+
+SDCC - Interfacing with Z80 assembler code
+https://gist.github.com/Konamiman/af5645b9998c802753023cf1be8a2970
+
+
+GOOGLE
+sega master system z80 tutorials
+
+https://www.chibiakumas.com/z80/MasterSystemGameGear.php
+
+https://www.smspower.org/Development/GettingStarted
+
+https://www.smspower.org/Development/GettingStarted?action=sourceblock&num=1
+https://www.smspower.org/Articles/TrainersDoItYourself
