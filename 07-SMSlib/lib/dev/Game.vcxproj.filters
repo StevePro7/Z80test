@@ -39,6 +39,9 @@
     <ClCompile Include="src\SMSlib_load1bppTiles.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\SMSlib.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat">
