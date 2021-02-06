@@ -54,6 +54,12 @@
     <ClCompile Include="src\SMSlib_VRAMmemset.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\SMSlib_VRAMmemcpy.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_UNSAFE.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat">

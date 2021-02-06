@@ -86,7 +86,7 @@ void UNSAFE_SMS_copySpritestoSAT (void) {
     out (c),a
 _no_sprite_term:
   __endasm; */
- SMS_setAddr(SMS_SATAddress+128);
+ //SMS_setAddr(SMS_SATAddress+128);
   /*__asm
     ld a,(#_SpriteNextFree)
     ld b,a
@@ -108,12 +108,12 @@ _no_sprites:
     ld a,#0xD0
     out (#_VDPDataPort),a
   __endasm; */
-}
-*/
+//}
 
-void OUTI32(void *src) /* __z88dk_fastcall */;
-void OUTI64(void *src) /* __z88dk_fastcall */;
-void OUTI128(void *src) /* __z88dk_fastcall */;
+
+void OUTI32( void *src ) /* __z88dk_fastcall */ {}
+void OUTI64( void *src ) /* __z88dk_fastcall */ {}
+void OUTI128( void *src ) /* __z88dk_fastcall */ {}
 
 #define SETVDPDATAPORT  /*__asm ld c,#_VDPDataPort __endasm */
 

@@ -8,8 +8,8 @@
 
 /* low level functions */
 
-#pragma save
-#pragma disable_warning 85
+//#pragma save
+//#pragma disable_warning 85
 void SMS_VRAMmemcpy (unsigned int dst, void *src, unsigned int size) {
   //  original code:
   // SMS_setAddr(0x4000|dst);
@@ -69,4 +69,4 @@ void SMS_VRAMmemcpy_brief (unsigned int dst, void *src, unsigned char size) {
 	pop	ix
 __endasm; */
 }
-#pragma restore
+//#pragma restore

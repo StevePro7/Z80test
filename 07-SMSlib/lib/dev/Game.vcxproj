@@ -153,6 +153,8 @@
     <ClCompile Include="src\SMSlib_load1bppTiles.c" />
     <ClCompile Include="src\SMSlib_sprite.c" />
     <ClCompile Include="src\SMSlib_STMcomp.c" />
+    <ClCompile Include="src\SMSlib_UNSAFE.c" />
+    <ClCompile Include="src\SMSlib_VRAMmemcpy.c" />
     <ClCompile Include="src\SMSlib_VRAMmemset.c" />
     <ClCompile Include="src\SMSlib_zx7.c" />
   </ItemGroup>
