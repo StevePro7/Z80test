@@ -151,8 +151,16 @@
     <ClCompile Include="src\SMSlib_common.c" />
     <ClCompile Include="src\SMSlib_deprecated.c" />
     <ClCompile Include="src\SMSlib_load1bppTiles.c" />
+    <ClCompile Include="src\SMSlib_loadTileMapArea.c" />
+    <ClCompile Include="src\SMSlib_loadTiles.c" />
+    <ClCompile Include="src\SMSlib_paletteAdv.c" />
+    <ClCompile Include="src\SMSlib_PSGaiden.c" />
     <ClCompile Include="src\SMSlib_sprite.c" />
+    <ClCompile Include="src\SMSlib_spriteAdv.c" />
+    <ClCompile Include="src\SMSlib_spriteClip.c" />
     <ClCompile Include="src\SMSlib_STMcomp.c" />
+    <ClCompile Include="src\SMSlib_textrenderer.c" />
+    <ClCompile Include="src\SMSlib_twosprites.c" />
     <ClCompile Include="src\SMSlib_UNSAFE.c" />
     <ClCompile Include="src\SMSlib_VRAMmemcpy.c" />
     <ClCompile Include="src\SMSlib_VRAMmemset.c" />

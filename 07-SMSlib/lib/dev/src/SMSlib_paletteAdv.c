@@ -6,8 +6,8 @@
 #include "SMSlib.h"
 #include "SMSlib_common.c"
 
-#pragma save
-#pragma disable_warning 85
+//#pragma save
+//#pragma disable_warning 85
 #ifndef TARGET_GG
 void SMS_loadBGPaletteHalfBrightness (void *palette) /* __z88dk_fastcall */ {
   // *palette will be in HL
@@ -63,4 +63,4 @@ void SMS_zeroSpritePalette (void) {
   __endasm; */
 }
 #endif
-#pragma restore
+//#pragma restore

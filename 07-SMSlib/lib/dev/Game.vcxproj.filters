@@ -60,6 +60,30 @@
     <ClCompile Include="src\SMSlib_UNSAFE.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\SMSlib_twosprites.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_textrenderer.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_spriteAdv.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_spriteClip.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_loadTileMapArea.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_loadTiles.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_paletteAdv.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_PSGaiden.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat">

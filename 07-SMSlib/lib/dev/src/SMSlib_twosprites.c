@@ -6,11 +6,11 @@
 #include "SMSlib.h"
 #include "SMSlib_common.c"
 
-#pragma save
-#pragma disable_warning 85
+//#pragma save
+//#pragma disable_warning 85
 
 // 2nd ASM version: 290 CPU cycles
-void SMS_addTwoAdjoiningSprites (unsigned char x, unsigned char y, unsigned char tile) __naked __preserves_regs(iyh,iyl) {
+void SMS_addTwoAdjoiningSprites (unsigned char x, unsigned char y, unsigned char tile) /*__naked __preserves_regs(iyh,iyl)*/ {
   /* __asm
     ld  a,(#_SpriteNextFree)
     cp  a,#MAXSPRITES-1
@@ -64,4 +64,4 @@ _secondSpriteClipped:
     ret
  __endasm; */
 }
-#pragma restore
+//#pragma restore
