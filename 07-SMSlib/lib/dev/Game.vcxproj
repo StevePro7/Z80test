@@ -145,8 +145,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="src\SMSlib_aPLib.c" />
+    <ClCompile Include="src\SMSlib_autotext.c" />
     <ClCompile Include="src\SMSlib_common.c" />
     <ClCompile Include="src\SMSlib_deprecated.c" />
+    <ClCompile Include="src\SMSlib_load1bppTiles.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat" />

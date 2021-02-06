@@ -30,6 +30,15 @@
     <ClCompile Include="src\SMSlib_deprecated.c">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\SMSlib_aPLib.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_autotext.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SMSlib_load1bppTiles.c">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="build.bat">
