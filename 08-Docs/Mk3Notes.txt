@@ -1,0 +1,62 @@
+Notes
+07/02/2021
+
+
+SAT
+Sprite Attribute Table
+256 bytes
+$3F00
+if VDP reg 5 = $FF
+which almost always true
+
+VDP reg 5
+Sprite [Attribute] Table base	$3F00
+
+VDP reg 6
+Sprite Pattern Table base
+
+
+Name table
+screen map
+$3800
+if VDP reg 2 = $FF
+which almost always true
+
+
+VDP Status register
+$BF	read
+e.g.
+IN a, ($BF)
+interrupt status register
+clears interrupt requests from the VDP chip
+
+
+VDP reg 10
+$FF disables the interrupt requests
+$00 gives the Raster Line interrupt request for every horizontal line
+
+$FF Horizontal line interrupt OFF
+
+
+
+RAM
+top 8 locations of RAM are reserved for memory mgt + control registers
+e.g.
+$DFF8 - $DFFF
+
+
+Bank control register located at
+$FFFF
+
+
+
+Cartridge Header
+$7FF0
+TMR SEGA
+
+
+
+PSG
+noise generator
+0	periodic
+1	white [hiss]
