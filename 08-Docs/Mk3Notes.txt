@@ -60,3 +60,13 @@ PSG
 noise generator
 0	periodic
 1	white [hiss]
+
+
+
+Screen Map
+$3800
+2K bytes
+
+
+Sprite Attribute Table	SAT
+$3F00
