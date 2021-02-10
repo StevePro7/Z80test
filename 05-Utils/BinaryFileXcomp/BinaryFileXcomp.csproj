@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DB014176-AE07-46CE-81C6-D912C3866B0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BinaryFileWrite</RootNamespace>
-    <AssemblyName>BinaryFileWrite</AssemblyName>
+    <RootNamespace>BinaryFileXcomp</RootNamespace>
+    <AssemblyName>BinaryFileXcomp</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -41,15 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="input\01output.sms">
+    <None Include="input\VHorg.sms">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="input\02output.sms">
+    <None Include="input\VHnew.sms">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
