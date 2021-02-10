@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DB014176-AE07-46CE-81C6-D912C3866B0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BinaryFileXcomp</RootNamespace>
-    <AssemblyName>BinaryFileXcomp</AssemblyName>
+    <RootNamespace>TestFileIgnoreLabel</RootNamespace>
+    <AssemblyName>TestFileIgnoreLabel</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,10 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="input\VHorg.sms">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="input\VHnew.sms">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="input\title_screen.inc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

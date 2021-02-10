@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace BinaryFileWrite
@@ -7,9 +7,19 @@ namespace BinaryFileWrite
 	{
 		public void Process(string path)
 		{
-			Bytes = File.ReadAllBytes("input/" + path);
+			Lines = File.ReadAllLines("input/" + path);
 		}
 
-		public byte[] Bytes { get; private set; }
+		public void Saving(List<string> outLines, string path)
+		{
+			if (!Directory.Exists("output"))
+			{
+				Directory.CreateDirectory("output");
+			}
+
+			File.WriteAllLines("output/" + path, outLines.ToArray());
+		}
+
+		public string[] Lines { get; private set; }
 	}
 }
