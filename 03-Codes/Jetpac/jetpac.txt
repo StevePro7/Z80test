@@ -1,0 +1,24 @@
+SMS Power! 12th Anniversary Coding Competition
+
+Jetpac for Sega Master System v0.3
+by Grz-
+
+Controls:
+============
+
+D-Pad left: move left 
+D-Pad right: move right 
+D-Pad up: fly
+Button 1: start game
+
+What is missing:
+============
+
+- Scoring
+- Sound effect
+- 2 player game
+- Life and bonus
+- Ennemy
+- Player fire
+- Refueling of the rocket
+- Game over
