@@ -252,247 +252,241 @@ prepti
 
        ei                  ; turn interrupts on.
 
-; Play title screen tune
+; Play title screen tune.
 
-       ld hl,titune            ; load title screen tune
-       call PSGPlayNoRepeat    ; play it once
+       ld hl,titune        ; load title screen tune.
+       call PSGPlayNoRepeat ; play it once.
 
-; Display title screen and wait for player 1 button 1 press
+; Display title screen and wait for player 1 button 1 press.
 
--      halt                    ; start loop in vblank
+-      halt                ; start loop in vblank.
 
-; Prevent CRAM show on title screen (yes, ugly hack)
+; Prevent CRAM snow on title screen (yes, ugly hack).
 
        ld b,200
 delay  nop
        nop
        nop
        nop
-       nop
        djnz delay
 
-; Flash the hiscore
+; Flash the hiscore.
 
-       ld hl,frame             ; point to the frame counter
-       ld a,(hl)               ; load it into the accumulator
-       and %11110000           ; apply quick and dirty bit masking
-       or %00000011            ; to control the speed and color of
-       ld b,a                  ; the flashing hiscore digits
-       ld a,$14                ; index of color we want to change
-       call setcol             ; set color of hiscore
-       inc (hl)                ; increment counter
+       ld hl,frame         ; point to the frame counter.
+       ld a,(hl)           ; load it into the accumulator.
+       and %11110000       ; apply quick and dirty bit masking,
+       or %00000011        ; to control the speed and color of
+       ld b,a              ; the flashing hiscore digits.
+       ld a,$14            ; index of color we want to change.
+       call setcol         ; set color of hiscore.
+       inc (hl)            ; increment counter.
 
 
-; Read and respond to controller input
+; Read and respond to controller input.
 
-; TODO remove TESTING
-       ;jp ldmain
-       call getkey             ; read controller port into ram
-       ld a,(input)            ; read input from ram mirror
-       bit 4,a                 ; is button 1 pressed
-       jp z,ldmain             ; yes - load assets for main loop
+       call getkey         ; read controller port into ram.
+       ld a,(input)        ; read input from ram mirror.
+       bit 4,a             ; is button 1 pressed?
+       jp z,ldmain         ; yes - load assets for main loop.
        
-       call PSGFrame           ; handle music
+       call PSGFrame       ; handle music.
+
        jp -
 
-; TODO remove TESTING
+; Load assets for main loop. Start with debouncing.
 
-; Load assets for main loop.  Start with debouncing
-
-ldmain  ld a,%10100000      ; turn display off
+ldmain ld a,%10100000      ; turn display off.
        ld b,1
-       call setreg          ; do it by writing to register 1
-       ld b,10              ; set up a 10 frame delay to prevent
--      halt                 ; bouncing keys
+       call setreg         ; do it by writing to register 1.
+       ld b,10             ; set up a 10 frame delay to prevent
+-      halt                ; bouncing keys.
        djnz -
-       
-       call PSGStop         ; turn off the music
-       di                   ; turn off interrupts
 
-; Setup hiscore and score for main loop and remove terminator
+       call PSGStop        ; turn of the music.
+       di                  ; turn off interrupts.
 
-       ld hl,initsc         ; point to (hi-)score init data
-       ld de,highvp         ; target the (hi-) score sat buffer
-       ld bc,8              ; write 8 vpos bytes
-       ldir                 ; do it
-       ld hl,initsc+8       ; point to (hi-)score init data #2
-       ld de,highhp         ; target buffer again
-       ld bc,16             ; write 16 hpos and cc bytes
+; Setup hiscore and score for main loop and remove terminator.
+
+       ld hl,initsc        ; point to (hi-)score init data.
+       ld de,highvp        ; target the (hi-) score sat buffer.
+       ld bc,8             ; write 8 vpos bytes.
+       ldir                ; do it.
+       ld hl,initsc+8      ; point to (hi-)score init data #2.
+       ld de,highhp        ; target buffer again.
+       ld bc,16            ; write 16 hpos and cc bytes.
        ldir
 
-; Setup the background assets for the main loop
+; Setup the background assets for the main loop.
 
-       ld hl,$0000          ; first tile 0 index 0
-       call vrampr          ; prepare vram
-       ld hl,bgtile         ; background tile data (the road)
-       ld bc,2*32           ; 2 tiles (!), each tile is 32 bytes
-       call vramwr          ; write background tiles to vram
-       
-       ld hl,$3800          ; point to name table
-       call vrampr          ; prepare vram
-       ld hl,bgmap          ; point to background tilemap data
-       ld bc,32*28*2        ; 32 x 28 tiles, each is 2 bytes
-       call vramwr          ; write name table to vram
+       ld hl,$0000         ; first tile @ index 0.
+       call vrampr         ; prepare vram.
+       ld hl,bgtile        ; background tile data (the road).
+       ld bc,2*32          ; 2 tiles (!), each tile is 32 bytes.
+       call vramwr         ; write background tiles to vram.
 
-; Make a standard enemy car for Ash and put it in the buffer
+       ld hl,$3800         ; point to name table.
+       call vrampr         ; prepare vram.
+       ld hl,bgmap         ; point to background tilemap data.
+       ld bc,32*28*2       ; 32 x 28 tiles, each is 2 bytes.
+       call vramwr         ; write name table to vram.
 
-       ld de,ashcc          ; point to Ash char codes in buffer
-       ld hl,encar          ; point to enemy car graphics
-       call carcc           ; set Ash graphics to enemy car
+; Make a standard enemy car for Ash and put it in the buffer.
 
-; Adjust the sprite palette (player might be cyan)
+       ld de,ashcc         ; point to Ash char codes in buffer.
+       ld hl,encar         ; point to enemy car graphics.
+       call carcc          ; set Ash graphics to enemy car.
 
-       ld a,$11             ; player car's color
-       ld b,%000010111      ; set it to default orange
-       call setcol          ; do it
-       
-       ld a,$14             ; hiscore digit color
-       ld b,%00110101       ; set them to default blue
-       call setcol          ; do it
+; Adjust the sprite palette (player might be cyan).
 
-; Put a shining new player car in the buffer
+       ld a,$11            ; player car's color.
+       ld b,%00010111      ; set it to default orange.
+       call setcol         ; do it.
 
-       ld de,plrcc          ; point to player cc in buffer
-       ld hl,plrcar         ; point to player car graphics
-       call carcc           ; set the char codes for player car
+       ld a,$14            ; hiscore digits' color.
+       ld b,%00110101      ; set them to default blue.
+       call setcol         ; do it.
 
-; Make Mae invisible - put transparent tiles in the buffer
+; Put a shining new player car in the buffer.
 
-       ld de,maecc          ; point to Mae cc in buffer
-       ld hl,invcar         ; point to transparent car graphics
-       call carcc           ; make Mae invisible (transparent)
-       
-       call quiet           ; kill the noise generator
+       ld de,plrcc         ; point to player cc in buffer.
+       ld hl,plrcar        ; point to player car graphics.
+       call carcc          ; set the char codes for player car.
 
-; Initialize variables after each crash
+; Make Mae invisible - put transparent tiles in the buffer..
 
-       ld a,50              ; Mae's initial y-coordinate
-       ld (maey),a          ; set it
-       ld a,230             ; Mae is invisible until delay = 0
-       ld (maedel),a        ; set Mae invisibility delay
-       ld a,193             ; Ash's initial y-coordiate
-       ld (ashy),a          ; set it
-       ld a,79              ; player starts at the road's center
-       ld (plx),a           ; set x co-ordinate
-       
-       xor a                ; set A = 0
-       ld (record),a        ; reset hiscore beaten flag
-       ld (scroll),a        ; reset scroll register buffer
-       ld (frame),a         ; reset frame counter
-       
-       ld hl,endspr         ; point to end of active sprites
-       ld (hl),$d0          ; insert sprite terminator here
+       ld de,maecc         ; point to Mae cc in buffer.
+       ld hl,invcar        ; point to transparent car graphics.
+       call carcc          ; make Mae invisible (transparent).
 
-; Initialize score counter to 0000
+       call quiet          ; kill the noise generator.
 
-       ld a,0               ; value to write to digit
-       ld b,4               ; we have 4 digits
-       ld hl,score          ; point to score data
--      ld (hl),a            ; reset digit (write value 0)
-       inc hl               ; next digit
-       djnz -               ; do it for all 4 digits
-       
-       call upbuf           ; update buffer for cars and digits
-       
-       ei                   ; enable frame interrupt (vblank)
-       halt                 ; wait for it to happen
-       call ldsat           ; load sat from buffer
-       
-       ld a,%11100000       ; turn screen on - normal sprites
+; Initialize variables after each crash.
+
+       ld a,50             ; Mae's initial y-coordinate.
+       ld (maey),a         ; set it.
+       ld a,230            ; Mae is invisible until delay = 0.
+       ld (maedel),a       ; set Mae invisibility delay.
+       ld a,193            ; Ash's initial y-coordinate.
+       ld (ashy),a         ; set it.
+       ld a,79             ; player starts at the road's center.
+       ld (plx),a          ; set x-coordinate.
+
+       xor a               ; set A = 0.
+       ld (record),a       ; reset hiscore-beaten-flag.
+       ld (scroll),a       ; reset scroll register buffer.
+       ld (frame),a        ; reset frame counter.
+
+       ld hl,endspr        ; point to end of active sprites.
+       ld (hl),$d0         ; insert sprite terminator here.
+
+; Initialize score counter to 0000.
+
+       ld a,0              ; value to write to digit.
+       ld b,4              ; we have 4 digits.
+       ld hl,score         ; point to score data.
+-      ld (hl),a           ; reset digit (write value 0).
+       inc hl              ; next digit,
+       djnz -              ; do it for all 4 digits
+
+       call upbuf          ; update buffer for cars and digits.
+
+       ei                  ; enable frame interrupt (vblank).
+       halt                ; wait for it to happen...
+       call ldsat          ; load sat from buffer.
+
+       ld a,%11100000      ; turn screen on - normal sprites.
        ld b,1
-       call setreg          ; set register 1
+       call setreg         ; set register 1.
+
+       ld a,150            ; set 'back to title screen'-delay,
+       ld (frame),a        ; and load it into counter.
+
+; 'Ready loop' - wait until the player presses button 1.
+; The player's car is on the road, waiting for the button press.
+
+rloop  halt                ; wait for the frame interrupt.
+
+; Jump back to title screen if the counter is depleted.
+
+       ld hl,frame         ; point to counter.
+       dec (hl)            ; decrement it.
+       jp z,prepti         ; is it 0? - Jump to title screen.
+
+; Proceed to main loop if the player presses start button.
+
+       call getkey         ; read controller port into ram.
+       ld a,(input)        ; read input from ram mirror.
+       bit 4,a             ; is button 1 pressed?
+       jp nz,rloop         ; yes - fall through to main loop!
+
+       ld a,%11110110      ; turn noise volume up to 12 db.
+       out ($7f),a         ; write to psg.
+       ld a,%11100110      ; make coarse noise - go car engine!
+       out ($7f),a         ; write to psg.
        
-       ld a,150             ; set 'back to title screen'-delay
-       ld (frame),a         ; and load it into counter
-
-; 'Ready loop' - wait until the player presses button 1
-; The player's car is on the road, waiting for the button press
-rloop  halt                 ; wait for the frame interrupt
-
-; Jump back to title screen if the counter is depleted
-
-       ld hl,frame          ; point to counter
-       dec (hl)             ; decrement it
-       jp z,prepti          ; is it 0? - Jump to title screen
-
-; Proceed to main loop if the player presses start button
-
-; TODO remove TESTING
-
-       call getkey          ; read controller port into ram
-       ld a,(input)         ; read input from ram mirror
-       bit 4,a              ; is button 1 pressed?
-       jp nz,rloop          ; yes - fall through to main loop!
-
-; TODO remove TESTING
-
-       ld a,%11110110       ; turn noise volume up to 12 db
-       out ($7f),a          ; write to psg
-       ld a,%11100110       ; make coarse noise - go car engine!
-       out ($7f),a          ; write to psg
-
        xor a
        ld (iflag),a
 
-; This is the main loop
+; This is the main loop.
+
 mloop  call wait
 
 ; Update vdp right when vblank begins!
 
-       ld a,(scroll)        ; 1-byte scroll reg. buffer in ram
-       ld b,9               ; target VDP register 9 (v-scroll)
-       call setreg          ; now vdp register = buffer, and the
-                            ; screen scrolls accordingly
+       ld a,(scroll)       ; 1-byte scroll reg. buffer in ram.
+       ld b,9              ; target VDP register 9 (v-scroll).
+       call setreg         ; now vdp register = buffer, and the
+                           ; screen scrolls accordingly.
 
-       call ldsat           ; load sat buffer to vram.  The cars
-                            ; and the (hi-)score sprites are
-                            ; updated on the screen
+       call ldsat          ; load sat buffer to vram. The cars
+                           ; and the (hi)-score sprites are
+                           ; updated on the screen.
 
 ; Test for max score (9999) = player beats the game (and dies)!
 
-       ld b,4               ; test up to 4 score digits
-       ld hl,score          ; point to the first digit
--      ld a,(hl)            ; load it into accumulator
-       cp 9                 ; is it 9?
-       jp nz,+              ; no - then skip further tests
-       inc hl               ; else - point to next digit
-       djnz -               ; perform the test again
-       jp plrdie            ; fall through = score is 9999!
+       ld b,4              ; test up to 4 score digits.
+       ld hl,score         ; point to the first digit.
+-      ld a,(hl)           ; load it into accumulator.
+       cp 9                ; is it 9?
+       jp nz, +            ; no - then skip further tests.
+       inc hl              ; else - point to next digit.
+       djnz -              ; perform the test again.
+       jp plrdie           ; fall through = score is 9999!
 +
-; Test to see if current score > hiscore
+; Test to see if current score > hiscore.
 
-       ld a,(record)        ; load pointer to new record flag
-       cp 0                 ; is it set already (hiscore beaten)?
-       jp z,score0          ; no - go on to test against score
+       ld a,(record)       ; load pointer to new record flag.
+       cp 0                ; is it set already (hiscore beaten)?
+       jp z,score0         ; no - go on to test against score.
 
-; Hiscore is beaten, so let hiscore mirror score
+; Hiscore is beaten, so let hiscore mirror score.
 
-       ld hl,score          ; point to score
-       ld de,hscore         ; point to hiscore
-       ld bc,$0004          ; 4 bytes (digits) to load
-       ldir                 ; do it!
+       ld hl,score         ; point to score.
+       ld de,hscore        ; point to hiscore.
+       ld bc,$0004         ; 4 bytes (digits) to load.
+       ldir                ; do it!
        jp endscr
 
-score0 ld de,score          ; point to score
-       ld hl,hscore         ; point to hiscore
-       ld b,4               ; test 4 digits, from left to right
+score0 ld de,score         ; point to score.
+       ld hl,hscore        ; point to hiscore.
+       ld b,4              ; test 4 digits, from left to right.
 
--      ld a,(de)            ; load score digit
-       cp (hl)              ; is hiscore digit > score digit?
-       jp c, endscr         ; yes - break out of loop
-       inc hl               ; no - point to next hiscore digit
-       inc de               ; point to next score digit
-       djnz -               ; compare up to four digits
+-      ld a,(de)           ; load score digit
+       cp (hl)             ; is hiscore digit > score digit?
+       jp c,endscr         ; yes - break out of loop.
+       inc hl              ; no - point to next hiscore digit.
+       inc de              ; point to next score digit
+       djnz -              ; compare up to four digits
 
-       ld a,l               ; fall through = new record is set!
-       ld (record),a        ; set the flag, score > hiscore!
+       ld a,1              ; fall through = new record is set!
+       ld (record),a       ; set the flag, score > hiscore!
 
 ; Turn player's car and score bright blue!
 
-       ld a,$11             ; color index of player's car
-       ld b,%00111100       ; bright blue / cyan
-       call setcol          ; set color to make a blue car
-endscr:
+       ld a,$11            ; color index of player's car.
+       ld b,%00111100      ; bright blue / cyan.
+       call setcol         ; set color to make a blue car.
+endscr
 
 ; Test for collision between sprites
 
@@ -520,122 +514,122 @@ endscr:
 
 ; Test if player wants to move left
 
-mpl    ld a,(input)         ; read input from ram mirror
-       bit 2,a              ; is left key pressed?
-       jp nz,endchk         ; no - end key check
+mpl    ld a,(input)        ; read input from ram mirror.
+       bit 2,a             ; is left key pressed?
+       jp nz,endchk        ; no - end key check.
 
-       ld a,(plx)           ; get player's hpos (x-coordinate)
-       cp leftb             ; is player over the left border?
-       jp c,endchk          ; yes - then don't move left
-       
-; Move player left
+       ld a,(plx)          ; get player's hpos (x-coordinate).
+       cp leftb            ; is player over the left border?
+       jp c,endchk         ; yes - then don't move left.
 
-       ld a,(plx)           ; get player x-coordinate
-       ld b,hspeed          ; load horizontal speed (constant)
-       sub b                ; subtract hspeed from player x
-       ld (plx),a           ; update player x-coordinate
-endchk                      ; end key check
+; Move player left.
 
-; Update enemy x,y positions
+       ld a,(plx)          ; get player x-coordinate.
+       ld b, hspeed        ; load horizontal speed (constant).
+       sub b               ; subtract hspeed from player x.
+       ld (plx),a          ; update player x-coordinate.
+endchk                     ; end key check
 
-       ld ix,ashdir         ; point to enemy Ash data
-       call enemy           ; move Ash down and left/right
-       ld ix,maedir         ; point to enemy Mae data
-       call enemy           ; move Mae down and left/right
+; Update enemy x,y positions.
 
-; Handle Mae visibility
+       ld ix,ashdir        ; point to enemy Ash data.
+       call enemy          ; move Ash down and left/right.
+       ld ix,maedir        ; point to enemy Mae data.
+       call enemy          ; move Mae down and left/right.
 
-       ld a,(maedel)        ; check Mae delay
-       cp $ff               ; is Mae already visible ($ff)?
-       jp z,endmae          ; yes - then skip rest of Mae routine
-       cp 0                 ; else - is delay counter deploeted?
-       jp nz,+              ; no - then skip forward, else...
+; Handle Mae visibility.
 
-; Make Mae visible by loading opaque tiles into buffer
+       ld a,(maedel)       ; check Mae delay.
+       cp $ff              ; is Mae already visible ($ff)?
+       jp z,endmae         ; yes - then skip rest of Mae routine.
+       cp 0                ; else - is delay counter depleted?
+       jp nz,+             ; no - then skip forward, else...
 
-       ld hl,encar          ; point to enemy car char codes
-       ld de,maecc          ; point to buffer
-       call carcc           ; load new char codes to buffer
+; Make Mae visible by loading opaque tiles into buffer.
 
-+      ld hl,maedel         ; point to Mae delay counter
-       dec (hl)             ; decrement it
+       ld hl,encar         ; point to enemy car char codes.
+       ld de,maecc         ; point to buffer.
+       call carcc          ; load new char codes to buffer.
+
++      ld hl,maedel        ; point to Mae delay counter.
+       dec (hl)            ; decrement it.
 endmae
 
-; Increment score 1 point every frame
+; Increment score 1 point every frame.
 
-       ld hl,score+3        ; point to the ones' digit in score
-       ld b,1               ; load amount to add to digit
-       call addsco          ; add one point to player's score
+        ld hl,score+3      ; point to the ones' digit in score.
+        ld b,1             ; load amount to add to digit.
+        call addsco        ; add one point to player's score.
 
-; Update enemy, player and score sprites in the buffer
+; Update enemy, player and score sprites in the buffer.
 
-       call upbuf           ; update sat buffer
+       call upbuf          ; update sat buffer.
 
-; Scroll background - update the vertical scroll buffer
+; Scroll background - update the vertical scroll buffer.
 
-       ld a,(scroll)        ; get scroll buffer value
-       sub vspeed           ; subtrat vertical speed
-       ld (scroll),a        ; update scroll buffer
+       ld a,(scroll)       ; get scroll buffer value.
+       sub vspeed          ; subtract vertical speed.
+       ld (scroll),a       ; update scroll buffer.
 
-       jp mloop             ; jump back for another round
+       jp mloop            ; jump back for another round.
 
 ; When the player dies...
 
-plrdie ld a,85              ; set death delay
-       ld (frame),a         ; load it into frame counter
+plrdie ld a,85             ; set death delay.
+       ld (frame),a        ; load it into frame counter.
 
-       ld a,%11110011       ; turn noise volume up to 6 db
-       out ($7f),a          ; write to psg port
-       ld a,%11100101       ; make medium coarse noise
-       out ($7f),a          ; write to psg port
+       ld a,%11110011      ; turn noise volume up to 6 db.
+       out ($7f),a         ; write to psg port.
+       ld a,%11100101      ; make medium coarse noise.
+       out ($7f),a         ; write to psg port.
 
-       ld hl,crash          ; point to crashed car graphics
-       ld de,plrcc          ; point to player cc buffer start
-       call carcc           ; set the player's sprite to crash!
+       ld hl,crash         ; point to crashed car graphics.
+       ld de,plrcc         ; point to player cc buffer start.
+       call carcc          ; set the player's sprites to crash!
 
-; This is the death loop
+; This is the death loop.
 
-dloop  call wait            ; start dead loop with vblank
-       call ldsat           ; load sprite attribute table
-       call upbuf           ; update the score
+dloop  call wait           ; start dead loop with vblank.
+       call ldsat          ; load sprite attribute table.
+       call upbuf          ; update the score.
 
-; Move enemy Ash fast upwards to create teh effect of enemy cars
-; coming from behind when player is crashed
+; Move enemy Ash fast upwards to create the effect of enemy cars
+; coming from behind when player is crashed.
 
-       ld a,(ashy)          ; load Ash vertical position
-       cp 192               ; is Ash's y-coordinate = 192?
-       jp z,+               ; yes - don't move him anymore
-                            ; (he now hides below the screen)
+       ld a,(ashy)         ; load Ash vertical position.
+       cp 192              ; is Ash's y-coordinate = 192?
+       jp z, +             ; yes - don't move him anymore
+                           ; (he now hides below the screen).
 
-       ld b,9               ; 9 pixels pr. frame is fast!
-       ld a,(ashy)          ; load Ash's y-coordinate
-       sub b                ; subtract from Ash's current y
-       ld (ashy),a          ; load result back into variable
+       ld b,9              ; 9 pixels pr. frame is fast!
+       ld a,(ashy)         ; load Ash's y-coordinate.
+       sub b               ; subtract from Ash's current y.
+       ld (ashy),a         ; load result back into variable.
 +
-; Move enemy Mae fast upwards (just like we did with Ash above)
+; Move enemy Mae fast upwards (just like we did with Ash above).
 
        ld a,(maey)
-       cp 192               ; stop Mae in blanked screen area
-       jp z,+               ; if she is not there, move her
+       cp 192              ; stop Mae in blanked screen area.
+       jp z, +             ; if she is not there, move her.
 
-       ld b,9               ; super fast at speed 9
-       ld a,(maey)          ; load Mae's current y position
-       sub b                ; subtract from Mae's current y
-       ld (maey),a          ; load result back into variable
+       ld b,9              ; super fast at speed 9.
+       ld a,(maey)         ; load Mae's current y position.
+       sub b               ; subtract from Mae's current y.
+       ld (maey),a         ; load result back into variable.
 +
-       ld a,(frame)         ; point to counter (death delay)
-       cp 0                 ; is it 0?
-       jp z,ldmain          ; yes - jump back and respawn player
-       dec a                ; decrement the counter
+       ld a,(frame)        ; point to counter (death delay).
+       cp 0                ; is it 0?
+       jp z,ldmain         ; yes - jump back and respawn player.
+       dec a               ; decrement the counter.
 
-; Check if we should kill the crash sound
+; Check if we should kill the crash sound.
 
        ld (frame),a
-       ld a,(frame)         ; point to counter (death delay)
-       cp 30                ; is it up?
-       call z,quiet         ; yes - turn off crash sound
+       ld a,(frame)        ; point to counter (death delay).
+       cp 30               ; is it up?
+       call z,quiet        ; yes - turn off crash sound.
 
-       jp dloop             ; another round of death...
+       jp dloop            ; another round of death....
 
 ; --------------------------------------------------------------
 ; SUBROUTINES
@@ -643,8 +637,7 @@ dloop  call wait            ; start dead loop with vblank
 ; PREPARE VRAM.
 ; Set up vdp to recieve data at vram address in HL.
 
-vrampr:
-       push af
+vrampr push af
        ld a,l
        out ($bf),a
        ld a,h
