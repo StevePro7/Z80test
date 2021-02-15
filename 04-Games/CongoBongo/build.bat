@@ -16,5 +16,5 @@ if exist output.sms.sym del output.sms.sym
 if exist main.o del main.o
 
 echo Run
-::java -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
-output.sms
+java -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
+::output.sms
