@@ -13,9 +13,8 @@ if exist "*.asm" del "*.asm" > nul
 if exist "*.ihx" del "*.ihx" > nul
 if exist "*.lk"  del "*.lk"  > nul
 if exist "*.lst" del "*.lst" > nul
-REM if exist "*.map" del "*.map" > nul
 if exist "*.noi" del "*.noi" > nul
-REM if exist "*.rel" del "*.rel" > nul
 if exist "*.sym" del "*.sym" > nul
 
-::output.sms
+::java -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
+output.sms
