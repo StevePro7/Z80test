@@ -1,6 +1,15 @@
 # Z80test
 Repository to consolidate many Z80 Assembly ideas
 
+15/02/2021
+Code files to copy up to StevProXNA
+
+01-Intro
+02-Outro
+03-Codes	get another code file
+04-Games
+04-Utils	BinaryFileWrite
+
 
 Automate scripts
 gfx.bat
