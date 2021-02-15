@@ -1,1 +1,0 @@
-M:global_manager
