@@ -23,7 +23,7 @@ Titlescreen and celebration are hand-drawn, digitized images, converted with
 Maxim's BMP2Tile. The racing car sprites are modified versions of sprites from
 Super Monaco GP.
 */
-.sdsctag 2.0, "Racer - rebooted", "ReleaseNotes", "Anders S. Jensen"
+.sdsctag 2.0, "Racer - rebooted", ReleaseNotes, "Anders S. Jensen"
 .memorymap
     defaultslot 0
     slotsize $8000
