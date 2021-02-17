@@ -7,15 +7,16 @@ namespace BinaryFileWrite
 {
 	public class DataManager
 	{
-		public void Process(string fileName, string extension, IList<ByteObject> byteObjectList)
+		public void Process(string fileName, IList<ByteObject> byteObjectList)
 		{
 			foreach (ByteObject obj in byteObjectList)
 			{
-				Process(fileName, extension, obj);
+				Process(fileName, obj);
 			}
 		}
 
-		public void Process(string fileName, string extension, ByteObject obj)
+		
+		public void Process(string fileName, ByteObject obj)
 		{
 			int starts = Int32.Parse(obj.ByteStarts, NumberStyles.HexNumber);
 			int finish = Int32.Parse(obj.ByteFinish, NumberStyles.HexNumber);
@@ -28,10 +29,11 @@ namespace BinaryFileWrite
 
 			// 1.
 			// Open as binary file.
-			var inFile = "input/" + fileName + extension;
+			//var inFile = "input/" + fileName + extension;
+			var inFile = GetInputFile(fileName);
 			var outFile = $"output/{fileName}/data/" + obj.ByteString;
 
-			using (BinaryReader b = new BinaryReader(File.Open(inFile, FileMode.Open)))
+			using (BinaryReader b = new BinaryReader(inFile))
 			{
 				int length = (int)b.BaseStream.Length;
 				int count = 0;
@@ -58,6 +60,21 @@ namespace BinaryFileWrite
 			BinaryWriter bw = new BinaryWriter(fs);
 			bw.Write(outArray);
 			bw.Close();
+		}
+
+		private FileStream GetInputFile(string fileName)
+		{
+			var extensions = new[] { "sms", "sg", "sc" };
+			foreach (var extn in extensions)
+			{
+				var path = $"input/{fileName}.{extn}";
+				if (File.Exists(path))
+				{
+					return File.Open(path, FileMode.Open);
+				}
+			}
+
+			return null;
 		}
 	}
 }

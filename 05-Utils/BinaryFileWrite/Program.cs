@@ -16,7 +16,7 @@ namespace BinaryFileWrite
 
 			var byteObjectList = fm.ByteObjectList;
 			var dm = new DataManager();
-			dm.Process(fileName, ".sms", byteObjectList);
+			dm.Process(fileName, byteObjectList);
 
 			Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
