@@ -26,7 +26,11 @@ namespace BinaryFileWrite
 				if (line.Contains("incbin ..."))
 				{
 					var info = String.Empty;
-					if (lines[index-1].Contains("_DATA_"))
+					if (lines[index - 2].Trim().EndsWith(":") && lines[index - 2].Contains("$"))
+					{
+						info = lines[index - 3];
+					}
+					else if (lines[index-1].Contains("_DATA_"))
 					{
 						info = lines[index - 2];
 					}
