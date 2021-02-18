@@ -11,5 +11,6 @@
         "**/*db": true,
         "**/*.sln": true,
         "**/*.vcxproj*": true
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }
