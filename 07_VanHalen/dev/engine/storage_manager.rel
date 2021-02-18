@@ -1,0 +1,65 @@
+XL2
+H 9 areas A global symbols
+M storage_manager
+O -mz80
+S _global_record_object Ref0000
+S _devkit_SMS_SRAM Ref0000
+S _devkit_SMS_disableSRAM Ref0000
+S .__.ABS. Def0000
+S _devkit_SMS_enableSRAM Ref0000
+A _CODE size 8B flags 0 addr 0
+S _engine_storage_manager_erase Def0069
+S _engine_storage_manager_read Def002F
+S _engine_storage_manager_available Def0000
+S _engine_storage_manager_write Def0042
+A _DATA size 6 flags 0 addr 0
+S _global_savegame_object Def0000
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 E5 CD 00 00 E1 4E 23 46 23 5E 23
+R 00 00 00 00 02 03 01 00 02 07 04 00
+T 0E 00 56 79 D6 04 20 13 78 D6 B0 20 0E 7B D6 E0
+R 00 00 00 00
+T 1C 00 20 09 7A D6 AC 20 04 3E 01 18 01
+R 00 00 00 00
+T 27 00
+R 00 00 00 00
+T 27 00 AF
+R 00 00 00 00
+T 28 00
+R 00 00 00 00
+T 28 00 6F E5 CD 00 00 E1 C9
+R 00 00 00 00 02 05 02 00
+T 2F 00
+R 00 00 00 00
+T 2F 00 CD 00 00 E5 CD 00 00 FD E1 FD 4E 04 21
+R 00 00 00 00 02 03 01 00 02 07 04 00
+T 3C 00 00 00 71 C3 00 00
+R 00 00 00 00 02 02 00 00 02 06 02 00
+T 42 00
+R 00 00 00 00
+T 42 00 CD 00 00 E5 CD 00 00 C1 69 60 36 04 23 36
+R 00 00 00 00 02 03 01 00 02 07 04 00
+T 50 00 B0 23 36 E0 23 36 AC 21 04 00 09 EB 3A
+R 00 00 00 00
+T 5D 00 00 00 12 21 05 00 09 36 FE C3 00 00
+R 00 00 00 00 02 02 00 00 02 0C 02 00
+T 69 00
+R 00 00 00 00
+T 69 00 CD 00 00 E5 CD 00 00 C1 69 60 AF 77 23 77
+R 00 00 00 00 02 03 01 00 02 07 04 00
+T 77 00 23 AF 77 23 77 21 04 00 09 36 00 21 05 00
+R 00 00 00 00
+T 85 00 09 36 FE C3 00 00
+R 00 00 00 00 02 06 02 00

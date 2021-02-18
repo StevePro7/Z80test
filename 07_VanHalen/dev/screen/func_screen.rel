@@ -1,0 +1,155 @@
+;!FILE func_screen.asm
+XL2
+H 9 areas 5B global symbols
+M func_screen
+O -mz80
+S _engine_content_manager_load_titleGap Ref0000
+S _devkit_SMS_displayOn Ref0000
+S _engine_content_manager_load_sprites Ref0000
+S _engine_font_manager_draw_text Ref0000
+S .__.ABS. Def0000
+S _engine_content_manager_load_tiles Ref0000
+S _devkit_SMS_displayOff Ref0000
+A _CODE size 88 flags 0 addr 0
+S A$func_screen$93 Def0024
+S A$func_screen$66 Def0003
+S A$func_screen$87 Def0018
+S A$func_screen$78 Def000C
+S Ffunc_screen$__str_0$0$0 Def0064
+S A$func_screen$97 Def0025
+S A$func_screen$88 Def001B
+S A$func_screen$79 Def000F
+S Ffunc_screen$__str_1$0$0 Def006B
+S A$func_screen$98 Def0028
+S A$func_screen$89 Def001C
+S Ffunc_screen$__str_2$0$0 Def0072
+S A$func_screen$99 Def0029
+S Ffunc_screen$__str_3$0$0 Def0077
+S Ffunc_screen$__str_4$0$0 Def007C
+S _screen_func_screen_load Def0000
+S XG$screen_func_screen_load$0$0 Def005F
+S Ffunc_screen$x$0$0 Def0062
+S Ffunc_screen$y$0$0 Def0063
+S G$screen_func_screen_update$0$0 Def0081
+S A$func_screen$100 Def002C
+S A$func_screen$110 Def0037
+S A$func_screen$101 Def002D
+S A$func_screen$120 Def004A
+S A$func_screen$111 Def003A
+S A$func_screen$102 Def002E
+S C$func_screen.c$20$1$23 Def0009
+S A$func_screen$130 Def0056
+S A$func_screen$112 Def003B
+S A$func_screen$103 Def0031
+S C$func_screen.c$21$1$23 Def000C
+S A$func_screen$131 Def0059
+S A$func_screen$113 Def003E
+S A$func_screen$104 Def0032
+S C$func_screen.c$22$1$23 Def0018
+S A$func_screen$132 Def005A
+S A$func_screen$114 Def0040
+S A$func_screen$105 Def0035
+S C$func_screen.c$32$1$23 Def005F
+S A$func_screen$142 Def005F
+S A$func_screen$133 Def005D
+S A$func_screen$124 Def004B
+S A$func_screen$115 Def0041
+S A$func_screen$106 Def0036
+S C$func_screen.c$24$1$23 Def0025
+S _screen_func_screen_update Def0081
+S A$func_screen$134 Def005E
+S A$func_screen$125 Def004E
+S A$func_screen$116 Def0042
+S C$func_screen.c$34$1$23 Def0081
+S C$func_screen.c$25$1$23 Def0037
+S A$func_screen$126 Def004F
+S A$func_screen$117 Def0045
+S C$func_screen.c$26$1$23 Def004B
+S C$func_screen.c$17$1$23 Def0000
+S A$func_screen$190 Def0087
+S A$func_screen$181 Def0081
+S A$func_screen$127 Def0052
+S A$func_screen$118 Def0046
+S C$func_screen.c$27$1$23 Def005F
+S C$func_screen.c$18$1$23 Def0003
+S A$func_screen$182 Def0082
+S A$func_screen$128 Def0054
+S A$func_screen$119 Def0049
+S C$func_screen.c$19$1$23 Def0006
+S A$func_screen$183 Def0083
+S A$func_screen$129 Def0055
+S A$func_screen$184 Def0084
+S A$func_screen$185 Def0085
+S C$func_screen.c$57$1$25 Def0081
+S C$func_screen.c$58$1$25 Def0087
+S C$func_screen.c$15$0$0 Def0000
+S XG$screen_func_screen_update$0$0 Def0087
+S A$func_screen$70 Def0006
+S A$func_screen$80 Def0010
+S A$func_screen$62 Def0000
+S G$screen_func_screen_load$0$0 Def0000
+S A$func_screen$90 Def001F
+S A$func_screen$81 Def0013
+S A$func_screen$91 Def0020
+S A$func_screen$82 Def0014
+S A$func_screen$92 Def0023
+S A$func_screen$83 Def0017
+S A$func_screen$74 Def0009
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 CD 00 00 CD
+R 00 00 00 00 02 03 06 00 02 06 05 00 02 09 00 00
+T 0A 00 00 00 21 06 0C E5 21 64 00 E5 CD 00 00 F1
+R 00 00 00 00 02 02 02 00 00 09 00 00 02 0D 03 00
+T 18 00 21 14 0C E3 21 6B 00 E5 CD 00 00 F1 F1 21
+R 00 00 00 00 00 07 00 00 02 0B 03 00
+T 26 00 63 00 56 21 62 00 5E D5 21 72 00 E5 CD
+R 00 00 00 00 00 02 00 00 00 06 00 00 00 0B 00 00
+T 33 00 00 00 F1 F1 21 63 00 46 3A 62 00 C6 07 4F
+R 00 00 00 00 02 02 03 00 00 07 00 00 00 0B 00 00
+T 41 00 C5 21 77 00 E5 CD 00 00 F1 F1 21 63 00 46
+R 00 00 00 00 00 04 00 00 02 08 03 00 00 0D 00 00
+T 4F 00 3A 62 00 C6 0E 4F C5 21 7C 00 E5 CD 00 00
+R 00 00 00 00 00 03 00 00 00 0A 00 00 02 0E 03 00
+T 5D 00 F1 F1 C3 00 00
+R 00 00 00 00 02 05 01 00
+T 62 00
+R 00 00 00 00
+T 62 00 04
+R 00 00 00 00
+T 63 00
+R 00 00 00 00
+T 63 00 14
+R 00 00 00 00
+T 64 00
+R 00 00 00 00
+T 64 00 52 45 43 4F 52 44 00
+R 00 00 00 00
+T 6B 00
+R 00 00 00 00
+T 6B 00 43 4F 56 45 52 53 00
+R 00 00 00 00
+T 72 00
+R 00 00 00 00
+T 72 00 31 39 38 34 00
+R 00 00 00 00
+T 77 00
+R 00 00 00 00
+T 77 00 31 39 38 36 00
+R 00 00 00 00
+T 7C 00
+R 00 00 00 00
+T 7C 00 31 39 38 38 00
+R 00 00 00 00
+T 81 00
+R 00 00 00 00
+T 81 00 C1 E1 E5 C5 36 08 C9
+R 00 00 00 00

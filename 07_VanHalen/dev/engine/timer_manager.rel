@@ -1,0 +1,69 @@
+XL2
+H 9 areas 8 global symbols
+M timer_manager
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 79 flags 0 addr 0
+S _engine_reset_manager_load Def003B
+S _engine_reset_manager_reset Def0072
+S _engine_delay_manager_update Def0019
+S _engine_reset_manager_update Def0050
+S _engine_delay_manager_load Def0000
+A _DATA size 8 flags 0 addr 0
+S _global_delay_object Def0000
+S _global_reset_object Def0004
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 04 00
+R 00 00 01 00
+T 04 00
+R 00 00 01 00
+T 00 00
+R 00 00 00 00
+T 00 00 21 00 00 FD 21 02 00 FD 39 FD 7E 00 77 23
+R 00 00 00 00 00 03 01 00
+T 0E 00 FD 7E 01 77 21 00 00 22 02 00 C9
+R 00 00 00 00 00 0A 01 00
+T 19 00
+R 00 00 00 00
+T 19 00 ED 4B 02 00 03 ED 43 02 00 2A 00 00 79 95
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0C 01 00
+T 27 00 78 9C 3E 00 17 EE 01 4F 47 B7 28 06 21
+R 00 00 00 00
+T 34 00 00 00 22 02 00
+R 00 00 00 00 00 05 01 00
+T 39 00
+R 00 00 00 00
+T 39 00 68 C9
+R 00 00 00 00
+T 3B 00
+R 00 00 00 00
+T 3B 00 21 04 00 FD 21 02 00 FD 39 FD 7E 00 77 23
+R 00 00 00 00 00 03 01 00
+T 49 00 FD 7E 01 77 C3 72 00
+R 00 00 00 00 00 07 00 00
+T 50 00
+R 00 00 00 00
+T 50 00 ED 4B 06 00 03 ED 43 06 00 2A 04 00 79 95
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0C 01 00
+T 5E 00 78 9C 3E 00 17 EE 01 4F 47 B7 28 06 21
+R 00 00 00 00
+T 6B 00 00 00 22 06 00
+R 00 00 00 00 00 05 01 00
+T 70 00
+R 00 00 00 00
+T 70 00 68 C9
+R 00 00 00 00
+T 72 00
+R 00 00 00 00
+T 72 00 21 00 00 22 06 00 C9
+R 00 00 00 00 00 06 01 00
