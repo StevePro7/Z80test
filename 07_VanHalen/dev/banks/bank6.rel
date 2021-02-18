@@ -1,5 +1,5 @@
 XL2
-H A areas 4 global symbols
+H A areas 7 global symbols
 M bank6
 O -mz80
 S .__.ABS. Def0000
@@ -12,8 +12,11 @@ A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
 A _BANK6 size 1BD0 flags 0 addr 0
 S _VanHalen1980__tiles__psgcompr Def0070
+S G$VanHalen1980__tilemap__stmcompr$0$0 Def0010
+S G$VanHalen1980__palette__bin$0$0 Def0000
 S _VanHalen1980__tilemap__stmcompr Def0010
 S _VanHalen1980__palette__bin Def0000
+S G$VanHalen1980__tiles__psgcompr$0$0 Def0070
 A _INITIALIZER size 0 flags 0 addr 0
 A _CABS size 0 flags 8 addr 0
 T 00 00

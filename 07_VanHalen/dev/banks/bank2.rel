@@ -1,5 +1,5 @@
 XL2
-H A areas 4 global symbols
+H A areas 7 global symbols
 M bank2
 O -mz80
 S .__.ABS. Def0000
@@ -11,9 +11,12 @@ A _HOME size 0 flags 0 addr 0
 A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
 A _BANK2 size 880 flags 0 addr 0
+S G$splash__palette__bin$0$0 Def0000
 S _splash__tilemap__stmcompr Def0010
 S _splash__palette__bin Def0000
+S G$splash__tiles__psgcompr$0$0 Def0057
 S _splash__tiles__psgcompr Def0057
+S G$splash__tilemap__stmcompr$0$0 Def0010
 A _INITIALIZER size 0 flags 0 addr 0
 A _CABS size 0 flags 8 addr 0
 T 00 00

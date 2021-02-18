@@ -1,5 +1,5 @@
 XL2
-H A areas 7 global symbols
+H A areas D global symbols
 M bank3
 O -mz80
 S .__.ABS. Def0000
@@ -11,11 +11,17 @@ A _HOME size 0 flags 0 addr 0
 A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
 A _BANK3 size 2587 flags 0 addr 0
+S G$VanHalenTitleGap__tiles__psgcompr$0$0 Def0077
 S _VanHalenTitleTop__palette__bin Def12D8
 S _VanHalenTitleGap__tiles__psgcompr Def0077
+S G$VanHalenTitleGap__tilemap__stmcompr$0$0 Def0010
+S G$VanHalenTitleTop__tiles__psgcompr$0$0 Def1345
+S G$VanHalenTitleGap__palette__bin$0$0 Def0000
 S _VanHalenTitleGap__tilemap__stmcompr Def0010
 S _VanHalenTitleTop__tiles__psgcompr Def1345
 S _VanHalenTitleGap__palette__bin Def0000
+S G$VanHalenTitleTop__tilemap__stmcompr$0$0 Def12E8
+S G$VanHalenTitleTop__palette__bin$0$0 Def12D8
 S _VanHalenTitleTop__tilemap__stmcompr Def12E8
 A _INITIALIZER size 0 flags 0 addr 0
 A _CABS size 0 flags 8 addr 0

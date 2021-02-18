@@ -1,13 +1,18 @@
 XL2
-H 9 areas 6 global symbols
+H 9 areas B global symbols
 M gfx
 O -mz80
 S .__.ABS. Def0000
 A _CODE size 3F2 flags 0 addr 0
 S _cursor__tiles__psgcompr Def0010
+S G$font__tiles__psgcompr$0$0 Def015B
+S G$cursor__palette__bin$0$0 Def0000
 S _font__tiles__psgcompr Def015B
 S _cursor__palette__bin Def0000
+S G$font__tilemap__bin$0$0 Def00DB
+S G$font__palette__bin$0$0 Def00CB
 S _font__tilemap__bin Def00DB
+S G$cursor__tiles__psgcompr$0$0 Def0010
 S _font__palette__bin Def00CB
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 0 flags 0 addr 0

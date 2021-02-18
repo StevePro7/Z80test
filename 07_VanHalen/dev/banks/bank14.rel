@@ -1,5 +1,5 @@
 XL2
-H A areas 4 global symbols
+H A areas 7 global symbols
 M bank14
 O -mz80
 S .__.ABS. Def0000
@@ -11,7 +11,10 @@ A _HOME size 0 flags 0 addr 0
 A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
 A _BANK14 size 1C3A flags 0 addr 0
+S G$VanHalen1998__tiles__psgcompr$0$0 Def00C7
 S _VanHalen1998__tiles__psgcompr Def00C7
+S G$VanHalen1998__tilemap__stmcompr$0$0 Def0010
+S G$VanHalen1998__palette__bin$0$0 Def0000
 S _VanHalen1998__tilemap__stmcompr Def0010
 S _VanHalen1998__palette__bin Def0000
 A _INITIALIZER size 0 flags 0 addr 0

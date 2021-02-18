@@ -1,11 +1,14 @@
 XL2
-H 9 areas 4 global symbols
+H 9 areas 7 global symbols
 M psg
 O -mz80
 S .__.ABS. Def0000
 A _CODE size 66 flags 0 addr 0
+S G$sfx_right_psg$0$0 Def0023
 S _sfx_right_psg Def0023
+S G$sfx_wrong_psg$0$0 Def0043
 S _sfx_wrong_psg Def0043
+S G$sfx_cheat_psg$0$0 Def0000
 S _sfx_cheat_psg Def0000
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 0 flags 0 addr 0
