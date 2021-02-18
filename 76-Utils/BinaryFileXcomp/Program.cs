@@ -40,7 +40,7 @@ namespace BinaryFileWrite
 					Console.WriteLine(msg);
 
 					ok = false;
-					break;
+					//break;
 				}
 			}
 
