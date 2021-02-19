@@ -15,7 +15,6 @@ namespace BinaryFileWrite
 			}
 		}
 
-		
 		public void Process(string fileName, ByteObject obj)
 		{
 			int starts = Int32.Parse(obj.ByteStarts, NumberStyles.HexNumber);
@@ -29,7 +28,6 @@ namespace BinaryFileWrite
 
 			// 1.
 			// Open as binary file.
-			//var inFile = "input/" + fileName + extension;
 			var inFile = GetInputFile(fileName);
 			var outFile = $"output/{fileName}/data/" + obj.ByteString;
 
