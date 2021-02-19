@@ -31,5 +31,5 @@ if exist "*.noi" del "*.noi" > nul
 if exist "*.sym" del "*.sym" > nul
 
 :: Run
-::java -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
-output.sms
+java -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
+::output.sms
