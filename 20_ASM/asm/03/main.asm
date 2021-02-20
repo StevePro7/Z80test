@@ -518,13 +518,13 @@ gsinit:
 		ld a, b
 		or c
 		jr z, +
-		ld de, VDPReg
+		ld de, VDPReg				; VDPReg = $C0CB
 		ld hl, _DATA_555_
 		ldir
 +:	
 		ret
 	
-	; Data from 569 to 7FEF (31367 bytes)
+	; Data from 569 to 7F8D (31269 bytes)
 	.dsb 31269, $00
 	
 ; Data from 7F8E to 7FC5 (56 bytes)	
