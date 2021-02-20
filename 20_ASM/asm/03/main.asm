@@ -167,7 +167,7 @@ _main:
 		ld hl, $0140
 		call _SMS_VDPturnOnFeature
 -:	
-		call _LABEL_473_
+		call _SMS_waitForVBlank
 		jr -
 	
 	; Data from 229 to 27A (82 bytes)
@@ -185,7 +185,7 @@ _SMS_init:
 		pop af
 		ld c, $00
 -:	
-		ld hl, _DATA_2CF_
+		ld hl, _VDPReg_init		; _VDPReg_init = $02CF
 		ld b, $00
 		add hl, bc
 		ld b, (hl)
@@ -200,10 +200,10 @@ _SMS_init:
 		ld a, c
 		sub $0B
 		jr c, -
-		call _LABEL_3DD_
-		call _LABEL_438_
-		call _LABEL_44A_
-		call _LABEL_4DD_
+		call _SMS_initSprites
+		call _SMS_finalizeSprites
+		call _SMS_copySpritestoSAT
+		call _SMS_resetPauseRequest
 -:	
 		in a, (Port_VCounter)
 		ld b, a
@@ -233,7 +233,7 @@ _SMS_init:
 		ret
 	
 ; Data from 2CF to 2E1 (19 bytes)	
-_DATA_2CF_:	
+_VDPReg_init:	
 	.db $04 $20 $FF $FF $FF $FF $FF $00 $00 $00 $FF $FD $21 $03 $C0 $FD
 	.db $6E $00 $C9
 	
@@ -308,7 +308,7 @@ _SMS_setSpritePaletteColor:
 	.db $A3 $20 $FC $C9 $11 $10 $C0 $0E $BF $F3 $ED $59 $ED $51 $FB $06
 	.db $10 $0E $BE $ED $A3 $20 $FC $C9 $7D $D3 $BE $C9
 	
-_LABEL_3DD_:	
+_SMS_initSprites:	
 		ld hl, SpriteNextFree
 		ld (hl), $00
 		ret
@@ -321,7 +321,7 @@ _LABEL_3DD_:
 	.db $FD $39 $FD $7E $00 $77 $FD $21 $C8 $C0 $FD $4E $00 $FD $34 $00
 	.db $69 $C9 $2E $FF $C9
 	
-_LABEL_438_:	
+_SMS_finalizeSprites:	
 		ld a, (SpriteNextFree)
 		sub $40
 		ret nc
@@ -332,7 +332,7 @@ _LABEL_438_:
 		ld (hl), $D0
 		ret
 	
-_LABEL_44A_:	
+_SMS_copySpritestoSAT:	
 		ld hl, $7F00
 		rst $08	; _LABEL_8_
 		ld bc, SpriteTableY
@@ -363,7 +363,7 @@ _LABEL_44A_:
 		jr nz, -
 		ret
 	
-_LABEL_473_:	
+_SMS_waitForVBlank:	
 		ld hl, VDPBlank
 		ld (hl), $00
 -:	
@@ -380,7 +380,7 @@ _LABEL_473_:
 	.db $4F $FD $7E $01 $2F $47 $79 $FD $21 $06 $C0 $FD $A6 $00 $6F $78
 	.db $FD $A6 $01 $67 $C9 $FD $21 $02 $C0 $FD $6E $00 $C9
 	
-_LABEL_4DD_:	
+_SMS_resetPauseRequest:	
 		ld hl, PauseRequested
 		ld (hl), $00
 		ret
