@@ -279,18 +279,39 @@ _SMS_VDPturnOffFeature:
 		out (Port_VDPAddress), a
 		ei
 		ret
+
+// stevepro TODO	
+; Data from 312 to 31B (10 bytes)	
+_SMS_setBGScrollX:	
+	.db $F3 $7D $D3 $BF $3E $88 $D3 $BF $FB $C9
 	
-	; Data from 312 to 39C (139 bytes)
-	.db $F3 $7D $D3 $BF $3E $88 $D3 $BF $FB $C9 $F3 $7D $D3 $BF $3E $89
-	.db $D3 $BF $FB $C9 $F3 $7D $D3 $BF $3E $87 $D3 $BF $FB $C9 $CB $45
-	.db $28 $04 $0E $FB $18 $02 $0E $FF $F3 $79 $D3 $BF $3E $86 $D3 $BF
-	.db $FB $C9 $4D $CB $41 $28 $0F $C5 $21 $02 $01 $CD $E2 $02 $C1 $21
-	.db $CD $C0 $36 $10 $18 $0D $C5 $21 $02 $01 $CD $F9 $02 $C1 $21 $CD
-	.db $C0 $36 $08 $CB $49 $28 $14 $21 $01 $01 $CD $E2 $02 $21 $CE $C0
-	.db $36 $10 $FD $21 $CD $C0 $FD $CB $00 $26 $C9 $21 $01 $01 $CD $F9
-	.db $02 $21 $CE $C0 $36 $08 $C9 $21 $02 $00 $39 $4E $06 $00 $21 $00
-	.db $C0 $09 $CF $21 $03 $00 $39 $7E $D3 $BE $C9
+; Data from 31C to 325 (10 bytes)	
+_SMS_setBGScrollY:	
+	.db $F3 $7D $D3 $BF $3E $89 $D3 $BF $FB $C9
 	
+; Data from 326 to 32F (10 bytes)	
+_SMS_setBackdropColor:	
+	.db $F3 $7D $D3 $BF $3E $87 $D3 $BF $FB $C9
+	
+; Data from 330 to 343 (20 bytes)	
+_SMS_useFirstHalfTilesforSprites:	
+	.db $CB $45 $28 $04 $0E $FB $18 $02 $0E $FF $F3 $79 $D3 $BF $3E $86
+	.db $D3 $BF $FB $C9
+	
+; Data from 344 to 388 (69 bytes)	
+_SMS_setSpriteMode:	
+	.db $4D $CB $41 $28 $0F $C5 $21 $02 $01 $CD $E2 $02 $C1 $21 $CD $C0
+	.db $36 $10 $18 $0D $C5 $21 $02 $01 $CD $F9 $02 $C1 $21 $CD $C0 $36
+	.db $08 $CB $49 $28 $14 $21 $01 $01 $CD $E2 $02 $21 $CE $C0 $36 $10
+	.db $FD $21 $CD $C0 $FD $CB $00 $26 $C9 $21 $01 $01 $CD $F9 $02 $21
+	.db $CE $C0 $36 $08 $C9
+	
+; Data from 389 to 39C (20 bytes)	
+_SMS_setBGPaletteColor:	
+	.db $21 $02 $00 $39 $4E $06 $00 $21 $00 $C0 $09 $CF $21 $03 $00 $39
+	.db $7E $D3 $BE $C9
+	
+// stevepro TODO
 _SMS_setSpritePaletteColor:	
 		ld hl, $0002
 		add hl, sp
@@ -305,18 +326,30 @@ _SMS_setSpritePaletteColor:
 		ld a, (hl)
 		out (Port_VDPData), a
 		ret
-	
-	; Data from 3B1 to 3DC (44 bytes)
+
+// stevepro TODO	
+; Data from 3B1 to 3C4 (20 bytes)	
+_SMS_loadBGPalette:	
 	.db $11 $00 $C0 $0E $BF $F3 $ED $59 $ED $51 $FB $06 $10 $0E $BE $ED
-	.db $A3 $20 $FC $C9 $11 $10 $C0 $0E $BF $F3 $ED $59 $ED $51 $FB $06
-	.db $10 $0E $BE $ED $A3 $20 $FC $C9 $7D $D3 $BE $C9
+	.db $A3 $20 $FC $C9
 	
+; Data from 3C5 to 3D8 (20 bytes)	
+_SMS_loadSpritePalette:	
+	.db $11 $10 $C0 $0E $BF $F3 $ED $59 $ED $51 $FB $06 $10 $0E $BE $ED
+	.db $A3 $20 $FC $C9
+	
+; Data from 3D9 to 3DC (4 bytes)	
+_SMS_setColor:	
+	.db $7D $D3 $BE $C9
+// stevepro TODO
+
 _SMS_initSprites:	
-		ld hl, SpriteNextFree
+		ld hl, SpriteNextFree		; SpriteNextFree = $C0C8
 		ld (hl), $00
 		ret
 	
-	; Data from 3E3 to 437 (85 bytes)
+; Data from 3E3 to 437 (85 bytes)	
+_SMS_addSprite:
 	.db $3A $C8 $C0 $D6 $40 $30 $4B $FD $21 $03 $00 $FD $39 $FD $7E $00
 	.db $D6 $D1 $28 $3E $3E $08 $21 $C8 $C0 $86 $4F $3E $C0 $CE $00 $47
 	.db $FD $5E $00 $1D $7B $02 $3A $C8 $C0 $87 $4F $21 $48 $C0 $06 $00
@@ -325,11 +358,12 @@ _SMS_initSprites:
 	.db $69 $C9 $2E $FF $C9
 	
 _SMS_finalizeSprites:	
-		ld a, (SpriteNextFree)
+		ld a, (SpriteNextFree)		; SpriteNextFree = $C0C8
 		sub $40
 		ret nc
-		ld bc, $C008
-		ld hl, (SpriteNextFree)
+		;ld bc, $C008	; stevepro
+		ld bc, SpriteTableY			; SpriteTableY = $C008
+		ld hl, (SpriteNextFree)		; SpriteNextFree = $C0C8
 		ld h, $00
 		add hl, bc
 		ld (hl), $D0
@@ -338,7 +372,7 @@ _SMS_finalizeSprites:
 _SMS_copySpritestoSAT:	
 		ld hl, $7F00
 		rst $08	; _LABEL_8_
-		ld bc, SpriteTableY
+		ld bc, SpriteTableY			; SpriteTableY = $C008
 		ld e, $40
 -:	
 		ld a, (bc)
@@ -352,7 +386,7 @@ _SMS_copySpritestoSAT:
 		jr nz, -
 		ld hl, $7F80
 		rst $08	; _LABEL_8_
-		ld bc, SpriteTableXN
+		ld bc, SpriteTableXN		; SpriteTableXN = $C048
 		ld e, $80
 -:	
 		ld a, (bc)
