@@ -23,17 +23,17 @@ PauseRequested db		; PauseRequested = $C002
 VDPType db				; VDPType = $C003
 KeysStatus dw			; KeysStatus = $C004
 PreviousKeysStatus dw	; PreviousKeysStatus = $C006
-_RAM_C008_ db	
+SpriteTableY db			; SpriteTableY = $C008
 .ende	
 	
 .enum $C048 export	
-_RAM_C048_ db	
+SpriteTableXN db		; SpriteTableXN = $C048
 .ende	
 	
 .enum $C0C8 export	
-_RAM_C0C8_ db	
-_RAM_C0C9_ dw	
-_RAM_C0CB_ dsb $4	
+SpriteNextFree db		; SpriteNextFree = $C0C8
+SMS_theLineInterruptHandler dw		; SMS_theLineInterruptHandler = $C0C9
+VDPReg dsb $4			; VDPReg = $C0CB
 .ende	
 	
 .enum $FFFC export	
@@ -293,7 +293,7 @@ _LABEL_39D_:
 	.db $10 $0E $BE $ED $A3 $20 $FC $C9 $7D $D3 $BE $C9
 	
 _LABEL_3DD_:	
-		ld hl, _RAM_C0C8_
+		ld hl, SpriteNextFree
 		ld (hl), $00
 		ret
 	
@@ -306,11 +306,11 @@ _LABEL_3DD_:
 	.db $69 $C9 $2E $FF $C9
 	
 _LABEL_438_:	
-		ld a, (_RAM_C0C8_)
+		ld a, (SpriteNextFree)
 		sub $40
 		ret nc
 		ld bc, $C008
-		ld hl, (_RAM_C0C8_)
+		ld hl, (SpriteNextFree)
 		ld h, $00
 		add hl, bc
 		ld (hl), $D0
@@ -319,7 +319,7 @@ _LABEL_438_:
 _LABEL_44A_:	
 		ld hl, $7F00
 		rst $08	; _LABEL_8_
-		ld bc, _RAM_C008_
+		ld bc, SpriteTableY
 		ld e, $40
 -:	
 		ld a, (bc)
@@ -333,7 +333,7 @@ _LABEL_44A_:
 		jr nz, -
 		ld hl, $7F80
 		rst $08	; _LABEL_8_
-		ld bc, _RAM_C048_
+		ld bc, SpriteTableXN
 		ld e, $80
 -:	
 		ld a, (bc)
@@ -399,7 +399,7 @@ _LABEL_50B_:
 		push bc
 		push de
 		push iy
-		ld hl, (_RAM_C0C9_)
+		ld hl, (SMS_theLineInterruptHandler)
 		call +++
 		pop iy
 		pop de
@@ -437,7 +437,7 @@ _LABEL_559_:
 		ld a, b
 		or c
 		jr z, +
-		ld de, _RAM_C0CB_
+		ld de, VDPReg
 		ld hl, _DATA_555_
 		ldir
 +:	
