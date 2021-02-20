@@ -100,18 +100,19 @@ _LABEL_70_:
 		inc a
 		djnz -
 		xor a
-		ld hl, VDPBlank
+		ld hl, VDPBlank			; VDPBlank = $C000
 		ld (hl), a
-		ld de, SMS_VDPFlags
+		ld de, SMS_VDPFlags		; SMS_VDPFlags = $C001
 		ld bc, $1FF0
 		ldir
-		call _LABEL_559_
-		call _LABEL_27B_
+		call gsinit
+		call _SMS_init
 		ei
-		call _LABEL_20A_
-		jp _LABEL_204_
+		call _main
+		jp _exit
 	
-	; Data from 99 to 203 (363 bytes)
+; Data from 99 to 118 (128 bytes)	
+_OUTI128:	
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
@@ -120,27 +121,39 @@ _LABEL_70_:
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
+	
+; Data from 119 to 158 (64 bytes)	
+_OUTI64:	
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
+	
+; Data from 159 to 198 (64 bytes)	
+_OUTI32:	
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
 	.db $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3 $ED $A3
+	
+; Data from 199 to 1FF (103 bytes)	
+_outi_block:	
 	.db $C9
 	.dsb 102, $00
+
+; Data from 200 to 203 (4 bytes)	
+__clock:	
 	.db $3E $02 $CF $C9
 	
-_LABEL_204_:	
+_exit:	
 		ld a, $00
 		rst $08	; _LABEL_8_
 -:	
 		halt
 		jr -
 	
-_LABEL_20A_:	
-		call _LABEL_27B_
+_main:	
+		call _SMS_init
 		ld hl, $0140
 		call _LABEL_2F9_
 		ld a, $03
@@ -165,7 +178,7 @@ _LABEL_20A_:
 	.db $6F $6E $20 $72 $65 $61 $6C $20 $68 $61 $72 $64 $77 $61 $72 $65
 	.db $21 $00
 	
-_LABEL_27B_:	
+_SMS_init:	
 		ld hl, $0000
 		push hl
 		call _LABEL_39D_
@@ -435,7 +448,7 @@ _SMS_nmi_isr:
 _DATA_555_:	
 	.db $04 $20 $08 $08
 	
-_LABEL_559_:	
+gsinit:	
 		;ld bc, $0004	; stevepro
 		ld bc, _SMS_crt0_RST08 - 2	; _SMS_crt0_RST08 - 2 = $0004
 		ld a, b
