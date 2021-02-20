@@ -58,7 +58,8 @@ _LABEL_0_:
 		im 1
 		jp _LABEL_70_
 	
-	; Data from 6 to 7 (2 bytes)
+; Data from 6 to 7 (2 bytes)
+_SMS_crt0_RST08:
 	.db $00 $00
 	
 _LABEL_8_:	
@@ -69,19 +70,20 @@ _LABEL_8_:
 		ei
 		ret
 	
-	; Data from 11 to 37 (39 bytes)
+; Data from 11 to 37 (39 bytes)
+_SMS_crt0_RST18:
 	.db $00 $00 $00 $00 $00 $00 $00 $7D $D3 $BE $7C $D6 $00 $00 $D3 $BE
 	.db $C9
 	.dsb 22, $00
 	
 _LABEL_38_:	
-		jp _LABEL_50B_
+		jp _SMS_isr
 	
 	; Data from 3B to 65 (43 bytes)
 	.dsb 43, $00
 	
 _LABEL_66_:	
-		jp _LABEL_541_
+		jp _SMS_nmi_isr
 	
 	; Data from 69 to 6F (7 bytes)
 	.db $00 $00 $00 $00 $00 $00 $00
@@ -100,7 +102,7 @@ _LABEL_70_:
 		xor a
 		ld hl, VDPBlank
 		ld (hl), a
-		ld de, VDPBlank + 1
+		ld de, SMS_VDPFlags
 		ld bc, $1FF0
 		ldir
 		call _LABEL_559_
@@ -281,7 +283,8 @@ _LABEL_39D_:
 		ld hl, $C010
 		add hl, bc
 		rst $08	; _LABEL_8_
-		ld hl, $0003
+		;ld hl, $0003	; stevepro
+		ld hl, _SMS_crt0_RST08 - 3	; _SMS_crt0_RST08 - 3 = $0003
 		add hl, sp
 		ld a, (hl)
 		out (Port_VDPData), a
@@ -374,7 +377,7 @@ _LABEL_4DD_:
 	.db $C9 $21 $02 $00 $39 $4E $F3 $79 $D3 $BF $3E $8A $D3 $BF $FB $C9
 	.db $DB $7E $6F $C9 $DB $7F $6F $C9
 	
-_LABEL_50B_:	
+_SMS_isr:	
 		push af
 		push hl
 		in a, (Port_VDPStatus)
@@ -410,7 +413,7 @@ _LABEL_50B_:
 		ei
 		reti
 	
-_LABEL_541_:	
+_SMS_nmi_isr:	
 		push af
 		push bc
 		push de
@@ -433,7 +436,8 @@ _DATA_555_:
 	.db $04 $20 $08 $08
 	
 _LABEL_559_:	
-		ld bc, $0004
+		;ld bc, $0004	; stevepro
+		ld bc, _SMS_crt0_RST08 - 2	; _SMS_crt0_RST08 - 2 = $0004
 		ld a, b
 		or c
 		jr z, +
@@ -456,6 +460,7 @@ _LABEL_559_:
 .BANK 1 SLOT 1	
 .ORG $0000	
 	
-	; Data from 7FF0 to 7FFF (16 bytes)
+; Data from 7FF0 to 7FFF (16 bytes)
+___SMS__SEGA_signature:	
 	.db $54 $4D $52 $20 $53 $45 $47 $41 $FF $FF $36 $9B $99 $99 $00 $4C
 	
