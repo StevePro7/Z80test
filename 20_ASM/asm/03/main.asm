@@ -155,17 +155,17 @@ _exit:
 _main:	
 		call _SMS_init
 		ld hl, $0140
-		call _LABEL_2F9_
+		call _SMS_VDPturnOffFeature
 		ld a, $03
 		push af
 		inc sp
 		xor a
 		push af
 		inc sp
-		call _LABEL_39D_
+		call _SMS_setSpritePaletteColor
 		pop af
 		ld hl, $0140
-		call _LABEL_2E2_
+		call _SMS_VDPturnOnFeature
 -:	
 		call _LABEL_473_
 		jr -
@@ -181,7 +181,7 @@ _main:
 _SMS_init:	
 		ld hl, $0000
 		push hl
-		call _LABEL_39D_
+		call _SMS_setSpritePaletteColor
 		pop af
 		ld c, $00
 -:	
@@ -237,7 +237,7 @@ _DATA_2CF_:
 	.db $04 $20 $FF $FF $FF $FF $FF $00 $00 $00 $FF $FD $21 $03 $C0 $FD
 	.db $6E $00 $C9
 	
-_LABEL_2E2_:	
+_SMS_VDPturnOnFeature:	
 		ld c, l
 		ld e, h
 		ld d, $00
@@ -256,7 +256,7 @@ _LABEL_2E2_:
 		ei
 		ret
 	
-_LABEL_2F9_:	
+_SMS_VDPturnOffFeature:	
 		ld a, l
 		ld e, h
 		cpl
@@ -288,7 +288,7 @@ _LABEL_2F9_:
 	.db $02 $21 $CE $C0 $36 $08 $C9 $21 $02 $00 $39 $4E $06 $00 $21 $00
 	.db $C0 $09 $CF $21 $03 $00 $39 $7E $D3 $BE $C9
 	
-_LABEL_39D_:	
+_SMS_setSpritePaletteColor:	
 		ld hl, $0002
 		add hl, sp
 		ld c, (hl)
