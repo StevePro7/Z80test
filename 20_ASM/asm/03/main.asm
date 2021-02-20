@@ -223,25 +223,28 @@ _SMS_init:
 		ld a, c
 		sub $E7
 		jr c, +
-		ld hl, VDPType
+		ld hl, VDPType		; VDPType = $C003
 		ld (hl), $80
 		ret
 	
 +:	
-		ld hl, VDPType
+		ld hl, VDPType		; VDPType = $C003
 		ld (hl), $40
 		ret
 	
-; Data from 2CF to 2E1 (19 bytes)	
+; Data from 2CF to 2D9 (11 bytes)	
 _VDPReg_init:	
-	.db $04 $20 $FF $FF $FF $FF $FF $00 $00 $00 $FF $FD $21 $03 $C0 $FD
-	.db $6E $00 $C9
+	.db $04 $20 $FF $FF $FF $FF $FF $00 $00 $00 $FF
+	
+; Data from 2DA to 2E1 (8 bytes)	
+_SMS_VDPType:	
+	.db $FD $21 $03 $C0 $FD $6E $00 $C9
 	
 _SMS_VDPturnOnFeature:	
 		ld c, l
 		ld e, h
 		ld d, $00
-		ld hl, $C0CB
+		ld hl, VDPReg	; VDPReg = $C0CB
 		add hl, de
 		ld a, (hl)
 		or c
@@ -262,7 +265,7 @@ _SMS_VDPturnOffFeature:
 		cpl
 		ld b, a
 		ld d, $00
-		ld hl, $C0CB
+		ld hl, VDPReg	; VDPReg = $C0CB
 		add hl, de
 		ld a, (hl)
 		and b
