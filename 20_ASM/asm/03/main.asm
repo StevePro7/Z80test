@@ -17,12 +17,12 @@ BANKS 1
 .ENDRO	
 	
 .enum $C000 export	
-_RAM_C000_ db	
-_RAM_C001_ db	
-_RAM_C002_ db	
-_RAM_C003_ db	
-_RAM_C004_ dw	
-_RAM_C006_ dw	
+VDPBlank db				; VDPBlank = $C000
+SMS_VDPFlags db			; SMS_VDPFlags = $C001
+PauseRequested db		; PauseRequested = $C002
+VDPType db				; VDPType = $C003
+KeysStatus dw			; KeysStatus = $C004
+PreviousKeysStatus dw	; PreviousKeysStatus = $C006
 _RAM_C008_ db	
 .ende	
 	
@@ -98,9 +98,9 @@ _LABEL_70_:
 		inc a
 		djnz -
 		xor a
-		ld hl, _RAM_C000_
+		ld hl, VDPBlank
 		ld (hl), a
-		ld de, _RAM_C000_ + 1
+		ld de, VDPBlank + 1
 		ld bc, $1FF0
 		ldir
 		call _LABEL_559_
@@ -208,12 +208,12 @@ _LABEL_27B_:
 		ld a, c
 		sub $E7
 		jr c, +
-		ld hl, _RAM_C003_
+		ld hl, VDPType
 		ld (hl), $80
 		ret
 	
 +:	
-		ld hl, _RAM_C003_
+		ld hl, VDPType
 		ld (hl), $40
 		ret
 	
@@ -348,10 +348,10 @@ _LABEL_44A_:
 		ret
 	
 _LABEL_473_:	
-		ld hl, _RAM_C000_
+		ld hl, VDPBlank
 		ld (hl), $00
 -:	
-		ld hl, _RAM_C000_
+		ld hl, VDPBlank
 		bit 0, (hl)
 		jr z, -
 		ret
@@ -365,7 +365,7 @@ _LABEL_473_:
 	.db $FD $A6 $01 $67 $C9 $FD $21 $02 $C0 $FD $6E $00 $C9
 	
 _LABEL_4DD_:	
-		ld hl, _RAM_C002_
+		ld hl, PauseRequested
 		ld (hl), $00
 		ret
 	
@@ -378,16 +378,16 @@ _LABEL_50B_:
 		push af
 		push hl
 		in a, (Port_VDPStatus)
-		ld (_RAM_C001_), a
+		ld (SMS_VDPFlags), a
 		rlca
 		jr nc, +
-		ld hl, _RAM_C000_
+		ld hl, VDPBlank
 		ld (hl), $01
-		ld hl, (_RAM_C004_)
-		ld (_RAM_C006_), hl
+		ld hl, (KeysStatus)
+		ld (PreviousKeysStatus), hl
 		in a, (Port_IOPort1)
 		cpl
-		ld hl, _RAM_C004_
+		ld hl, KeysStatus
 		ld (hl), a
 		in a, (Port_IOPort2)
 		cpl
@@ -416,7 +416,7 @@ _LABEL_541_:
 		push de
 		push hl
 		push iy
-		ld hl, _RAM_C002_
+		ld hl, PauseRequested
 		ld (hl), $01
 		pop iy
 		pop hl
