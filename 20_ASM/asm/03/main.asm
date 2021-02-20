@@ -401,24 +401,39 @@ _SMS_copySpritestoSAT:
 		ret
 	
 _SMS_waitForVBlank:	
-		ld hl, VDPBlank
+		ld hl, VDPBlank				; VDPBlank = $C000
 		ld (hl), $00
 -:	
-		ld hl, VDPBlank
+		ld hl, VDPBlank				; VDPBlank = $C000
 		bit 0, (hl)
 		jr z, -
 		ret
 	
-	; Data from 480 to 4DC (93 bytes)
-	.db $2A $04 $C0 $C9 $FD $21 $06 $C0 $FD $7E $00 $2F $4F $FD $7E $01
-	.db $2F $47 $FD $21 $04 $C0 $FD $7E $00 $A1 $6F $FD $7E $01 $A0 $67
-	.db $C9 $3A $04 $C0 $FD $21 $06 $C0 $FD $A6 $00 $6F $3A $05 $C0 $FD
-	.db $21 $06 $C0 $FD $A6 $01 $67 $C9 $FD $21 $04 $C0 $FD $7E $00 $2F
-	.db $4F $FD $7E $01 $2F $47 $79 $FD $21 $06 $C0 $FD $A6 $00 $6F $78
-	.db $FD $A6 $01 $67 $C9 $FD $21 $02 $C0 $FD $6E $00 $C9
+; Data from 480 to 483 (4 bytes)	
+_SMS_getKeysStatus:	
+	.db $2A $04 $C0 $C9
+	
+; Data from 484 to 4A0 (29 bytes)	
+_SMS_getKeysPressed:	
+	.db $FD $21 $06 $C0 $FD $7E $00 $2F $4F $FD $7E $01 $2F $47 $FD $21
+	.db $04 $C0 $FD $7E $00 $A1 $6F $FD $7E $01 $A0 $67 $C9
+	
+; Data from 4A1 to 4B7 (23 bytes)	
+_SMS_getKeysHeld:	
+	.db $3A $04 $C0 $FD $21 $06 $C0 $FD $A6 $00 $6F $3A $05 $C0 $FD $21
+	.db $06 $C0 $FD $A6 $01 $67 $C9
+	
+; Data from 4B8 to 4D4 (29 bytes)	
+_SMS_getKeysReleased:	
+	.db $FD $21 $04 $C0 $FD $7E $00 $2F $4F $FD $7E $01 $2F $47 $79 $FD
+	.db $21 $06 $C0 $FD $A6 $00 $6F $78 $FD $A6 $01 $67 $C9
+	
+; Data from 4D5 to 4DC (8 bytes)	
+_SMS_queryPauseRequested:	
+	.db $FD $21 $02 $C0 $FD $6E $00 $C9
 	
 _SMS_resetPauseRequest:	
-		ld hl, PauseRequested
+		ld hl, PauseRequested		; PauseRequested = $C002
 		ld (hl), $00
 		ret
 	
