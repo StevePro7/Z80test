@@ -320,7 +320,6 @@ _SMS_setSpritePaletteColor:
 		ld hl, $C010
 		add hl, bc
 		rst $08	; _LABEL_8_
-		;ld hl, $0003	; stevepro
 		ld hl, _SMS_crt0_RST08 - 3	; _SMS_crt0_RST08 - 3 = $0003
 		add hl, sp
 		ld a, (hl)
@@ -361,7 +360,6 @@ _SMS_finalizeSprites:
 		ld a, (SpriteNextFree)		; SpriteNextFree = $C0C8
 		sub $40
 		ret nc
-		;ld bc, $C008	; stevepro
 		ld bc, SpriteTableY			; SpriteTableY = $C008
 		ld hl, (SpriteNextFree)		; SpriteNextFree = $C0C8
 		ld h, $00
@@ -513,7 +511,6 @@ _DATA_555_:
 	.db $04 $20 $08 $08
 	
 gsinit:	
-		;ld bc, $0004	; stevepro
 		ld bc, _SMS_crt0_RST08 - 2	; _SMS_crt0_RST08 - 2 = $0004
 		ld a, b
 		or c
