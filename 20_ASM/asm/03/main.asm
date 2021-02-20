@@ -437,25 +437,37 @@ _SMS_resetPauseRequest:
 		ld (hl), $00
 		ret
 	
-	; Data from 4E3 to 50A (40 bytes)
+; Data from 4E3 to 4F3 (17 bytes)	
+_SMS_setLineInterruptHandler:	
 	.db $21 $02 $00 $39 $7E $32 $C9 $C0 $21 $03 $00 $39 $7E $32 $CA $C0
-	.db $C9 $21 $02 $00 $39 $4E $F3 $79 $D3 $BF $3E $8A $D3 $BF $FB $C9
-	.db $DB $7E $6F $C9 $DB $7F $6F $C9
+	.db $C9
+	
+; Data from 4F4 to 502 (15 bytes)	
+_SMS_setLineCounter:	
+	.db $21 $02 $00 $39 $4E $F3 $79 $D3 $BF $3E $8A $D3 $BF $FB $C9
+	
+; Data from 503 to 506 (4 bytes)	
+_SMS_getVCount:	
+	.db $DB $7E $6F $C9
+	
+; Data from 507 to 50A (4 bytes)	
+_SMS_getHCount:	
+	.db $DB $7F $6F $C9
 	
 _SMS_isr:	
 		push af
 		push hl
 		in a, (Port_VDPStatus)
-		ld (SMS_VDPFlags), a
+		ld (SMS_VDPFlags), a		; SMS_VDPFlags = $C001
 		rlca
 		jr nc, +
-		ld hl, VDPBlank
+		ld hl, VDPBlank				; VDPBlank = $C000
 		ld (hl), $01
-		ld hl, (KeysStatus)
-		ld (PreviousKeysStatus), hl
+		ld hl, (KeysStatus)			; KeysStatus = $C004
+		ld (PreviousKeysStatus), hl	; PreviousKeysStatus = $C006
 		in a, (Port_IOPort1)
 		cpl
-		ld hl, KeysStatus
+		ld hl, KeysStatus			; KeysStatus = $C004
 		ld (hl), a
 		in a, (Port_IOPort2)
 		cpl
@@ -467,8 +479,8 @@ _SMS_isr:
 		push bc
 		push de
 		push iy
-		ld hl, (SMS_theLineInterruptHandler)
-		call +++
+		ld hl, (SMS_theLineInterruptHandler)	; SMS_theLineInterruptHandler = $C0C9
+		call ___sdcc_call_hl
 		pop iy
 		pop de
 		pop bc
@@ -484,7 +496,7 @@ _SMS_nmi_isr:
 		push de
 		push hl
 		push iy
-		ld hl, PauseRequested
+		ld hl, PauseRequested					; PauseRequested = $C002
 		ld (hl), $01
 		pop iy
 		pop hl
@@ -493,7 +505,7 @@ _SMS_nmi_isr:
 		pop af
 		retn
 	
-+++:	
+___sdcc_call_hl:	
 		jp (hl)
 	
 ; Data from 555 to 558 (4 bytes)	
