@@ -216,8 +216,7 @@ _SMS_setBGPaletteColor:
 	ld a, (hl)
 	out ($be), a
 	ret
-	
-// stevepro TODO
+
 _SMS_setSpritePaletteColor:	
 		ld hl, $0002
 		add hl, sp
@@ -280,18 +279,66 @@ _SMS_initSprites:
 // stevepro TODO	add a label for the equivalent to ld a, ($C12F)
 ; Data from 3E3 to 437 (85 bytes)	
 _SMS_addSprite:
-	.db $3A $C8 $C0 $D6 $40 $30 $4B $FD $21 $03 $00 $FD $39 $FD $7E $00
-	.db $D6 $D1 $28 $3E $3E $08 $21 $C8 $C0 $86 $4F $3E $C0 $CE $00 $47
-	.db $FD $5E $00 $1D $7B $02 $3A $C8 $C0 $87 $4F $21 $48 $C0 $06 $00
-	.db $09 $FD $21 $02 $00 $FD $39 $FD $7E $00 $77 $23 $FD $21 $04 $00
-	.db $FD $39 $FD $7E $00 $77 $FD $21 $C8 $C0 $FD $4E $00 $FD $34 $00
-	.db $69 $C9 $2E $FF $C9
-	;OLD
-	;; SpriteNextFree = $C12F
-	;; SpriteTableXN = $C0AF
-	;NEW
-	; SpriteNextFree = $C0C8
-	;; SpriteTableXN = $C048
+	;.db $3A $C8 $C0 $D6 $40 $30 $4B $FD $21 $03 $00 $FD $39 $FD $7E $00
+	;.db $D6 $D1 $28 $3E $3E $08 $21 $C8 $C0 $86 $4F $3E $C0 $CE $00 $47
+	;.db $FD $5E $00 $1D $7B $02 $3A $C8 $C0 $87 $4F $21 $48 $C0 $06 $00
+	;.db $09 $FD $21 $02 $00 $FD $39 $FD $7E $00 $77 $23 $FD $21 $04 $00
+	;.db $FD $39 $FD $7E $00 $77 $FD $21 $C8 $C0 $FD $4E $00 $FD $34 $00
+	;.db $69 $C9 $2E $FF $C9
+
+	;.db $3A $C8 $C0 $D6 $40 $30 $4B $FD $21 $03 $00 $FD $39 $FD $7E $00
+		 ld a, ($C0C8)
+		 sub $40
+		 jr nc, $4B
+		 ld iy, $0003
+		 add iy, sp
+		 ld a, (iy + $00)
+
+	;.db $D6 $D1 $28 $3E $3E $08 $21 $C8 $C0 $86 $4F $3E $C0 $CE $00 $47
+		sub	$D1
+		jr z, $3E
+		ld a, $08
+		ld hl, $C0C8
+		add a, (hl)
+		ld c, a
+		ld a, $C0
+		adc a, $00
+		ld b, a
+
+	;.db $FD $5E $00 $1D $7B $02 $3A $C8 $C0 $87 $4F $21 $48 $C0 $06 $00
+		ld e, (iy + $00)
+		dec e
+		ld a, e
+		ld (bc), a
+		ld a, ($C0C8)
+		add a, a
+		ld c, a
+		ld hl, $C048
+		ld b, $00
+		
+	;.db $09 $FD $21 $02 $00 $FD $39 $FD $7E $00 $77 $23 $FD $21 $04 $00
+		add hl, bc
+		ld iy, $0002
+		add iy, sp
+		ld a, (iy + $00)
+		ld (hl), a
+		inc hl
+		ld iy, $0004
+
+	;.db $FD $39 $FD $7E $00 $77 $FD $21 $C8 $C0 $FD $4E $00 $FD $34 $00
+		add iy, sp
+		ld a, (iy + $00)
+		ld (hl), a
+		ld iy, $C0C8
+		ld c, (iy + $00)
+		inc (iy + $00)
+		
+	;.db $69 $C9 $2E $FF $C9
+		ld l, c
+		ret
+		ld l, $FF
+		ret
+
 _SMS_finalizeSprites:	
 		ld a, (SpriteNextFree)		; SpriteNextFree = $C0C8
 		sub $40
