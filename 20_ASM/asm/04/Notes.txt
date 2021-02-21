@@ -1,0 +1,25 @@
+Notes
+20/02/2021
+
+
+_LABEL_50B_	_SMS_isr
+_LABEL_541_	_SMS_nmi_isr
+
+_LABEL_559_	gsinit
+_LABEL_27B_	_SMS_init
+_LABEL_20A_	_main
+_LABEL_204_	_exit
+
+
+_LABEL_2F9_	_SMS_VDPturnOffFeature
+_LABEL_39D_	_SMS_setSpritePaletteColor
+_LABEL_2E2_	_SMS_VDPturnOnFeature
+_LABEL_473_	_SMS_waitForVBlank
+
+
+_DATA_2CF_	_VDPReg_init
+
+_LABEL_3DD_	_SMS_initSprites
+_LABEL_438_	_SMS_finalizeSprites
+_LABEL_44A_	_SMS_copySpritestoSAT
+_LABEL_4DD_	_SMS_resetPauseRequest
