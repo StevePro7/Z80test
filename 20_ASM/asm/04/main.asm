@@ -27,8 +27,21 @@ _LABEL_8_:
 //stevepro TODO	
 ; Data from 11 to 37 (39 bytes)
 _SMS_crt0_RST18:
-	.db $00 $00 $00 $00 $00 $00 $00 $7D $D3 $BE $7C $D6 $00 $00 $D3 $BE
-	.db $C9
+	;.db $00 $00 $00 $00 $00 $00 $00 $7D $D3 $BE $7C $D6 $00 $00 $D3 $BE
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	ld a, l
+	out ($be), a
+	ld a, h
+	sub a, $00
+	nop
+	out ($be), a
+	ret
 	.dsb 22, $00
 	
 _LABEL_38_:	
