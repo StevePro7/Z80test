@@ -2,5 +2,6 @@
 #define _LOCALE_MANAGER_H_
 
 #define LOCALE_BUILD_VALUE		"V1.0"
+#define LOCALE_HELLO_VALUE		"HELLO WORLD"
 
 #endif//_LOCALE_MANAGER_H_
