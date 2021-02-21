@@ -17,7 +17,12 @@ SpriteNextFree db		; SpriteNextFree = $C0C8
 SMS_theLineInterruptHandler dw		; SMS_theLineInterruptHandler = $C0C9
 VDPReg dsb $4			; VDPReg = $C0CB
 .ende	
-	
+
+.enum $C0CD export	
+spritesHeight db		; spritesHeight = $C0CD
+spritesWidth db		    ; spritesWidth = $C0CE
+.ende	
+
 .enum $FFFC export	
 _RAM_FFFC_ db	
 .ende

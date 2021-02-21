@@ -155,54 +155,50 @@ _SMS_useFirstHalfTilesforSprites:
 		out (Port_VDPAddress), a
 		ei
 		ret
-// stevepro TODO	
-; Data from 344 to 388 (69 bytes)	
-_SMS_setSpriteMode:	
-	.db $4D $CB $41 $28 $0F $C5 $21 $02 $01 $CD $E2 $02 $C1 $21 $CD $C0
-	.db $36 $10 $18 $0D $C5 $21 $02 $01 $CD $F9 $02 $C1 $21 $CD $C0 $36
-	.db $08 $CB $49 $28 $14 $21 $01 $01 $CD $E2 $02 $21 $CE $C0 $36 $10
-	.db $FD $21 $CD $C0 $FD $CB $00 $26 $C9 $21 $01 $01 $CD $F9 $02 $21
-	.db $CE $C0 $36 $08 $C9
 
-	;_SMS_setSpriteMode:
-	;	ld c, l
-	;	bit 0, c
-	;	jr z, +
-	;	push bc
-	;	ld hl, $0102
-	;	call _SMS_VDPturnOnFeature
-	;	pop bc
-	;	ld hl, spritesHeight		; spritesHeight = $C1B8
-	;	ld (hl), $10
-	;	jr ++
+; Data from 344 to 388 (69 bytes)	
+_SMS_setSpriteMode:
+	; .db $4D $CB $41 $28 $0F $C5 $21 $02 $01 $CD $E2 $02 $C1 $21 $CD $C0
+	; .db $36 $10 $18 $0D $C5 $21 $02 $01 $CD $F9 $02 $C1 $21 $CD $C0 $36
+	; .db $08 $CB $49 $28 $14 $21 $01 $01 $CD $E2 $02 $21 $CE $C0 $36 $10
+	; .db $FD $21 $CD $C0 $FD $CB $00 $26 $C9 $21 $01 $01 $CD $F9 $02 $21
+	; .db $CE $C0 $36 $08 $C9
+
+		ld c, l
+		bit 0, c
+		jr z, +
+		push bc
+		ld hl, $0102
+		call _SMS_VDPturnOnFeature
+		pop bc
+		ld hl, spritesHeight			; spritesHeight = $C0CD
+		ld (hl), $10
+		jr ++
 	
-;+:
-	;	push bc
-	;	ld hl, $0102
-	;	call _SMS_VDPturnOffFeature
-	;	pop bc
-	;	ld hl, spritesHeight		; spritesHeight = $C1B8
-	;	ld (hl), $08
-;++:
-	;	bit 1, c
-	;	jr z, +
-	;	ld hl, $0101
-	;	call _SMS_VDPturnOnFeature
-	;	ld hl, spritesWidth		; spritesWidth = $C1B9
-	;	ld (hl), $10
-	;	ld iy, spritesHeight	; spritesHeight = $C1B8
-	;	sla (iy+0)
-	;	ret
++:
+		push bc
+		ld hl, $0102
+		call _SMS_VDPturnOffFeature
+		pop bc
+		ld hl, spritesHeight			; spritesHeight = $C0CD
+		ld (hl), $08
+++:
+		bit 1, c
+		jr z, +
+		ld hl, $0101
+		call _SMS_VDPturnOnFeature
+		ld hl, spritesWidth				; spritesWidth = $C0CE
+		ld (hl), $10
+		ld iy, spritesHeight			; spritesHeight = $C0CD
+		sla (iy+0)
+		ret
 	
-;+:
-	;	ld hl, $0101
-	;	call _SMS_VDPturnOffFeature
-	;	ld hl, spritesWidth	; spritesWidth = $C1B9
-	;	ld (hl), $08
-	;	ret
-; new
-; ; spritesHeight = $C1B8
-; ; spritesWidth = $C1B9
++:
+		ld hl, $0101
+		call _SMS_VDPturnOffFeature
+		ld hl, spritesWidth	; spritesWidth = $C0CE
+		ld (hl), $08
+		ret
 
 ; Data from 389 to 39C (20 bytes)	
 _SMS_setBGPaletteColor:
