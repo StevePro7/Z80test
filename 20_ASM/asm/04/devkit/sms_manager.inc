@@ -275,8 +275,7 @@ _SMS_initSprites:
 		ld hl, SpriteNextFree		; SpriteNextFree = $C0C8
 		ld (hl), $00
 		ret
-	
-// stevepro TODO	add a label for the equivalent to ld a, ($C12F)
+
 ; Data from 3E3 to 437 (85 bytes)	
 _SMS_addSprite:
 	;.db $3A $C8 $C0 $D6 $40 $30 $4B $FD $21 $03 $00 $FD $39 $FD $7E $00
@@ -450,6 +449,6 @@ _SMS_getVCount:
 ; Data from 507 to 50A (4 bytes)	
 _SMS_getHCount:	
 	;.db $DB $7F $6F $C9
-		in a, ($7F)					; stevepro TODO
+		in a, ($7F)	
 		ld l, a
 		ret
