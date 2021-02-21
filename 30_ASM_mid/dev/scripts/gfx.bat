@@ -10,7 +10,7 @@ bmp2tile.exe raw\font.bmp -savetiles "font (tiles).psgcompr" -removedupes -tileo
 
 
 :: Sprites
-bmp2tile.exe raw\cursor.bmp -savetiles "cursor (tiles).psgcompr" -noremovedupes -planar -tileoffset 0 -savepalette "cursor (palette).bin" -fullpalette  -spritepalette -exit
+::bmp2tile.exe raw\cursor.bmp -savetiles "cursor (tiles).psgcompr" -noremovedupes -planar -tileoffset 0 -savepalette "cursor (palette).bin" -fullpalette  -spritepalette -exit
 
 
 cd ..\dev
