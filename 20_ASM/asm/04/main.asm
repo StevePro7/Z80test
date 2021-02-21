@@ -1,54 +1,8 @@
 ; This disassembly was created using Emulicious (http://www.emulicious.net)	
-.MEMORYMAP	
-SLOTSIZE $7FF0	
-SLOT 0 $0000	
-SLOTSIZE $10	
-SLOT 1 $7FF0	
-SLOTSIZE $4000	
-SLOT 2 $8000	
-DEFAULTSLOT 2	
-.ENDME	
-.ROMBANKMAP	
-BANKSTOTAL 2	
-BANKSIZE $7FF0	
-BANKS 1	
-BANKSIZE $10	
-BANKS 1	
-.ENDRO	
+.include "devkit/memory_manager.inc"
+.include "devkit/enum_manager.inc"
+.include "devkit/define_manager.inc"
 	
-.enum $C000 export	
-VDPBlank db				; VDPBlank = $C000
-SMS_VDPFlags db			; SMS_VDPFlags = $C001
-PauseRequested db		; PauseRequested = $C002
-VDPType db				; VDPType = $C003
-KeysStatus dw			; KeysStatus = $C004
-PreviousKeysStatus dw	; PreviousKeysStatus = $C006
-SpriteTableY db			; SpriteTableY = $C008
-.ende	
-	
-.enum $C048 export	
-SpriteTableXN db		; SpriteTableXN = $C048
-.ende	
-	
-.enum $C0C8 export	
-SpriteNextFree db		; SpriteNextFree = $C0C8
-SMS_theLineInterruptHandler dw		; SMS_theLineInterruptHandler = $C0C9
-VDPReg dsb $4			; VDPReg = $C0CB
-.ende	
-	
-.enum $FFFC export	
-_RAM_FFFC_ db	
-.ende	
-	
-; Ports	
-.define Port_VDPData $BE	
-.define Port_VDPAddress $BF	
-	
-; Input Ports	
-.define Port_VCounter $7E	
-.define Port_VDPStatus $BF	
-.define Port_IOPort1 $DC	
-.define Port_IOPort2 $DD	
 	
 .BANK 0 SLOT 0	
 .ORG $0000	
@@ -213,7 +167,7 @@ _VDPReg_init:
 ; Data from 2DA to 2E1 (8 bytes)	
 _SMS_VDPType:	
 		;.db $FD $21 $03 $C0 $FD $6E $00 $C9
-		ld iy, $C06A
+		ld iy, $C003
 		ld l, (iy + $00)
 		ret
 
@@ -354,7 +308,10 @@ _SMS_setSpriteMode:
 	;	ld hl, spritesWidth	; spritesWidth = $C1B9
 	;	ld (hl), $08
 	;	ret
-	
+; new
+; ; spritesHeight = $C1B8
+; ; spritesWidth = $C1B9
+
 ; Data from 389 to 39C (20 bytes)	
 _SMS_setBGPaletteColor:
 	;.db $21 $02 $00 $39 $4E $06 $00 $21 $00 $C0 $09 $CF $21 $03 $00 $39
@@ -423,14 +380,16 @@ _SMS_loadSpritePalette:
 	
 ; Data from 3D9 to 3DC (4 bytes)	
 _SMS_setColor:	
-	.db $7D $D3 $BE $C9
-// stevepro TODO
-
+	;.db $7D $D3 $BE $C9
+	ld a, l
+	out ($be), a
+	ret
 _SMS_initSprites:	
 		ld hl, SpriteNextFree		; SpriteNextFree = $C0C8
 		ld (hl), $00
 		ret
 	
+// stevepro TODO	add a label for the equivalent to ld a, ($C12F)
 ; Data from 3E3 to 437 (85 bytes)	
 _SMS_addSprite:
 	.db $3A $C8 $C0 $D6 $40 $30 $4B $FD $21 $03 $00 $FD $39 $FD $7E $00
@@ -439,7 +398,12 @@ _SMS_addSprite:
 	.db $09 $FD $21 $02 $00 $FD $39 $FD $7E $00 $77 $23 $FD $21 $04 $00
 	.db $FD $39 $FD $7E $00 $77 $FD $21 $C8 $C0 $FD $4E $00 $FD $34 $00
 	.db $69 $C9 $2E $FF $C9
-	
+	;OLD
+	;; SpriteNextFree = $C12F
+	;; SpriteTableXN = $C0AF
+	;NEW
+	; SpriteNextFree = $C0C8
+	;; SpriteTableXN = $C048
 _SMS_finalizeSprites:	
 		ld a, (SpriteNextFree)		; SpriteNextFree = $C0C8
 		sub $40
@@ -493,7 +457,9 @@ _SMS_waitForVBlank:
 	
 ; Data from 480 to 483 (4 bytes)	
 _SMS_getKeysStatus:	
-	.db $2A $04 $C0 $C9
+	;.db $2A $04 $C0 $C9
+		ld hl, (KeysStatus)	; KeysStatus = $C004
+		ret
 	
 ; Data from 484 to 4A0 (29 bytes)	
 _SMS_getKeysPressed:	
@@ -530,11 +496,17 @@ _SMS_setLineCounter:
 	
 ; Data from 503 to 506 (4 bytes)	
 _SMS_getVCount:	
-	.db $DB $7E $6F $C9
+	;.db $DB $7E $6F $C9
+		in a, (Port_VCounter)		; Port_VCounter = $7E
+		ld l, a
+		ret
 	
 ; Data from 507 to 50A (4 bytes)	
 _SMS_getHCount:	
-	.db $DB $7F $6F $C9
+	;.db $DB $7F $6F $C9
+		in a, ($7F)					; stevepro TODO
+		ld l, a
+		ret
 	
 _SMS_isr:	
 		push af
