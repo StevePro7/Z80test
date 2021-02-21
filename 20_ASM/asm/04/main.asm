@@ -23,8 +23,7 @@ _LABEL_8_:
 		out (c), h
 		ei
 		ret
-	
-//stevepro TODO	
+
 ; Data from 11 to 37 (39 bytes)
 _SMS_crt0_RST18:
 	;.db $00 $00 $00 $00 $00 $00 $00 $7D $D3 $BE $7C $D6 $00 $00 $D3 $BE
@@ -109,9 +108,9 @@ _main:
 -:	
 		call _SMS_waitForVBlank
 		jr -
-	
-// stevepro TODO
+
 	; Data from 229 to 27A (82 bytes)
+	; Steven BolandHello WorldSimple Sega Master System demo to run on real hardware!
 	.db $53 $74 $65 $76 $65 $6E $20 $42 $6F $6C $61 $6E $64 $00 $48 $65
 	.db $6C $6C $6F $20 $57 $6F $72 $6C $64 $00 $53 $69 $6D $70 $6C $65
 	.db $20 $53 $65 $67 $61 $20 $4D $61 $73 $74 $65 $72 $20 $53 $79 $73
@@ -194,7 +193,8 @@ gsinit:
 	.dsb 31269, $00
 	
 ; Data from 7F8E to 7FC5 (56 bytes)	
-___SMS__SDSC_descr:	
+___SMS__SDSC_descr:
+	; Simple Sega Master System demo to run on real hardware!
 	.db $53 $69 $6D $70 $6C $65 $20 $53 $65 $67 $61 $20 $4D $61 $73 $74
 	.db $65 $72 $20 $53 $79 $73 $74 $65 $6D $20 $64 $65 $6D $6F $20 $74
 	.db $6F $20 $72 $75 $6E $20 $6F $6E $20 $72 $65 $61 $6C $20 $68 $61
@@ -202,14 +202,17 @@ ___SMS__SDSC_descr:
 	
 ; Data from 7FC6 to 7FD1 (12 bytes)	
 ___SMS__SDSC_name:	
+	; Hello World
 	.db $48 $65 $6C $6C $6F $20 $57 $6F $72 $6C $64 $00
 	
 ; Data from 7FD2 to 7FDF (14 bytes)	
 ___SMS__SDSC_author:	
+	; Steven Boland
 	.db $53 $74 $65 $76 $65 $6E $20 $42 $6F $6C $61 $6E $64 $00
 	
 ; Data from 7FE0 to 7FEF (16 bytes)	
 ___SMS__SDSC_signature:	
+	; SDSC
 	.db $53 $44 $53 $43 $01 $00 $06 $12 $19 $20 $D2 $7F $C6 $7F $8E $7F
 	
 .BANK 1 SLOT 1	
@@ -217,5 +220,6 @@ ___SMS__SDSC_signature:
 	
 ; Data from 7FF0 to 7FFF (16 bytes)
 ___SMS__SEGA_signature:	
+	; $54 $4D $52 $20 $53 $45 $47 $41
 	.db $54 $4D $52 $20 $53 $45 $47 $41 $FF $FF $36 $9B $99 $99 $00 $4C
 	
