@@ -3,11 +3,8 @@ F:G$engine_audio_manager_sfx_right$0_0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$engine_audio_manager_sfx_wrong$0_0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:G$engine_audio_manager_sfx_cheat$0_0$0({2}DF,SV:S),Z,0,0,0,0,0
 F:Faudio_manager$play_sfx$0_0$0({2}DF,SV:S),Z,0,0,0,0,0
-S:Laudio_manager.play_sfx$sound$1_0$21({2}DG,SC:U),B,1,4
-S:Laudio_manager.play_sfx$status$1_0$22({1}SC:U),R,0,0,[a]
-S:G$engine_font_manager_draw_char$0_0$0({2}DF,SV:S),C,0,0
-S:G$engine_font_manager_draw_text$0_0$0({2}DF,SV:S),C,0,0
-S:G$engine_font_manager_draw_data$0_0$0({2}DF,SV:S),C,0,0
+S:Laudio_manager.play_sfx$sound$1_0$18({2}DG,SC:U),B,1,4
+S:Laudio_manager.play_sfx$status$1_0$19({1}SC:U),R,0,0,[a]
 S:G$devkit_PSGPlay$0_0$0({2}DF,SV:S),C,0,0
 S:G$devkit_PSGPlayNoRepeat$0_0$0({2}DF,SV:S),C,0,0
 S:G$devkit_PSGStop$0_0$0({2}DF,SV:S),C,0,0
