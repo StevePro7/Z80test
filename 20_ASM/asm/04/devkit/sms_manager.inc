@@ -223,7 +223,7 @@ _SMS_setSpritePaletteColor:
 		add hl, sp
 		ld c, (hl)
 		ld b, $00
-		ld hl, $C010				; stevepro TODO
+		ld hl, SpritePalette		; SpritePalette = $C010
 		add hl, bc
 		rst $08	; _LABEL_8_
 		ld hl, _SMS_crt0_RST08 - 3	; _SMS_crt0_RST08 - 3 = $0003
@@ -253,7 +253,7 @@ _SMS_loadBGPalette:
 _SMS_loadSpritePalette:	
 	;.db $11 $10 $C0 $0E $BF $F3 $ED $59 $ED $51 $FB $06 $10 $0E $BE $ED
 	;.db $A3 $20 $FC $C9
-		ld de, $C010		; PSGChan1Volume = $C010	; stevepro TODO
+		ld de, SpritePalette		; SpritePalette = $C010
 		ld c, Port_VDPAddress
 		di
 		out (c), e
