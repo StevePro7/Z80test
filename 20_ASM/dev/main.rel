@@ -1,18 +1,45 @@
+;!FILE main.asm
 XL2
-H E areas F global symbols
+H E areas 2E global symbols
 M main
 O -mz80
 S _SMS_setSpritePaletteColor Ref0000
+S G$ROM_bank_to_be_mapped_on_slot2$0$0 DefFFFF
 S _SMS_VDPturnOffFeature Ref0000
 S _SMS_waitForVBlank Ref0000
+S G$SRAM_bank_to_be_mapped_on_slot2$0$0 DefFFFC
 S _ROM_bank_to_be_mapped_on_slot2 DefFFFF
+S G$SMS_SRAM$0$0 Def8000
 S _SRAM_bank_to_be_mapped_on_slot2 DefFFFC
 S .__.ABS. Def0000
 S _SMS_SRAM Def8000
 S _SMS_init Ref0000
 S _SMS_VDPturnOnFeature Ref0000
-A _CODE size 71 flags 0 addr 0
+A _CODE size 6E flags 0 addr 0
+S A$main$101 Def001A
 S _main Def0000
+S C$main.c$12$3$60 Def0017
+S C$main.c$14$2$59 Def001A
+S XG$main$0$0 Def001A
+S A$main$90 Def0011
+S A$main$91 Def0014
+S A$main$83 Def0009
+S A$main$74 Def0000
+S A$main$84 Def000C
+S A$main$85 Def000D
+S A$main$86 Def0010
+S C$main.c$5$1$58 Def0000
+S C$main.c$3$0$0 Def0000
+S A$main$96 Def0017
+S A$main$78 Def0003
+S Fmain$__str_0$0$0 Def001C
+S C$main.c$6$1$58 Def0003
+S A$main$79 Def0006
+S Fmain$__str_1$0$0 Def002A
+S C$main.c$7$1$58 Def0009
+S Fmain$__str_2$0$0 Def0036
+S C$main.c$8$1$58 Def0011
+S G$main$0$0 Def0000
 A _DATA size 0 flags 0 addr 0
 A _INITIALIZED size 0 flags 0 addr 0
 A _DABS size 0 flags 8 addr 0
@@ -22,42 +49,47 @@ A _GSFINAL size 0 flags 0 addr 0
 A _INITIALIZER size 0 flags 0 addr 0
 A _CABS size 0 flags 8 addr 0
 A _CABS0 size 10 flags 8 addr 7FF0
+S G$__SMS__SEGA_signature$0$0 Def7FF0
 S ___SMS__SEGA_signature Def7FF0
 A _CABS1 size E flags 8 addr 7FD2
+S G$__SMS__SDSC_author$0$0 Def7FD2
 S ___SMS__SDSC_author Def7FD2
 A _CABS2 size C flags 8 addr 7FC6
+S G$__SMS__SDSC_name$0$0 Def7FC6
 S ___SMS__SDSC_name Def7FC6
 A _CABS3 size 38 flags 8 addr 7F8E
+S G$__SMS__SDSC_descr$0$0 Def7F8E
 S ___SMS__SDSC_descr Def7F8E
 A _CABS4 size 10 flags 8 addr 7FE0
+S G$__SMS__SDSC_signature$0$0 Def7FE0
 S ___SMS__SDSC_signature Def7FE0
 T 00 00
 R 00 00 00 00
-T 00 00 CD 00 00 21 40 01 CD 00 00 3E 03 F5 33 AF
-R 00 00 00 00 02 03 07 00 02 09 01 00
-T 0E 00 F5 33 CD 00 00 F1 21 40 01 CD 00 00
-R 00 00 00 00 02 05 00 00 02 0C 08 00
-T 1A 00
+T 00 00 CD 00 00 21 40 01 CD 00 00 21 00 1E E5 CD
+R 00 00 00 00 02 03 0A 00 02 09 02 00
+T 0E 00 00 00 F1 21 40 01 CD 00 00
+R 00 00 00 00 02 02 00 00 02 09 0B 00
+T 17 00
 R 00 00 00 00
-T 1A 00 CD 00 00 18 FB
-R 00 00 00 00 02 03 02 00
-T 1F 00
+T 17 00 CD 00 00 18 FB
+R 00 00 00 00 02 03 03 00
+T 1C 00
 R 00 00 00 00
-T 1F 00 53 74 65 76 65 6E 20 42 6F 6C 61 6E 64 00
+T 1C 00 53 74 65 76 65 6E 20 42 6F 6C 61 6E 64 00
 R 00 00 00 00
-T 2D 00
+T 2A 00
 R 00 00 00 00
-T 2D 00 48 65 6C 6C 6F 20 57 6F 72 6C 64 00
+T 2A 00 48 65 6C 6C 6F 20 57 6F 72 6C 64 00
 R 00 00 00 00
-T 39 00
+T 36 00
 R 00 00 00 00
-T 39 00 53 69 6D 70 6C 65 20 53 65 67 61 20 4D 61
+T 36 00 53 69 6D 70 6C 65 20 53 65 67 61 20 4D 61
 R 00 00 00 00
-T 47 00 73 74 65 72 20 53 79 73 74 65 6D 20 64 65
+T 44 00 73 74 65 72 20 53 79 73 74 65 6D 20 64 65
 R 00 00 00 00
-T 55 00 6D 6F 20 74 6F 20 72 75 6E 20 6F 6E 20 72
+T 52 00 6D 6F 20 74 6F 20 72 75 6E 20 6F 6E 20 72
 R 00 00 00 00
-T 63 00 65 61 6C 20 68 61 72 64 77 61 72 65 21 00
+T 60 00 65 61 6C 20 68 61 72 64 77 61 72 65 21 00
 R 00 00 00 00
 T F0 7F
 R 00 00 09 00
