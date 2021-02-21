@@ -110,7 +110,7 @@ _main:
 		jr -
 
 	; Data from 229 to 27A (82 bytes)
-	; Steven BolandHello WorldSimple Sega Master System demo to run on real hardware!
+	; Steven Boland Hello World Simple Sega Master System demo to run on real hardware!
 	.db $53 $74 $65 $76 $65 $6E $20 $42 $6F $6C $61 $6E $64 $00 $48 $65
 	.db $6C $6C $6F $20 $57 $6F $72 $6C $64 $00 $53 $69 $6D $70 $6C $65
 	.db $20 $53 $65 $67 $61 $20 $4D $61 $73 $74 $65 $72 $20 $53 $79 $73
