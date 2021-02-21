@@ -1,0 +1,101 @@
+;!FILE test_screen.asm
+XL2
+H 9 areas 3F global symbols
+M test_screen
+O -mz80
+S _engine_content_manager_load_titleGap Ref0000
+S _devkit_SMS_displayOn Ref0000
+S _engine_font_manager_draw_text Ref0000
+S .__.ABS. Def0000
+S _devkit_SMS_displayOff Ref0000
+S _engine_input_manager_move Ref0000
+S _devkit_SMS_setBGScrollY Ref0000
+A _CODE size 48 flags 0 addr 0
+S A$test_screen$125 Def0037
+S C$test_screen.c$16$1$23 Def0003
+S A$test_screen$126 Def0038
+S C$test_screen.c$17$1$23 Def0006
+S A$test_screen$127 Def0039
+S A$test_screen$118 Def0030
+S C$test_screen.c$32$2$26 Def0034
+S C$test_screen.c$18$1$23 Def0013
+S A$test_screen$128 Def003C
+S A$test_screen$119 Def0031
+S A$test_screen$147 Def0047
+S A$test_screen$138 Def0041
+S C$test_screen.c$34$2$26 Def003D
+S A$test_screen$139 Def0042
+S C$test_screen.c$28$1$25 Def0028
+S C$test_screen.c$38$1$25 Def0041
+S C$test_screen.c$29$1$25 Def0030
+S C$test_screen.c$39$1$25 Def0047
+S C$test_screen.c$13$0$0 Def0000
+S XG$screen_test_screen_update$0$0 Def0047
+S G$screen_test_screen_load$0$0 Def0000
+S A$test_screen$73 Def0006
+S A$test_screen$83 Def0013
+S A$test_screen$74 Def0009
+S A$test_screen$65 Def0000
+S A$test_screen$93 Def001B
+S A$test_screen$75 Def000A
+S A$test_screen$76 Def000D
+S A$test_screen$77 Def000E
+S A$test_screen$87 Def0016
+S A$test_screen$78 Def0011
+S A$test_screen$69 Def0003
+S Ftest_screen$__str_0$0$0 Def001C
+S A$test_screen$88 Def0019
+S A$test_screen$79 Def0012
+S _screen_test_screen_load Def0000
+S XG$screen_test_screen_load$0$0 Def001B
+S G$screen_test_screen_update$0$0 Def0028
+S A$test_screen$110 Def0028
+S A$test_screen$120 Def0032
+S A$test_screen$111 Def002A
+S C$test_screen.c$20$1$23 Def0016
+S A$test_screen$112 Def002B
+S C$test_screen.c$21$1$23 Def001B
+S A$test_screen$140 Def0043
+S A$test_screen$113 Def002C
+S A$test_screen$141 Def0044
+S A$test_screen$132 Def003D
+S A$test_screen$114 Def002F
+S C$test_screen.c$23$1$23 Def0028
+S A$test_screen$142 Def0045
+S A$test_screen$133 Def0040
+S A$test_screen$124 Def0034
+S C$test_screen.c$15$1$23 Def0000
+S _screen_test_screen_update Def0028
+A _DATA size 1 flags 0 addr 0
+S Ftest_screen$index$0$0 Def0000
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 00 00
+T 00 00 CD 00 00 CD 00 00 21 0A 15 E5 21 1C 00 E5
+R 00 00 00 00 02 03 04 00 02 06 00 00 00 0D 00 00
+T 0E 00 CD 00 00 F1 F1 CD 00 00 21 00 00 36 00 C9
+R 00 00 00 00 02 03 02 00 02 08 01 00 00 0B 01 00
+T 1C 00
+R 00 00 00 00
+T 1C 00 50 52 45 53 53 20 53 54 41 52 54 00
+R 00 00 00 00
+T 28 00
+R 00 00 00 00
+T 28 00 3E 02 F5 33 CD 00 00 33 7D B7 28 0D 3A
+R 00 00 00 00 02 07 05 00
+T 35 00 00 00 F5 33 CD 00 00 33 21 00 00 34
+R 00 00 00 00 00 02 01 00 02 07 06 00 00 0B 01 00
+T 41 00
+R 00 00 00 00
+T 41 00 C1 E1 E5 C5 36 07 C9
+R 00 00 00 00
