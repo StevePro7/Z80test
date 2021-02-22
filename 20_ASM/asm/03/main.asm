@@ -549,4 +549,3 @@ ___SMS__SDSC_signature:
 ; Data from 7FF0 to 7FFF (16 bytes)
 ___SMS__SEGA_signature:	
 	.db $54 $4D $52 $20 $53 $45 $47 $41 $FF $FF $36 $9B $99 $99 $00 $4C
-	
