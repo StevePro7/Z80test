@@ -1191,7 +1191,7 @@ _LABEL_C51_:
 		ret	
 		
 	; Data from C94 to 10E4 (1105 bytes)	
-	.incbin "data/File00_00C94_010E4.dat"	
+	.incbin ...	
 		
 _LABEL_10E5_:		
 		ld hl, $7F00	
@@ -2506,7 +2506,7 @@ _LABEL_C22_:
 		ret
 	
 	; Data from C65 to 10B5 (1105 bytes)
-	.incbin "data/File01_00C65_010B5.dat"
+	.incbin ...
 	
 _LABEL_10B6_:	
 		ld hl, $7F00
