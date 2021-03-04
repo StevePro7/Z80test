@@ -45,6 +45,7 @@ banks 1
 ;==============================================================
 ; Main program
 ;==============================================================
+.section "Main control structure" free
 main:
     ld sp, $dff0
 
@@ -126,11 +127,12 @@ main:
 
     ; Infinite loop to stop program
 -:  jr -
-
+.ends
 ;==============================================================
 ; Helper functions
 ;==============================================================
 
+.section "Helper functions" free
 SetVDPAddress:
 ; Sets the VDP address
 ; Parameters: hl = address
@@ -158,7 +160,7 @@ CopyToVDP:
 ;==============================================================
 ; Data
 ;==============================================================
-
+.ends
 .asciitable
 map " " to "~" = 0
 .enda
