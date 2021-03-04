@@ -161,14 +161,18 @@ CopyToVDP:
 ; Data
 ;==============================================================
 .ends
+
+.section "Text section" free
 .asciitable
 map " " to "~" = 0
 .enda
 
 Message:
-.asc "Hello world!"
+.asc "Hello World!"
 .db $ff
+.ends
 
+.section "Content section"
 PaletteData:
 .db $00,$3f ; Black, white
 PaletteDataEnd:
@@ -177,6 +181,9 @@ PaletteDataEnd:
 VDPInitData:
 .db $04,$80,$00,$81,$ff,$82,$ff,$85,$ff,$86,$ff,$87,$00,$88,$00,$89,$ff,$8a
 VDPInitDataEnd:
+.ends
 
+.section "Font include" free
 FontData:
 .incbin "font.bin" fsize FontDataSize
+.ends
