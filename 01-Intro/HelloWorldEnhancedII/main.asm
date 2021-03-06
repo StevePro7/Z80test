@@ -31,9 +31,12 @@ banks 1
 ;==============================================================
 ; Boot section
 ;==============================================================
+.section "Boot" force
+boot:
     di              ; disable interrupts
     im 1            ; Interrupt mode 1
     jp main         ; jump to main program
+.ends
 
 .org $0066
 ;==============================================================
@@ -128,10 +131,10 @@ main:
     ; Infinite loop to stop program
 -:  jr -
 .ends
+
 ;==============================================================
 ; Helper functions
 ;==============================================================
-
 .section "Helper functions" free
 SetVDPAddress:
 ; Sets the VDP address
@@ -156,12 +159,11 @@ CopyToVDP:
     or c
     jr nz,-
     ret
+.ends
 
 ;==============================================================
 ; Data
 ;==============================================================
-.ends
-
 .section "Text section" free
 .asciitable
 map " " to "~" = 0
