@@ -8,38 +8,44 @@ namespace BinaryFileWrite
 	{
 		static void Main()
 		{
-			var fileName = ConfigurationManager.AppSettings["fileName"];
+			//var fileName = ConfigurationManager.AppSettings["fileName"];
 
-			Console.WriteLine("Stripping underscores:" );
-			Console.WriteLine($"{fileName}");
+			Console.WriteLine("Detecting underscores:" );
+
+
+			//Console.WriteLine($"{fileName}");
 			var fm = new FileManager();
-			fm.Process(fileName);
-			var inpLines = fm.Lines;
-			var outLines = new List<string>();
+			fm.GetFiles();
 
-			foreach(var inpLine in inpLines)
+			var files = fm.Files;
+			foreach (var file in files)
 			{
-				var txtLine = inpLine.TrimEnd();
-				if (txtLine.EndsWith(":"))
+				Console.WriteLine($"File: {file}");
+				var isOK = true;
+				fm.Process(file);
+				var lines = fm.Lines;
+
+				foreach (var line in lines)
 				{
-					if (txtLine.StartsWith("___"))
+					var txtLine = line.TrimEnd();
+					if (txtLine.EndsWith(":"))
 					{
-						txtLine = txtLine.Substring(3, txtLine.Length - 3);
-					}
-					if (txtLine.StartsWith("__"))
-					{
-						txtLine = txtLine.Substring(2, txtLine.Length - 2);
-					}
-					else if (txtLine.StartsWith("_"))
-					{
-						txtLine = txtLine.Substring(1, txtLine.Length - 1);
+						if (txtLine.StartsWith("_"))
+						{
+							Console.WriteLine($"  line: {line}");
+							isOK = false;
+						}
 					}
 				}
 
-				outLines.Add(txtLine);
+				if (isOK)
+				{
+					Console.WriteLine("=>OK");
+				}
+
+				Console.WriteLine();
 			}
 
-			fm.Saving(outLines, fileName);
 			Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
 		}
