@@ -8,53 +8,59 @@ namespace BinaryFileWrite
 	{
 		static void Main()
 		{
-			var fileName = ConfigurationManager.AppSettings["fileName"];
-
+			//var fileName = ConfigurationManager.AppSettings["fileName"];
 			Console.WriteLine("Update sections:" );
-			Console.WriteLine($"{fileName}");
 			var fm = new FileManager();
-			fm.Process(fileName);
-			var inpLines = fm.Lines;
-			var outLines = new List<string>();
+			fm.GetFiles();
 
-			var firstTime = true;
-			var count = inpLines.Length;
-			for (int index = 0; index < count; index++)
+			var fileNames = fm.Files;
+			foreach (var fileName in fileNames)
 			{
-				var inpLine = inpLines[index];
-				var txtLine = inpLine;
-				//var txtLine = inpLine.Trim();
+				Console.WriteLine($"{fileName}");
+				fm.Process(fileName);
 
-				if (txtLine.EndsWith(":"))
+				var inpLines = fm.Lines;
+				var outLines = new List<string>();
+
+				var firstTime = true;
+				var count = inpLines.Length;
+				for (int index = 0; index < count; index++)
 				{
-					if (txtLine.StartsWith("-") || txtLine.StartsWith("+"))
+					var inpLine = inpLines[index];
+					var txtLine = inpLine;
+					//var txtLine = inpLine.Trim();
+
+					if (txtLine.EndsWith(":"))
 					{
-					}
-					else
-					{
-						if (firstTime)
+						if (txtLine.StartsWith("-") || txtLine.StartsWith("+"))
 						{
-							firstTime = false;
 						}
 						else
 						{
-							var endLine = ".ends";
-							outLines.Add(endLine);
-							outLines.Add(String.Empty);
-						}
+							if (firstTime)
+							{
+								firstTime = false;
+							}
+							else
+							{
+								var endLine = ".ends";
+								outLines.Add(endLine);
+								outLines.Add(String.Empty);
+							}
 
-						var section = txtLine.Substring(0, txtLine.Length - 1);
-						var sctLine = $".section \"{section}\" free";
-						outLines.Add(sctLine);
+							var section = txtLine.Substring(0, txtLine.Length - 1);
+							var sctLine = $".section \"{section}\" free";
+							outLines.Add(sctLine);
+						}
 					}
+
+					outLines.Add(txtLine);
 				}
 
-				outLines.Add(txtLine);
+				outLines.Add(".ends");
+				fm.Saving(outLines, fileName);
 			}
 
-			outLines.Add(".ends");
-
-			fm.Saving(outLines, fileName);
 			Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
 		}
