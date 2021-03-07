@@ -8,6 +8,12 @@ namespace BinaryFileWrite
 		public void GetFiles()
 		{
 			Files = Directory.GetFiles("input");
+
+			var delFiles = Directory.GetFiles("output");
+			foreach (var delFile in delFiles)
+			{
+				File.Delete(delFile);
+			}
 		}
 
 		public void Process(string path)

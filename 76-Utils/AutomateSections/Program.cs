@@ -28,9 +28,9 @@ namespace BinaryFileWrite
 				{
 					var inpLine = inpLines[index];
 					var txtLine = inpLine;
-					//var txtLine = inpLine.Trim();
+					var tmpLine = inpLine.Trim();
 
-					if (txtLine.EndsWith(":"))
+					if (tmpLine.EndsWith(":"))
 					{
 						if (txtLine.StartsWith("-") || txtLine.StartsWith("+"))
 						{
@@ -57,7 +57,11 @@ namespace BinaryFileWrite
 					outLines.Add(txtLine);
 				}
 
-				outLines.Add(".ends");
+				if (!firstTime)
+				{
+					outLines.Add(".ends");
+				}
+
 				fm.Saving(outLines, fileName);
 			}
 
