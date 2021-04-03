@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 
 namespace BinaryFileWrite
 {
@@ -8,83 +6,80 @@ namespace BinaryFileWrite
 	{
 		public FileManager()
 		{
-			ByteObjectList = new List<ByteObject>();
-		}
-
-		public void Process(string fileName, string extension)
-		{
-			ByteObjectList.Clear();
-
-			var inpFile = fileName + extension;
-			var outFile = "main" + extension;
-
-			var lines = File.ReadAllLines("input/" + inpFile);
-			var count = 0;
-			for (int index = 0; index < lines.Length; index++)
-			{
-				var line = lines[index];
-				if (line.Contains("incbin ..."))
-				{
-					var info = String.Empty;
-					if (lines[index - 2].Trim().EndsWith(":") && lines[index - 2].Contains("$"))
-					{
-						info = lines[index - 3];
-					}
-					else if (lines[index-1].Contains("_DATA_"))
-					{
-						info = lines[index - 2];
-					}
-					else
-					{
-						info = lines[index - 1];
-					}
-					
-					ByteObject obj = CalcByteObject(info, count++);
-					ByteObjectList.Add(obj);
-
-					var destFile = String.Format(@"""data/{0}""", obj.ByteString);
-					line = line.Replace("...", destFile);
-					lines[index] = line;
-				}
-			}
-
-			string path = $"output/{fileName}/{outFile}";
-			File.WriteAllLines(path, lines);
-		}
-
-		public ByteObject CalcByteObject(string info, int count)
-		{
-			var data = info.Split(new char[] { ' ' });
-			var starts = data[3];
-			var finish = data[5];
-
-			var filename = String.Format("File{0}_{1}_{2}.dat", count.ToString("D2"), starts.PadLeft(5, '0'), finish.PadLeft(5, '0'));
-			return new ByteObject
-			{
-				ByteStarts = starts,
-				ByteFinish = finish,
-				ByteString = filename
-			};
-		}
-
-		public void Setup(string fileName)
-		{
 			if (!Directory.Exists("output"))
 			{
 				Directory.CreateDirectory("output");
 			}
+		}
 
-			var path = $"output/{fileName}";
-			if (!Directory.Exists(path))
+		public void Process(string fileName, int startBank)
+		{
+			var data = fileName.Split(new char[] { '.' });
+			var year = data[0];
+			var dirX = $"output/{year}";
+			if (!Directory.Exists(dirX))
 			{
-				Directory.CreateDirectory(path);
-			}
-			if (!Directory.Exists(path + "/data"))
-			{
-				Directory.CreateDirectory(path + "/data");
+				Directory.CreateDirectory(dirX);
 			}
 		}
 
-		public IList<ByteObject> ByteObjectList { get; private set; }
+		public void Build(string fileName, int startBank, int year)
+		{
+			int block = 16 * 1024;          // 16 KB
+
+			var bytes = File.ReadAllBytes("input/" + fileName);
+			var longs = bytes.Length;
+			int files = longs / block + 1;
+
+			for (int index = 0; index < files; index++)
+			{
+				int point = (index + 0) * block;
+				//int rght = (index + 1) * block - 1;
+
+				var required = block;
+				var temps = (index + 1) * block;
+				if (temps > longs)
+				{
+					var diffs = (index + 0) * block;
+					required = longs - diffs;
+				}
+
+				var slot = new byte[required];
+				var count = 0;
+
+				var inFile = File.Open("input/" + fileName, FileMode.Open);
+				byte data = 0;
+				using (BinaryReader b = new BinaryReader(inFile))
+				{
+					int length = (int)b.BaseStream.Length;
+
+					b.BaseStream.Seek(point, SeekOrigin.Current);
+
+					while (count < required)
+					{
+						data = b.ReadByte();
+						slot[count] = data;
+						count++;
+						point++;
+					}
+				}
+
+				var bank = "bank" + (startBank + index).ToString();
+				var dirX = $"output/{year}/{bank}";
+				if (!Directory.Exists(dirX))
+				{
+					Directory.CreateDirectory(dirX);
+				}
+
+				var yearWithsuffix = (index + 1).ToString().PadLeft(2, '0');
+				var outFileName = fileName.Replace(year.ToString(), year + "_" + yearWithsuffix);
+				var outFile = $"output/{year}/{bank}/{outFileName}";
+				FileStream fs = new FileStream(outFile, FileMode.Create, FileAccess.ReadWrite);
+				BinaryWriter bw = new BinaryWriter(fs);
+				bw.Write(slot);
+				bw.Close();
+			}
+		}
+
 	}
 }

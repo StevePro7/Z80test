@@ -8,15 +8,12 @@ namespace BinaryFileWrite
 		static void Main()
 		{
 			var fileName = ConfigurationManager.AppSettings["fileName"];
-			Console.WriteLine($"Processing '{fileName}'");
+			var startBank = Convert.ToInt32(ConfigurationManager.AppSettings["startBank"]);
+			Console.WriteLine($"Processing '{fileName}'   [{startBank}]");
 
 			var fm = new FileManager();
-			fm.Setup(fileName);
-			fm.Process(fileName, ".asm");
-
-			var byteObjectList = fm.ByteObjectList;
-			var dm = new DataManager();
-			dm.Process(fileName, byteObjectList);
+			//fm.Process(fileName, startBank);
+			fm.Build(fileName, startBank, 1978);
 
 			Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
