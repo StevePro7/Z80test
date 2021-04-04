@@ -72,7 +72,7 @@ namespace BinaryFileWrite
 				}
 
 				var yearWithsuffix = (index + 1).ToString().PadLeft(2, '0');
-				var outFileName = fileName.Replace(year.ToString(), year + "_" + yearWithsuffix);
+				var outFileName = "Riff_" + fileName.Replace(year.ToString(), year + "_" + yearWithsuffix);
 				var outFile = $"output/{year}/{bank}/{outFileName}";
 				FileStream fs = new FileStream(outFile, FileMode.Create, FileAccess.ReadWrite);
 				BinaryWriter bw = new BinaryWriter(fs);
