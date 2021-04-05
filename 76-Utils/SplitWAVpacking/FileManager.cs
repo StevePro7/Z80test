@@ -15,14 +15,20 @@ namespace SplitWAVpacking
 				var valid = Process(index);
 				if (valid)
 				{
-					CopyLocal(index, year);
+					//CopyLocal(index, year);
 					if (!flag)
 					{
 						continue;
 					}
 
-					CopyRemote(index, year, bank);
-					CopyRemote(index, year, bank2);
+					if (year.Equals("test"))
+					{
+						CopyRemote(index, year, bank);
+					}
+					else
+					{
+						CopyRemote(index, year, bank2);
+					}
 				}
 			}
 		}
