@@ -12,21 +12,25 @@ namespace SplitWAVpacking
 
 			var fm = new FileManager();
 			fm.Init(cm.Year, cm.Bank, cm.Flag);
+			fm.Init(cm.Year, cm.Bank2, cm.Flag);
 			//fm.Init(cm.Year, cm.Bank, true);
 			//fm.Convert();
 
-			int index = 0;
-			var valid = fm.Process(index);
-			if (valid)
-			{
-				fm.CopyLocal(index, cm.Year);
-				fm.CopyRemote(index, cm.Year, cm.Bank);
-				if (cm.Flag)
-				{
-				}
-			}
+			fm.ProcessAll(cm.Year, cm.Bank, cm.Bank2, cm.Flag);
 
-            Console.WriteLine("Press [ RETURN ]");
+			//int index = 0;
+			//var valid = fm.Process(index);
+			//if (valid)
+			//{
+			//	fm.CopyLocal(index, cm.Year);
+			//	fm.CopyRemote(index, cm.Year, cm.Bank);
+			//	fm.CopyRemote(index, cm.Year, cm.Bank2);
+			//	if (cm.Flag)
+			//	{
+			//	}
+			//}
+
+			Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
 		}
 

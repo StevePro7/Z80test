@@ -8,6 +8,25 @@ namespace SplitWAVpacking
 		const int maxFiles = 5;
 		const int maxBlock = 16 * 1024;
 
+		public void ProcessAll(string year, int bank, int bank2, bool flag)
+		{
+			for (int index = 0; index < maxFiles; index++)
+			{
+				var valid = Process(index);
+				if (valid)
+				{
+					CopyLocal(index, year);
+					if (!flag)
+					{
+						continue;
+					}
+
+					CopyRemote(index, year, bank);
+					CopyRemote(index, year, bank2);
+				}
+			}
+		}
+
 		public void CopyRemote(int index, string year, int bank)
 		{
 			var inPrefix = $"0{index + 1}";
