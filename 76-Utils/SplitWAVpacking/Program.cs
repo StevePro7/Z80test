@@ -12,9 +12,10 @@ namespace SplitWAVpacking
 
 			var fm = new FileManager();
 			fm.Init(cm.Year, cm.Bank, cm.Flag);
-
+			//fm.Init(cm.Year, cm.Bank, true);
 			//fm.Convert();
-			//fm.Process(cm.Year, cm.Bank, cm.Flag);
+
+			fm.Process(0, cm.Year, cm.Bank, true);
 
             Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
