@@ -15,7 +15,16 @@ namespace SplitWAVpacking
 			//fm.Init(cm.Year, cm.Bank, true);
 			//fm.Convert();
 
-			fm.Process(0, cm.Year, cm.Bank, true);
+			int index = 0;
+			var valid = fm.Process(index);
+			if (valid)
+			{
+				fm.CopyLocal(index, cm.Year);
+				fm.CopyRemote(index, cm.Year, cm.Bank);
+				if (cm.Flag)
+				{
+				}
+			}
 
             Console.WriteLine("Press [ RETURN ]");
 			Console.Read();
