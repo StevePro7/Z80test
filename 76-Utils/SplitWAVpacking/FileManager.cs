@@ -5,7 +5,7 @@ namespace SplitWAVpacking
 {	
     public class FileManager
     {
-		const int maxFiles = 5;
+		const int maxFiles = 4;
 		const int maxBlock = 16 * 1024;
 
 		public void ProcessAll(string year, int bank, int bank2, bool flag)
