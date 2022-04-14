@@ -1,0 +1,52 @@
+XL3
+H 9 areas B global symbols
+M boss_shot
+O -mz80
+S .__.ABS. Def000000
+A _CODE size 46 flags 0 addr 0
+S _boss_fire_paths Def000033
+S G$boss_fire_paths$0_0$0 Def000033
+S _boss_lightining_paths Def00002E
+S G$boss_lightining_paths$0_0$0 Def00002E
+S _boss_fire_path Def000004
+S G$boss_fire_path$0_0$0 Def000004
+S _boss_lightining_path Def000000
+S G$boss_lightining_path$0_0$0 Def000000
+S _boss_shot_infos Def000038
+S G$boss_shot_infos$0_0$0 Def000038
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00 00
+R 00 00 00 00
+T 00 00 00 00 04 80 80
+R 00 00 00 00
+T 04 00 00
+R 00 00 00 00
+T 04 00 00 00 02 04 02 04 02 03 02 02 02 00 02 FE
+R 00 00 00 00
+T 11 00 00 02 FD 02 FC 02 FC 02 FC 02 FC 02 FD 02
+R 00 00 00 00
+T 1E 00 00 FE 02 00 02 02 02 03 02 04 02 04 02 00
+R 00 00 00 00
+T 2B 00 00 02 80 80
+R 00 00 00 00
+T 2E 00 00
+R 00 00 00 00
+T 2E 00 00 00 00 00 00 00
+R 00 00 00 00 00 06 00 00
+T 33 00 00
+R 00 00 00 00
+T 33 00 00 00 00 00 04 00
+R 00 00 00 00 00 06 00 00
+T 38 00 00
+R 00 00 00 00
+T 38 00 00 1A 03 2D 04 01 2E 00 5C 04 28 08 01
+R 00 00 00 00 00 08 00 00
+T 44 00 00 33 00
+R 00 00 00 00 00 03 00 00
