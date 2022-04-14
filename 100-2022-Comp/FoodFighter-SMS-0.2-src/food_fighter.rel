@@ -1,0 +1,3546 @@
+;!FILE food_fighter.asm
+XL3
+H E areas 901 global symbols
+M food_fighter
+O -mz80
+S _SMS_loadPSGaidencompressedTilesatAddr Ref000000
+S _SMS_setSpritePaletteColor Ref000000
+S _rand Ref000000
+S _SMS_load1bppTiles Ref000000
+S _draw_actor Ref000000
+S _enemy_death_psg Ref000000
+S _SMS_VDPturnOffFeature Ref000000
+S _SMS_waitForVBlank Ref000000
+S _init_actor Ref000000
+S _sprites_palette_bin Ref000000
+S _SMS_initSprites Ref000000
+S _SMS_configureTextRenderer Ref000000
+S _SMS_setLineInterruptHandler Ref000000
+S _PSGSFXPlay Ref000000
+S _SMS_getKeysStatus Ref000000
+S _ROM_bank_to_be_mapped_on_slot2 Def00FFFF
+S _SMS_loadSpritePalette Ref000000
+S G$ROM_bank_to_be_mapped_on_slot2$0_0$0 Def00FFFF
+S _SRAM_bank_to_be_mapped_on_slot2 Def00FFFC
+S G$SRAM_bank_to_be_mapped_on_slot2$0_0$0 Def00FFFC
+S .__.ABS. Def000000
+S _SMS_copySpritestoSAT Ref000000
+S _SMS_SRAM Def008000
+S _SMS_setLineCounter Ref000000
+S _PSGSFXFrame Ref000000
+S G$SMS_SRAM$0_0$0 Def008000
+S _font_1bpp Ref000000
+S _SMS_loadBGPalette Ref000000
+S _SMS_crt0_RST08 Ref000000
+S _puts Ref000000
+S _SMS_VDPturnOnFeature Ref000000
+S _SMS_finalizeSprites Ref000000
+S _player_shot_psg Ref000000
+S _printf Ref000000
+S _sprites_tiles_psgcompr Ref000000
+S _SMS_useFirstHalfTilesforSprites Ref000000
+S _PSGFrame Ref000000
+S _SMS_setSpriteMode Ref000000
+S _player_death_psg Ref000000
+S __modsint Ref000000
+S _PSGPlayNoRepeat Ref000000
+S __divsint Ref000000
+A _CODE size E77 flags 0 addr 0
+S A$food_fighter$3310 Def000CAE
+S A$food_fighter$3121 Def000BF3
+S A$food_fighter$3112 Def000BEA
+S A$food_fighter$3103 Def000BE2
+S A$food_fighter$3031 Def000BB5
+S A$food_fighter$3022 Def000BA8
+S A$food_fighter$2500 Def00099C
+S A$food_fighter$2401 Def00093D
+S A$food_fighter$2221 Def0008A5
+S A$food_fighter$2212 Def00089C
+S A$food_fighter$2203 Def000895
+S A$food_fighter$2131 Def000854
+S A$food_fighter$2122 Def000852
+S A$food_fighter$2104 Def00083B
+S A$food_fighter$1600 Def000602
+S A$food_fighter$1510 Def000597
+S A$food_fighter$1501 Def00058D
+S A$food_fighter$1420 Def000532
+S A$food_fighter$1411 Def000527
+S A$food_fighter$1402 Def00051E
+S A$food_fighter$1321 Def0004BA
+S A$food_fighter$1312 Def0004AF
+S A$food_fighter$1303 Def0004A2
+S A$food_fighter$1240 Def000459
+S A$food_fighter$1231 Def00044D
+S A$food_fighter$1222 Def000443
+S A$food_fighter$1213 Def000437
+S A$food_fighter$1204 Def00042D
+S A$food_fighter$1150 Def000401
+S A$food_fighter$1141 Def0003F3
+S A$food_fighter$1132 Def0003EB
+S A$food_fighter$1123 Def0003E2
+S A$food_fighter$1114 Def0003CF
+S A$food_fighter$1105 Def0003C0
+S A$food_fighter$1060 Def000380
+S A$food_fighter$1024 Def000365
+S C$food_fighter.c$410$1_0$232 Def0009E3
+S C$food_fighter.c$314$1_0$202 Def00073E
+S C$food_fighter.c$120$1_0$153 Def0000F2
+S C$food_fighter.c$102$1_0$153 Def000083
+S A$food_fighter$3320 Def000CBF
+S A$food_fighter$3311 Def000CAF
+S A$food_fighter$3302 Def000CA1
+S A$food_fighter$3122 Def000BF4
+S A$food_fighter$3113 Def000BED
+S A$food_fighter$3104 Def000BE5
+S A$food_fighter$3023 Def000BA9
+S A$food_fighter$2600 Def0009E5
+S A$food_fighter$2510 Def0009A7
+S A$food_fighter$2501 Def00099D
+S A$food_fighter$2402 Def00093F
+S A$food_fighter$2240 Def0008B6
+S A$food_fighter$2231 Def0008AC
+S A$food_fighter$2222 Def0008A6
+S A$food_fighter$2213 Def00089D
+S A$food_fighter$2204 Def000896
+S A$food_fighter$2150 Def000864
+S A$food_fighter$2123 Def000853
+S A$food_fighter$2105 Def00083E
+S A$food_fighter$2024 Def0007D5
+S A$food_fighter$1700 Def000682
+S A$food_fighter$1601 Def000605
+S A$food_fighter$1520 Def0005A5
+S A$food_fighter$1430 Def000538
+S A$food_fighter$1421 Def000533
+S A$food_fighter$1412 Def00052A
+S A$food_fighter$1403 Def00051F
+S A$food_fighter$1340 Def0004D0
+S A$food_fighter$1322 Def0004BD
+S A$food_fighter$1313 Def0004B0
+S A$food_fighter$1304 Def0004A5
+S A$food_fighter$1241 Def00045B
+S A$food_fighter$1232 Def00044E
+S A$food_fighter$1214 Def00043A
+S A$food_fighter$1205 Def00042E
+S A$food_fighter$1160 Def00040C
+S A$food_fighter$1151 Def000402
+S A$food_fighter$1142 Def0003F6
+S A$food_fighter$1133 Def0003ED
+S A$food_fighter$1124 Def0003E3
+S A$food_fighter$1115 Def0003D0
+S A$food_fighter$1106 Def0003C3
+S A$food_fighter$1070 Def00038F
+S A$food_fighter$1025 Def000366
+S C$food_fighter.c$411$1_0$232 Def0009E3
+S C$food_fighter.c$322$2_0$203 Def0007EE
+S G$count_enemies$0$0 Def0006E2
+S C$food_fighter.c$200$3_0$171 Def000389
+S C$food_fighter.c$140$1_0$161 Def00012C
+S C$food_fighter.c$131$2_0$160 Def00010C
+S A$food_fighter$3402 Def000D12
+S A$food_fighter$3330 Def000CCC
+S A$food_fighter$3321 Def000CC2
+S A$food_fighter$3312 Def000CB1
+S A$food_fighter$3303 Def000CA4
+S A$food_fighter$3213 Def000C43
+S A$food_fighter$3150 Def000C09
+S A$food_fighter$3132 Def000BFA
+S A$food_fighter$3114 Def000BEE
+S A$food_fighter$3105 Def000BE6
+S A$food_fighter$3024 Def000BAA
+S A$food_fighter$2700 Def000A3F
+S A$food_fighter$2601 Def0009E6
+S A$food_fighter$2520 Def0009B7
+S A$food_fighter$2511 Def0009A9
+S A$food_fighter$2502 Def00099E
+S A$food_fighter$2430 Def000951
+S A$food_fighter$2403 Def000942
+S A$food_fighter$2304 Def0008FE
+S A$food_fighter$2241 Def0008B7
+S A$food_fighter$2232 Def0008AD
+S A$food_fighter$2223 Def0008A7
+S A$food_fighter$2214 Def00089E
+S A$food_fighter$2205 Def000897
+S A$food_fighter$2151 Def000866
+S A$food_fighter$2115 Def000845
+S A$food_fighter$2106 Def00083F
+S A$food_fighter$2052 Def0007FD
+S A$food_fighter$2043 Def0007EE
+S A$food_fighter$2025 Def0007D8
+S A$food_fighter$1620 Def00061F
+S A$food_fighter$1611 Def00060D
+S A$food_fighter$1602 Def000606
+S A$food_fighter$1530 Def0005AD
+S A$food_fighter$1521 Def0005A6
+S A$food_fighter$1512 Def000599
+S A$food_fighter$1431 Def000539
+S A$food_fighter$1422 Def000534
+S A$food_fighter$1413 Def00052B
+S A$food_fighter$1404 Def000520
+S A$food_fighter$1350 Def0004E2
+S A$food_fighter$1341 Def0004D1
+S A$food_fighter$1206 Def00042F
+S A$food_fighter$1161 Def00040D
+S A$food_fighter$1152 Def000403
+S A$food_fighter$1143 Def0003F7
+S A$food_fighter$1134 Def0003EE
+S A$food_fighter$1116 Def0003D3
+S A$food_fighter$1107 Def0003C5
+S A$food_fighter$1080 Def00039B
+S A$food_fighter$1071 Def000390
+S A$food_fighter$1062 Def000383
+S A$food_fighter$1053 Def000372
+S C$food_fighter.c$412$1_0$232 Def0009F1
+S G$init_score$0$0 Def0009D5
+S C$food_fighter.c$141$1_0$161 Def00013B
+S C$food_fighter.c$132$2_0$160 Def00010F
+S C$food_fighter.c$104$1_0$153 Def000087
+S A$food_fighter$3520 Def000D81
+S A$food_fighter$3421 Def000D22
+S A$food_fighter$3403 Def000D15
+S A$food_fighter$3340 Def000CDF
+S A$food_fighter$3331 Def000CCE
+S A$food_fighter$3322 Def000CC3
+S A$food_fighter$3313 Def000CB2
+S A$food_fighter$3223 Def000C4D
+S A$food_fighter$3214 Def000C45
+S A$food_fighter$3160 Def000C11
+S A$food_fighter$3133 Def000BFD
+S A$food_fighter$3115 Def000BF1
+S A$food_fighter$3106 Def000BE7
+S A$food_fighter$3052 Def000BB7
+S A$food_fighter$3025 Def000BAB
+S A$food_fighter$2800 Def000ACF
+S A$food_fighter$2710 Def000A50
+S A$food_fighter$2701 Def000A42
+S A$food_fighter$2602 Def0009E7
+S A$food_fighter$2530 Def0009BE
+S A$food_fighter$2521 Def0009B8
+S A$food_fighter$2512 Def0009AC
+S A$food_fighter$2503 Def0009A0
+S A$food_fighter$2440 Def00095C
+S A$food_fighter$2350 Def000912
+S A$food_fighter$2341 Def000906
+S A$food_fighter$2260 Def0008D2
+S A$food_fighter$2242 Def0008B9
+S A$food_fighter$2233 Def0008AE
+S A$food_fighter$2215 Def00089F
+S A$food_fighter$2170 Def00087D
+S A$food_fighter$2116 Def000848
+S A$food_fighter$2071 Def000802
+S A$food_fighter$2053 Def0007FF
+S A$food_fighter$2044 Def0007F2
+S A$food_fighter$2035 Def0007E0
+S A$food_fighter$2026 Def0007D9
+S A$food_fighter$2008 Def0007CC
+S A$food_fighter$1900 Def00074F
+S A$food_fighter$1810 Def0006F5
+S A$food_fighter$1801 Def0006E7
+S A$food_fighter$1720 Def000699
+S A$food_fighter$1621 Def000620
+S A$food_fighter$1612 Def000611
+S A$food_fighter$1603 Def000608
+S A$food_fighter$1540 Def0005BB
+S A$food_fighter$1531 Def0005B0
+S A$food_fighter$1522 Def0005A7
+S A$food_fighter$1513 Def00059C
+S A$food_fighter$1432 Def00053A
+S A$food_fighter$1414 Def00052C
+S A$food_fighter$1405 Def000521
+S A$food_fighter$1351 Def0004E5
+S A$food_fighter$1342 Def0004D2
+S A$food_fighter$1333 Def0004C5
+S A$food_fighter$1270 Def000474
+S A$food_fighter$1207 Def000430
+S A$food_fighter$1162 Def00040F
+S A$food_fighter$1144 Def0003F9
+S A$food_fighter$1117 Def0003D4
+S A$food_fighter$1108 Def0003C6
+S A$food_fighter$1090 Def0003AA
+S A$food_fighter$1081 Def00039C
+S A$food_fighter$1072 Def000391
+S A$food_fighter$1063 Def000386
+S A$food_fighter$1054 Def000375
+S A$food_fighter$1018 Def00035D
+S G$draw_lives$0$0 Def000BB7
+S C$food_fighter.c$406$1_0$230 Def0009D5
+S C$food_fighter.c$350$2_0$213 Def000856
+S C$food_fighter.c$344$2_0$210 Def000845
+S C$food_fighter.c$325$2_0$202 Def00078B
+S C$food_fighter.c$306$5_0$200 Def000707
+S XG$kill_player$0$0 Def000371
+S G$wait_button_release$0$0 Def00010C
+S _add_score Def0009E3
+S A$food_fighter$3413 Def000D1C
+S A$food_fighter$3404 Def000D16
+S A$food_fighter$3350 Def000CE6
+S A$food_fighter$3341 Def000CE0
+S A$food_fighter$3332 Def000CCF
+S A$food_fighter$3314 Def000CB4
+S A$food_fighter$3251 Def000C6C
+S A$food_fighter$3233 Def000C59
+S A$food_fighter$3224 Def000C50
+S A$food_fighter$3170 Def000C19
+S A$food_fighter$3161 Def000C12
+S A$food_fighter$3134 Def000BFE
+S A$food_fighter$3116 Def000BF2
+S A$food_fighter$3080 Def000BC5
+S A$food_fighter$3053 Def000BBA
+S A$food_fighter$3026 Def000BAC
+S A$food_fighter$2810 Def000AE1
+S A$food_fighter$2801 Def000AD1
+S A$food_fighter$2720 Def000A5A
+S A$food_fighter$2711 Def000A51
+S A$food_fighter$2702 Def000A43
+S A$food_fighter$2630 Def0009F6
+S A$food_fighter$2603 Def0009E8
+S A$food_fighter$2531 Def0009BF
+S A$food_fighter$2513 Def0009AD
+S A$food_fighter$2504 Def0009A1
+S A$food_fighter$2450 Def000970
+S A$food_fighter$2441 Def00095D
+S A$food_fighter$2360 Def000920
+S A$food_fighter$2351 Def000914
+S A$food_fighter$2342 Def000907
+S A$food_fighter$2261 Def0008D3
+S A$food_fighter$2243 Def0008BA
+S A$food_fighter$2234 Def0008AF
+S A$food_fighter$2216 Def0008A0
+S A$food_fighter$2162 Def00086F
+S A$food_fighter$2144 Def000856
+S A$food_fighter$2117 Def000849
+S A$food_fighter$2090 Def000821
+S A$food_fighter$2072 Def000805
+S A$food_fighter$2045 Def0007F5
+S A$food_fighter$2036 Def0007E4
+S A$food_fighter$2027 Def0007DB
+S A$food_fighter$2018 Def0007D1
+S A$food_fighter$2009 Def0007CE
+S A$food_fighter$1910 Def00075B
+S A$food_fighter$1901 Def000752
+S A$food_fighter$1820 Def0006FF
+S A$food_fighter$1811 Def0006F6
+S A$food_fighter$1802 Def0006EA
+S A$food_fighter$1721 Def00069A
+S A$food_fighter$1712 Def00068E
+S A$food_fighter$1622 Def000622
+S A$food_fighter$1613 Def000614
+S A$food_fighter$1604 Def000609
+S A$food_fighter$1550 Def0005C7
+S A$food_fighter$1541 Def0005BE
+S A$food_fighter$1532 Def0005B1
+S A$food_fighter$1523 Def0005A8
+S A$food_fighter$1514 Def00059D
+S A$food_fighter$1505 Def00058E
+S A$food_fighter$1460 Def000564
+S A$food_fighter$1442 Def000545
+S A$food_fighter$1433 Def00053B
+S A$food_fighter$1415 Def00052D
+S A$food_fighter$1406 Def000522
+S A$food_fighter$1352 Def0004E8
+S A$food_fighter$1343 Def0004D3
+S A$food_fighter$1334 Def0004C9
+S A$food_fighter$1271 Def000475
+S A$food_fighter$1226 Def000444
+S A$food_fighter$1208 Def000433
+S A$food_fighter$1190 Def00041C
+S A$food_fighter$1163 Def000412
+S A$food_fighter$1145 Def0003FC
+S A$food_fighter$1118 Def0003D7
+S A$food_fighter$1109 Def0003C7
+S A$food_fighter$1091 Def0003AD
+S A$food_fighter$1073 Def000392
+S A$food_fighter$1064 Def000388
+S A$food_fighter$1055 Def000377
+S A$food_fighter$1019 Def000360
+S C$food_fighter.c$500$1_1$244 Def000C04
+S C$food_fighter.c$430$1_0$234 Def000A81
+S C$food_fighter.c$421$1_0$234 Def000A26
+S C$food_fighter.c$407$1_0$230 Def0009D5
+S C$food_fighter.c$323$3_0$204 Def000770
+S C$food_fighter.c$318$1_0$202 Def000747
+S C$food_fighter.c$307$5_0$200 Def000712
+S C$food_fighter.c$201$4_0$172 Def0003EF
+S C$food_fighter.c$150$1_0$163 Def00017C
+S C$food_fighter.c$124$1_0$153 Def000103
+S C$food_fighter.c$111$2_0$156 Def0000C3
+S C$food_fighter.c$106$1_0$153 Def0000A5
+S _init_numeric_label Def000924
+S _main Def000D7E
+S A$food_fighter$3351 Def000CE9
+S A$food_fighter$3333 Def000CD1
+S A$food_fighter$3315 Def000CB5
+S A$food_fighter$3270 Def000C80
+S A$food_fighter$3252 Def000C6F
+S A$food_fighter$3243 Def000C66
+S A$food_fighter$3234 Def000C5C
+S A$food_fighter$3171 Def000C1C
+S A$food_fighter$3162 Def000C14
+S A$food_fighter$3144 Def000C04
+S A$food_fighter$3135 Def000C01
+S A$food_fighter$3090 Def000BD7
+S A$food_fighter$3063 Def000BBF
+S A$food_fighter$3054 Def000BBB
+S A$food_fighter$3027 Def000BAD
+S A$food_fighter$3009 Def000BA7
+S A$food_fighter$2910 Def000B5A
+S A$food_fighter$2901 Def000B51
+S A$food_fighter$2820 Def000AEC
+S A$food_fighter$2730 Def000A65
+S A$food_fighter$2712 Def000A52
+S A$food_fighter$2703 Def000A45
+S A$food_fighter$2631 Def0009F9
+S A$food_fighter$2604 Def0009EB
+S A$food_fighter$2532 Def0009C0
+S A$food_fighter$2514 Def0009AE
+S A$food_fighter$2505 Def0009A2
+S A$food_fighter$2460 Def00097B
+S A$food_fighter$2451 Def000971
+S A$food_fighter$2442 Def000960
+S A$food_fighter$2361 Def000921
+S A$food_fighter$2352 Def000917
+S A$food_fighter$2343 Def000908
+S A$food_fighter$2280 Def0008E7
+S A$food_fighter$2262 Def0008D4
+S A$food_fighter$2253 Def0008C4
+S A$food_fighter$2244 Def0008BD
+S A$food_fighter$2235 Def0008B0
+S A$food_fighter$2217 Def0008A1
+S A$food_fighter$2163 Def000872
+S A$food_fighter$2145 Def000859
+S A$food_fighter$2118 Def00084C
+S A$food_fighter$2091 Def000822
+S A$food_fighter$2073 Def000807
+S A$food_fighter$2046 Def0007F8
+S A$food_fighter$2037 Def0007E7
+S A$food_fighter$2028 Def0007DC
+S A$food_fighter$2019 Def0007D4
+S A$food_fighter$1911 Def00075D
+S A$food_fighter$1830 Def000707
+S A$food_fighter$1812 Def0006F7
+S A$food_fighter$1803 Def0006EC
+S A$food_fighter$1740 Def0006AC
+S A$food_fighter$1722 Def00069B
+S A$food_fighter$1713 Def00068F
+S A$food_fighter$1623 Def000625
+S A$food_fighter$1614 Def000617
+S A$food_fighter$1605 Def00060B
+S A$food_fighter$1560 Def0005D5
+S A$food_fighter$1551 Def0005CA
+S A$food_fighter$1542 Def0005C1
+S A$food_fighter$1533 Def0005B4
+S A$food_fighter$1515 Def00059F
+S A$food_fighter$1506 Def000590
+S A$food_fighter$1470 Def00056E
+S A$food_fighter$1461 Def000565
+S A$food_fighter$1443 Def000547
+S A$food_fighter$1434 Def00053C
+S A$food_fighter$1416 Def00052E
+S A$food_fighter$1407 Def000523
+S A$food_fighter$1380 Def000509
+S A$food_fighter$1353 Def0004EB
+S A$food_fighter$1344 Def0004D4
+S A$food_fighter$1335 Def0004CB
+S A$food_fighter$1317 Def0004B3
+S A$food_fighter$1245 Def00045D
+S A$food_fighter$1227 Def000447
+S A$food_fighter$1209 Def000434
+S A$food_fighter$1191 Def00041F
+S A$food_fighter$1164 Def000413
+S A$food_fighter$1146 Def0003FD
+S A$food_fighter$1128 Def0003E4
+S A$food_fighter$1119 Def0003D8
+S A$food_fighter$1092 Def0003AE
+S A$food_fighter$1074 Def000393
+S A$food_fighter$1056 Def00037A
+S A$food_fighter$1029 Def000369
+S C$food_fighter.c$514$1_1$240 Def000C2A
+S C$food_fighter.c$440$1_0$234 Def000B0C
+S C$food_fighter.c$431$1_0$234 Def000AB2
+S C$food_fighter.c$422$1_0$234 Def000A3F
+S C$food_fighter.c$414$1_0$233 Def0009F2
+S C$food_fighter.c$408$1_0$230 Def0009E2
+S C$food_fighter.c$400$1_0$229 Def00099A
+S XG$add_numeric_label$0$0 Def000981
+S C$food_fighter.c$206$2_0$170 Def000419
+S C$food_fighter.c$125$1_0$153 Def00010B
+S C$food_fighter.c$105$2_0$154 Def00008B
+S _configure_text Def000062
+S A$food_fighter$3451 Def000D42
+S A$food_fighter$3433 Def000D2B
+S A$food_fighter$3370 Def000CF8
+S A$food_fighter$3334 Def000CD2
+S A$food_fighter$3316 Def000CB7
+S A$food_fighter$3307 Def000CA7
+S A$food_fighter$3280 Def000C88
+S A$food_fighter$3271 Def000C83
+S A$food_fighter$3235 Def000C5D
+S A$food_fighter$3181 Def000C22
+S A$food_fighter$3154 Def000C0C
+S A$food_fighter$3145 Def000C05
+S A$food_fighter$3127 Def000BF6
+S A$food_fighter$3091 Def000BD8
+S A$food_fighter$3055 Def000BBE
+S A$food_fighter$3028 Def000BB0
+S A$food_fighter$2830 Def000AF8
+S A$food_fighter$2821 Def000AEF
+S A$food_fighter$2812 Def000AE3
+S A$food_fighter$2713 Def000A53
+S A$food_fighter$2704 Def000A48
+S A$food_fighter$2650 Def0009FD
+S A$food_fighter$2605 Def0009EC
+S A$food_fighter$2542 Def0009CB
+S A$food_fighter$2533 Def0009C1
+S A$food_fighter$2515 Def0009B1
+S A$food_fighter$2506 Def0009A3
+S A$food_fighter$2470 Def000981
+S A$food_fighter$2452 Def000974
+S A$food_fighter$2443 Def000961
+S A$food_fighter$2434 Def000952
+S A$food_fighter$2407 Def000943
+S A$food_fighter$2353 Def000918
+S A$food_fighter$2344 Def000909
+S A$food_fighter$2317 Def000900
+S A$food_fighter$2290 Def0008F3
+S A$food_fighter$2281 Def0008EA
+S A$food_fighter$2272 Def0008DB
+S A$food_fighter$2254 Def0008C7
+S A$food_fighter$2236 Def0008B1
+S A$food_fighter$2227 Def0008A8
+S A$food_fighter$2218 Def0008A2
+S A$food_fighter$2209 Def000899
+S A$food_fighter$2191 Def000880
+S A$food_fighter$2164 Def000873
+S A$food_fighter$2155 Def000867
+S A$food_fighter$2146 Def00085B
+S A$food_fighter$2119 Def00084D
+S A$food_fighter$2092 Def000825
+S A$food_fighter$2083 Def000817
+S A$food_fighter$2074 Def00080A
+S A$food_fighter$2047 Def0007FA
+S A$food_fighter$2038 Def0007EA
+S A$food_fighter$2029 Def0007DE
+S A$food_fighter$1930 Def000777
+S A$food_fighter$1921 Def00076B
+S A$food_fighter$1912 Def00075E
+S A$food_fighter$1840 Def000712
+S A$food_fighter$1831 Def00070A
+S A$food_fighter$1813 Def0006F8
+S A$food_fighter$1750 Def0006B9
+S A$food_fighter$1741 Def0006AD
+S A$food_fighter$1714 Def000693
+S A$food_fighter$1705 Def000686
+S A$food_fighter$1660 Def00064F
+S A$food_fighter$1642 Def00063C
+S A$food_fighter$1624 Def000626
+S A$food_fighter$1615 Def000619
+S A$food_fighter$1606 Def00060C
+S A$food_fighter$1570 Def0005E0
+S A$food_fighter$1561 Def0005D8
+S A$food_fighter$1543 Def0005C2
+S A$food_fighter$1534 Def0005B5
+S A$food_fighter$1516 Def0005A0
+S A$food_fighter$1507 Def000591
+S A$food_fighter$1480 Def00057C
+S A$food_fighter$1462 Def000566
+S A$food_fighter$1453 Def000557
+S A$food_fighter$1444 Def00054A
+S A$food_fighter$1435 Def00053D
+S A$food_fighter$1426 Def000535
+S A$food_fighter$1417 Def00052F
+S A$food_fighter$1408 Def000524
+S A$food_fighter$1390 Def000515
+S A$food_fighter$1381 Def00050A
+S A$food_fighter$1372 Def000501
+S A$food_fighter$1363 Def0004F3
+S A$food_fighter$1345 Def0004D5
+S A$food_fighter$1336 Def0004CC
+S A$food_fighter$1327 Def0004C0
+S A$food_fighter$1318 Def0004B6
+S A$food_fighter$1309 Def0004A8
+S A$food_fighter$1291 Def000490
+S A$food_fighter$1246 Def000461
+S A$food_fighter$1237 Def00044F
+S A$food_fighter$1228 Def000448
+S A$food_fighter$1219 Def00043C
+S A$food_fighter$1165 Def000414
+S A$food_fighter$1147 Def0003FE
+S A$food_fighter$1129 Def0003E7
+S A$food_fighter$1093 Def0003B0
+S A$food_fighter$1075 Def000394
+S A$food_fighter$1057 Def00037B
+S C$food_fighter.c$450$1_0$234 Def000B5A
+S C$food_fighter.c$441$1_0$234 Def000B27
+S C$food_fighter.c$432$1_0$234 Def000AC8
+S C$food_fighter.c$415$1_0$233 Def0009F2
+S C$food_fighter.c$401$1_0$229 Def0009B9
+S C$food_fighter.c$371$4_0$220 Def0008DB
+S C$food_fighter.c$345$3_0$211 Def000817
+S G$fire_as_enemy_shot$0$0 Def00073E
+S G$draw_enemies$0$0 Def00041C
+S C$food_fighter.c$152$1_0$163 Def0001B1
+S C$food_fighter.c$143$1_0$163 Def00013C
+S C$food_fighter.c$136$1_0$161 Def000118
+S _handle_player_input Def000083
+S A$food_fighter$3434 Def000D2E
+S A$food_fighter$3425 Def000D25
+S A$food_fighter$3371 Def000CF9
+S A$food_fighter$3335 Def000CD4
+S A$food_fighter$3326 Def000CC4
+S A$food_fighter$3317 Def000CB8
+S A$food_fighter$3308 Def000CAA
+S A$food_fighter$3281 Def000C8B
+S A$food_fighter$3263 Def000C78
+S A$food_fighter$3236 Def000C60
+S A$food_fighter$3218 Def000C48
+S A$food_fighter$3182 Def000C25
+S A$food_fighter$3155 Def000C0F
+S A$food_fighter$3146 Def000C07
+S A$food_fighter$3128 Def000BF9
+S A$food_fighter$3029 Def000BB1
+S A$food_fighter$2840 Def000B04
+S A$food_fighter$2831 Def000AF9
+S A$food_fighter$2822 Def000AF0
+S A$food_fighter$2750 Def000A78
+S A$food_fighter$2714 Def000A54
+S A$food_fighter$2705 Def000A49
+S A$food_fighter$2660 Def000A0D
+S A$food_fighter$2651 Def000A01
+S A$food_fighter$2615 Def0009F1
+S A$food_fighter$2606 Def0009EF
+S A$food_fighter$2543 Def0009CC
+S A$food_fighter$2534 Def0009C4
+S A$food_fighter$2525 Def0009B9
+S A$food_fighter$2516 Def0009B2
+S A$food_fighter$2507 Def0009A4
+S A$food_fighter$2480 Def000982
+S A$food_fighter$2453 Def000975
+S A$food_fighter$2444 Def000962
+S A$food_fighter$2435 Def000955
+S A$food_fighter$2417 Def000948
+S A$food_fighter$2408 Def000944
+S A$food_fighter$2390 Def000930
+S A$food_fighter$2354 Def000919
+S A$food_fighter$2345 Def00090A
+S A$food_fighter$2291 Def0008F6
+S A$food_fighter$2282 Def0008EB
+S A$food_fighter$2273 Def0008DE
+S A$food_fighter$2255 Def0008C8
+S A$food_fighter$2246 Def0008BF
+S A$food_fighter$2237 Def0008B2
+S A$food_fighter$2219 Def0008A3
+S A$food_fighter$2192 Def000883
+S A$food_fighter$2165 Def000876
+S A$food_fighter$2156 Def00086A
+S A$food_fighter$2147 Def00085E
+S A$food_fighter$2093 Def000826
+S A$food_fighter$2084 Def00081A
+S A$food_fighter$2039 Def0007EC
+S A$food_fighter$1940 Def000783
+S A$food_fighter$1931 Def000778
+S A$food_fighter$1922 Def00076E
+S A$food_fighter$1913 Def00075F
+S A$food_fighter$1841 Def000715
+S A$food_fighter$1832 Def00070B
+S A$food_fighter$1814 Def0006F9
+S A$food_fighter$1751 Def0006BA
+S A$food_fighter$1733 Def0006A4
+S A$food_fighter$1706 Def00068A
+S A$food_fighter$1661 Def000653
+S A$food_fighter$1652 Def000646
+S A$food_fighter$1643 Def00063F
+S A$food_fighter$1634 Def00062D
+S A$food_fighter$1625 Def000627
+S A$food_fighter$1571 Def0005E2
+S A$food_fighter$1562 Def0005D9
+S A$food_fighter$1544 Def0005C3
+S A$food_fighter$1535 Def0005B6
+S A$food_fighter$1517 Def0005A1
+S A$food_fighter$1508 Def000593
+S A$food_fighter$1481 Def00057D
+S A$food_fighter$1463 Def000567
+S A$food_fighter$1454 Def00055A
+S A$food_fighter$1445 Def00054C
+S A$food_fighter$1436 Def000540
+S A$food_fighter$1418 Def000530
+S A$food_fighter$1409 Def000525
+S A$food_fighter$1391 Def000516
+S A$food_fighter$1382 Def00050B
+S A$food_fighter$1373 Def000502
+S A$food_fighter$1364 Def0004F6
+S A$food_fighter$1346 Def0004D8
+S A$food_fighter$1337 Def0004CD
+S A$food_fighter$1328 Def0004C3
+S A$food_fighter$1319 Def0004B7
+S A$food_fighter$1292 Def000493
+S A$food_fighter$1283 Def000483
+S A$food_fighter$1247 Def000464
+S A$food_fighter$1238 Def000453
+S A$food_fighter$1229 Def00044A
+S A$food_fighter$1166 Def000415
+S A$food_fighter$1157 Def000405
+S A$food_fighter$1148 Def0003FF
+S A$food_fighter$1139 Def0003EF
+S A$food_fighter$1085 Def00039F
+S A$food_fighter$1076 Def000395
+S A$food_fighter$1058 Def00037E
+S C$food_fighter.c$512$1_1$244 Def000C1E
+S C$food_fighter.c$501$2_1$245 Def000C09
+S C$food_fighter.c$451$1_0$234 Def000B5D
+S C$food_fighter.c$442$1_0$234 Def000B34
+S C$food_fighter.c$433$1_0$234 Def000AD4
+S C$food_fighter.c$424$1_0$234 Def000A5E
+S C$food_fighter.c$416$1_0$233 Def0009FA
+S C$food_fighter.c$381$1_0$223 Def000906
+S C$food_fighter.c$354$2_0$213 Def00086F
+S C$food_fighter.c$348$2_0$210 Def000854
+S C$food_fighter.c$346$3_0$211 Def000840
+S C$food_fighter.c$338$2_0$202 Def000801
+S C$food_fighter.c$324$4_0$205 Def0007E0
+S C$food_fighter.c$212$2_0$175 Def00045D
+S C$food_fighter.c$202$5_0$173 Def0003C0
+S G$is_player_colliding_with_enemy$0$0 Def000201
+S C$food_fighter.c$153$1_0$163 Def0001C5
+S C$food_fighter.c$137$1_0$161 Def000118
+S C$food_fighter.c$130$1_0$159 Def00010C
+S C$food_fighter.c$121$2_0$158 Def0000FE
+S C$food_fighter.c$112$3_0$157 Def0000C9
+S _is_colliding_with_shot Def00013C
+S A$food_fighter$3516 Def000D7E
+S A$food_fighter$3471 Def000D51
+S A$food_fighter$3444 Def000D3A
+S A$food_fighter$3435 Def000D30
+S A$food_fighter$3417 Def000D1F
+S A$food_fighter$3408 Def000D19
+S A$food_fighter$3363 Def000CF1
+S A$food_fighter$3345 Def000CE1
+S A$food_fighter$3336 Def000CD5
+S A$food_fighter$3327 Def000CC7
+S A$food_fighter$3318 Def000CBB
+S A$food_fighter$3309 Def000CAB
+S A$food_fighter$3282 Def000C8C
+S A$food_fighter$3264 Def000C7B
+S A$food_fighter$3237 Def000C61
+S A$food_fighter$3228 Def000C53
+S A$food_fighter$3219 Def000C4A
+S A$food_fighter$3192 Def000C2A
+S A$food_fighter$3183 Def000C26
+S A$food_fighter$3084 Def000BC7
+S A$food_fighter$3039 Def000BB6
+S A$food_fighter$2850 Def000B0E
+S A$food_fighter$2832 Def000AFC
+S A$food_fighter$2823 Def000AF1
+S A$food_fighter$2814 Def000AE6
+S A$food_fighter$2805 Def000AD4
+S A$food_fighter$2760 Def000A84
+S A$food_fighter$2724 Def000A5E
+S A$food_fighter$2715 Def000A55
+S A$food_fighter$2706 Def000A4A
+S A$food_fighter$2670 Def000A1B
+S A$food_fighter$2661 Def000A0E
+S A$food_fighter$2652 Def000A03
+S A$food_fighter$2607 Def0009F0
+S A$food_fighter$2571 Def0009D5
+S A$food_fighter$2535 Def0009C5
+S A$food_fighter$2526 Def0009BA
+S A$food_fighter$2517 Def0009B3
+S A$food_fighter$2508 Def0009A5
+S A$food_fighter$2490 Def000994
+S A$food_fighter$2481 Def000984
+S A$food_fighter$2454 Def000976
+S A$food_fighter$2445 Def000965
+S A$food_fighter$2436 Def000958
+S A$food_fighter$2427 Def000949
+S A$food_fighter$2409 Def000947
+S A$food_fighter$2391 Def000933
+S A$food_fighter$2382 Def000924
+S A$food_fighter$2355 Def00091C
+S A$food_fighter$2346 Def00090B
+S A$food_fighter$2328 Def000903
+S A$food_fighter$2292 Def0008F7
+S A$food_fighter$2283 Def0008EE
+S A$food_fighter$2274 Def0008DF
+S A$food_fighter$2256 Def0008CA
+S A$food_fighter$2247 Def0008C2
+S A$food_fighter$2238 Def0008B3
+S A$food_fighter$2193 Def000885
+S A$food_fighter$2166 Def000877
+S A$food_fighter$2157 Def00086B
+S A$food_fighter$2094 Def000829
+S A$food_fighter$2085 Def00081C
+S A$food_fighter$2076 Def00080D
+S A$food_fighter$2058 Def000801
+S A$food_fighter$1950 Def00078B
+S A$food_fighter$1932 Def000779
+S A$food_fighter$1914 Def000762
+S A$food_fighter$1905 Def000754
+S A$food_fighter$1860 Def00072F
+S A$food_fighter$1851 Def00071D
+S A$food_fighter$1842 Def000716
+S A$food_fighter$1833 Def00070C
+S A$food_fighter$1824 Def000702
+S A$food_fighter$1815 Def0006FA
+S A$food_fighter$1761 Def0006C5
+S A$food_fighter$1752 Def0006BB
+S A$food_fighter$1734 Def0006A8
+S A$food_fighter$1707 Def00068B
+S A$food_fighter$1680 Def000664
+S A$food_fighter$1653 Def00064A
+S A$food_fighter$1635 Def000631
+S A$food_fighter$1626 Def000628
+S A$food_fighter$1590 Def0005FC
+S A$food_fighter$1572 Def0005E3
+S A$food_fighter$1563 Def0005DA
+S A$food_fighter$1545 Def0005C4
+S A$food_fighter$1518 Def0005A3
+S A$food_fighter$1509 Def000594
+S A$food_fighter$1482 Def00057E
+S A$food_fighter$1464 Def000568
+S A$food_fighter$1455 Def00055C
+S A$food_fighter$1446 Def00054F
+S A$food_fighter$1437 Def000541
+S A$food_fighter$1419 Def000531
+S A$food_fighter$1392 Def000517
+S A$food_fighter$1383 Def00050C
+S A$food_fighter$1374 Def000503
+S A$food_fighter$1365 Def0004F9
+S A$food_fighter$1347 Def0004DA
+S A$food_fighter$1338 Def0004CE
+S A$food_fighter$1293 Def000496
+S A$food_fighter$1284 Def000487
+S A$food_fighter$1275 Def000476
+S A$food_fighter$1257 Def00046B
+S A$food_fighter$1248 Def000467
+S A$food_fighter$1239 Def000456
+S A$food_fighter$1167 Def000416
+S A$food_fighter$1158 Def000408
+S A$food_fighter$1149 Def000400
+S A$food_fighter$1095 Def0003B2
+S A$food_fighter$1086 Def0003A1
+S A$food_fighter$1077 Def000396
+S A$food_fighter$1068 Def000389
+S A$food_fighter$1059 Def00037F
+S C$food_fighter.c$513$1_1$244 Def000C22
+S C$food_fighter.c$502$2_1$245 Def000C0C
+S C$food_fighter.c$460$1_0$235 Def000B8D
+S C$food_fighter.c$452$1_0$234 Def000B60
+S C$food_fighter.c$443$1_0$234 Def000B41
+S C$food_fighter.c$425$1_0$234 Def000A64
+S C$food_fighter.c$403$1_0$229 Def0009CB
+S C$food_fighter.c$382$1_0$223 Def000906
+S C$food_fighter.c$235$2_0$180 Def00062D
+S C$food_fighter.c$203$5_0$173 Def0003E4
+S C$food_fighter.c$170$1_0$165 Def0002A8
+S C$food_fighter.c$161$1_0$165 Def00020A
+S C$food_fighter.c$113$3_0$157 Def0000D5
+S C$food_fighter.c$107$2_0$155 Def0000A9
+S _draw_score Def0009F2
+S _gameplay_loop Def000C43
+S A$food_fighter$3463 Def000D4B
+S A$food_fighter$3445 Def000D3D
+S A$food_fighter$3436 Def000D32
+S A$food_fighter$3382 Def000D02
+S A$food_fighter$3355 Def000CEB
+S A$food_fighter$3346 Def000CE4
+S A$food_fighter$3337 Def000CD8
+S A$food_fighter$3328 Def000CC8
+S A$food_fighter$3319 Def000CBC
+S A$food_fighter$3292 Def000C96
+S A$food_fighter$3283 Def000C8F
+S A$food_fighter$3256 Def000C70
+S A$food_fighter$3247 Def000C69
+S A$food_fighter$3238 Def000C64
+S A$food_fighter$3229 Def000C56
+S A$food_fighter$3184 Def000C29
+S A$food_fighter$3166 Def000C16
+S A$food_fighter$3139 Def000C02
+S A$food_fighter$3085 Def000BC8
+S A$food_fighter$3076 Def000BC0
+S A$food_fighter$2923 Def000B65
+S A$food_fighter$2914 Def000B5D
+S A$food_fighter$2905 Def000B55
+S A$food_fighter$2860 Def000B22
+S A$food_fighter$2851 Def000B11
+S A$food_fighter$2833 Def000AFD
+S A$food_fighter$2824 Def000AF2
+S A$food_fighter$2806 Def000AD7
+S A$food_fighter$2770 Def000A9B
+S A$food_fighter$2761 Def000A86
+S A$food_fighter$2743 Def000A71
+S A$food_fighter$2734 Def000A68
+S A$food_fighter$2725 Def000A61
+S A$food_fighter$2716 Def000A56
+S A$food_fighter$2707 Def000A4D
+S A$food_fighter$2671 Def000A1C
+S A$food_fighter$2662 Def000A0F
+S A$food_fighter$2653 Def000A06
+S A$food_fighter$2572 Def0009D8
+S A$food_fighter$2554 Def0009D1
+S A$food_fighter$2536 Def0009C8
+S A$food_fighter$2527 Def0009BB
+S A$food_fighter$2518 Def0009B4
+S A$food_fighter$2509 Def0009A6
+S A$food_fighter$2491 Def000995
+S A$food_fighter$2482 Def000988
+S A$food_fighter$2464 Def00097D
+S A$food_fighter$2446 Def000966
+S A$food_fighter$2437 Def000959
+S A$food_fighter$2428 Def00094B
+S A$food_fighter$2392 Def000934
+S A$food_fighter$2383 Def000927
+S A$food_fighter$2347 Def00090C
+S A$food_fighter$2293 Def0008F9
+S A$food_fighter$2275 Def0008E0
+S A$food_fighter$2266 Def0008D6
+S A$food_fighter$2257 Def0008CD
+S A$food_fighter$2248 Def0008C3
+S A$food_fighter$2239 Def0008B4
+S A$food_fighter$2194 Def000888
+S A$food_fighter$2167 Def000879
+S A$food_fighter$2158 Def00086E
+S A$food_fighter$2149 Def000861
+S A$food_fighter$2095 Def00082A
+S A$food_fighter$2086 Def00081D
+S A$food_fighter$2077 Def000811
+S A$food_fighter$1960 Def00079A
+S A$food_fighter$1951 Def00078F
+S A$food_fighter$1933 Def00077A
+S A$food_fighter$1915 Def000763
+S A$food_fighter$1906 Def000755
+S A$food_fighter$1861 Def000732
+S A$food_fighter$1852 Def000721
+S A$food_fighter$1843 Def000718
+S A$food_fighter$1834 Def00070E
+S A$food_fighter$1825 Def000705
+S A$food_fighter$1816 Def0006FB
+S A$food_fighter$1771 Def0006D5
+S A$food_fighter$1762 Def0006C9
+S A$food_fighter$1753 Def0006BD
+S A$food_fighter$1735 Def0006A9
+S A$food_fighter$1726 Def00069D
+S A$food_fighter$1708 Def00068C
+S A$food_fighter$1681 Def000666
+S A$food_fighter$1654 Def00064B
+S A$food_fighter$1636 Def000634
+S A$food_fighter$1627 Def00062A
+S A$food_fighter$1591 Def0005FD
+S A$food_fighter$1582 Def0005ED
+S A$food_fighter$1573 Def0005E4
+S A$food_fighter$1564 Def0005DB
+S A$food_fighter$1555 Def0005CC
+S A$food_fighter$1546 Def0005C5
+S A$food_fighter$1528 Def0005A9
+S A$food_fighter$1519 Def0005A4
+S A$food_fighter$1483 Def00057F
+S A$food_fighter$1474 Def000570
+S A$food_fighter$1456 Def00055D
+S A$food_fighter$1447 Def000552
+S A$food_fighter$1438 Def000542
+S A$food_fighter$1393 Def000518
+S A$food_fighter$1384 Def00050F
+S A$food_fighter$1375 Def000504
+S A$food_fighter$1366 Def0004FC
+S A$food_fighter$1357 Def0004EE
+S A$food_fighter$1348 Def0004DD
+S A$food_fighter$1339 Def0004CF
+S A$food_fighter$1294 Def000497
+S A$food_fighter$1285 Def00048A
+S A$food_fighter$1276 Def00047A
+S A$food_fighter$1267 Def00046C
+S A$food_fighter$1249 Def000469
+S A$food_fighter$1177 Def000419
+S A$food_fighter$1168 Def000417
+S A$food_fighter$1159 Def000409
+S A$food_fighter$1087 Def0003A4
+S A$food_fighter$1078 Def000397
+S A$food_fighter$1069 Def00038D
+S C$food_fighter.c$530$1_0$247 Def000C84
+S C$food_fighter.c$521$1_0$247 Def000C53
+S G$init_lives$0$0 Def000B8E
+S C$food_fighter.c$444$1_0$234 Def000B4D
+S C$food_fighter.c$435$1_0$234 Def000AEA
+S C$food_fighter.c$426$1_0$234 Def000A68
+S C$food_fighter.c$404$1_0$229 Def0009D1
+S C$food_fighter.c$390$1_0$225 Def000948
+S C$food_fighter.c$383$1_0$223 Def00091D
+S C$food_fighter.c$311$1_0$196 Def000739
+S C$food_fighter.c$302$1_0$196 Def0006E2
+S C$food_fighter.c$171$1_0$165 Def0002AE
+S C$food_fighter.c$162$1_0$165 Def000218
+S C$food_fighter.c$155$1_0$163 Def0001FA
+S C$food_fighter.c$146$1_0$163 Def000145
+S C$food_fighter.c$139$1_0$161 Def00011D
+S C$food_fighter.c$114$3_0$157 Def0000DD
+S _interrupt_handler Def000900
+S A$food_fighter$3455 Def000D45
+S A$food_fighter$3446 Def000D3E
+S A$food_fighter$3437 Def000D35
+S A$food_fighter$3392 Def000D0C
+S A$food_fighter$3383 Def000D05
+S A$food_fighter$3338 Def000CD9
+S A$food_fighter$3329 Def000CCB
+S A$food_fighter$3293 Def000C98
+S A$food_fighter$3275 Def000C84
+S A$food_fighter$3257 Def000C73
+S A$food_fighter$3239 Def000C65
+S A$food_fighter$3176 Def000C1E
+S A$food_fighter$3095 Def000BD9
+S A$food_fighter$3086 Def000BCB
+S A$food_fighter$2933 Def000B72
+S A$food_fighter$2924 Def000B68
+S A$food_fighter$2906 Def000B58
+S A$food_fighter$2870 Def000B2D
+S A$food_fighter$2861 Def000B23
+S A$food_fighter$2852 Def000B12
+S A$food_fighter$2834 Def000AFE
+S A$food_fighter$2825 Def000AF3
+S A$food_fighter$2807 Def000ADA
+S A$food_fighter$2771 Def000A9F
+S A$food_fighter$2762 Def000A89
+S A$food_fighter$2744 Def000A72
+S A$food_fighter$2735 Def000A69
+S A$food_fighter$2717 Def000A57
+S A$food_fighter$2708 Def000A4E
+S A$food_fighter$2690 Def000A35
+S A$food_fighter$2672 Def000A1D
+S A$food_fighter$2663 Def000A12
+S A$food_fighter$2654 Def000A07
+S A$food_fighter$2573 Def0009D9
+S A$food_fighter$2537 Def0009C9
+S A$food_fighter$2528 Def0009BC
+S A$food_fighter$2519 Def0009B6
+S A$food_fighter$2492 Def000996
+S A$food_fighter$2483 Def00098A
+S A$food_fighter$2465 Def00097F
+S A$food_fighter$2447 Def000969
+S A$food_fighter$2438 Def00095A
+S A$food_fighter$2429 Def00094F
+S A$food_fighter$2384 Def000928
+S A$food_fighter$2348 Def00090D
+S A$food_fighter$2294 Def0008FA
+S A$food_fighter$2276 Def0008E2
+S A$food_fighter$2267 Def0008D9
+S A$food_fighter$2258 Def0008CE
+S A$food_fighter$2168 Def00087A
+S A$food_fighter$2096 Def00082D
+S A$food_fighter$2087 Def00081E
+S A$food_fighter$2078 Def000814
+S A$food_fighter$1970 Def0007A6
+S A$food_fighter$1952 Def000790
+S A$food_fighter$1934 Def00077B
+S A$food_fighter$1916 Def000764
+S A$food_fighter$1907 Def000758
+S A$food_fighter$1862 Def000735
+S A$food_fighter$1853 Def000724
+S A$food_fighter$1844 Def000719
+S A$food_fighter$1835 Def000711
+S A$food_fighter$1817 Def0006FC
+S A$food_fighter$1808 Def0006EF
+S A$food_fighter$1772 Def0006D9
+S A$food_fighter$1754 Def0006BE
+S A$food_fighter$1745 Def0006B1
+S A$food_fighter$1736 Def0006AA
+S A$food_fighter$1727 Def00069E
+S A$food_fighter$1682 Def000669
+S A$food_fighter$1673 Def00065D
+S A$food_fighter$1655 Def00064C
+S A$food_fighter$1637 Def000637
+S A$food_fighter$1628 Def00062B
+S A$food_fighter$1619 Def00061C
+S A$food_fighter$1583 Def0005F0
+S A$food_fighter$1574 Def0005E7
+S A$food_fighter$1565 Def0005DC
+S A$food_fighter$1556 Def0005CF
+S A$food_fighter$1529 Def0005AC
+S A$food_fighter$1493 Def000585
+S A$food_fighter$1484 Def000580
+S A$food_fighter$1475 Def000573
+S A$food_fighter$1457 Def000560
+S A$food_fighter$1394 Def000519
+S A$food_fighter$1385 Def000510
+S A$food_fighter$1376 Def000505
+S A$food_fighter$1367 Def0004FD
+S A$food_fighter$1358 Def0004F1
+S A$food_fighter$1349 Def0004E0
+S A$food_fighter$1295 Def000498
+S A$food_fighter$1286 Def00048B
+S A$food_fighter$1277 Def00047D
+S A$food_fighter$1268 Def00046E
+S A$food_fighter$1196 Def000421
+S A$food_fighter$1169 Def000418
+S A$food_fighter$1097 Def0003B5
+S A$food_fighter$1088 Def0003A7
+S A$food_fighter$1079 Def000398
+S C$food_fighter.c$581$1_0$251 Def000D7E
+S C$food_fighter.c$552$4_0$250 Def000D0F
+S C$food_fighter.c$540$1_0$247 Def000CC4
+S C$food_fighter.c$531$1_0$247 Def000C88
+S C$food_fighter.c$522$1_0$247 Def000C59
+S C$food_fighter.c$506$1_1$244 Def000C11
+S C$food_fighter.c$475$1_0$240 Def000BC0
+S C$food_fighter.c$454$1_0$234 Def000B65
+S C$food_fighter.c$445$1_0$234 Def000B51
+S C$food_fighter.c$436$1_0$234 Def000AF7
+S C$food_fighter.c$427$1_0$234 Def000A71
+S C$food_fighter.c$418$1_0$234 Def0009FB
+S XG$draw_numeric_label$0$0 Def0009D1
+S C$food_fighter.c$384$1_0$223 Def000923
+S C$food_fighter.c$377$1_0$221 Def000900
+S C$food_fighter.c$376$2_0$221 Def000900
+S C$food_fighter.c$363$2_0$216 Def0008EF
+S C$food_fighter.c$357$2_0$213 Def00087E
+S C$food_fighter.c$355$3_0$214 Def000867
+S C$food_fighter.c$312$1_0$196 Def00073D
+S C$food_fighter.c$280$2_0$191 Def00067E
+S C$food_fighter.c$230$1_0$179 Def00049B
+S C$food_fighter.c$213$3_0$176 Def000421
+S C$food_fighter.c$194$1_0$170 Def000372
+S C$food_fighter.c$156$1_0$163 Def000200
+S C$food_fighter.c$147$1_0$163 Def000150
+S C$food_fighter.c$133$1_0$159 Def000113
+S _add_lives Def000BA8
+S _init_level Def0009FB
+S A$food_fighter$3528 Def000D84
+S A$food_fighter$3447 Def000D41
+S A$food_fighter$3438 Def000D36
+S A$food_fighter$3429 Def000D28
+S A$food_fighter$3393 Def000D0D
+S A$food_fighter$3384 Def000D06
+S A$food_fighter$3375 Def000CFA
+S A$food_fighter$3339 Def000CDC
+S A$food_fighter$3276 Def000C87
+S A$food_fighter$3258 Def000C74
+S A$food_fighter$3177 Def000C21
+S A$food_fighter$3096 Def000BDB
+S A$food_fighter$3087 Def000BCE
+S A$food_fighter$3078 Def000BC3
+S A$food_fighter$2943 Def000B80
+S A$food_fighter$2934 Def000B75
+S A$food_fighter$2925 Def000B69
+S A$food_fighter$2880 Def000B39
+S A$food_fighter$2871 Def000B2E
+S A$food_fighter$2862 Def000B26
+S A$food_fighter$2853 Def000B13
+S A$food_fighter$2844 Def000B08
+S A$food_fighter$2835 Def000AFF
+S A$food_fighter$2808 Def000ADC
+S A$food_fighter$2790 Def000AC1
+S A$food_fighter$2772 Def000AA3
+S A$food_fighter$2763 Def000A8C
+S A$food_fighter$2754 Def000A7C
+S A$food_fighter$2745 Def000A73
+S A$food_fighter$2736 Def000A6A
+S A$food_fighter$2718 Def000A58
+S A$food_fighter$2709 Def000A4F
+S A$food_fighter$2691 Def000A36
+S A$food_fighter$2682 Def000A26
+S A$food_fighter$2673 Def000A1E
+S A$food_fighter$2664 Def000A13
+S A$food_fighter$2628 Def0009F2
+S A$food_fighter$2574 Def0009DC
+S A$food_fighter$2538 Def0009CA
+S A$food_fighter$2529 Def0009BD
+S A$food_fighter$2493 Def000997
+S A$food_fighter$2448 Def00096C
+S A$food_fighter$2439 Def00095B
+S A$food_fighter$2385 Def00092B
+S A$food_fighter$2349 Def00090E
+S A$food_fighter$2295 Def0008FC
+S A$food_fighter$2277 Def0008E3
+S A$food_fighter$2259 Def0008D1
+S A$food_fighter$2196 Def00088B
+S A$food_fighter$2178 Def00087E
+S A$food_fighter$2169 Def00087C
+S A$food_fighter$2097 Def00082E
+S A$food_fighter$2088 Def00081F
+S A$food_fighter$2079 Def000816
+S A$food_fighter$1980 Def0007B0
+S A$food_fighter$1971 Def0007A7
+S A$food_fighter$1953 Def000791
+S A$food_fighter$1944 Def000786
+S A$food_fighter$1935 Def00077C
+S A$food_fighter$1917 Def000768
+S A$food_fighter$1908 Def000759
+S A$food_fighter$1863 Def000737
+S A$food_fighter$1854 Def000727
+S A$food_fighter$1845 Def00071B
+S A$food_fighter$1818 Def0006FD
+S A$food_fighter$1809 Def0006F3
+S A$food_fighter$1755 Def0006BF
+S A$food_fighter$1746 Def0006B2
+S A$food_fighter$1728 Def0006A2
+S A$food_fighter$1719 Def000695
+S A$food_fighter$1683 Def00066A
+S A$food_fighter$1674 Def00065E
+S A$food_fighter$1647 Def000641
+S A$food_fighter$1638 Def000639
+S A$food_fighter$1629 Def00062C
+S A$food_fighter$1584 Def0005F1
+S A$food_fighter$1575 Def0005E8
+S A$food_fighter$1566 Def0005DD
+S A$food_fighter$1557 Def0005D0
+S A$food_fighter$1539 Def0005B8
+S A$food_fighter$1494 Def000586
+S A$food_fighter$1476 Def000575
+S A$food_fighter$1458 Def000562
+S A$food_fighter$1449 Def000554
+S A$food_fighter$1386 Def000511
+S A$food_fighter$1377 Def000506
+S A$food_fighter$1368 Def0004FE
+S A$food_fighter$1287 Def00048C
+S A$food_fighter$1278 Def00047E
+S A$food_fighter$1269 Def000472
+S A$food_fighter$1197 Def000425
+S A$food_fighter$1089 Def0003A8
+S C$food_fighter.c$582$1_0$251 Def000D7E
+S C$food_fighter.c$550$1_0$247 Def000D02
+S C$food_fighter.c$541$1_0$247 Def000CE1
+S C$food_fighter.c$523$1_0$247 Def000C66
+S C$food_fighter.c$492$2_0$241 Def000BF3
+S C$food_fighter.c$462$1_0$236 Def000B8E
+S C$food_fighter.c$455$1_0$234 Def000B72
+S C$food_fighter.c$437$1_0$234 Def000B04
+S C$food_fighter.c$419$1_0$234 Def000A08
+S C$food_fighter.c$378$1_0$221 Def000903
+S C$food_fighter.c$364$2_0$216 Def0008A8
+S C$food_fighter.c$335$5_0$206 Def0007D5
+S C$food_fighter.c$333$6_0$207 Def0007D1
+S C$food_fighter.c$331$7_0$208 Def0007CF
+S C$food_fighter.c$240$1_0$179 Def000585
+S C$food_fighter.c$236$3_0$181 Def0004C5
+S C$food_fighter.c$221$2_0$179 Def00046C
+S C$food_fighter.c$180$1_0$167 Def0002F0
+S C$food_fighter.c$164$1_0$165 Def000222
+S C$food_fighter.c$134$1_0$159 Def000117
+S C$food_fighter.c$116$3_0$157 Def0000E2
+S A$food_fighter$3475 Def000D54
+S A$food_fighter$3439 Def000D39
+S A$food_fighter$3385 Def000D07
+S A$food_fighter$3376 Def000CFD
+S A$food_fighter$3268 Def000C7C
+S A$food_fighter$3259 Def000C77
+S A$food_fighter$3088 Def000BD1
+S A$food_fighter$3079 Def000BC4
+S A$food_fighter$2962 Def000B85
+S A$food_fighter$2944 Def000B82
+S A$food_fighter$2935 Def000B76
+S A$food_fighter$2926 Def000B6C
+S A$food_fighter$2890 Def000B47
+S A$food_fighter$2881 Def000B3A
+S A$food_fighter$2872 Def000B2F
+S A$food_fighter$2854 Def000B16
+S A$food_fighter$2836 Def000B00
+S A$food_fighter$2818 Def000AEA
+S A$food_fighter$2809 Def000ADE
+S A$food_fighter$2764 Def000A8E
+S A$food_fighter$2755 Def000A7F
+S A$food_fighter$2746 Def000A74
+S A$food_fighter$2737 Def000A6B
+S A$food_fighter$2719 Def000A59
+S A$food_fighter$2692 Def000A37
+S A$food_fighter$2683 Def000A29
+S A$food_fighter$2674 Def000A1F
+S A$food_fighter$2665 Def000A14
+S A$food_fighter$2629 Def0009F5
+S A$food_fighter$2575 Def0009DD
+S A$food_fighter$2548 Def0009CD
+S A$food_fighter$2494 Def000998
+S A$food_fighter$2458 Def000977
+S A$food_fighter$2449 Def00096F
+S A$food_fighter$2386 Def00092C
+S A$food_fighter$2359 Def00091D
+S A$food_fighter$2296 Def0008FD
+S A$food_fighter$2278 Def0008E5
+S A$food_fighter$2197 Def00088E
+S A$food_fighter$2098 Def000831
+S A$food_fighter$2089 Def000820
+S A$food_fighter$1990 Def0007B9
+S A$food_fighter$1981 Def0007B1
+S A$food_fighter$1972 Def0007A8
+S A$food_fighter$1945 Def000789
+S A$food_fighter$1936 Def00077D
+S A$food_fighter$1927 Def000770
+S A$food_fighter$1909 Def00075A
+S A$food_fighter$1855 Def000729
+S A$food_fighter$1846 Def00071C
+S A$food_fighter$1819 Def0006FE
+S A$food_fighter$1783 Def0006E1
+S A$food_fighter$1756 Def0006C3
+S A$food_fighter$1747 Def0006B3
+S A$food_fighter$1684 Def00066B
+S A$food_fighter$1666 Def000655
+S A$food_fighter$1648 Def000644
+S A$food_fighter$1585 Def0005F3
+S A$food_fighter$1576 Def0005EB
+S A$food_fighter$1558 Def0005D3
+S A$food_fighter$1495 Def000587
+S A$food_fighter$1477 Def000576
+S A$food_fighter$1459 Def000563
+S A$food_fighter$1387 Def000512
+S A$food_fighter$1378 Def000507
+S A$food_fighter$1279 Def00047F
+S A$food_fighter$1198 Def000427
+S A$food_fighter$1099 Def0003B9
+S C$food_fighter.c$533$1_0$247 Def000C90
+S C$food_fighter.c$524$1_0$247 Def000C69
+S C$food_fighter.c$495$1_0$240 Def000BF6
+S C$food_fighter.c$463$1_0$236 Def000B8E
+S C$food_fighter.c$456$1_0$234 Def000B84
+S C$food_fighter.c$438$1_0$234 Def000B08
+S C$food_fighter.c$429$1_0$234 Def000A7C
+S C$food_fighter.c$379$1_0$221 Def000903
+S C$food_fighter.c$374$2_0$216 Def0008FE
+S C$food_fighter.c$365$2_0$216 Def000899
+S C$food_fighter.c$303$2_0$197 Def00072B
+S C$food_fighter.c$232$1_0$179 Def0004A8
+S C$food_fighter.c$208$2_0$175 Def00041C
+S G$init_enemies$0$0 Def000372
+S C$food_fighter.c$165$1_0$165 Def000242
+S C$food_fighter.c$149$1_0$163 Def000166
+S A$food_fighter$3467 Def000D4E
+S A$food_fighter$3386 Def000D09
+S A$food_fighter$3377 Def000CFE
+S A$food_fighter$3368 Def000CF4
+S A$food_fighter$3359 Def000CEE
+S A$food_fighter$3287 Def000C90
+S A$food_fighter$3269 Def000C7F
+S A$food_fighter$3089 Def000BD4
+S A$food_fighter$2990 Def000B96
+S A$food_fighter$2963 Def000B88
+S A$food_fighter$2936 Def000B78
+S A$food_fighter$2927 Def000B6D
+S A$food_fighter$2918 Def000B60
+S A$food_fighter$2891 Def000B48
+S A$food_fighter$2882 Def000B3B
+S A$food_fighter$2873 Def000B30
+S A$food_fighter$2855 Def000B17
+S A$food_fighter$2819 Def000AEB
+S A$food_fighter$2792 Def000AC4
+S A$food_fighter$2783 Def000AB2
+S A$food_fighter$2774 Def000AA5
+S A$food_fighter$2765 Def000A91
+S A$food_fighter$2747 Def000A75
+S A$food_fighter$2738 Def000A6C
+S A$food_fighter$2729 Def000A64
+S A$food_fighter$2693 Def000A38
+S A$food_fighter$2684 Def000A2B
+S A$food_fighter$2675 Def000A20
+S A$food_fighter$2666 Def000A17
+S A$food_fighter$2639 Def0009FA
+S A$food_fighter$2585 Def0009E2
+S A$food_fighter$2576 Def0009E0
+S A$food_fighter$2549 Def0009CF
+S A$food_fighter$2459 Def00097A
+S A$food_fighter$2396 Def000935
+S A$food_fighter$2387 Def00092D
+S A$food_fighter$2369 Def000923
+S A$food_fighter$2288 Def0008EF
+S A$food_fighter$2198 Def000890
+S A$food_fighter$2099 Def000832
+S A$food_fighter$1991 Def0007BC
+S A$food_fighter$1982 Def0007B2
+S A$food_fighter$1973 Def0007A9
+S A$food_fighter$1964 Def00079C
+S A$food_fighter$1937 Def00077E
+S A$food_fighter$1928 Def000774
+S A$food_fighter$1766 Def0006CD
+S A$food_fighter$1748 Def0006B5
+S A$food_fighter$1694 Def000676
+S A$food_fighter$1685 Def00066C
+S A$food_fighter$1667 Def000659
+S A$food_fighter$1595 Def0005FF
+S A$food_fighter$1586 Def0005F6
+S A$food_fighter$1577 Def0005EC
+S A$food_fighter$1559 Def0005D4
+S A$food_fighter$1496 Def000588
+S A$food_fighter$1478 Def000579
+S A$food_fighter$1469 Def00056A
+S A$food_fighter$1388 Def000513
+S A$food_fighter$1379 Def000508
+S A$food_fighter$1199 Def000428
+S C$food_fighter.c$543$1_0$247 Def000CE6
+S C$food_fighter.c$534$1_0$247 Def000C96
+S C$food_fighter.c$496$1_0$240 Def000BFA
+S C$food_fighter.c$464$1_0$236 Def000B9A
+S C$food_fighter.c$448$1_0$234 Def000B55
+S C$food_fighter.c$392$1_0$227 Def000949
+S C$food_fighter.c$326$6_0$207 Def000793
+S C$food_fighter.c$275$2_0$190 Def00065D
+S C$food_fighter.c$250$6_0$184 Def0005A9
+S C$food_fighter.c$233$1_0$179 Def0004B3
+S C$food_fighter.c$214$4_0$177 Def00044F
+S C$food_fighter.c$190$1_0$168 Def000362
+S C$food_fighter.c$182$1_0$167 Def000319
+S C$food_fighter.c$173$1_0$167 Def0002AF
+S C$food_fighter.c$127$1_0$159 Def00010C
+S _count_enemies Def0006E2
+S A$food_fighter$3459 Def000D48
+S A$food_fighter$3387 Def000D0A
+S A$food_fighter$3378 Def000D01
+S A$food_fighter$3369 Def000CF7
+S A$food_fighter$3297 Def000C9B
+S A$food_fighter$3288 Def000C93
+S A$food_fighter$2991 Def000B99
+S A$food_fighter$2973 Def000B8D
+S A$food_fighter$2964 Def000B89
+S A$food_fighter$2937 Def000B79
+S A$food_fighter$2928 Def000B70
+S A$food_fighter$2919 Def000B63
+S A$food_fighter$2892 Def000B49
+S A$food_fighter$2883 Def000B3C
+S A$food_fighter$2856 Def000B18
+S A$food_fighter$2829 Def000AF7
+S A$food_fighter$2793 Def000AC7
+S A$food_fighter$2784 Def000AB5
+S A$food_fighter$2775 Def000AA6
+S A$food_fighter$2766 Def000A94
+S A$food_fighter$2748 Def000A76
+S A$food_fighter$2739 Def000A6D
+S A$food_fighter$2694 Def000A39
+S A$food_fighter$2685 Def000A2C
+S A$food_fighter$2676 Def000A21
+S A$food_fighter$2667 Def000A18
+S A$food_fighter$2658 Def000A08
+S A$food_fighter$2649 Def0009FB
+S A$food_fighter$2577 Def0009E1
+S A$food_fighter$2487 Def00098B
+S A$food_fighter$2397 Def000936
+S A$food_fighter$2388 Def00092E
+S A$food_fighter$2289 Def0008F2
+S A$food_fighter$1992 Def0007BD
+S A$food_fighter$1983 Def0007B3
+S A$food_fighter$1974 Def0007AA
+S A$food_fighter$1965 Def00079F
+S A$food_fighter$1938 Def00077F
+S A$food_fighter$1929 Def000776
+S A$food_fighter$1893 Def000747
+S A$food_fighter$1767 Def0006D1
+S A$food_fighter$1749 Def0006B8
+S A$food_fighter$1695 Def00067A
+S A$food_fighter$1686 Def00066E
+S A$food_fighter$1668 Def00065A
+S A$food_fighter$1659 Def00064E
+S A$food_fighter$1587 Def0005F7
+S A$food_fighter$1497 Def000589
+S A$food_fighter$1479 Def00057B
+S A$food_fighter$1398 Def00051A
+S A$food_fighter$1389 Def000514
+S A$food_fighter$1299 Def00049B
+S A$food_fighter$410 Def0000B1
+S A$food_fighter$401 Def0000A5
+S C$food_fighter.c$583$2_0$252 Def000D7E
+S C$food_fighter.c$560$2_0$248 Def000D1F
+S C$food_fighter.c$544$1_0$247 Def000CEB
+S C$food_fighter.c$535$1_0$247 Def000C9B
+S C$food_fighter.c$526$1_0$247 Def000C6C
+S C$food_fighter.c$517$1_0$247 Def000C43
+S C$food_fighter.c$516$1_1$247 Def000C43
+S C$food_fighter.c$507$2_1$246 Def000C16
+S C$food_fighter.c$486$2_0$241 Def000BD9
+S C$food_fighter.c$471$1_0$239 Def000BB7
+S C$food_fighter.c$465$1_0$236 Def000BA7
+S C$food_fighter.c$393$1_0$227 Def000952
+S C$food_fighter.c$386$1_0$225 Def000924
+S G$draw_enemy_shots$0$0 Def000856
+S C$food_fighter.c$276$2_0$190 Def000662
+S C$food_fighter.c$270$1_0$179 Def000641
+S C$food_fighter.c$266$3_0$181 Def00061C
+S C$food_fighter.c$242$6_0$184 Def000545
+S C$food_fighter.c$237$4_0$182 Def00060D
+S G$handle_enemies_movement$0$0 Def00046C
+S C$food_fighter.c$219$2_0$175 Def00046B
+S C$food_fighter.c$191$1_0$168 Def000369
+S C$food_fighter.c$183$1_0$167 Def00032D
+S C$food_fighter.c$167$1_0$165 Def00026B
+S C$food_fighter.c$158$1_0$165 Def000201
+S _init_score Def0009D5
+S A$food_fighter$3487 Def000D5A
+S A$food_fighter$3397 Def000D0F
+S A$food_fighter$3298 Def000C9E
+S A$food_fighter$2965 Def000B8C
+S A$food_fighter$2938 Def000B7C
+S A$food_fighter$2929 Def000B71
+S A$food_fighter$2893 Def000B4C
+S A$food_fighter$2884 Def000B3D
+S A$food_fighter$2866 Def000B27
+S A$food_fighter$2857 Def000B1B
+S A$food_fighter$2848 Def000B0C
+S A$food_fighter$2785 Def000AB8
+S A$food_fighter$2776 Def000AA9
+S A$food_fighter$2767 Def000A97
+S A$food_fighter$2749 Def000A77
+S A$food_fighter$2695 Def000A3A
+S A$food_fighter$2686 Def000A2D
+S A$food_fighter$2677 Def000A24
+S A$food_fighter$2668 Def000A19
+S A$food_fighter$2659 Def000A0B
+S A$food_fighter$2488 Def00098E
+S A$food_fighter$2398 Def000937
+S A$food_fighter$2389 Def00092F
+S A$food_fighter$1993 Def0007BE
+S A$food_fighter$1975 Def0007AB
+S A$food_fighter$1966 Def0007A2
+S A$food_fighter$1957 Def000793
+S A$food_fighter$1939 Def000782
+S A$food_fighter$1894 Def00074A
+S A$food_fighter$1876 Def00073D
+S A$food_fighter$1867 Def000739
+S A$food_fighter$1777 Def0006DD
+S A$food_fighter$1687 Def00066F
+S A$food_fighter$1678 Def000662
+S A$food_fighter$1669 Def00065B
+S A$food_fighter$1588 Def0005FA
+S A$food_fighter$1498 Def00058A
+S A$food_fighter$1489 Def000581
+S A$food_fighter$411 Def0000B2
+S A$food_fighter$402 Def0000A7
+S C$food_fighter.c$586$1_0$251 Def000D84
+S C$food_fighter.c$584$2_0$252 Def000D81
+S C$food_fighter.c$561$2_0$248 Def000D22
+S C$food_fighter.c$545$1_0$247 Def000CEE
+S C$food_fighter.c$527$1_0$247 Def000C70
+S C$food_fighter.c$518$1_0$247 Def000C48
+S C$food_fighter.c$508$2_1$246 Def000C19
+S C$food_fighter.c$472$1_0$239 Def000BB7
+S C$food_fighter.c$458$1_0$235 Def000B85
+S XG$add_score$0$0 Def0009F1
+S C$food_fighter.c$394$1_0$227 Def000977
+S C$food_fighter.c$387$1_0$225 Def000924
+S C$food_fighter.c$359$2_0$216 Def000880
+S C$food_fighter.c$304$3_0$198 Def0006EF
+S C$food_fighter.c$284$2_0$192 Def00068E
+S C$food_fighter.c$263$5_0$183 Def000602
+S C$food_fighter.c$226$1_0$179 Def000476
+S C$food_fighter.c$192$1_0$168 Def000371
+S C$food_fighter.c$168$1_0$165 Def00027F
+S _wait_button_release Def00010C
+S _draw_lives Def000BB7
+S A$food_fighter$3479 Def000D57
+S A$food_fighter$2939 Def000B7D
+S A$food_fighter$2867 Def000B28
+S A$food_fighter$2858 Def000B1E
+S A$food_fighter$2849 Def000B0D
+S A$food_fighter$2786 Def000ABA
+S A$food_fighter$2768 Def000A98
+S A$food_fighter$2759 Def000A81
+S A$food_fighter$2696 Def000A3C
+S A$food_fighter$2687 Def000A30
+S A$food_fighter$2678 Def000A25
+S A$food_fighter$2669 Def000A1A
+S A$food_fighter$2498 Def00099A
+S A$food_fighter$2489 Def000991
+S A$food_fighter$2399 Def000938
+S A$food_fighter$1994 Def0007BF
+S A$food_fighter$1976 Def0007AC
+S A$food_fighter$1967 Def0007A3
+S A$food_fighter$1958 Def000796
+S A$food_fighter$1895 Def00074B
+S A$food_fighter$1886 Def00073E
+S A$food_fighter$1868 Def00073C
+S A$food_fighter$1859 Def00072B
+S A$food_fighter$1796 Def0006E2
+S A$food_fighter$1778 Def0006DF
+S A$food_fighter$1688 Def000670
+S A$food_fighter$1679 Def000663
+S A$food_fighter$1589 Def0005FB
+S A$food_fighter$1499 Def00058B
+S A$food_fighter$700 Def0001DA
+S A$food_fighter$610 Def00015F
+S A$food_fighter$520 Def000113
+S A$food_fighter$511 Def00010C
+S A$food_fighter$430 Def0000C7
+S A$food_fighter$412 Def0000B3
+S A$food_fighter$340 Def000069
+S XG$main$0$0 Def000D84
+S C$food_fighter.c$571$2_0$248 Def000D48
+S C$food_fighter.c$562$2_0$248 Def000D25
+S C$food_fighter.c$551$3_0$249 Def000D0C
+S C$food_fighter.c$546$1_0$247 Def000CF1
+S C$food_fighter.c$537$1_0$247 Def000CA1
+S C$food_fighter.c$528$1_0$247 Def000C78
+S C$food_fighter.c$519$1_0$247 Def000C4D
+S C$food_fighter.c$479$2_0$241 Def000BC7
+S C$food_fighter.c$473$1_0$239 Def000BBF
+S C$food_fighter.c$459$1_0$235 Def000B85
+S C$food_fighter.c$395$1_0$227 Def000981
+S XG$init_numeric_label$0$0 Def000948
+S C$food_fighter.c$388$1_0$225 Def000935
+S G$set_numeric_label$0$0 Def000906
+S C$food_fighter.c$327$7_0$208 Def00079C
+S C$food_fighter.c$272$1_0$179 Def000646
+S C$food_fighter.c$244$6_0$184 Def00056A
+S C$food_fighter.c$227$1_0$179 Def000483
+S C$food_fighter.c$215$5_0$178 Def00043C
+S C$food_fighter.c$199$2_0$170 Def000405
+S C$food_fighter.c$185$1_0$167 Def000356
+S C$food_fighter.c$176$1_0$167 Def0002B8
+S A$food_fighter$2949 Def000B84
+S A$food_fighter$2877 Def000B34
+S A$food_fighter$2868 Def000B29
+S A$food_fighter$2859 Def000B21
+S A$food_fighter$2787 Def000ABC
+S A$food_fighter$2778 Def000AAC
+S A$food_fighter$2769 Def000A99
+S A$food_fighter$2688 Def000A31
+S A$food_fighter$2598 Def0009E3
+S A$food_fighter$2499 Def00099B
+S A$food_fighter$1995 Def0007C0
+S A$food_fighter$1977 Def0007AD
+S A$food_fighter$1968 Def0007A4
+S A$food_fighter$1959 Def000799
+S A$food_fighter$1896 Def00074C
+S A$food_fighter$1887 Def000740
+S A$food_fighter$1797 Def0006E5
+S A$food_fighter$1689 Def000674
+S A$food_fighter$800 Def000253
+S A$food_fighter$710 Def0001EB
+S A$food_fighter$701 Def0001DD
+S A$food_fighter$620 Def000168
+S A$food_fighter$611 Def000160
+S A$food_fighter$521 Def000115
+S A$food_fighter$422 Def0000BE
+S A$food_fighter$413 Def0000B4
+S A$food_fighter$341 Def00006C
+S A$food_fighter$260 Def000009
+S C$food_fighter.c$572$2_0$248 Def000D4B
+S C$food_fighter.c$529$1_0$247 Def000C7C
+S C$food_fighter.c$487$3_0$242 Def000BDD
+S C$food_fighter.c$389$1_0$225 Def000943
+S C$food_fighter.c$366$4_0$218 Def0008AC
+S C$food_fighter.c$328$7_0$208 Def0007B4
+S C$food_fighter.c$292$2_0$195 Def0006C5
+S C$food_fighter.c$243$7_0$185 Def000557
+S C$food_fighter.c$216$5_0$178 Def000444
+S C$food_fighter.c$186$1_0$167 Def00035C
+S C$food_fighter.c$177$1_0$167 Def0002C6
+S XG$configure_text$0$0 Def000080
+S A$food_fighter$2995 Def000B9A
+S A$food_fighter$2986 Def000B8E
+S A$food_fighter$2878 Def000B35
+S A$food_fighter$2869 Def000B2C
+S A$food_fighter$2797 Def000AC8
+S A$food_fighter$2788 Def000ABF
+S A$food_fighter$2779 Def000AAF
+S A$food_fighter$2689 Def000A32
+S A$food_fighter$2599 Def0009E4
+S A$food_fighter$1996 Def0007C1
+S A$food_fighter$1987 Def0007B4
+S A$food_fighter$1978 Def0007AE
+S A$food_fighter$1969 Def0007A5
+S A$food_fighter$1888 Def000744
+S A$food_fighter$1699 Def00067E
+S A$food_fighter$900 Def0002CC
+S A$food_fighter$810 Def000267
+S A$food_fighter$801 Def000255
+S A$food_fighter$711 Def0001EE
+S A$food_fighter$702 Def0001DE
+S A$food_fighter$630 Def000177
+S A$food_fighter$621 Def000169
+S A$food_fighter$612 Def000162
+S A$food_fighter$603 Def000150
+S A$food_fighter$423 Def0000BF
+S A$food_fighter$414 Def0000B6
+S A$food_fighter$342 Def00006D
+S A$food_fighter$270 Def000012
+S C$food_fighter.c$573$2_0$248 Def000D4E
+S C$food_fighter.c$564$2_0$248 Def000D28
+S C$food_fighter.c$539$1_0$247 Def000CA7
+S C$food_fighter.c$478$3_0$243 Def000BC0
+S C$food_fighter.c$467$1_0$238 Def000BA8
+S C$food_fighter.c$367$4_0$218 Def0008C4
+S C$food_fighter.c$329$7_0$208 Def0007CC
+S C$food_fighter.c$305$4_0$199 Def00071D
+S C$food_fighter.c$293$2_0$195 Def0006CD
+S C$food_fighter.c$286$2_0$193 Def00069D
+S C$food_fighter.c$283$1_0$179 Def000686
+S C$food_fighter.c$279$2_0$191 Def000676
+S C$food_fighter.c$274$1_0$179 Def000655
+S C$food_fighter.c$251$7_0$187 Def0005B8
+S C$food_fighter.c$238$1_0$179 Def000581
+S C$food_fighter.c$229$1_0$179 Def000490
+S XG$handle_player_input$0$0 Def00010B
+S _draw_enemies Def00041C
+S _fire_as_enemy_shot Def00073E
+S A$food_fighter$2996 Def000B9D
+S A$food_fighter$2987 Def000B91
+S A$food_fighter$2897 Def000B4D
+S A$food_fighter$2888 Def000B41
+S A$food_fighter$2879 Def000B36
+S A$food_fighter$2798 Def000ACB
+S A$food_fighter$1997 Def0007C2
+S A$food_fighter$1988 Def0007B7
+S A$food_fighter$1979 Def0007AF
+S A$food_fighter$1889 Def000746
+S A$food_fighter$910 Def0002D7
+S A$food_fighter$901 Def0002CD
+S A$food_fighter$820 Def000272
+S A$food_fighter$811 Def000269
+S A$food_fighter$802 Def000257
+S A$food_fighter$712 Def0001F1
+S A$food_fighter$703 Def0001DF
+S A$food_fighter$640 Def000183
+S A$food_fighter$631 Def000178
+S A$food_fighter$622 Def00016A
+S A$food_fighter$613 Def000163
+S A$food_fighter$604 Def000153
+S A$food_fighter$550 Def000121
+S A$food_fighter$460 Def0000F0
+S A$food_fighter$424 Def0000C1
+S A$food_fighter$415 Def0000B8
+S A$food_fighter$406 Def0000A9
+S A$food_fighter$361 Def000080
+S A$food_fighter$343 Def000070
+S A$food_fighter$334 Def000062
+S A$food_fighter$271 Def000015
+S C$food_fighter.c$468$1_0$238 Def000BA8
+S C$food_fighter.c$294$2_0$195 Def0006D5
+S C$food_fighter.c$273$2_0$189 Def00064E
+S C$food_fighter.c$252$7_0$187 Def0005C7
+S C$food_fighter.c$239$1_0$179 Def000538
+S C$food_fighter.c$179$1_0$167 Def0002D0
+S XG$is_colliding_with_shot$0$0 Def000200
+S C$food_fighter.c$90$0_0$151 Def000000
+S _is_player_colliding_with_enemy Def000201
+S A$food_fighter$2997 Def000B9E
+S A$food_fighter$2988 Def000B92
+S A$food_fighter$2889 Def000B44
+S A$food_fighter$2799 Def000ACE
+S A$food_fighter$1998 Def0007C5
+S A$food_fighter$1989 Def0007B8
+S A$food_fighter$920 Def0002E9
+S A$food_fighter$911 Def0002D8
+S A$food_fighter$830 Def00027E
+S A$food_fighter$821 Def000273
+S A$food_fighter$803 Def00025A
+S A$food_fighter$722 Def0001FA
+S A$food_fighter$704 Def0001E1
+S A$food_fighter$650 Def000194
+S A$food_fighter$641 Def000185
+S A$food_fighter$632 Def000179
+S A$food_fighter$623 Def00016B
+S A$food_fighter$605 Def000156
+S A$food_fighter$560 Def00012D
+S A$food_fighter$551 Def000123
+S A$food_fighter$542 Def000118
+S A$food_fighter$515 Def00010F
+S A$food_fighter$470 Def0000FA
+S A$food_fighter$461 Def0000F1
+S A$food_fighter$443 Def0000D5
+S A$food_fighter$434 Def0000C9
+S A$food_fighter$416 Def0000B9
+S A$food_fighter$407 Def0000AD
+S A$food_fighter$380 Def000089
+S A$food_fighter$353 Def00007D
+S A$food_fighter$344 Def000071
+S A$food_fighter$335 Def000064
+S A$food_fighter$254 Def000000
+S XG$gameplay_loop$0$0 Def000D5A
+S C$food_fighter.c$575$2_0$248 Def000D51
+S C$food_fighter.c$566$2_0$248 Def000D2B
+S C$food_fighter.c$555$3_0$249 Def000D12
+S C$food_fighter.c$548$2_0$248 Def000CF4
+S C$food_fighter.c$489$3_0$243 Def000BE9
+S C$food_fighter.c$469$1_0$238 Def000BB6
+S XG$draw_score$0$0 Def0009FA
+S C$food_fighter.c$397$1_0$229 Def000982
+S G$init_enemy_shots$0$0 Def000802
+S C$food_fighter.c$285$1_0$179 Def000695
+S C$food_fighter.c$248$6_0$184 Def00058E
+S C$food_fighter.c$245$7_0$186 Def000570
+S C$food_fighter.c$188$1_0$168 Def00035D
+S A$food_fighter$2998 Def000BA1
+S A$food_fighter$2989 Def000B95
+S A$food_fighter$1999 Def0007C6
+S A$food_fighter$930 Def0002F7
+S A$food_fighter$921 Def0002EA
+S A$food_fighter$912 Def0002D9
+S A$food_fighter$840 Def00028D
+S A$food_fighter$822 Def000274
+S A$food_fighter$804 Def00025C
+S A$food_fighter$750 Def00020A
+S A$food_fighter$714 Def0001F3
+S A$food_fighter$705 Def0001E4
+S A$food_fighter$660 Def0001A5
+S A$food_fighter$651 Def000195
+S A$food_fighter$642 Def000188
+S A$food_fighter$633 Def00017A
+S A$food_fighter$624 Def00016C
+S A$food_fighter$606 Def000159
+S A$food_fighter$561 Def00012F
+S A$food_fighter$552 Def000124
+S A$food_fighter$543 Def00011B
+S A$food_fighter$516 Def000112
+S A$food_fighter$471 Def0000FC
+S A$food_fighter$453 Def0000E2
+S A$food_fighter$444 Def0000D9
+S A$food_fighter$435 Def0000CD
+S A$food_fighter$417 Def0000BA
+S A$food_fighter$408 Def0000AE
+S A$food_fighter$390 Def000098
+S A$food_fighter$345 Def000074
+S A$food_fighter$336 Def000065
+S A$food_fighter$264 Def00000C
+S A$food_fighter$255 Def000003
+S C$food_fighter.c$576$2_0$248 Def000D54
+S C$food_fighter.c$567$2_0$248 Def000D3A
+S C$food_fighter.c$556$3_0$249 Def000D19
+S C$food_fighter.c$549$2_0$248 Def000CFA
+S C$food_fighter.c$499$2_0$244 Def000C02
+S C$food_fighter.c$398$1_0$229 Def00098B
+S XG$interrupt_handler$0$0 Def000903
+S C$food_fighter.c$368$5_0$219 Def0008D6
+S C$food_fighter.c$288$2_0$194 Def0006AC
+S C$food_fighter.c$258$6_0$184 Def0005ED
+S C$food_fighter.c$254$7_0$187 Def0005CC
+S C$food_fighter.c$189$1_0$168 Def00035D
+S C$food_fighter.c$91$1_0$151 Def000000
+S _init_lives Def000B8E
+S A$food_fighter$2999 Def000BA2
+S A$food_fighter$940 Def00030A
+S A$food_fighter$931 Def0002F9
+S A$food_fighter$922 Def0002EB
+S A$food_fighter$913 Def0002DA
+S A$food_fighter$850 Def0002A1
+S A$food_fighter$841 Def00028E
+S A$food_fighter$823 Def000275
+S A$food_fighter$805 Def00025F
+S A$food_fighter$751 Def00020D
+S A$food_fighter$733 Def000200
+S A$food_fighter$706 Def0001E5
+S A$food_fighter$661 Def0001A8
+S A$food_fighter$652 Def000196
+S A$food_fighter$643 Def000189
+S A$food_fighter$634 Def00017B
+S A$food_fighter$625 Def00016D
+S A$food_fighter$607 Def00015C
+S A$food_fighter$562 Def000130
+S A$food_fighter$553 Def000125
+S A$food_fighter$544 Def00011C
+S A$food_fighter$481 Def000103
+S A$food_fighter$454 Def0000E5
+S A$food_fighter$436 Def0000CE
+S A$food_fighter$409 Def0000B0
+S A$food_fighter$346 Def000075
+S A$food_fighter$337 Def000066
+S A$food_fighter$265 Def00000D
+S C$food_fighter.c$579$1_0$247 Def000D5A
+S C$food_fighter.c$577$2_0$248 Def000D57
+S C$food_fighter.c$568$2_0$248 Def000D42
+S C$food_fighter.c$559$2_0$248 Def000D1C
+S XG$add_lives$0$0 Def000BB6
+S XG$init_level$0$0 Def000B84
+S G$handle_enemy_shots_movement$0$0 Def000880
+S C$food_fighter.c$296$1_0$179 Def0006E1
+S C$food_fighter.c$289$2_0$194 Def0006B1
+S C$food_fighter.c$287$1_0$179 Def0006A4
+S C$food_fighter.c$269$1_0$179 Def00063C
+S C$food_fighter.c$255$7_0$187 Def0005E0
+S C$food_fighter.c$92$1_0$151 Def000006
+S A$food_fighter$941 Def00030D
+S A$food_fighter$932 Def0002FC
+S A$food_fighter$923 Def0002EE
+S A$food_fighter$914 Def0002DD
+S A$food_fighter$842 Def000290
+S A$food_fighter$824 Def000278
+S A$food_fighter$806 Def000262
+S A$food_fighter$770 Def000222
+S A$food_fighter$761 Def000218
+S A$food_fighter$752 Def000210
+S A$food_fighter$743 Def000201
+S A$food_fighter$716 Def0001F6
+S A$food_fighter$707 Def0001E6
+S A$food_fighter$680 Def0001BF
+S A$food_fighter$671 Def0001B1
+S A$food_fighter$653 Def000198
+S A$food_fighter$644 Def00018A
+S A$food_fighter$626 Def00016E
+S A$food_fighter$608 Def00015D
+S A$food_fighter$563 Def000131
+S A$food_fighter$554 Def000127
+S A$food_fighter$482 Def000106
+S A$food_fighter$455 Def0000E6
+S A$food_fighter$437 Def0000CF
+S A$food_fighter$428 Def0000C3
+S A$food_fighter$392 Def00009A
+S A$food_fighter$374 Def000083
+S A$food_fighter$347 Def000078
+S A$food_fighter$338 Def000067
+S A$food_fighter$266 Def00000E
+S C$food_fighter.c$569$2_0$248 Def000D45
+S C$food_fighter.c$298$1_0$196 Def0006E2
+S C$food_fighter.c$93$1_0$151 Def00000C
+S A$food_fighter$960 Def000326
+S A$food_fighter$942 Def000310
+S A$food_fighter$933 Def0002FD
+S A$food_fighter$924 Def0002EF
+S A$food_fighter$915 Def0002DE
+S A$food_fighter$906 Def0002D0
+S A$food_fighter$852 Def0002A4
+S A$food_fighter$843 Def000292
+S A$food_fighter$834 Def00027F
+S A$food_fighter$825 Def000279
+S A$food_fighter$816 Def00026B
+S A$food_fighter$780 Def000231
+S A$food_fighter$771 Def000226
+S A$food_fighter$762 Def00021B
+S A$food_fighter$753 Def000211
+S A$food_fighter$744 Def000203
+S A$food_fighter$717 Def0001F8
+S A$food_fighter$708 Def0001E7
+S A$food_fighter$690 Def0001C9
+S A$food_fighter$681 Def0001C0
+S A$food_fighter$672 Def0001B2
+S A$food_fighter$663 Def0001AA
+S A$food_fighter$654 Def00019B
+S A$food_fighter$645 Def00018B
+S A$food_fighter$627 Def000172
+S A$food_fighter$618 Def000166
+S A$food_fighter$609 Def00015E
+S A$food_fighter$564 Def000132
+S A$food_fighter$555 Def000128
+S A$food_fighter$483 Def000107
+S A$food_fighter$456 Def0000E8
+S A$food_fighter$438 Def0000D0
+S A$food_fighter$429 Def0000C6
+S A$food_fighter$393 Def00009D
+S A$food_fighter$384 Def00008B
+S A$food_fighter$375 Def000086
+S A$food_fighter$348 Def00007B
+S A$food_fighter$339 Def000068
+S A$food_fighter$267 Def00000F
+S C$food_fighter.c$94$1_0$151 Def000016
+S _init_enemies Def000372
+S A$food_fighter$970 Def00032D
+S A$food_fighter$961 Def000327
+S A$food_fighter$952 Def000319
+S A$food_fighter$934 Def0002FE
+S A$food_fighter$916 Def0002DF
+S A$food_fighter$907 Def0002D4
+S A$food_fighter$880 Def0002B1
+S A$food_fighter$853 Def0002A6
+S A$food_fighter$844 Def000294
+S A$food_fighter$835 Def000283
+S A$food_fighter$826 Def00027A
+S A$food_fighter$817 Def00026F
+S A$food_fighter$808 Def000264
+S A$food_fighter$781 Def000234
+S A$food_fighter$772 Def000227
+S A$food_fighter$763 Def00021C
+S A$food_fighter$754 Def000212
+S A$food_fighter$745 Def000207
+S A$food_fighter$727 Def0001FC
+S A$food_fighter$709 Def0001EA
+S A$food_fighter$691 Def0001CC
+S A$food_fighter$682 Def0001C1
+S A$food_fighter$673 Def0001B3
+S A$food_fighter$655 Def00019C
+S A$food_fighter$646 Def00018D
+S A$food_fighter$628 Def000175
+S A$food_fighter$619 Def000167
+S A$food_fighter$565 Def000133
+S A$food_fighter$529 Def000117
+S A$food_fighter$484 Def000108
+S A$food_fighter$475 Def0000FE
+S A$food_fighter$466 Def0000F2
+S A$food_fighter$457 Def0000E9
+S A$food_fighter$448 Def0000DD
+S A$food_fighter$439 Def0000D1
+S A$food_fighter$394 Def00009E
+S A$food_fighter$385 Def00008F
+S A$food_fighter$349 Def00007C
+S A$food_fighter$268 Def000010
+S A$food_fighter$259 Def000006
+S XG$count_enemies$0$0 Def00073D
+S A$food_fighter$980 Def000342
+S A$food_fighter$971 Def000331
+S A$food_fighter$962 Def000328
+S A$food_fighter$953 Def00031D
+S A$food_fighter$944 Def000312
+S A$food_fighter$935 Def0002FF
+S A$food_fighter$917 Def0002E2
+S A$food_fighter$908 Def0002D5
+S A$food_fighter$890 Def0002C0
+S A$food_fighter$881 Def0002B5
+S A$food_fighter$863 Def0002AA
+S A$food_fighter$845 Def000297
+S A$food_fighter$836 Def000286
+S A$food_fighter$827 Def00027B
+S A$food_fighter$818 Def000270
+S A$food_fighter$782 Def000237
+S A$food_fighter$773 Def000228
+S A$food_fighter$764 Def00021E
+S A$food_fighter$755 Def000214
+S A$food_fighter$746 Def000209
+S A$food_fighter$728 Def0001FE
+S A$food_fighter$692 Def0001CE
+S A$food_fighter$683 Def0001C2
+S A$food_fighter$674 Def0001B4
+S A$food_fighter$665 Def0001AD
+S A$food_fighter$656 Def00019D
+S A$food_fighter$647 Def00018F
+S A$food_fighter$638 Def00017C
+S A$food_fighter$629 Def000176
+S A$food_fighter$593 Def000145
+S A$food_fighter$566 Def000135
+S A$food_fighter$548 Def00011D
+S A$food_fighter$494 Def00010B
+S A$food_fighter$485 Def000109
+S A$food_fighter$476 Def000101
+S A$food_fighter$467 Def0000F4
+S A$food_fighter$458 Def0000EC
+S A$food_fighter$449 Def0000E0
+S A$food_fighter$395 Def00009F
+S A$food_fighter$386 Def000091
+S A$food_fighter$269 Def000011
+S XG$init_score$0$0 Def0009E2
+S _handle_enemies_movement Def00046C
+S _draw_enemy_shots Def000856
+S A$food_fighter$981 Def000345
+S A$food_fighter$972 Def000334
+S A$food_fighter$963 Def000329
+S A$food_fighter$954 Def00031E
+S A$food_fighter$936 Def000301
+S A$food_fighter$918 Def0002E5
+S A$food_fighter$909 Def0002D6
+S A$food_fighter$891 Def0002C2
+S A$food_fighter$882 Def0002B7
+S A$food_fighter$864 Def0002AC
+S A$food_fighter$846 Def000299
+S A$food_fighter$837 Def000288
+S A$food_fighter$828 Def00027C
+S A$food_fighter$819 Def000271
+S A$food_fighter$792 Def000242
+S A$food_fighter$783 Def000238
+S A$food_fighter$774 Def000229
+S A$food_fighter$765 Def00021F
+S A$food_fighter$756 Def000215
+S A$food_fighter$693 Def0001D1
+S A$food_fighter$684 Def0001C3
+S A$food_fighter$675 Def0001B5
+S A$food_fighter$666 Def0001AF
+S A$food_fighter$657 Def00019E
+S A$food_fighter$648 Def000190
+S A$food_fighter$639 Def000180
+S A$food_fighter$594 Def000148
+S A$food_fighter$576 Def00013B
+S A$food_fighter$567 Def000136
+S A$food_fighter$549 Def000120
+S A$food_fighter$486 Def00010A
+S A$food_fighter$468 Def0000F6
+S A$food_fighter$459 Def0000ED
+S A$food_fighter$396 Def0000A3
+S A$food_fighter$387 Def000092
+S A$food_fighter$279 Def000016
+S XG$draw_lives$0$0 Def000BBF
+S C$food_fighter.c$259$7_0$188 Def0005FF
+S XG$wait_button_release$0$0 Def000117
+S C$food_fighter.c$96$1_0$152 Def000062
+S A$food_fighter$982 Def000347
+S A$food_fighter$973 Def000336
+S A$food_fighter$964 Def00032A
+S A$food_fighter$955 Def00031F
+S A$food_fighter$946 Def000315
+S A$food_fighter$937 Def000303
+S A$food_fighter$928 Def0002F0
+S A$food_fighter$919 Def0002E6
+S A$food_fighter$892 Def0002C3
+S A$food_fighter$847 Def00029C
+S A$food_fighter$838 Def00028B
+S A$food_fighter$829 Def00027D
+S A$food_fighter$793 Def000246
+S A$food_fighter$784 Def00023B
+S A$food_fighter$775 Def00022A
+S A$food_fighter$694 Def0001D2
+S A$food_fighter$685 Def0001C4
+S A$food_fighter$676 Def0001B6
+S A$food_fighter$658 Def0001A1
+S A$food_fighter$649 Def000191
+S A$food_fighter$595 Def000149
+S A$food_fighter$586 Def00013C
+S A$food_fighter$568 Def000139
+S A$food_fighter$559 Def00012C
+S A$food_fighter$469 Def0000F8
+S A$food_fighter$388 Def000094
+S A$food_fighter$379 Def000087
+S C$food_fighter.c$97$1_0$152 Def000062
+S _set_numeric_label Def000906
+S A$food_fighter$983 Def00034A
+S A$food_fighter$974 Def000339
+S A$food_fighter$965 Def00032B
+S A$food_fighter$956 Def000320
+S A$food_fighter$947 Def000317
+S A$food_fighter$938 Def000305
+S A$food_fighter$929 Def0002F4
+S A$food_fighter$848 Def00029F
+S A$food_fighter$839 Def00028C
+S A$food_fighter$794 Def000249
+S A$food_fighter$785 Def00023C
+S A$food_fighter$776 Def00022B
+S A$food_fighter$695 Def0001D3
+S A$food_fighter$677 Def0001B7
+S A$food_fighter$659 Def0001A2
+S A$food_fighter$596 Def00014A
+S A$food_fighter$587 Def00013E
+S A$food_fighter$389 Def000095
+S C$food_fighter.c$98$1_0$152 Def00007D
+S A$food_fighter$984 Def00034D
+S A$food_fighter$975 Def00033A
+S A$food_fighter$966 Def00032C
+S A$food_fighter$957 Def000321
+S A$food_fighter$939 Def000308
+S A$food_fighter$858 Def0002A8
+S A$food_fighter$795 Def00024B
+S A$food_fighter$786 Def00023D
+S A$food_fighter$777 Def00022C
+S A$food_fighter$696 Def0001D4
+S A$food_fighter$678 Def0001BB
+S A$food_fighter$597 Def00014C
+S A$food_fighter$588 Def000142
+S XG$fire_as_enemy_shot$0$0 Def000801
+S XG$draw_enemies$0$0 Def00046B
+S C$food_fighter.c$99$1_0$152 Def000080
+S A$food_fighter$994 Def000356
+S A$food_fighter$976 Def00033B
+S A$food_fighter$958 Def000322
+S A$food_fighter$886 Def0002B8
+S A$food_fighter$796 Def00024E
+S A$food_fighter$787 Def000240
+S A$food_fighter$778 Def00022F
+S A$food_fighter$697 Def0001D6
+S A$food_fighter$679 Def0001BE
+S A$food_fighter$598 Def00014D
+S A$food_fighter$589 Def000144
+S XG$is_player_colliding_with_enemy$0$0 Def0002AE
+S A$food_fighter$986 Def00034F
+S A$food_fighter$977 Def00033C
+S A$food_fighter$959 Def000323
+S A$food_fighter$887 Def0002BB
+S A$food_fighter$869 Def0002AE
+S A$food_fighter$797 Def00024F
+S A$food_fighter$788 Def000241
+S A$food_fighter$779 Def000230
+S A$food_fighter$698 Def0001D8
+S A$food_fighter$689 Def0001C5
+S G$draw_level_number$0$0 Def000B85
+S _init_enemy_shots Def000802
+S A$food_fighter$978 Def00033E
+S A$food_fighter$897 Def0002C6
+S A$food_fighter$888 Def0002BE
+S A$food_fighter$879 Def0002AF
+S A$food_fighter$798 Def000250
+S A$food_fighter$699 Def0001D9
+S G$gameover_sequence$0$0 Def000BC0
+S XG$init_lives$0$0 Def000BA7
+S A$food_fighter$988 Def000352
+S A$food_fighter$979 Def000340
+S A$food_fighter$898 Def0002C9
+S A$food_fighter$889 Def0002BF
+S A$food_fighter$799 Def000251
+S _handle_enemy_shots_movement Def000880
+S A$food_fighter$989 Def000354
+S A$food_fighter$899 Def0002CA
+S A$food_fighter$999 Def000358
+S XG$init_enemies$0$0 Def000419
+S G$load_standard_palettes$0$0 Def000000
+S XG$draw_enemy_shots$0$0 Def00087E
+S XG$handle_enemies_movement$0$0 Def0006E1
+S G$handle_shot_movement$0$0 Def000118
+S G$is_player_colliding_with_shot$0$0 Def0002AF
+S XG$set_numeric_label$0$0 Def000923
+S G$kill_player$0$0 Def00035D
+S XG$init_enemy_shots$0$0 Def000854
+S _draw_level_number Def000B85
+S G$add_numeric_label$0$0 Def000949
+S _gameover_sequence Def000BC0
+S XG$handle_enemy_shots_movement$0$0 Def0008FE
+S _load_standard_palettes Def000000
+S G$draw_numeric_label$0$0 Def000982
+S _handle_shot_movement Def000118
+S _is_player_colliding_with_shot Def0002AF
+S _level_infos Def000017
+S G$add_score$0$0 Def0009E3
+S Ffood_fighter$__str_0$0_0$0 Def0009D2
+S _kill_player Def00035D
+S G$main$0$0 Def000D7E
+S Ffood_fighter$__str_1$0_0$0 Def000C2B
+S XG$draw_level_number$0$0 Def000B8D
+S G$init_numeric_label$0$0 Def000924
+S G$level_infos$0_0$0 Def000017
+S Ffood_fighter$__str_2$0_0$0 Def000C37
+S XG$gameover_sequence$0$0 Def000C2A
+S G$configure_text$0$0 Def000062
+S _add_numeric_label Def000949
+S A$food_fighter$1000 Def00035A
+S Ffood_fighter$__str_3$0_0$0 Def000D5C
+S G$handle_player_input$0$0 Def000083
+S A$food_fighter$2000 Def0007C7
+S A$food_fighter$1100 Def0003BC
+S Ffood_fighter$__str_4$0_0$0 Def000D6A
+S G$is_colliding_with_shot$0$0 Def00013C
+S A$food_fighter$3000 Def000BA5
+S A$food_fighter$2100 Def000833
+S A$food_fighter$2001 Def0007C8
+S A$food_fighter$1200 Def000429
+S A$food_fighter$1110 Def0003C8
+S A$food_fighter$1101 Def0003BE
+S Ffood_fighter$__str_5$0_0$0 Def000D74
+S G$gameplay_loop$0$0 Def000C43
+S G$draw_score$0$0 Def0009F2
+S XG$load_standard_palettes$0$0 Def000016
+S A$food_fighter$3100 Def000BDD
+S A$food_fighter$3001 Def000BA6
+S A$food_fighter$2110 Def000840
+S A$food_fighter$2101 Def000834
+S A$food_fighter$2002 Def0007C9
+S A$food_fighter$1300 Def00049E
+S A$food_fighter$1201 Def00042A
+S A$food_fighter$1120 Def0003DB
+S A$food_fighter$1111 Def0003C9
+S A$food_fighter$1030 Def00036C
+S Ffood_fighter$__str_6$0_0$0 Def000D86
+S G$interrupt_handler$0$0 Def000900
+S C$food_fighter.c$320$1_0$202 Def00074F
+S A$food_fighter$3101 Def000BDE
+S A$food_fighter$2210 Def00089A
+S A$food_fighter$2120 Def00084F
+S A$food_fighter$2111 Def000843
+S A$food_fighter$2102 Def000837
+S A$food_fighter$2030 Def0007DF
+S A$food_fighter$2003 Def0007CA
+S A$food_fighter$1310 Def0004AB
+S A$food_fighter$1301 Def00049F
+S A$food_fighter$1220 Def00043F
+S A$food_fighter$1202 Def00042B
+S A$food_fighter$1130 Def0003E8
+S A$food_fighter$1121 Def0003DC
+S A$food_fighter$1112 Def0003CC
+S A$food_fighter$1040 Def000371
+S A$food_fighter$1031 Def00036D
+S Ffood_fighter$__str_7$0_0$0 Def000D96
+S G$add_lives$0$0 Def000BA8
+S G$init_level$0$0 Def0009FB
+S C$food_fighter.c$321$1_0$202 Def000754
+S XG$handle_shot_movement$0$0 Def00013B
+S _draw_numeric_label Def000982
+S A$food_fighter$3111 Def000BE9
+S A$food_fighter$3102 Def000BE1
+S A$food_fighter$3030 Def000BB4
+S A$food_fighter$2400 Def000939
+S A$food_fighter$2220 Def0008A4
+S A$food_fighter$2211 Def00089B
+S A$food_fighter$2202 Def000891
+S A$food_fighter$2121 Def000850
+S A$food_fighter$2103 Def000838
+S A$food_fighter$2013 Def0007CF
+S A$food_fighter$2004 Def0007CB
+S A$food_fighter$1500 Def00058C
+S A$food_fighter$1410 Def000526
+S A$food_fighter$1320 Def0004B8
+S A$food_fighter$1311 Def0004AE
+S A$food_fighter$1302 Def0004A0
+S A$food_fighter$1230 Def00044B
+S A$food_fighter$1221 Def000440
+S A$food_fighter$1203 Def00042C
+S A$food_fighter$1140 Def0003F2
+S A$food_fighter$1131 Def0003EA
+S A$food_fighter$1122 Def0003DF
+S A$food_fighter$1113 Def0003CD
+S A$food_fighter$1032 Def000370
+S A$food_fighter$1023 Def000362
+S A$food_fighter$1005 Def00035C
+S Ffood_fighter$__str_8$0_0$0 Def000DA3
+S C$food_fighter.c$340$2_0$210 Def000802
+S XG$is_player_colliding_with_shot$0$0 Def00035C
+S C$food_fighter.c$110$1_0$153 Def0000BE
+S C$food_fighter.c$101$1_0$153 Def000083
+A _DATA size 206 flags 0 addr 0
+S Lfood_fighter.count_enemies$enemy$1_0$196 Def0001F5
+S _lives Def0001D3
+S Lfood_fighter.draw_enemy_shots$enm_shot$1_0$212 Def000201
+S Lfood_fighter.draw_enemies$enemy$1_0$174 Def0001E8
+S G$lives$0_0$0 Def0001D3
+S _enemies Def000041
+S Lfood_fighter.fire_as_enemy_shot$count$1_0$202 Def0001F9
+S Lfood_fighter.fire_as_enemy_shot$i$1_0$202 Def0001F7
+S Lfood_fighter.fire_as_enemy_shot$j$1_0$202 Def0001F8
+S G$enemies$0_0$0 Def000041
+S Lfood_fighter.count_enemies$count$1_0$196 Def0001F4
+S Lfood_fighter.count_enemies$i$1_0$196 Def0001F2
+S Lfood_fighter.init_enemies$enemy$1_0$169 Def0001E4
+S _enemy_shots Def000161
+S Lfood_fighter.handle_enemy_shots_movement$enm_shot$1_0$215 Def000204
+S Lfood_fighter.count_enemies$j$1_0$196 Def0001F3
+S Lfood_fighter.draw_enemies$i$1_0$174 Def0001E6
+S Lfood_fighter.draw_enemy_shots$i$1_0$212 Def000200
+S Lfood_fighter.init_enemy_shots$enm_shot$1_0$209 Def0001FE
+S Lfood_fighter.draw_enemies$j$1_0$174 Def0001E7
+S Lfood_fighter.handle_enemies_movement$enemy$1_0$179 Def0001EC
+S G$enemy_shots$0_0$0 Def000161
+S Lfood_fighter.is_player_colliding_with_shot$delta$1_0$167 Def0001DC
+S _ply_ctl Def000000
+S Lfood_fighter.init_enemies$i$1_0$169 Def0001DE
+S Lfood_fighter.init_enemies$j$1_0$169 Def0001DF
+S G$ply_ctl$0_0$0 Def000000
+S Lfood_fighter.handle_enemy_shots_movement$i$1_0$215 Def000203
+S Lfood_fighter.init_enemy_shots$i$1_0$209 Def0001FD
+S Lfood_fighter.handle_enemies_movement$i$1_0$179 Def0001EA
+S Lfood_fighter.handle_enemies_movement$j$1_0$179 Def0001EB
+S _shot Def000021
+S G$shot$0_0$0 Def000021
+S Lfood_fighter.is_colliding_with_shot$delta$1_0$163 Def0001D8
+S Lfood_fighter.fire_as_enemy_shot$target$1_0$202 Def0001FA
+S Lfood_fighter.init_enemies$x$1_0$169 Def0001E0
+S Lfood_fighter.init_enemies$y$1_0$169 Def0001E2
+S _player Def000001
+S G$player$0_0$0 Def000001
+S Lfood_fighter.is_player_colliding_with_enemy$delta$1_0$165 Def0001DA
+S Lfood_fighter.handle_enemies_movement$incr_x$1_0$179 Def0001EE
+S Lfood_fighter.handle_enemies_movement$incr_y$1_0$179 Def0001F0
+S _level Def0001A1
+S G$level$0_0$0 Def0001A1
+S Lfood_fighter.fire_as_enemy_shot$enemy$1_0$202 Def0001FB
+S _score Def0001CE
+S G$score$0_0$0 Def0001CE
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+A _CABS0 size 10 flags 8 addr 7FF0
+S ___SMS__SEGA_signature Def007FF0
+S G$__SMS__SEGA_signature$0_0$0 Def007FF0
+A _CABS1 size 10 flags 8 addr 7FD0
+S ___SMS__SDSC_author Def007FD0
+S G$__SMS__SDSC_author$0_0$0 Def007FD0
+A _CABS2 size D flags 8 addr 7FC3
+S ___SMS__SDSC_name Def007FC3
+S G$__SMS__SDSC_name$0_0$0 Def007FC3
+A _CABS3 size D4 flags 8 addr 7EEF
+S ___SMS__SDSC_descr Def007EEF
+S G$__SMS__SDSC_descr$0_0$0 Def007EEF
+A _CABS4 size 10 flags 8 addr 7FE0
+S ___SMS__SDSC_signature Def007FE0
+S G$__SMS__SDSC_signature$0_0$0 Def007FE0
+T 00 00 00
+R 00 00 01 00
+T 00 00 00
+R 00 00 01 00
+T 01 00 00
+R 00 00 01 00
+T 01 00 00
+R 00 00 01 00
+T 21 00 00
+R 00 00 01 00
+T 21 00 00
+R 00 00 01 00
+T 41 00 00
+R 00 00 01 00
+T 41 00 00
+R 00 00 01 00
+T 61 01 00
+R 00 00 01 00
+T 61 01 00
+R 00 00 01 00
+T A1 01 00
+R 00 00 01 00
+T A1 01 00
+R 00 00 01 00
+T CE 01 00
+R 00 00 01 00
+T CE 01 00
+R 00 00 01 00
+T D3 01 00
+R 00 00 01 00
+T D3 01 00
+R 00 00 01 00
+T D8 01 00
+R 00 00 01 00
+T D8 01 00
+R 00 00 01 00
+T DA 01 00
+R 00 00 01 00
+T DA 01 00
+R 00 00 01 00
+T DC 01 00
+R 00 00 01 00
+T DC 01 00
+R 00 00 01 00
+T DE 01 00
+R 00 00 01 00
+T DE 01 00
+R 00 00 01 00
+T DF 01 00
+R 00 00 01 00
+T DF 01 00
+R 00 00 01 00
+T E0 01 00
+R 00 00 01 00
+T E0 01 00
+R 00 00 01 00
+T E2 01 00
+R 00 00 01 00
+T E2 01 00
+R 00 00 01 00
+T E4 01 00
+R 00 00 01 00
+T E4 01 00
+R 00 00 01 00
+T E6 01 00
+R 00 00 01 00
+T E6 01 00
+R 00 00 01 00
+T E7 01 00
+R 00 00 01 00
+T E7 01 00
+R 00 00 01 00
+T E8 01 00
+R 00 00 01 00
+T E8 01 00
+R 00 00 01 00
+T EA 01 00
+R 00 00 01 00
+T EA 01 00
+R 00 00 01 00
+T EB 01 00
+R 00 00 01 00
+T EB 01 00
+R 00 00 01 00
+T EC 01 00
+R 00 00 01 00
+T EC 01 00
+R 00 00 01 00
+T EE 01 00
+R 00 00 01 00
+T EE 01 00
+R 00 00 01 00
+T F0 01 00
+R 00 00 01 00
+T F0 01 00
+R 00 00 01 00
+T F2 01 00
+R 00 00 01 00
+T F2 01 00
+R 00 00 01 00
+T F3 01 00
+R 00 00 01 00
+T F3 01 00
+R 00 00 01 00
+T F4 01 00
+R 00 00 01 00
+T F4 01 00
+R 00 00 01 00
+T F5 01 00
+R 00 00 01 00
+T F5 01 00
+R 00 00 01 00
+T F7 01 00
+R 00 00 01 00
+T F7 01 00
+R 00 00 01 00
+T F8 01 00
+R 00 00 01 00
+T F8 01 00
+R 00 00 01 00
+T F9 01 00
+R 00 00 01 00
+T F9 01 00
+R 00 00 01 00
+T FA 01 00
+R 00 00 01 00
+T FA 01 00
+R 00 00 01 00
+T FB 01 00
+R 00 00 01 00
+T FB 01 00
+R 00 00 01 00
+T FD 01 00
+R 00 00 01 00
+T FD 01 00
+R 00 00 01 00
+T FE 01 00
+R 00 00 01 00
+T FE 01 00
+R 00 00 01 00
+T 00 02 00
+R 00 00 01 00
+T 00 02 00
+R 00 00 01 00
+T 01 02 00
+R 00 00 01 00
+T 01 02 00
+R 00 00 01 00
+T 03 02 00
+R 00 00 01 00
+T 03 02 00
+R 00 00 01 00
+T 04 02 00
+R 00 00 01 00
+T 04 02 00
+R 00 00 01 00
+T 00 00 00
+R 00 00 00 00
+T 00 00 00 21 00 00 CD 00 00 21 00 00 CD
+R 00 00 00 00 02 04 09 00 02 07 1B 00 02 0A 09 00
+T 0A 00 00 00 00 AF F5 33 AF F5 33 CD 00 00 F1 C9
+R 00 00 00 00 02 03 10 00 02 0C 01 00
+T 17 00 00
+R 00 00 00 00
+T 17 00 00 C0 00 00 00 00 00 00 00 00 00 00 00
+R 00 00 00 00
+T 23 00 00 00 00 01 80 00 80 00 00 00 78 00 00 00
+R 00 00 00 00
+T 30 00 00 00 00 00 00 05 A0 00 A0 00 00 00 78 00
+R 00 00 00 00
+T 3D 00 00 00 00 00 00 00 00 06 00 01 A0 00 00 00
+R 00 00 00 00
+T 4A 00 00 00 00 00 00 00 00 3C 00 01 A0 00 00 01
+R 00 00 00 00
+T 57 00 00 3C 00 3C 00 25 00 5D 00 00 00 04
+R 00 00 00 00
+T 62 00 00
+R 00 00 00 00
+T 62 00 00 3E 01 F5 33 AF F5 33 21 00 03 E5 21
+R 00 00 00 00
+T 6E 00 00 60 01 E5 21 00 00 E5 CD 00 00 21 08 00
+R 00 00 00 00 02 07 1A 00 02 0B 03 00
+T 7B 00 00 39 F9 21 40 11 C3 00 00
+R 00 00 00 00 02 09 0B 00
+T 83 00 00
+R 00 00 00 00
+T 83 00 00 CD 00 00 4D CB 51 28 1A ED 5B 02 00 3E
+R 00 00 00 00 02 04 0E 00 00 0D 01 00
+T 90 00 00 08 BB 3E 00 9A E2 9A 00 EE 80
+R 00 00 00 00 00 09 00 00
+T 9A 00 00
+R 00 00 00 00
+T 9A 00 00 F2 BE 00 1B 1B ED 53 02 00 18 19
+R 00 00 00 00 00 04 00 00 00 0A 01 00
+T A5 00 00
+R 00 00 00 00
+T A5 00 00 CB 59 28 15 ED 5B 02 00 7B D6 F0 7A 17
+R 00 00 00 00 00 09 01 00
+T B2 00 00 3F 1F DE 80 30 06 13 13 ED 53 02 00
+R 00 00 00 00 00 0D 01 00
+T BE 00 00
+R 00 00 00 00
+T BE 00 00 79 E6 30 28 2F 3A 21 00 B7 20 29 ED 5B
+R 00 00 00 00 00 09 01 00
+T CB 00 00 02 00 13 13 13 13 ED 53 22 00 ED 5B
+R 00 00 00 00 00 03 01 00 00 0B 01 00
+T D7 00 00 04 00 ED 53 24 00 21 21 00 36 01 3A
+R 00 00 00 00 00 03 01 00 00 07 01 00 00 0A 01 00
+T E3 00 00 00 00 B7 20 0A C5 21 00 00 E5 CD 00 00
+R 00 00 00 00 00 03 01 00 02 0A 20 00 02 0E 28 00
+T F0 00 00 F1 C1
+R 00 00 00 00
+T F2 00 00
+R 00 00 00 00
+T F2 00 00 CB 41 28 0D CB 61 28 09 CB 69 28 05 21
+R 00 00 00 00
+T FF 00 00 CD 01 36 01
+R 00 00 00 00 00 03 01 00
+T 03 01 00
+R 00 00 00 00
+T 03 01 00 01 00 00 0A B7 C8 3D 02 C9
+R 00 00 00 00 00 04 01 00
+T 0C 01 00
+R 00 00 00 00
+T 0C 01 00
+R 00 00 00 00
+T 0C 01 00 CD 00 00 CD 00 00 7D E6 30 20 F5 C9
+R 00 00 00 00 02 04 07 00 02 07 0E 00
+T 18 01 00
+R 00 00 00 00
+T 18 01 00 3A 21 00 B7 C8 2A 24 00 7D C6 FC 4F 7C
+R 00 00 00 00 00 04 01 00 00 09 01 00
+T 25 01 00 CE FF 47 ED 43 24 00 79 D6 F8 78 17 3F
+R 00 00 00 00 00 08 01 00
+T 32 01 00 1F DE 7F D0 21 21 00 36 00 C9
+R 00 00 00 00 00 08 01 00
+T 3C 01 00
+R 00 00 00 00
+T 3C 01 00 DD E5 DD 21 00 00 DD 39 F5 21 21 00 7E
+R 00 00 00 00 00 0D 01 00
+T 49 01 00 B7 20 04 6F C3 FC 01
+R 00 00 00 00 00 08 00 00
+T 50 01 00
+R 00 00 00 00
+T 50 01 00 DD 7E 04 DD 77 FE DD 7E 05 DD 77 FF E1
+R 00 00 00 00
+T 5D 01 00 E5 7E B7 20 04 6F C3 FC 01
+R 00 00 00 00 00 0A 00 00
+T 66 01 00
+R 00 00 00 00
+T 66 01 00 E1 E5 23 23 23 4E 23 46 ED 5B 24 00 21
+R 00 00 00 00 00 0D 01 00
+T 73 01 00 D8 01 79 93 77 78 9A 23 77 FD 21 D8 01
+R 00 00 00 00 00 03 01 00 00 0E 01 00
+T 80 01 00 FD 7E 00 D6 FA FD 7E 01 17 3F 1F DE 7F
+R 00 00 00 00
+T 8D 01 00 38 1E C1 C5 21 11 00 09 4E 06 00 21
+R 00 00 00 00
+T 99 01 00 0E 00 09 EB 7B FD 96 00 7A FD 9E 01 E2
+R 00 00 00 00
+T A6 01 00 AA 01 EE 80
+R 00 00 00 00 00 03 00 00
+T AA 01 00
+R 00 00 00 00
+T AA 01 00 F2 B1 01
+R 00 00 00 00 00 04 00 00
+T AD 01 00
+R 00 00 00 00
+T AD 01 00 2E 00 18 4B
+R 00 00 00 00
+T B1 01 00
+R 00 00 00 00
+T B1 01 00 E1 E5 23 4E 23 46 ED 5B 22 00 21 D8 01
+R 00 00 00 00 00 0B 01 00 00 0E 01 00
+T BE 01 00 79 93 77 78 9A 23 77 FD 21 D8 01 FD 7E
+R 00 00 00 00 00 0C 01 00
+T CB 01 00 00 D6 FA FD 7E 01 17 3F 1F DE 7F 38 1E
+R 00 00 00 00
+T D8 01 00 C1 C5 21 10 00 09 4E 06 00 21 0E 00 09
+R 00 00 00 00
+T E5 01 00 EB 7B FD 96 00 7A FD 9E 01 E2 F3 01 EE
+R 00 00 00 00 00 0D 00 00
+T F2 01 00 80
+R 00 00 00 00
+T F3 01 00
+R 00 00 00 00
+T F3 01 00 F2 FA 01
+R 00 00 00 00 00 04 00 00
+T F6 01 00
+R 00 00 00 00
+T F6 01 00 2E 00 18 02
+R 00 00 00 00
+T FA 01 00
+R 00 00 00 00
+T FA 01 00 2E 01
+R 00 00 00 00
+T FC 01 00
+R 00 00 00 00
+T FC 01 00 DD F9 DD E1 C9
+R 00 00 00 00
+T 01 02 00
+R 00 00 00 00
+T 01 02 00 DD E5 DD 21 00 00 DD 39 F5 DD 4E 04 DD
+R 00 00 00 00
+T 0E 02 00 46 05 0A B7 20 04 6F C3 AA 02
+R 00 00 00 00 00 0B 00 00
+T 18 02 00
+R 00 00 00 00
+T 18 02 00 3A 01 00 B7 20 04 6F C3 AA 02
+R 00 00 00 00 00 04 01 00 00 0B 00 00
+T 22 02 00
+R 00 00 00 00
+T 22 02 00 ED 5B 04 00 69 60 23 23 23 7E DD 77 FE
+R 00 00 00 00 00 05 01 00
+T 2F 02 00 23 7E DD 77 FF 21 DA 01 7B DD 96 FE 77
+R 00 00 00 00 00 09 01 00
+T 3C 02 00 7A DD 9E FF 23 77 FD 21 DA 01 FD 7E 00
+R 00 00 00 00 00 0B 01 00
+T 49 02 00 D6 F4 FD 7E 01 17 3F 1F DE 7F 38 12 3E
+R 00 00 00 00
+T 56 02 00 0C FD BE 00 3E 00 FD 9E 01 E2 64 02 EE
+R 00 00 00 00 00 0D 00 00
+T 63 02 00 80
+R 00 00 00 00
+T 64 02 00
+R 00 00 00 00
+T 64 02 00 F2 6B 02
+R 00 00 00 00 00 04 00 00
+T 67 02 00
+R 00 00 00 00
+T 67 02 00 2E 00 18 3F
+R 00 00 00 00
+T 6B 02 00
+R 00 00 00 00
+T 6B 02 00 ED 5B 02 00 69 60 23 4E 23 46 21 DA 01
+R 00 00 00 00 00 05 01 00 00 0E 01 00
+T 78 02 00 7B 91 77 7A 98 23 77 FD 21 DA 01 FD 7E
+R 00 00 00 00 00 0C 01 00
+T 85 02 00 00 D6 F4 FD 7E 01 17 3F 1F DE 7F 38 12
+R 00 00 00 00
+T 92 02 00 3E 0C FD BE 00 3E 00 FD 9E 01 E2 A1 02
+R 00 00 00 00 00 0E 00 00
+T 9F 02 00 EE 80
+R 00 00 00 00
+T A1 02 00
+R 00 00 00 00
+T A1 02 00 F2 A8 02
+R 00 00 00 00 00 04 00 00
+T A4 02 00
+R 00 00 00 00
+T A4 02 00 2E 00 18 02
+R 00 00 00 00
+T A8 02 00
+R 00 00 00 00
+T A8 02 00 2E 01
+R 00 00 00 00
+T AA 02 00
+R 00 00 00 00
+T AA 02 00 DD F9 DD E1 C9
+R 00 00 00 00
+T AF 02 00
+R 00 00 00 00
+T AF 02 00 DD E5 DD 21 00 00 DD 39 F5 DD 4E 04 DD
+R 00 00 00 00
+T BC 02 00 46 05 0A B7 20 04 6F C3 58 03
+R 00 00 00 00 00 0B 00 00
+T C6 02 00
+R 00 00 00 00
+T C6 02 00 3A 01 00 B7 20 04 6F C3 58 03
+R 00 00 00 00 00 04 01 00 00 0B 00 00
+T D0 02 00
+R 00 00 00 00
+T D0 02 00 ED 5B 04 00 69 60 23 23 23 7E DD 77 FE
+R 00 00 00 00 00 05 01 00
+T DD 02 00 23 7E DD 77 FF 21 DC 01 7B DD 96 FE 77
+R 00 00 00 00 00 09 01 00
+T EA 02 00 7A DD 9E FF 23 77 FD 21 DC 01 FD 7E 00
+R 00 00 00 00 00 0B 01 00
+T F7 02 00 D6 FA FD 7E 01 17 3F 1F DE 7F 38 12 3E
+R 00 00 00 00
+T 04 03 00 0C FD BE 00 3E 00 FD 9E 01 E2 12 03 EE
+R 00 00 00 00 00 0D 00 00
+T 11 03 00 80
+R 00 00 00 00
+T 12 03 00
+R 00 00 00 00
+T 12 03 00 F2 19 03
+R 00 00 00 00 00 04 00 00
+T 15 03 00
+R 00 00 00 00
+T 15 03 00 2E 00 18 3F
+R 00 00 00 00
+T 19 03 00
+R 00 00 00 00
+T 19 03 00 ED 5B 02 00 69 60 23 4E 23 46 21 DC 01
+R 00 00 00 00 00 05 01 00 00 0E 01 00
+T 26 03 00 7B 91 77 7A 98 23 77 FD 21 DC 01 FD 7E
+R 00 00 00 00 00 0C 01 00
+T 33 03 00 00 D6 FA FD 7E 01 17 3F 1F DE 7F 38 12
+R 00 00 00 00
+T 40 03 00 3E 0C FD BE 00 3E 00 FD 9E 01 E2 4F 03
+R 00 00 00 00 00 0E 00 00
+T 4D 03 00 EE 80
+R 00 00 00 00
+T 4F 03 00
+R 00 00 00 00
+T 4F 03 00 F2 56 03
+R 00 00 00 00 00 04 00 00
+T 52 03 00
+R 00 00 00 00
+T 52 03 00 2E 00 18 02
+R 00 00 00 00
+T 56 03 00
+R 00 00 00 00
+T 56 03 00 2E 01
+R 00 00 00 00
+T 58 03 00
+R 00 00 00 00
+T 58 03 00 DD F9 DD E1 C9
+R 00 00 00 00
+T 5D 03 00
+R 00 00 00 00
+T 5D 03 00 21 00 00 36 78 21 00 00 E5 CD 00 00 21
+R 00 00 00 00 00 04 01 00 02 09 26 00 02 0D 28 00
+T 6A 03 00 FF FF E3 CD A8 0B F1 C9
+R 00 00 00 00 00 07 00 00
+T 72 03 00
+R 00 00 00 00
+T 72 03 00 21 DE 01 36 00 21 AA 01 7E 32 E2 01 23
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0D 01 00
+T 7F 03 00 7E 32 E3 01
+R 00 00 00 00 00 05 01 00
+T 83 03 00
+R 00 00 00 00
+T 83 03 00 3A DE 01 D6 03 C8 ED 4B DE 01 06 00 69
+R 00 00 00 00 00 04 01 00 00 0B 01 00
+T 90 03 00 60 29 09 29 29 29 29 29 11 41 00 19 22
+R 00 00 00 00 00 0C 01 00
+T 9D 03 00 E4 01 3E 00 32 DF 01 3A DE 01 0F 30 08
+R 00 00 00 00 00 03 01 00 00 08 01 00 00 0B 01 00
+T AA 03 00 3A A7 01 4F 06 00 18 03
+R 00 00 00 00 00 04 01 00
+T B2 03 00
+R 00 00 00 00
+T B2 03 00 01 00 00
+R 00 00 00 00
+T B5 03 00
+R 00 00 00 00
+T B5 03 00 ED 43 E0 01
+R 00 00 00 00 00 05 01 00
+T B9 03 00
+R 00 00 00 00
+T B9 03 00 3A DF 01 D6 03 28 45 3A A3 01 26 01 E5
+R 00 00 00 00 00 04 01 00 00 0B 01 00
+T C6 03 00 33 F5 33 21 01 00 E5 2E 02 E5 2A E2 01
+R 00 00 00 00 00 0E 01 00
+T D3 03 00 E5 2A E0 01 E5 2A E4 01 E5 CD 00 00 21
+R 00 00 00 00 00 05 01 00 00 09 01 00 02 0D 08 00
+T E0 03 00 0C 00 39 F9 21 E4 01 7E C6 20 77 30 02
+R 00 00 00 00 00 08 01 00
+T ED 03 00 23 34
+R 00 00 00 00
+T EF 03 00
+R 00 00 00 00
+T EF 03 00 21 DF 01 34 3A A6 01 4F 06 00 21 E0 01
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0E 01 00
+T FC 03 00 7E 81 77 23 7E 88 77 18 B4
+R 00 00 00 00
+T 05 04 00
+R 00 00 00 00
+T 05 04 00 21 DE 01 34 3A A8 01 4F 06 00 21 E2 01
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0E 01 00
+T 12 04 00 7E 81 77 23 7E 88 77 C3 83 03
+R 00 00 00 00 00 0B 00 00
+T 1C 04 00
+R 00 00 00 00
+T 1C 04 00 21 E6 01 36 00
+R 00 00 00 00 00 04 01 00
+T 21 04 00
+R 00 00 00 00
+T 21 04 00 ED 4B E6 01 06 00 69 60 29 09 29 29 29
+R 00 00 00 00 00 05 01 00
+T 2E 04 00 29 29 11 41 00 19 22 E8 01 21 E7 01 36
+R 00 00 00 00 00 06 01 00 00 0A 01 00 00 0D 01 00
+T 3B 04 00 00
+R 00 00 00 00
+T 3C 04 00
+R 00 00 00 00
+T 3C 04 00 2A E8 01 E5 CD 00 00 F1 21 E8 01 7E C6
+R 00 00 00 00 00 04 01 00 02 08 04 00 00 0C 01 00
+T 49 04 00 20 77 30 02 23 34
+R 00 00 00 00
+T 4F 04 00
+R 00 00 00 00
+T 4F 04 00 FD 21 E7 01 FD 34 00 FD 7E 00 D6 03 20
+R 00 00 00 00 00 05 01 00
+T 5C 04 00 DF FD 21 E6 01 FD 34 00 FD 7E 00 D6 03
+R 00 00 00 00 00 06 01 00
+T 69 04 00 20 B6 C9
+R 00 00 00 00
+T 6C 04 00
+R 00 00 00 00
+T 6C 04 00 DD E5 DD 21 00 00 DD 39 F5 F5 ED 4B
+R 00 00 00 00
+T 78 04 00 AC 01 2A B0 01 09 EB ED 53 AC 01 ED 4B
+R 00 00 00 00 00 03 01 00 00 06 01 00 00 0C 01 00
+T 85 04 00 AE 01 2A B2 01 09 EB ED 53 AE 01 3A
+R 00 00 00 00 00 03 01 00 00 06 01 00 00 0C 01 00
+T 91 04 00 AD 01 32 EE 01 17 9F 32 EF 01 2A
+R 00 00 00 00 00 03 01 00 00 06 01 00 00 0B 01 00
+T 9C 04 00 B4 01 7C B5 28 06 21 00 00 22 EE 01
+R 00 00 00 00 00 03 01 00 00 0D 01 00
+T A8 04 00
+R 00 00 00 00
+T A8 04 00 3A AF 01 32 F0 01 17 9F 32 F1 01 2A
+R 00 00 00 00 00 04 01 00 00 07 01 00 00 0C 01 00
+T B4 04 00 BC 01 7C B5 28 06 21 00 00 22 F0 01
+R 00 00 00 00 00 03 01 00 00 0D 01 00
+T C0 04 00
+R 00 00 00 00
+T C0 04 00 21 EA 01 36 00
+R 00 00 00 00 00 04 01 00
+T C5 04 00
+R 00 00 00 00
+T C5 04 00 ED 4B EA 01 06 00 69 60 29 09 29 29 29
+R 00 00 00 00 00 05 01 00
+T D2 04 00 29 29 E3 DD 7E FC C6 41 00 00 DD 77 FE
+R 00 00 00 00 09 0A 01 00
+T DD 04 00 DD 7E FD CE 41 00 00 DD 77 FF DD 6E FE
+R 00 00 00 00 89 07 01 00
+T E8 04 00 DD 66 FF 22 EC 01 21 EB 01 36 00
+R 00 00 00 00 00 07 01 00 00 0A 01 00
+T F3 04 00
+R 00 00 00 00
+T F3 04 00 2A EC 01 DD 75 FE DD 74 FF 7E B7 CA
+R 00 00 00 00 00 04 01 00
+T FF 04 00 02 06 D1 C1 C5 D5 03 69 60 5E 23 56 7B
+R 00 00 00 00 00 03 00 00
+T 0C 05 00 21 EE 01 86 5F 7A 23 8E 57 7B 02 03 7A
+R 00 00 00 00 00 04 01 00
+T 19 05 00 02 ED 4B EC 01 03 03 03 69 60 5E 23 56
+R 00 00 00 00 00 06 01 00
+T 26 05 00 7B 21 F0 01 86 5F 7A 23 8E 57 7B 02 03
+R 00 00 00 00 00 05 01 00
+T 33 05 00 7A 02 2A EC 01 23 E3 E1 E5 7E DD 77 FE
+R 00 00 00 00 00 06 01 00
+T 40 05 00 23 7E DD 77 FF 3E FF DD BE FE 3E 00 DD
+R 00 00 00 00
+T 4D 05 00 9E FF E2 54 05 EE 80
+R 00 00 00 00 00 06 00 00
+T 54 05 00
+R 00 00 00 00
+T 54 05 00 F2 6A 05 DD 7E FE C6 01 4F DD 7E FF CE
+R 00 00 00 00 00 04 00 00
+T 61 05 00 FF 47 E1 E5 71 23 70 18 17
+R 00 00 00 00
+T 6A 05 00
+R 00 00 00 00
+T 6A 05 00 DD CB FF 7E 28 11 DD 7E FE C6 FF 4F DD
+R 00 00 00 00
+T 77 05 00 7E FF CE 00 47 E1 E5 71 23 70
+R 00 00 00 00
+T 81 05 00
+R 00 00 00 00
+T 81 05 00 ED 4B EC 01 03 03 03 50 69 62 5E 23 6E
+R 00 00 00 00 00 05 01 00
+T 8E 05 00 3E C0 BB 3E 00 9D E2 99 05 EE 80
+R 00 00 00 00 00 0A 00 00
+T 99 05 00
+R 00 00 00 00
+T 99 05 00 F2 A9 05 7B C6 40 47 7D CE FF 5F 69 62
+R 00 00 00 00 00 04 00 00
+T A6 05 00 70 23 73
+R 00 00 00 00
+T A9 05 00
+R 00 00 00 00
+T A9 05 00 2A EC 01 E5 CD 3C 01 F1 DD 75 FF 7D B7
+R 00 00 00 00 00 04 01 00 00 08 00 00
+T B6 05 00 28 35 2A EC 01 DD 75 FE DD 74 FF C1 E1
+R 00 00 00 00 00 06 01 00
+T C3 05 00 E5 C5 36 00 21 21 00 36 00 21 A4 01 7E
+R 00 00 00 00 00 08 01 00 00 0D 01 00
+T D0 05 00 DD 77 FE 23 7E DD 77 FF C1 E1 E5 C5 E5
+R 00 00 00 00
+T DD 05 00 CD E3 09 26 03 E3 33 21 00 00 E5 CD
+R 00 00 00 00 00 04 00 00 02 0B 05 00
+T E9 05 00 00 00 F1 33
+R 00 00 00 00 02 03 0D 00
+T ED 05 00
+R 00 00 00 00
+T ED 05 00 3A 00 00 B7 20 0F 2A EC 01 E5 CD 01 02
+R 00 00 00 00 00 04 01 00 00 0A 01 00 00 0E 00 00
+T FA 05 00 F1 7D B7 28 03 CD 5D 03
+R 00 00 00 00 00 09 00 00
+T 02 06 00
+R 00 00 00 00
+T 02 06 00 21 EC 01 7E C6 20 77 30 02 23 34
+R 00 00 00 00 00 04 01 00
+T 0D 06 00
+R 00 00 00 00
+T 0D 06 00 FD 21 EB 01 FD 34 00 FD 7E 00 D6 03 C2
+R 00 00 00 00 00 05 01 00
+T 1A 06 00 F3 04 3A A9 01 B7 28 0B 21 EE 01 AF 96
+R 00 00 00 00 00 03 00 00 00 06 01 00 00 0C 01 00
+T 27 06 00 77 3E 00 23 9E 77
+R 00 00 00 00
+T 2D 06 00
+R 00 00 00 00
+T 2D 06 00 FD 21 EA 01 FD 34 00 FD 7E 00 D6 03 C2
+R 00 00 00 00 00 05 01 00
+T 3A 06 00 C5 04 21 AD 01 36 00 21 AF 01 36 00 ED
+R 00 00 00 00 00 03 00 00 00 06 01 00 00 0B 01 00
+T 47 06 00 4B B4 01 78 B1 28 07 0B ED 43 B4 01 18
+R 00 00 00 00 00 04 01 00 00 0D 01 00
+T 54 06 00 31
+R 00 00 00 00
+T 55 06 00
+R 00 00 00 00
+T 55 06 00 ED 4B B6 01 78 B1 28 19 0B ED 43 B6 01
+R 00 00 00 00 00 05 01 00 00 0E 01 00
+T 62 06 00 78 B1 20 20 2A B0 01 AF 95 4F 3E 00 9C
+R 00 00 00 00 00 08 01 00
+T 6F 06 00 47 ED 43 B0 01 18 10
+R 00 00 00 00 00 06 01 00
+T 76 06 00
+R 00 00 00 00
+T 76 06 00 ED 4B B8 01 ED 43 B4 01 ED 4B BA 01 ED
+R 00 00 00 00 00 05 01 00 00 09 01 00 00 0D 01 00
+T 83 06 00 43 B6 01
+R 00 00 00 00 00 04 01 00
+T 86 06 00
+R 00 00 00 00
+T 86 06 00 ED 4B BC 01 78 B1 28 07 0B ED 43 BC 01
+R 00 00 00 00 00 05 01 00 00 0E 01 00
+T 93 06 00 18 48
+R 00 00 00 00
+T 95 06 00
+R 00 00 00 00
+T 95 06 00 ED 4B BE 01 78 B1 28 07 0B ED 43 BE 01
+R 00 00 00 00 00 05 01 00 00 0E 01 00
+T A2 06 00 18 39
+R 00 00 00 00
+T A4 06 00
+R 00 00 00 00
+T A4 06 00 ED 4B C0 01 78 B1 28 19 0B ED 43 C0 01
+R 00 00 00 00 00 05 01 00 00 0E 01 00
+T B1 06 00 78 B1 20 28 2A B2 01 AF 95 4F 3E 00 9C
+R 00 00 00 00 00 08 01 00
+T BE 06 00 47 ED 43 B2 01 18 18
+R 00 00 00 00 00 06 01 00
+T C5 06 00
+R 00 00 00 00
+T C5 06 00 ED 4B C2 01 ED 43 BC 01 ED 4B C4 01 ED
+R 00 00 00 00 00 05 01 00 00 09 01 00 00 0D 01 00
+T D2 06 00 43 BE 01 ED 4B C6 01 ED 43 C0 01
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0C 01 00
+T DD 06 00
+R 00 00 00 00
+T DD 06 00 DD F9 DD E1 C9
+R 00 00 00 00
+T E2 06 00
+R 00 00 00 00
+T E2 06 00 21 F4 01 36 00 21 F2 01 36 00 01 41 00
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0E 01 00
+T EF 06 00
+R 00 00 00 00
+T EF 06 00 ED 5B F2 01 16 00 6B 62 29 19 29 29 29
+R 00 00 00 00 00 05 01 00
+T FC 06 00 29 29 09 22 F5 01 21 F3 01 36 00
+R 00 00 00 00 00 07 01 00 00 0A 01 00
+T 07 07 00
+R 00 00 00 00
+T 07 07 00 2A F5 01 7E B7 28 04 21 F4 01 34
+R 00 00 00 00 00 04 01 00 00 0B 01 00
+T 12 07 00
+R 00 00 00 00
+T 12 07 00 21 F5 01 7E C6 20 77 30 02 23 34
+R 00 00 00 00 00 04 01 00
+T 1D 07 00
+R 00 00 00 00
+T 1D 07 00 FD 21 F3 01 FD 34 00 FD 7E 00 D6 03 20
+R 00 00 00 00 00 05 01 00
+T 2A 07 00 DC FD 21 F2 01 FD 34 00 FD 7E 00 D6 03
+R 00 00 00 00 00 06 01 00
+T 37 07 00 20 B6 3A F4 01 6F C9
+R 00 00 00 00 00 06 01 00
+T 3E 07 00
+R 00 00 00 00
+T 3E 07 00 DD E5 DD 21 00 00 DD 39 F5 01 A2 01 0A
+R 00 00 00 00 00 0D 01 00
+T 4B 07 00 B7 CA FD 07 21 F9 01 36 00 C5 CD 00 00
+R 00 00 00 00 00 05 00 00 00 08 01 00 02 0E 02 00
+T 58 07 00 C1 0A 4F 06 00 C5 E5 CD 00 00 F1 F1 FD
+R 00 00 00 00 02 0B 27 00
+T 65 07 00 21 FA 01 FD 75 00 21 F7 01 36 00
+R 00 00 00 00 00 04 01 00 00 0A 01 00
+T 70 07 00
+R 00 00 00 00
+T 70 07 00 ED 4B F7 01 06 00 69 60 29 09 29 29 29
+R 00 00 00 00 00 05 01 00
+T 7D 07 00 29 29 11 41 00 19 22 FB 01 21 F8 01 36
+R 00 00 00 00 00 06 01 00 00 0A 01 00 00 0D 01 00
+T 8A 07 00 00
+R 00 00 00 00
+T 8B 07 00
+R 00 00 00 00
+T 8B 07 00 ED 5B FB 01 1A B7 28 42 3A F9 01 21
+R 00 00 00 00 00 05 01 00 00 0C 01 00
+T 97 07 00 FA 01 96 20 35 DD 4E 04 DD 46 05 69 60
+R 00 00 00 00 00 03 01 00
+T A4 07 00 23 E3 EB 23 5E 23 56 13 13 13 13 E1 E5
+R 00 00 00 00
+T B1 07 00 73 23 72 21 03 00 09 E3 2A FB 01 23 23
+R 00 00 00 00 00 0C 01 00
+T BE 07 00 23 5E 23 56 21 0C 00 19 EB E1 E5 73 23
+R 00 00 00 00
+T CB 07 00 72 3E 01 02 18 2C
+R 00 00 00 00
+T D1 07 00
+R 00 00 00 00
+T D1 07 00 21 F9 01 34
+R 00 00 00 00 00 04 01 00
+T D5 07 00
+R 00 00 00 00
+T D5 07 00 21 FB 01 7E C6 20 77 30 02 23 34
+R 00 00 00 00 00 04 01 00
+T E0 07 00
+R 00 00 00 00
+T E0 07 00 FD 21 F8 01 FD 34 00 FD 7E 00 D6 03 20
+R 00 00 00 00 00 05 01 00
+T ED 07 00 9D FD 21 F7 01 FD 34 00 FD 7E 00 D6 03
+R 00 00 00 00 00 06 01 00
+T FA 07 00 C2 70 07
+R 00 00 00 00 00 04 00 00
+T FD 07 00
+R 00 00 00 00
+T FD 07 00 DD F9 DD E1 C9
+R 00 00 00 00
+T 02 08 00
+R 00 00 00 00
+T 02 08 00 21 FD 01 36 00 21 61 01 22 FE 01
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0C 01 00
+T 0D 08 00
+R 00 00 00 00
+T 0D 08 00 FD 21 FD 01 FD 7E 00 D6 02 C8 FD 5E 00
+R 00 00 00 00 00 05 01 00
+T 1A 08 00 16 00 EB 29 29 29 29 EB 21 08 00 19 01
+R 00 00 00 00
+T 27 08 00 08 01 C5 01 01 00 C5 01 01 00 C5 D5 E5
+R 00 00 00 00
+T 34 08 00 2A FE 01 E5 CD 00 00 21 0C 00 39 F9 2A
+R 00 00 00 00 00 04 01 00 02 08 08 00
+T 41 08 00 FE 01 36 00 21 FD 01 34 21 FE 01 7E C6
+R 00 00 00 00 00 03 01 00 00 08 01 00 00 0C 01 00
+T 4E 08 00 20 77 30 BB 23 34 18 B7
+R 00 00 00 00
+T 56 08 00
+R 00 00 00 00
+T 56 08 00 21 00 02 36 00 21 61 01 22 01 02
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0C 01 00
+T 61 08 00
+R 00 00 00 00
+T 61 08 00 3A 00 02 D6 02 C8 2A 01 02 E5 CD 00 00
+R 00 00 00 00 00 04 01 00 00 0A 01 00 02 0E 04 00
+T 6E 08 00 F1 21 00 02 34 21 01 02 7E C6 20 77 30
+R 00 00 00 00 00 05 01 00 00 09 01 00
+T 7B 08 00 E5 23 34 18 E1
+R 00 00 00 00
+T 80 08 00
+R 00 00 00 00
+T 80 08 00 21 03 02 36 00 21 61 01 22 04 02
+R 00 00 00 00 00 04 01 00 00 09 01 00 00 0C 01 00
+T 8B 08 00
+R 00 00 00 00
+T 8B 08 00 3A 03 02 D6 02 C8 ED 4B 04 02 0A B7 28
+R 00 00 00 00 00 04 01 00 00 0B 01 00
+T 98 08 00 42 69 60 23 23 23 4E 23 46 2B 03 03 78
+R 00 00 00 00
+T A5 08 00 71 23 77 ED 4B 04 02 69 60 23 23 23 5E
+R 00 00 00 00 00 08 01 00
+T B2 08 00 23 56 3E C0 BB 3E 00 9A E2 BF 08 EE 80
+R 00 00 00 00 00 0C 00 00
+T BF 08 00
+R 00 00 00 00
+T BF 08 00 F2 C4 08 AF 02
+R 00 00 00 00 00 04 00 00
+T C4 08 00
+R 00 00 00 00
+T C4 08 00 3A 00 00 B7 20 25 2A 04 02 E5 CD AF 02
+R 00 00 00 00 00 04 01 00 00 0A 01 00 00 0E 00 00
+T D1 08 00 F1 7D B7 28 19 CD 5D 03 18 14
+R 00 00 00 00 00 09 00 00
+T DB 08 00
+R 00 00 00 00
+T DB 08 00 CD 00 00 7D B7 20 05 7C E6 07 28 08
+R 00 00 00 00 02 04 02 00
+T E7 08 00
+R 00 00 00 00
+T E7 08 00 2A 04 02 E5 CD 3E 07 F1
+R 00 00 00 00 00 04 01 00 00 08 00 00
+T EF 08 00
+R 00 00 00 00
+T EF 08 00 21 03 02 34 21 04 02 7E C6 20 77 30 8F
+R 00 00 00 00 00 04 01 00 00 08 01 00
+T FC 08 00 23 34 18 8B
+R 00 00 00 00
+T 00 09 00
+R 00 00 00 00
+T 00 09 00 CD 00 00 C3 00 00
+R 00 00 00 00 02 04 24 00 02 07 18 00
+T 06 09 00
+R 00 00 00 00
+T 06 09 00 D1 C1 C5 D5 59 50 13 13 FD 21 04 00 FD
+R 00 00 00 00
+T 13 09 00 39 FD 7E 00 12 13 FD 7E 01 12 21 04 00
+R 00 00 00 00
+T 20 09 00 09 36 01 C9
+R 00 00 00 00
+T 24 09 00
+R 00 00 00 00
+T 24 09 00 21 00 00 E5 21 04 00 39 4E 23 46 C5 CD
+R 00 00 00 00
+T 31 09 00 06 09 F1 F1 D1 C1 C5 D5 FD 21 04 00 FD
+R 00 00 00 00 00 03 00 00
+T 3E 09 00 39 FD 7E 00 02 03 FD 7E 01 02 C9
+R 00 00 00 00
+T 49 09 00
+R 00 00 00 00
+T 49 09 00 DD E5 DD 21 00 00 DD 39 F5 DD 4E 04 DD
+R 00 00 00 00
+T 56 09 00 46 05 69 60 23 23 7E DD 77 FE 23 7E DD
+R 00 00 00 00
+T 63 09 00 77 FF 2B DD 7E 06 DD 56 07 DD 86 FE 5F
+R 00 00 00 00
+T 70 09 00 7A DD 8E FF 73 23 77 21 04 00 09 36 01
+R 00 00 00 00
+T 7D 09 00 DD F9 DD E1 C9
+R 00 00 00 00
+T 82 09 00
+R 00 00 00 00
+T 82 09 00 DD E5 DD 21 00 00 DD 39 F5 DD 4E 04 DD
+R 00 00 00 00
+T 8F 09 00 46 05 21 04 00 09 EB 1A B7 28 33 69 60
+R 00 00 00 00
+T 9C 09 00 23 6E 26 00 29 29 29 29 29 E3 0A 26 00
+R 00 00 00 00
+T A9 09 00 DD 86 FE 6F 7C DD 8E FF 67 29 7C F6 78
+R 00 00 00 00
+T B6 09 00 67 C5 CF E1 23 23 4E 23 46 D5 C5 21
+R 00 00 00 00
+T C2 09 00 D2 09 E5 CD 00 00 F1 F1 D1 AF 12
+R 00 00 00 00 00 03 00 00 02 07 21 00
+T CD 09 00
+R 00 00 00 00
+T CD 09 00 DD F9 DD E1 C9
+R 00 00 00 00
+T D2 09 00
+R 00 00 00 00
+T D2 09 00 25 64 00
+R 00 00 00 00
+T D5 09 00
+R 00 00 00 00
+T D5 09 00 11 08 01 D5 21 CE 01 E5 CD 24 09 F1 F1
+R 00 00 00 00 00 08 01 00 00 0C 00 00
+T E2 09 00 C9
+R 00 00 00 00
+T E3 09 00
+R 00 00 00 00
+T E3 09 00 C1 E1 E5 C5 E5 21 CE 01 E5 CD 49 09 F1
+R 00 00 00 00 00 09 01 00 00 0D 00 00
+T F0 09 00 F1 C9
+R 00 00 00 00
+T F2 09 00
+R 00 00 00 00
+T F2 09 00 21 CE 01 E5 CD 82 09 F1 C9
+R 00 00 00 00 00 04 01 00 00 08 00 00
+T FB 09 00
+R 00 00 00 00
+T FB 09 00 DD E5 DD 21 00 00 DD 39 21 FA FF 39 F9
+R 00 00 00 00
+T 08 0A 00 3A A1 01 06 00 4F 0B 21 05 00 E5 C5 CD
+R 00 00 00 00 00 04 01 00
+T 15 0A 00 00 00 F1 F1 4D 44 29 09 29 09 29 09 11
+R 00 00 00 00 02 03 27 00
+T 22 0A 00 17 00 19 E3 3A A1 01 06 00 4F 0B 21
+R 00 00 00 00 00 03 00 00 00 08 01 00
+T 2E 0A 00 0F 00 E5 C5 CD 00 00 F1 F1 7D 87 87 C6
+R 00 00 00 00 02 08 27 00
+T 3B 0A 00 40 32 A3 01 3A A1 01 4F 06 00 21 03 00
+R 00 00 00 00 00 05 01 00 00 08 01 00
+T 48 0A 00 E5 C5 CD 00 00 F1 F1 4D 44 29 29 09 EB
+R 00 00 00 00 02 06 29 00
+T 55 0A 00 13 13 13 13 13 ED 53 A4 01 21 00 00 22
+R 00 00 00 00 00 0A 01 00
+T 62 0A 00 AC 01 6C 22 AE 01 E1 E5 4E 23 46 ED 43
+R 00 00 00 00 00 03 01 00 00 07 01 00
+T 6F 0A 00 B0 01 E1 E5 23 23 4E 23 46 ED 43 B2 01
+R 00 00 00 00 00 03 01 00 00 0E 01 00
+T 7C 0A 00 21 A6 01 36 55 DD 7E FA C6 0E DD 77 FC
+R 00 00 00 00 00 04 01 00
+T 89 0A 00 DD 7E FB CE 00 DD 77 FD DD 6E FC DD 66
+R 00 00 00 00
+T 96 0A 00 FD 7E 0F 30 0A DD 36 FE 2A DD 36 FF 00
+R 00 00 00 00
+T A3 0A 00 18 07
+R 00 00 00 00
+T A5 0A 00
+R 00 00 00 00
+T A5 0A 00 AF DD 77 FE DD 77 FF
+R 00 00 00 00
+T AC 0A 00
+R 00 00 00 00
+T AC 0A 00 DD 7E FE 32 A7 01 DD 6E FC DD 66 FD CB
+R 00 00 00 00 00 07 01 00
+T B9 0A 00 56 28 05 01 40 00 18 03
+R 00 00 00 00
+T C1 0A 00
+R 00 00 00 00
+T C1 0A 00 01 18 00
+R 00 00 00 00
+T C4 0A 00
+R 00 00 00 00
+T C4 0A 00 21 A8 01 71 DD 6E FC DD 66 FD 7E E6 02
+R 00 00 00 00 00 04 01 00
+T D1 0A 00 32 A9 01 DD 6E FC DD 66 FD CB 56 28 05
+R 00 00 00 00 00 04 01 00
+T DE 0A 00 11 80 FF 18 03
+R 00 00 00 00
+T E3 0A 00
+R 00 00 00 00
+T E3 0A 00 11 00 00
+R 00 00 00 00
+T E6 0A 00
+R 00 00 00 00
+T E6 0A 00 ED 53 AA 01 C1 C5 21 04 00 09 4E 23 46
+R 00 00 00 00 00 05 01 00
+T F3 0A 00 ED 43 B8 01 D1 D5 21 06 00 19 5E 23 56
+R 00 00 00 00 00 05 01 00
+T 00 0B 00 ED 53 BA 01 ED 43 B4 01 ED 53 B6 01 C1
+R 00 00 00 00 00 05 01 00 00 09 01 00 00 0D 01 00
+T 0D 0B 00 C5 21 08 00 09 7E DD 77 FE 23 7E DD 77
+R 00 00 00 00
+T 1A 0B 00 FF 21 C2 01 DD 7E FE 77 23 DD 7E FF 77
+R 00 00 00 00 00 05 01 00
+T 27 0B 00 C1 C5 21 0A 00 09 4E 23 46 ED 43 C4 01
+R 00 00 00 00 00 0E 01 00
+T 34 0B 00 D1 D5 21 0C 00 19 5E 23 56 ED 53 C6 01
+R 00 00 00 00 00 0E 01 00
+T 41 0B 00 21 BC 01 DD 7E FE 77 23 DD 7E FF 77 ED
+R 00 00 00 00 00 04 01 00
+T 4E 0B 00 43 BE 01 ED 53 C0 01 21 CD 01 36 00 CD
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0B 01 00
+T 5B 0B 00 72 03 CD 02 08 21 21 00 36 00 11 1D 01
+R 00 00 00 00 00 03 00 00 00 06 00 00 00 09 01 00
+T 68 0B 00 D5 21 C8 01 E5 CD 24 09 F1 F1 3A A1 01
+R 00 00 00 00 00 05 01 00 00 09 00 00 00 0E 01 00
+T 75 0B 00 4F 06 00 C5 21 C8 01 E5 CD 06 09 DD F9
+R 00 00 00 00 00 08 01 00 00 0C 00 00
+T 82 0B 00 DD E1 C9
+R 00 00 00 00
+T 85 0B 00
+R 00 00 00 00
+T 85 0B 00 21 C8 01 E5 CD 82 09 F1 C9
+R 00 00 00 00 00 04 01 00 00 08 00 00
+T 8E 0B 00
+R 00 00 00 00
+T 8E 0B 00 11 14 01 D5 21 D3 01 E5 CD 24 09 F1 21
+R 00 00 00 00 00 08 01 00 00 0C 00 00
+T 9B 0B 00 03 00 E3 21 D3 01 E5 CD 06 09 F1 F1 C9
+R 00 00 00 00 00 07 01 00 00 0B 00 00
+T A8 0B 00
+R 00 00 00 00
+T A8 0B 00 C1 E1 E5 C5 E5 21 D3 01 E5 CD 49 09 F1
+R 00 00 00 00 00 09 01 00 00 0D 00 00
+T B5 0B 00 F1 C9
+R 00 00 00 00
+T B7 0B 00
+R 00 00 00 00
+T B7 0B 00 21 D3 01 E5 CD 82 09 F1 C9
+R 00 00 00 00 00 04 01 00 00 08 00 00
+T C0 0B 00
+R 00 00 00 00
+T C0 0B 00 01 78 00
+R 00 00 00 00
+T C3 0B 00
+R 00 00 00 00
+T C3 0B 00 78 B1 28 2F C5 CD 00 00 CD F2 09 CD
+R 00 00 00 00 02 09 07 00 00 0C 00 00
+T CF 0B 00 B7 0B CD 85 0B 21 D6 7A CF C1 CB 59 28
+R 00 00 00 00 00 03 00 00 00 06 00 00
+T DC 0B 00 0C C5 21 2B 0C E5 CD 00 00 F1 C1 18 0A
+R 00 00 00 00 00 06 00 00 02 0A 1D 00
+T E9 0B 00
+R 00 00 00 00
+T E9 0B 00 C5 21 37 0C E5 CD 00 00 F1 C1
+R 00 00 00 00 00 05 00 00 02 09 1D 00
+T F3 0B 00
+R 00 00 00 00
+T F3 0B 00 0B 18 CD
+R 00 00 00 00
+T F6 0B 00
+R 00 00 00 00
+T F6 0B 00 21 D6 7A CF 21 2B 0C E5 CD 00 00 F1 2E
+R 00 00 00 00 00 08 00 00 02 0C 1D 00
+T 03 0C 00 00
+R 00 00 00 00
+T 04 0C 00
+R 00 00 00 00
+T 04 0C 00 7D E6 30 20 08 CD 00 00 CD 00 00 18 F3
+R 00 00 00 00 02 09 07 00 02 0C 0E 00
+T 11 0C 00
+R 00 00 00 00
+T 11 0C 00 7D E6 30 28 08 CD 00 00 CD 00 00 18 F3
+R 00 00 00 00 02 09 07 00 02 0C 0E 00
+T 1E 0C 00
+R 00 00 00 00
+T 1E 0C 00 21 D6 7A CF 21 37 0C E5 CD 00 00 F1 C9
+R 00 00 00 00 00 08 00 00 02 0C 1D 00
+T 2B 0C 00
+R 00 00 00 00
+T 2B 0C 00 47 41 4D 45 20 4F 56 45 52 21 21 00
+R 00 00 00 00
+T 37 0C 00
+R 00 00 00 00
+T 37 0C 00 20 20 20 20 20 20 20 20 20 20 20 00
+R 00 00 00 00
+T 43 0C 00
+R 00 00 00 00
+T 43 0C 00 2E 01 CD 00 00 2E 01 CD 00 00 21 20 00
+R 00 00 00 00 02 06 23 00 02 0B 25 00
+T 50 0C 00 CD 00 00 21 40 01 CD 00 00 21 00 40 E5
+R 00 00 00 00 02 04 1E 00 02 0A 06 00
+T 5D 0C 00 21 00 00 E5 CD 00 00 F1 F1 CD 62 00 CD
+R 00 00 00 00 02 04 22 00 02 08 00 00 00 0D 00 00
+T 6A 0C 00 00 00 21 42 78 CF 21 5C 0D E5 CD 00 00
+R 00 00 00 00 00 03 00 00 00 0A 00 00 02 0E 1D 00
+T 77 0C 00 F1 21 5C 78 CF 21 6A 0D E5 CD 00 00 F1
+R 00 00 00 00 00 09 00 00 02 0D 1D 00
+T 84 0C 00 21 6C 78 CF 21 74 0D E5 CD 00 00 F1 21
+R 00 00 00 00 00 08 00 00 02 0C 1D 00
+T 91 0C 00 00 09 CD 00 00 2E B4 CD 00 00 21 10 00
+R 00 00 00 00 00 03 00 00 02 06 0C 00 02 0B 17 00
+T 9E 0C 00 CD 00 00 21 40 01 CD 00 00 11 02 01 D5
+R 00 00 00 00 02 04 1E 00 02 0A 1E 00
+T AB 0C 00 21 01 00 E5 2E 02 E5 2E A8 E5 2E 78 E5
+R 00 00 00 00
+T B8 0C 00 21 01 00 E5 CD 00 00 21 0C 00 39 F9 11
+R 00 00 00 00 00 04 01 00 02 08 08 00
+T C5 0C 00 06 01 D5 21 01 00 E5 2E 01 E5 2E A0 E5
+R 00 00 00 00
+T D2 0C 00 2E 78 E5 21 21 00 E5 CD 00 00 21 0C 00
+R 00 00 00 00 00 07 01 00 02 0B 08 00
+T DF 0C 00 39 F9 21 00 00 36 00 21 A1 01 36 01 CD
+R 00 00 00 00 00 06 01 00 00 0B 01 00
+T EC 0C 00 D5 09 CD 8E 0B CD FB 09
+R 00 00 00 00 00 03 00 00 00 06 00 00 00 09 00 00
+T F4 0C 00
+R 00 00 00 00
+T F4 0C 00 2A D5 01 7C B5 C8 CD E2 06 4D 21 A2 01
+R 00 00 00 00 00 04 01 00 00 0A 00 00 00 0E 01 00
+T 01 0D 00 71 3A CD 01 0C 0D 28 03 B7 28 10
+R 00 00 00 00 00 05 01 00
+T 0C 0D 00
+R 00 00 00 00
+T 0C 0D 00 B7 28 03 CD 0C 01
+R 00 00 00 00 00 07 00 00
+T 12 0D 00
+R 00 00 00 00
+T 12 0D 00 3A A1 01 3C 32 A1 01 CD FB 09
+R 00 00 00 00 00 04 01 00 00 08 01 00 00 0B 00 00
+T 1C 0D 00
+R 00 00 00 00
+T 1C 0D 00 CD 83 00 CD 18 01 CD 6C 04 CD
+R 00 00 00 00 00 04 00 00 00 07 00 00 00 0A 00 00
+T 26 0D 00 80 08 CD 00 00 3A 00 00 CB 57 20 08 21
+R 00 00 00 00 00 03 00 00 02 06 0A 00 00 09 01 00
+T 33 0D 00 01 00 E5 CD 00 00 F1
+R 00 00 00 00 00 03 01 00 02 07 04 00
+T 3A 0D 00
+R 00 00 00 00
+T 3A 0D 00 21 21 00 E5 CD 00 00 F1 CD 1C 04 CD
+R 00 00 00 00 00 04 01 00 02 08 04 00 00 0C 00 00
+T 46 0D 00 56 08 CD 00 00 CD 00 00 CD
+R 00 00 00 00 00 03 00 00 02 06 1F 00 02 09 07 00
+T 4F 0D 00 00 00 CD F2 09 CD B7 0B CD
+R 00 00 00 00 02 03 15 00 00 06 00 00 00 09 00 00
+T 58 0D 00 85 0B 18 98
+R 00 00 00 00 00 03 00 00
+T 5C 0D 00
+R 00 00 00 00
+T 5C 0D 00 53 63 6F 72 65 3A 20 20 20 20 20 20 20
+R 00 00 00 00
+T 69 0D 00 00
+R 00 00 00 00
+T 6A 0D 00
+R 00 00 00 00
+T 6A 0D 00 4C 69 76 65 73 3A 20 20 20 00
+R 00 00 00 00
+T 74 0D 00
+R 00 00 00 00
+T 74 0D 00 4C 65 76 65 6C 3A 20 20 20 00
+R 00 00 00 00
+T 7E 0D 00
+R 00 00 00 00
+T 7E 0D 00
+R 00 00 00 00
+T 7E 0D 00 CD 43 0C CD C0 0B 18 F8
+R 00 00 00 00 00 04 00 00 00 07 00 00
+T 86 0D 00
+R 00 00 00 00
+T 86 0D 00 48 61 72 6F 6C 64 6F 2D 4F 4B 5C 32 30
+R 00 00 00 00
+T 93 0D 00 32 32 00
+R 00 00 00 00
+T 96 0D 00
+R 00 00 00 00
+T 96 0D 00 46 6F 6F 64 20 46 69 67 68 74 65 72 00
+R 00 00 00 00
+T A3 0D 00
+R 00 00 00 00
+T A3 0D 00 41 20 66 6F 6F 64 2D 62 61 73 65 64 20
+R 00 00 00 00
+T B0 0D 00 53 48 4D 55 50 2E 0A 4D 61 64 65 20 66
+R 00 00 00 00
+T BD 0D 00 6F 72 20 74 68 65 20 53 4D 53 20 50 6F
+R 00 00 00 00
+T CA 0D 00 77 65 72 21 20 43 6F 64 69 6E 67 20 43
+R 00 00 00 00
+T D7 0D 00 6F 6D 70 65 74 69 74 69 6F 6E 20 32 30
+R 00 00 00 00
+T E4 0D 00 32 32 20 2D 20 68 74 74 70 73 3A 2F 2F
+R 00 00 00 00
+T F1 0D 00 77 77 77 2E 73 6D 73 70 6F 77 65 72 2E
+R 00 00 00 00
+T FE 0D 00 6F 72 67 2F 66 6F 72 75 6D 73 2F 31 38
+R 00 00 00 00
+T 0B 0E 00 38 37 39 2D 43 6F 6D 70 65 74 69 74 69
+R 00 00 00 00
+T 18 0E 00 6F 6E 73 32 30 32 32 44 65 61 64 6C 69
+R 00 00 00 00
+T 25 0E 00 6E 65 49 73 32 37 74 68 4D 61 72 63 68
+R 00 00 00 00
+T 32 0E 00 0A 42 75 69 6C 74 20 75 73 69 6E 67 20
+R 00 00 00 00
+T 3F 0E 00 64 65 76 6B 69 74 53 4D 53 20 26 20 53
+R 00 00 00 00
+T 4C 0E 00 4D 53 6C 69 62 20 2D 20 68 74 74 70 73
+R 00 00 00 00
+T 59 0E 00 3A 2F 2F 67 69 74 68 75 62 2E 63 6F 6D
+R 00 00 00 00
+T 66 0E 00 2F 73 76 65 72 78 2F 64 65 76 6B 69 74
+R 00 00 00 00
+T 73 0E 00 53 4D 53 00
+R 00 00 00 00
+T F0 7F 00
+R 00 00 09 00
+T F0 7F 00
+R 00 00 09 00
+T F0 7F 00 54 4D 52 20 53 45 47 41 FF FF FF FF 99
+R 00 00 09 00
+T FD 7F 00 99 00 4C
+R 00 00 09 00
+T D0 7F 00
+R 00 00 0A 00
+T D0 7F 00
+R 00 00 0A 00
+T D0 7F 00 48 61 72 6F 6C 64 6F 2D 4F 4B 5C 32 30
+R 00 00 0A 00
+T DD 7F 00 32 32 00
+R 00 00 0A 00
+T C3 7F 00
+R 00 00 0B 00
+T C3 7F 00
+R 00 00 0B 00
+T C3 7F 00 46 6F 6F 64 20 46 69 67 68 74 65 72 00
+R 00 00 0B 00
+T EF 7E 00
+R 00 00 0C 00
+T EF 7E 00
+R 00 00 0C 00
+T EF 7E 00 41 20 66 6F 6F 64 2D 62 61 73 65 64 20
+R 00 00 0C 00
+T FC 7E 00 53 48 4D 55 50 2E 0A 4D 61 64 65 20 66
+R 00 00 0C 00
+T 09 7F 00 6F 72 20 74 68 65 20 53 4D 53 20 50 6F
+R 00 00 0C 00
+T 16 7F 00 77 65 72 21 20 43 6F 64 69 6E 67 20 43
+R 00 00 0C 00
+T 23 7F 00 6F 6D 70 65 74 69 74 69 6F 6E 20 32 30
+R 00 00 0C 00
+T 30 7F 00 32 32 20 2D 20 68 74 74 70 73 3A 2F 2F
+R 00 00 0C 00
+T 3D 7F 00 77 77 77 2E 73 6D 73 70 6F 77 65 72 2E
+R 00 00 0C 00
+T 4A 7F 00 6F 72 67 2F 66 6F 72 75 6D 73 2F 31 38
+R 00 00 0C 00
+T 57 7F 00 38 37 39 2D 43 6F 6D 70 65 74 69 74 69
+R 00 00 0C 00
+T 64 7F 00 6F 6E 73 32 30 32 32 44 65 61 64 6C 69
+R 00 00 0C 00
+T 71 7F 00 6E 65 49 73 32 37 74 68 4D 61 72 63 68
+R 00 00 0C 00
+T 7E 7F 00 0A 42 75 69 6C 74 20 75 73 69 6E 67 20
+R 00 00 0C 00
+T 8B 7F 00 64 65 76 6B 69 74 53 4D 53 20 26 20 53
+R 00 00 0C 00
+T 98 7F 00 4D 53 6C 69 62 20 2D 20 68 74 74 70 73
+R 00 00 0C 00
+T A5 7F 00 3A 2F 2F 67 69 74 68 75 62 2E 63 6F 6D
+R 00 00 0C 00
+T B2 7F 00 2F 73 76 65 72 78 2F 64 65 76 6B 69 74
+R 00 00 0C 00
+T BF 7F 00 53 4D 53 00
+R 00 00 0C 00
+T E0 7F 00
+R 00 00 0D 00
+T E0 7F 00
+R 00 00 0D 00
+T E0 7F 00 53 44 53 43 00 02 23 03 22 20 D0 7F C3
+R 00 00 0D 00
+T ED 7F 00 7F EF 7E
+R 00 00 0D 00
