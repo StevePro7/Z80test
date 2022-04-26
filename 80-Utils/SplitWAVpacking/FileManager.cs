@@ -15,7 +15,6 @@ namespace SplitWAVpacking
 				var valid = Process(index);
 				if (valid)
 				{
-					//CopyLocal(index, year);
 					if (!flag)
 					{
 						continue;
@@ -49,18 +48,6 @@ namespace SplitWAVpacking
 			File.Copy("input\\" + inRiff, dirX + "\\" + outRiff, true);
 		}
 
-		public void CopyLocal(int index, string year)
-		{
-			var inPrefix = $"0{index + 1}";
-			var inRiff = inPrefix + ".wav";
-			var inConv = inRiff + ".pcmenc";
-
-			var outRiff = $"Riff_{year}_{inRiff}";
-			var outConv = $"Riff_{year}_{inConv}";
-			File.Copy("input\\" + inRiff, "output\\" + outRiff, true);
-			File.Copy("input\\" + inConv, "output\\" + outConv, true);
-		}
-
 		public bool Process(int index)
 		{
 			var inPrefix = $"0{index + 1}";
@@ -84,44 +71,57 @@ namespace SplitWAVpacking
 			return true;
 		}
 
-		public void Convert()
-		{
-			System.Diagnostics.Process.Start("input\\riff.bat");
-		}
+	
 
 
-		public void Init(string year, int bank, bool flag)
+		public void Init(string suff, int bank)
 		{
+			if (Directory.Exists("output"))
+			{
+				Directory.Delete("output", true);
+			}
+
 			if (!Directory.Exists("output"))
 			{
 				Directory.CreateDirectory("output");
 			}
 
-			if (!flag)
+			var dirX = "output/banks";
+			if (!Directory.Exists(dirX))
 			{
-				return;
+				Directory.CreateDirectory(dirX);
 			}
-
-			var dirX = "output\\" + year;
+			dirX = "output/scripts";
 			if (!Directory.Exists(dirX))
 			{
 				Directory.CreateDirectory(dirX);
 			}
 
-			for (int index = 0; index < maxFiles; index++)
+			MaxFiles = Directory.GetFiles("input", "*.wav").Length;
+			for (int idx = 0; idx < MaxFiles; idx++)
 			{
-				dirX = "output\\" + year + "\\bank" + (bank + index).ToString();
-				if (!Directory.Exists(dirX))
-				{
-					Directory.CreateDirectory(dirX);
-				}
-				dirX += "\\raw";
+				dirX = $"output/banks/bank{idx + bank}";
 				if (!Directory.Exists(dirX))
 				{
 					Directory.CreateDirectory(dirX);
 				}
 			}
+
+			//for (int index = 0; index < maxFiles; index++)
+			//{
+			//	dirX = "output\\" + year + "\\bank" + (bank + index).ToString();
+			//	if (!Directory.Exists(dirX))
+			//	{
+			//		Directory.CreateDirectory(dirX);
+			//	}
+			//	dirX += "\\raw";
+			//	if (!Directory.Exists(dirX))
+			//	{
+			//		Directory.CreateDirectory(dirX);
+			//	}
+			//}
 		}
 
+		public int MaxFiles { get; private set; }
 	}
 }
