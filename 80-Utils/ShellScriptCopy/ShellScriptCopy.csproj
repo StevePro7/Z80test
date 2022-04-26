@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DB014176-AE07-46CE-81C6-D912C3866B0C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SplitWAVpacking</RootNamespace>
-    <AssemblyName>SplitWAVpacking</AssemblyName>
+    <RootNamespace>ShellScriptCopy</RootNamespace>
+    <AssemblyName>ShellScriptCopy</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,7 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="input\build.bat">
+    <None Include="build.bat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
