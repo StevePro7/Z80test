@@ -54,7 +54,8 @@ namespace SplitWAVpacking
 			}
 
 			outLines.Add("rm -f *.asm 2> /dev/null && rm -f *.ihx 2> /dev/null; rm -f *.lk 2> /dev/null");
-			outLines.Add("rm -f *.lst 2> /dev/null && rm -f *.sym 2> /dev/null; ## rm -f *.noi 2> /dev/null");
+			outLines.Add("rm -f *.lst 2> /dev/null && rm -f *.sym 2> /dev/null;");
+			outLines.Add("## rm -f *.noi 2> /dev/null");
 			outLines.Add("");
 
 			outLines.Add("## Run");
