@@ -14,7 +14,7 @@ namespace SplitWAVpacking
 			var directry = new List<string>();
 
 			outLines.Add("#!/bin/sh");
-			outLines.Add("echo off");
+			outLines.Add("## echo off");
 
 			for (int idx = 2; idx < inpLines.Length; idx++)
 			{
@@ -25,6 +25,10 @@ namespace SplitWAVpacking
 				if (outLine.StartsWith("set"))
 				{
 					outLine = outLine.Replace("set", "##set");
+				}
+				if (outLine.StartsWith("echo"))
+				{
+					outLine = outLine.Replace("echo", "##echo");
 				}
 
 				if (outLine.EndsWith("^"))
