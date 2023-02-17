@@ -9,11 +9,11 @@ namespace SplitWAVpacking
 		{
 			Year = ConfigurationManager.AppSettings["year"];
 			Bank = Convert.ToInt32(ConfigurationManager.AppSettings["bank"]);
-			Flag = Convert.ToBoolean(ConfigurationManager.AppSettings["flag"]);
+			//Flag = Convert.ToBoolean(ConfigurationManager.AppSettings["flag"]);
 		}
 
 		public string Year { get; private set; }
 		public int Bank { get; private set; }
-		public bool Flag { get; private set; }
+		//public bool Flag { get; private set; }
 	}
 }

@@ -5,22 +5,22 @@ namespace SplitWAVpacking
 {	
     public class FileManager
     {
-		const int maxFiles = 7;
+		int maxFiles;
 		const int maxBlock = 16 * 1024;
 
-		public void ProcessAll(string year, int bank, int bank2, bool flag)
+		public void GetFiles()
+		{
+			var files = Directory.GetFiles("input", "*.pcmenc");
+			maxFiles = files.Length;
+		}
+
+		public void ProcessAll(string year, int bank, int bank2)
 		{
 			for (int index = 0; index < maxFiles; index++)
 			{
 				var valid = Process(index);
 				if (valid)
 				{
-					//CopyLocal(index, year);
-					if (!flag)
-					{
-						continue;
-					}
-
 					if (year.Equals("test"))
 					{
 						CopyRemote(index, year, bank);
@@ -90,16 +90,11 @@ namespace SplitWAVpacking
 		}
 
 
-		public void Init(string year, int bank, bool flag)
+		public void Init(string year, int bank)
 		{
 			if (!Directory.Exists("output"))
 			{
 				Directory.CreateDirectory("output");
-			}
-
-			if (!flag)
-			{
-				return;
 			}
 
 			var dirX = "output\\" + year;
