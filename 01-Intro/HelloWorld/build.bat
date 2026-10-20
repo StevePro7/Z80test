@@ -4,15 +4,15 @@ cls
 if exist main.o del main.o
 
 echo Compile
-wla-z80 -o main.o main.asm 
+wla-z80 -i -o main.o main.asm 
 
 echo [objects] > linkfile
 echo main.o >> linkfile
 
 echo Link
-wlalink linkfile output.sms
+wlalink -S -A linkfile output.sms
 
-if exist output.sms.sym del output.sms.sym
+:: if exist output.sms.sym del output.sms.sym
 if exist main.o del main.o
 
 echo Run

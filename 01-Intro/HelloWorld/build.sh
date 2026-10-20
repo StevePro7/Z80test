@@ -7,13 +7,13 @@ then
 fi
 
 echo Compile
-wla-z80 -o main.o main.asm 
+wla-z80 -i -o main.o main.asm 
 
 echo [objects] > linkfile
 echo main.o >> linkfile
 
 echo Link
-wlalink linkfile output.sms
+wlalink -S -A linkfile output.sms
 
 if [ -a main.o ]
 then
