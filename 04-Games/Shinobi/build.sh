@@ -7,7 +7,7 @@ then
 fi
 
 echo Compile
-wla-z80 -o main.o main.asm 
+wla-z80 -o main.o main.asm
 
 echo [objects] > linkfile
 echo main.o >> linkfile
