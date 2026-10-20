@@ -70,3 +70,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# JetBrains
+*.idea
