@@ -530,9 +530,9 @@ _RAM_FFFF_ db
 ; Zero-based values. The level selector is (area * 4) + round:
 ; area $00, round $00 starts Area 1, Round 1; area $01, round $00 starts Area 2, Round 1.
 ; Checkpoint $00 starts at the beginning of the round; higher values select later sections.
-.define Start_Area $09
+.define Start_Area $02
 .define Start_Round $03
-.define Start_Checkpoint $00
+.define Start_Checkpoint $01
 	
 .BANK 0 SLOT 0	
 .ORG $0000	
@@ -587,10 +587,17 @@ _LABEL_28_:
 _LABEL_30_:	
 		jp _LABEL_C14_
 	
-	; Data from 33 to 37 (5 bytes)
-	.db $00 $00 $00 $00 $00
+	; ROM-hack config bytes (unused padding between RST vectors): area, round, checkpoint
+	.db $00 
+_DATA_StartArea_:
+	.db Start_Area
+_DATA_StartRound_:
+	.db Start_Round
+_DATA_StartCheckpoint_:
+	.db Start_Checkpoint
+	.db $00
 	
-_LABEL_38_:	
+_LABEL_38_:
 		jp _LABEL_AF_
 	
 _LABEL_3B_:	
@@ -16832,7 +16839,14 @@ _LABEL_StartLevel_:
 	ret
 
 _LABEL_StartConfig_:
-	ld hl, (Start_Checkpoint * $100) + (Start_Area * 4) + Start_Round
+	ld a, (_DATA_StartArea_)
+	add a, a
+	add a, a
+	ld hl, _DATA_StartRound_
+	add a, (hl)
+	ld l, a
+	ld a, (_DATA_StartCheckpoint_)
+	ld h, a
 	ld (_RAM_C128_), hl
 	ld a, h
 	ld (_RAM_D39A_), a
@@ -16863,7 +16877,7 @@ _LABEL_ResetPlayerEquipment_:
 	set 1, (hl)
 	ret
 
-	.dsb 32, $FF
+	.dsb 21, $FF
 	
 .BANK 1 SLOT 1	
 .ORG $0000	
