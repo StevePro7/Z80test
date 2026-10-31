@@ -526,6 +526,13 @@ _RAM_FFFF_ db
 .define Port_VDPStatus $BF	
 .define Port_IOPort1 $DC	
 .define Port_IOPort2 $DD	
+
+; Zero-based values. The level selector is (area * 4) + round:
+; area $00, round $00 starts Area 1, Round 1; area $01, round $00 starts Area 2, Round 1.
+; Checkpoint $00 starts at the beginning of the round; higher values select later sections.
+.define Start_Area $02
+.define Start_Round $03
+.define Start_Checkpoint $01
 	
 .BANK 0 SLOT 0	
 .ORG $0000	
@@ -580,10 +587,17 @@ _LABEL_28_:
 _LABEL_30_:	
 		jp _LABEL_C14_
 	
-	; Data from 33 to 37 (5 bytes)
-	.db $00 $00 $00 $00 $00
+	; ROM-hack config bytes (unused padding between RST vectors): area, round, checkpoint
+	.db $00 
+_DATA_StartArea_:
+	.db Start_Area
+_DATA_StartRound_:
+	.db Start_Round
+_DATA_StartCheckpoint_:
+	.db Start_Checkpoint
+	.db $00
 	
-_LABEL_38_:	
+_LABEL_38_:
 		jp _LABEL_AF_
 	
 _LABEL_3B_:	
@@ -625,7 +639,7 @@ _LABEL_69_:
 		call _LABEL_26D_
 		call _LABEL_27A_
 		call _LABEL_28E_
-		call _LABEL_AB1_
+		call _LABEL_AutoStart_
 		ld hl, _RAM_C111_
 		ld (hl), $00
 		inc hl
@@ -2835,7 +2849,7 @@ _LABEL_1422_:
 		bit 0, (hl)
 		jr nz, +
 		set 0, (hl)
-		call _LABEL_B1B_
+		call _LABEL_StartGame_
 		ret
 	
 +:	
@@ -3208,7 +3222,7 @@ _LABEL_16C3_:
 +++:	
 		xor a
 		ld (_RAM_C129_), a
-		ld (_RAM_C127_), a
+		call _LABEL_ResetPlayerEquipment_
 		ld (_RAM_C12E_), a
 		ld hl, _RAM_C121_
 		ld de, _RAM_C121_ + 1
@@ -3230,7 +3244,7 @@ _LABEL_16C3_:
 	.db $FF
 	
 _LABEL_16F7_:	
-		call _LABEL_1F31_
+		call _LABEL_StartLevel_
 		call _LABEL_ACA_
 		ld hl, $3800
 		ld (_RAM_CC1C_), hl
@@ -11268,7 +11282,7 @@ _LABEL_5061_:
 		call _LABEL_50D0_
 		call _LABEL_510B_
 		call _LABEL_B8A_
-		call _LABEL_5147_
+		call _LABEL_UpdateLevelText_
 		call _LABEL_224_
 		ret
 	
@@ -16813,13 +16827,63 @@ _DATA_7F8B_:
 ; Data from 7F90 to 7FEF (96 bytes)	
 _DATA_7F90_:	
 	.db $EE $FF $00
-	.dsb 93, $FF
+
+_LABEL_StartGame_:
+	call _LABEL_B1B_
+	call _LABEL_StartConfig_
+	ret
+
+_LABEL_StartLevel_:
+	call _LABEL_StartConfig_
+	call _LABEL_1F31_
+	ret
+
+_LABEL_StartConfig_:
+	ld a, (_DATA_StartArea_)
+	add a, a
+	add a, a
+	ld hl, _DATA_StartRound_
+	add a, (hl)
+	ld l, a
+	ld a, (_DATA_StartCheckpoint_)
+	ld h, a
+	ld (_RAM_C128_), hl
+	ld a, h
+	ld (_RAM_D39A_), a
+	ld a, l
+	ld (_RAM_D39B_), a
+	call _LABEL_GiveAxe_
+	ret
+
+_LABEL_AutoStart_:
+	call _LABEL_AB1_
+	ld a, $03
+	call _LABEL_4E3_
+	ret
+
+_LABEL_UpdateLevelText_:
+	call _LABEL_StartConfig_
+	call _LABEL_5147_
+	ret
+
+_LABEL_GiveAxe_:
+	ld hl, _RAM_C127_
+	set 1, (hl)
+	ret
+
+_LABEL_ResetPlayerEquipment_:
+	ld hl, _RAM_C127_
+	ld (hl), a
+	set 1, (hl)
+	ret
+
+	.dsb 21, $FF
 	
 .BANK 1 SLOT 1	
 .ORG $0000	
 	
 	; Data from 7FF0 to 7FFF (16 bytes)
-	.db $54 $4D $52 $20 $53 $45 $47 $41 $FF $FF $6F $34 $68 $50 $01 $4F
+	.db $54 $4D $52 $20 $53 $45 $47 $41 $FF $FF $03 $1B $68 $50 $01 $4F
 	
 .BANK 2	
 .ORG $0000	
