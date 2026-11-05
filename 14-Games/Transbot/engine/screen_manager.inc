@@ -1,5 +1,5 @@
 ; Screen setup and reset ($0429-$0509)
-_LABEL_429_:	
+_LABEL_429_:
 		call _LABEL_2800_
 		ld hl, $0000
 		ld de, _DATA_3_
@@ -24,11 +24,11 @@ _LABEL_429_:
 		bit 0, a
 		jr z, +
 		ld c, $0A
-+:	
++:
 		ld a, c
 		ld (_RAM_C15D_), a
 		ld (_RAM_C22B_), a
-		ld a, $40
+	 	ld a, $40
 		ld (_RAM_C167_), a
 		ld (_RAM_C235_), a
 		ld a, $01
@@ -49,7 +49,7 @@ _LABEL_429_:
 		ld ix, _RAM_C300_
 		ld b, $19
 		ld c, $00
--:	
+-:
 		ld (ix+1), c
 		ld (ix+16), $F8
 		inc c
@@ -76,8 +76,8 @@ _LABEL_429_:
 		ld (_RAM_C176_), a
 		call _LABEL_28EA_
 		jp _LABEL_27FB_
-	
-_LABEL_4EA_:	
+
+_LABEL_4EA_:
 		ld hl, _RAM_C100_
 		ld de, _RAM_C100_ + 1
 		ld bc, $1E01
@@ -91,4 +91,4 @@ _LABEL_4EA_:
 		ld hl, _DATA_3B_
 		otir
 		jp _LABEL_27D3_
-	
+
