@@ -16,6 +16,6 @@ if exist output.sym del output.sym
 if exist main.o del main.o
 
 echo Run
-java -Dsun.java2d.d3d=false -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
+::java -Dsun.java2d.d3d=false -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
 ::java -jar C:\SEGA\Emulicious\Emulicious.jar output.sms
-::output.sms
+output.sms

@@ -2,15 +2,15 @@
 ; WLA-DX banking setup
 ;==============================================================
 .memorymap
-defaultslot 0
-slotsize $8000
-slot 0 $0000
+defaultslot 0   ; Sets slot 0 as the default memory slot.
+slotsize $8000   ; Sets the default slot size to $8000 bytes (32 KB).
+slot 0 $0000     ; Defines slot 0 as starting at memory address $0000.
 .endme
 
 .rombankmap
-bankstotal 1
-banksize $8000
-banks 1
+bankstotal 1    ; Sets the total number of ROM banks to 1.
+banksize $8000  ; Sets the size of each ROM bank to $8000 bytes (32 KB).   
+banks 1         ; Defines 1 ROM bank. 
 .endro
 
 ;==============================================================
