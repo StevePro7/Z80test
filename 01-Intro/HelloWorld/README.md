@@ -138,3 +138,33 @@ Bits 14–15: Operation (01 = VRAM write)
 01 = VRAM WRITE
 10 = VDP REGISTER WRITE
 11 = CRAM WRITE
+
+
+Clearing VRAM - VRAM write access, looping, conditional jumps
+Because there's 16KB of VRAM, we'll need 14 bits (214 = 16384 = 16KB) for the address. The last two bits to make it up to a 16-bit (2-byte) number are used to signal what our intentions are.
+
+
+
+$4000
+0100 0000
+VRAM write
+
+We can't write
+out ($bf),$4000
+
+but $4000 = $00 $40
+so we have to write
+
+    ld a,$00
+    out ($bf),a
+    ld a,$40
+    out ($bf),a
+
+we can only output one byte at a time, and the data has to come from register a
+
+Now we've set the VDP ready to receive data.
+We send it data by outputting to port $be, the VDP data port
+
+OR instructino affects Z flag
+Z flag = 1 if last calc = 0
+Z flag = 0 if last calc != 0
