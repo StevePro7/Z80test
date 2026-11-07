@@ -1,6 +1,9 @@
 # Transbot
 05-Nov-2026
 
+For isolated Z80 routine tests using the intentionally patched `output.sms`,
+see [tests/README.md](tests/README.md).
+
 Source:
 ~/Steven/Code/testing
 
